@@ -1,0 +1,15 @@
+# Copy to .dev.vars for local development. Keep real values out of source control.
+# Run npm run ai:access. Put its hash/signing secret below; enter the separate owner code in AI Talk.
+OWNER_TOKEN_HASH=
+SESSION_SECRET=
+GROQ_API_KEY=
+# Set true only after checking that this Groq account is on its Free plan.
+GROQ_FREE_TIER_CONFIRMED=false
+# Optional natural TTS: leave both blank to use free German device voices.
+# Use an ElevenLabs Free key with Text to Speech and User (read) permissions.
+# Choose a currently available default or your own Voice Design voice; shared Voice Library voices need a paid API plan.
+# The server checks tier=free, credit extensions disabled, and remaining allowance before synthesis.
+ELEVENLABS_API_KEY=
+ELEVENLABS_VOICE_ID=
+# Owner unlock attempts allowed per IP per 15 minutes (default 5).
+AI_AUTH_ATTEMPTS=

@@ -1,0 +1,806 @@
+{
+  "id": "starter",
+  "version": "starter-2026.10-1",
+  "words": [
+    ["hallo", "hallo", "hello", "expression", "", "Hallo, Sam!", "Hello, Sam!", 1],
+    ["ich", "ich", "I", "pronoun", "", "Ich bin Alex.", "I am Alex.", 1],
+    ["heissen", "heißen", "to be called", "verb", "ich heiße · du heißt", "Ich heiße Sam.", "My name is Sam.", 1],
+    ["du", "du", "you (one person, informal)", "pronoun", "", "Wie heißt du?", "What is your name?", 1],
+    ["wie", "wie", "how; what in ‘what is your name?’", "adverb", "", "Wie geht es dir?", "How are you?", 1],
+    ["und", "und", "and", "conjunction", "", "Ich heiße Sam. Und du?", "My name is Sam. And you?", 1],
+    ["name", "der Name", "name", "noun", "die Namen", "Mein Name ist Alex.", "My name is Alex.", 1],
+    ["bitte", "bitte", "please; you are welcome", "expression", "", "Einen Tee, bitte.", "A tea, please.", 1],
+    ["langsam", "langsam", "slow; slowly", "adjective", "", "Bitte sprechen Sie langsam.", "Please speak slowly.", 1],
+    ["nochmal", "noch einmal", "once more; again", "expression", "", "Bitte noch einmal.", "Once more, please.", 1],
+    ["verstehen", "verstehen", "to understand", "verb", "ich verstehe · du verstehst", "Ich verstehe die Frage.", "I understand the question.", 1],
+    ["sprechen", "sprechen", "to speak", "verb", "ich spreche · du sprichst", "Ich spreche ein bisschen Deutsch.", "I speak a little German.", 1],
+    ["wiederholen", "wiederholen", "to repeat", "verb", "ich wiederhole · Sie wiederholen", "Können Sie das wiederholen?", "Can you repeat that?", 1],
+    ["entschuldigung", "die Entschuldigung", "apology; excuse me", "noun", "die Entschuldigungen", "Entschuldigung, ich verstehe das nicht.", "Excuse me, I do not understand that.", 1],
+    ["kaffee", "der Kaffee", "coffee", "noun", "die Kaffees (cups or varieties)", "Ich möchte einen Kaffee.", "I would like a coffee.", 3],
+    ["wasser", "das Wasser", "water", "noun", "usually singular", "Ein Wasser, bitte.", "A water, please.", 3],
+    ["tee", "der Tee", "tea", "noun", "die Tees (varieties)", "Der Tee ist heiß.", "The tea is hot.", 3],
+    ["klein", "klein", "small", "adjective", "", "Der Kaffee ist klein.", "The coffee is small.", 3],
+    ["gross", "groß", "big; large", "adjective", "", "Ich möchte einen großen Tee.", "I would like a large tea.", 3],
+    ["moechten", "möchten", "would like", "verb", "ich möchte · Sie möchten", "Ich möchte ein Wasser.", "I would like a water.", 3],
+    ["trinken", "trinken", "to drink", "verb", "ich trinke · du trinkst", "Ich trinke gern Tee.", "I like drinking tea.", 3],
+    ["lernen", "lernen", "to learn; to study", "verb", "ich lerne · du lernst", "Ich lerne Deutsch.", "I am learning German.", 1],
+    ["deutsch", "Deutsch", "German (language)", "language", "", "Ich verstehe ein bisschen Deutsch.", "I understand a little German.", 1],
+    ["bisschen", "ein bisschen", "a little", "expression", "", "Ich spreche ein bisschen Deutsch.", "I speak a little German.", 1],
+    ["nicht", "nicht", "not", "adverb", "", "Ich verstehe das nicht.", "I do not understand that.", 1],
+    ["danke", "danke", "thank you", "expression", "", "Danke für die Hilfe!", "Thank you for the help!", 1],
+    ["ja", "ja", "yes", "expression", "", "Ja, ich lerne Deutsch.", "Yes, I am learning German.", 1],
+    ["nein", "nein", "no", "expression", "", "Nein, danke.", "No, thank you.", 1],
+    ["buchstabieren", "buchstabieren", "to spell out", "verb", "ich buchstabiere · Sie buchstabieren", "Können Sie Ihren Namen buchstabieren?", "Can you spell your name?", 1],
+    ["schreiben", "schreiben", "to write", "verb", "ich schreibe · du schreibst", "Wie schreibt man das?", "How do you write that?", 1],
+    ["buchstabe", "der Buchstabe", "letter of the alphabet", "noun", "die Buchstaben", "Der erste Buchstabe ist S.", "The first letter is S.", 1],
+    ["nachname", "der Nachname", "surname; family name", "noun", "die Nachnamen", "Mein Nachname ist Meyer.", "My surname is Meyer.", 1],
+    ["wohnen", "wohnen", "to live; to reside", "verb", "ich wohne · du wohnst", "Ich wohne in Köln.", "I live in Cologne.", 2],
+    ["kommen", "kommen", "to come", "verb", "ich komme · du kommst", "Ich komme aus Indien.", "I come from India.", 2],
+    ["stadt", "die Stadt", "city; town", "noun", "die Städte", "Die Stadt ist groß.", "The city is big.", 2],
+    ["land", "das Land", "country", "noun", "die Länder", "Aus welchem Land kommst du?", "Which country do you come from?", 2],
+    ["hier", "hier", "here", "adverb", "", "Ich wohne hier.", "I live here.", 2],
+    ["wo", "wo", "where (location)", "adverb", "", "Wo wohnst du?", "Where do you live?", 2],
+    ["aus", "aus", "from (origin)", "preposition", "", "Ich komme aus Spanien.", "I come from Spain.", 2],
+    ["englisch", "Englisch", "English (language)", "language", "", "Ich spreche Englisch.", "I speak English.", 2],
+    ["sprache", "die Sprache", "language", "noun", "die Sprachen", "Welche Sprachen sprichst du?", "Which languages do you speak?", 2],
+    ["gut", "gut", "good; well", "adjective", "", "Ich verstehe Englisch gut.", "I understand English well.", 2],
+    ["auch", "auch", "also; too", "adverb", "", "Ich lerne auch Deutsch.", "I am learning German too.", 2],
+    ["einfach", "einfach", "simple; easy", "adjective", "", "Die Frage ist einfach.", "The question is simple.", 2],
+    ["studieren", "studieren", "to study at university", "verb", "ich studiere · du studierst", "Ich studiere Informatik.", "I study computer science.", 2],
+    ["arbeiten", "arbeiten", "to work", "verb", "ich arbeite · du arbeitest", "Ich arbeite am Freitag.", "I work on Friday.", 2],
+    ["student", "der Student", "university student (male)", "noun", "die Studenten; feminine: die Studentin / die Studentinnen", "Ich bin Student.", "I am a university student.", 2],
+    ["universitaet", "die Universität", "university", "noun", "die Universitäten; short form: die Uni", "Ich bin an der Universität.", "I am at the university.", 2],
+    ["fach", "das Fach", "subject; field of study", "noun", "die Fächer", "Mein Fach ist Biologie.", "My subject is biology.", 2],
+    ["machen", "machen", "to do; to make", "verb", "ich mache · du machst", "Was machst du?", "What do you do?", 2],
+    ["gern", "gern", "gladly; like doing something", "adverb", "", "Ich koche gern.", "I like cooking.", 2],
+    ["lesen", "lesen", "to read", "verb", "ich lese · du liest", "Ich lese gern.", "I like reading.", 2],
+    ["kochen", "kochen", "to cook", "verb", "ich koche · du kochst", "Wir kochen zusammen.", "We cook together.", 2],
+    ["musik", "die Musik", "music", "noun", "usually singular", "Ich höre gern Musik.", "I like listening to music.", 2],
+    ["sport", "der Sport", "sport; exercise", "noun", "usually singular", "Ich mache gern Sport.", "I like doing sport.", 2],
+    ["spielen", "spielen", "to play", "verb", "ich spiele · du spielst", "Ich spiele gern Fußball.", "I like playing football.", 2],
+    ["lieber", "lieber", "rather; prefer to", "adverb", "", "Ich trinke lieber Tee.", "I prefer tea.", 2],
+    ["brot", "das Brot", "bread; loaf of bread", "noun", "die Brote", "Ich möchte ein Brot.", "I would like a loaf of bread.", 3],
+    ["apfel", "der Apfel", "apple", "noun", "die Äpfel", "Ich kaufe zwei Äpfel.", "I am buying two apples.", 3],
+    ["milch", "die Milch", "milk", "noun", "usually singular", "Ich brauche Milch.", "I need milk.", 3],
+    ["kaufen", "kaufen", "to buy", "verb", "ich kaufe · du kaufst", "Ich kaufe Brot.", "I am buying bread.", 3],
+    ["frisch", "frisch", "fresh", "adjective", "", "Das Brot ist frisch.", "The bread is fresh.", 3],
+    ["noch", "noch", "more; still", "adverb", "", "Noch etwas?", "Anything else?", 3],
+    ["kosten", "kosten", "to cost", "verb", "es kostet · sie kosten", "Was kostet das?", "How much does that cost?", 3],
+    ["euro", "der Euro", "euro", "noun", "die Euro (currency amounts)", "Das kostet zwei Euro.", "That costs two euros.", 3],
+    ["geld", "das Geld", "money", "noun", "usually singular", "Ich habe kein Geld dabei.", "I do not have any money with me.", 3],
+    ["karte", "die Karte", "card (here: payment card)", "noun", "die Karten", "Kann ich mit Karte bezahlen?", "Can I pay by card?", 3],
+    ["bar", "bar", "in cash", "adverb", "", "Ich bezahle bar.", "I am paying in cash.", 3],
+    ["bezahlen", "bezahlen", "to pay", "verb", "ich bezahle · du bezahlst", "Ich möchte bezahlen.", "I would like to pay.", 3],
+    ["bahnhof", "der Bahnhof", "train station", "noun", "die Bahnhöfe", "Wo ist der Bahnhof?", "Where is the train station?", 3],
+    ["strasse", "die Straße", "street; road", "noun", "die Straßen", "Die Straße ist hier.", "The street is here.", 3],
+    ["links", "links", "left; on the left", "adverb", "", "Der Bahnhof ist links.", "The station is on the left.", 3],
+    ["rechts", "rechts", "right; on the right", "adverb", "", "Die Universität ist rechts.", "The university is on the right.", 3],
+    ["geradeaus", "geradeaus", "straight ahead", "adverb", "", "Gehen Sie geradeaus.", "Go straight ahead.", 3],
+    ["nah", "nah", "near; close", "adjective", "", "Der Bahnhof ist ganz nah.", "The station is very close.", 3],
+    ["eins", "eins", "one", "number", "ein / eine before a noun", "Eins, zwei, drei.", "One, two, three.", 4],
+    ["zwei", "zwei", "two", "number", "", "Ich kaufe zwei Äpfel.", "I am buying two apples.", 4],
+    ["drei", "drei", "three", "number", "", "Das kostet drei Euro.", "That costs three euros.", 4],
+    ["vier", "vier", "four", "number", "", "Ich arbeite vier Stunden.", "I work four hours.", 4],
+    ["fuenf", "fünf", "five", "number", "", "Wir treffen uns um fünf Uhr.", "We are meeting at five o'clock.", 4],
+    ["sechs", "sechs", "six", "number", "", "Ich stehe um sechs Uhr auf.", "I get up at six o'clock.", 4],
+    ["sieben", "sieben", "seven", "number", "", "Geht es um sieben Uhr?", "Does seven o'clock work?", 4],
+    ["acht", "acht", "eight", "number", "", "Ich esse um acht Uhr.", "I eat at eight o'clock.", 4],
+    ["neun", "neun", "nine", "number", "", "Morgen um neun Uhr habe ich Zeit.", "I am free tomorrow at nine o'clock.", 4],
+    ["zehn", "zehn", "ten", "number", "", "Es ist zehn Uhr.", "It is ten o'clock.", 4],
+    ["uhr", "die Uhr", "clock; o’clock in time phrases", "noun", "die Uhren (clocks); time phrases use Uhr", "Wir treffen uns um zehn Uhr.", "We are meeting at ten o'clock.", 4],
+    ["aufstehen", "aufstehen", "to get up", "verb", "ich stehe auf · du stehst auf", "Ich stehe um sieben Uhr auf.", "I get up at seven o'clock.", 4],
+    ["morgens", "morgens", "in the mornings", "adverb", "", "Morgens trinke ich Tee.", "I drink tea in the mornings.", 4],
+    ["essen", "essen", "to eat", "verb", "ich esse · du isst", "Ich esse um ein Uhr.", "I eat at one o'clock.", 4],
+    ["schlafen", "schlafen", "to sleep", "verb", "ich schlafe · du schläfst", "Ich schlafe gut.", "I sleep well.", 4],
+    ["morgen", "morgen", "tomorrow", "adverb", "", "Morgen habe ich Zeit.", "I have time tomorrow.", 4],
+    ["heute", "heute", "today", "adverb", "", "Heute lerne ich Deutsch.", "Today I am studying German.", 4],
+    ["zeit", "die Zeit", "time", "noun", "die Zeiten (times); usually singular for available time", "Hast du heute Zeit?", "Do you have time today?", 4],
+    ["treffen", "treffen", "to meet", "verb", "ich treffe · wir treffen uns", "Wir treffen uns morgen.", "We are meeting tomorrow.", 4],
+    ["montag", "der Montag", "Monday", "noun", "die Montage", "Am Montag habe ich Zeit.", "I have time on Monday.", 4],
+    ["spaeter", "später", "later", "adverb", "", "Geht es auch später?", "Would later also work?", 4],
+    ["termin", "der Termin", "appointment", "noun", "die Termine", "Ich habe morgen einen Termin.", "I have an appointment tomorrow.", 4],
+    ["leider", "leider", "unfortunately", "adverb", "", "Heute kann ich leider nicht.", "Unfortunately, I cannot today.", 4],
+    ["passen", "passen", "to suit; to work for someone", "verb", "es passt · die Zeiten passen", "Freitag passt gut.", "Friday works well.", 4],
+    ["freitag", "der Freitag", "Friday", "noun", "die Freitage", "Am Freitag arbeite ich.", "I work on Friday.", 4],
+    ["raum", "der Raum", "room", "noun", "die Räume", "Wo ist Raum zehn?", "Where is room ten?", 5],
+    ["stockwerk", "das Stockwerk", "floor; storey", "noun", "die Stockwerke; im ersten Stock = on the first floor", "Das Gebäude hat drei Stockwerke.", "The building has three floors.", 5],
+    ["treppe", "die Treppe", "stairs; staircase", "noun", "die Treppen", "Die Treppe ist rechts.", "The stairs are on the right.", 5],
+    ["tuer", "die Tür", "door", "noun", "die Türen", "Die Tür ist links.", "The door is on the left.", 5],
+    ["finden", "finden", "to find", "verb", "ich finde · du findest", "Ich finde den Raum nicht.", "I cannot find the room.", 5],
+    ["gebaeude", "das Gebäude", "building", "noun", "die Gebäude", "Der Kurs ist in diesem Gebäude.", "The course is in this building.", 5],
+    ["kurs", "der Kurs", "course; class", "noun", "die Kurse", "Mein Deutschkurs beginnt um zehn Uhr.", "My German class starts at ten o'clock.", 5],
+    ["helfen", "helfen", "to help", "verb", "ich helfe · du hilfst", "Kannst du mir helfen?", "Can you help me?", 5],
+    ["frage", "die Frage", "question", "noun", "die Fragen", "Ich habe eine Frage.", "I have a question.", 5],
+    ["antwort", "die Antwort", "answer", "noun", "die Antworten", "Die Antwort ist richtig.", "The answer is correct.", 5],
+    ["zeigen", "zeigen", "to show", "verb", "ich zeige · du zeigst", "Kannst du mir das zeigen?", "Can you show me that?", 5],
+    ["erklaeren", "erklären", "to explain", "verb", "ich erkläre · du erklärst", "Kannst du die Frage erklären?", "Can you explain the question?", 5],
+    ["heft", "das Heft", "exercise book; notebook", "noun", "die Hefte", "Ich schreibe die Antwort ins Heft.", "I write the answer in the exercise book.", 5],
+    ["mensa", "die Mensa", "university canteen", "noun", "die Mensen", "Wir essen in der Mensa.", "We eat in the university canteen.", 5],
+    ["mittag", "der Mittag", "midday; noon", "noun", "die Mittage; zu Mittag = for lunch", "Was machst du heute Mittag?", "What are you doing around lunchtime today?", 5],
+    ["zusammen", "zusammen", "together", "adverb", "", "Wir essen zusammen.", "We eat together.", 5],
+    ["mitkommen", "mitkommen", "to come along", "verb", "ich komme mit · du kommst mit", "Kommst du mit?", "Are you coming along?", 5],
+    ["hunger", "der Hunger", "hunger", "noun", "usually singular; Hunger haben = to be hungry", "Ich habe Hunger.", "I am hungry.", 5],
+    ["schmecken", "schmecken", "to taste (good, bad, etc.)", "verb", "es schmeckt · sie schmecken", "Das Essen schmeckt gut.", "The food tastes good.", 5],
+    ["wochenende", "das Wochenende", "weekend", "noun", "die Wochenenden", "Was machst du am Wochenende?", "What are you doing at the weekend?", 5],
+    ["samstag", "der Samstag", "Saturday", "noun", "die Samstage", "Am Samstag habe ich Zeit.", "I have time on Saturday.", 5],
+    ["sonntag", "der Sonntag", "Sunday", "noun", "die Sonntage", "Am Sonntag besuche ich einen Freund.", "On Sunday I am visiting a friend.", 5],
+    ["park", "der Park", "park", "noun", "die Parks", "Wir treffen uns im Park.", "We are meeting in the park.", 5],
+    ["freund", "der Freund", "friend (male)", "noun", "die Freunde; feminine: die Freundin / die Freundinnen", "Ich besuche einen Freund.", "I am visiting a friend.", 5],
+    ["besuchen", "besuchen", "to visit", "verb", "ich besuche · du besuchst", "Ich besuche am Sonntag Freunde.", "I am visiting friends on Sunday.", 5],
+    ["stunde", "die Stunde", "hour", "noun", "die Stunden", "Ich arbeite vier Stunden.", "I work for four hours.", 6],
+    ["woche", "die Woche", "week", "noun", "die Wochen", "Ich arbeite zehn Stunden pro Woche.", "I work ten hours per week.", 6],
+    ["dienstag", "der Dienstag", "Tuesday", "noun", "die Dienstage", "Am Dienstag habe ich Zeit.", "I have time on Tuesday.", 6],
+    ["donnerstag", "der Donnerstag", "Thursday", "noun", "die Donnerstage", "Am Donnerstag habe ich einen Kurs.", "I have a class on Thursday.", 6],
+    ["verfuegbar", "verfügbar", "available", "adjective", "", "Am Freitag bin ich verfügbar.", "I am available on Friday.", 6],
+    ["ab", "ab", "from (a starting time)", "preposition", "", "Ich kann ab zehn Uhr arbeiten.", "I can work from ten o'clock.", 6],
+    ["bis", "bis", "until; up to", "preposition", "", "Ich arbeite bis fünf Uhr.", "I work until five o'clock.", 6],
+    ["aufgabe", "die Aufgabe", "task", "noun", "die Aufgaben", "Was ist meine erste Aufgabe?", "What is my first task?", 6],
+    ["anfangen", "anfangen", "to start; to begin", "verb", "ich fange an · du fängst an", "Wann fange ich an?", "When do I start?", 6],
+    ["zuerst", "zuerst", "first; first of all", "adverb", "", "Was mache ich zuerst?", "What do I do first?", 6],
+    ["danach", "danach", "after that", "adverb", "", "Danach schicke ich die Datei.", "After that I send the file.", 6],
+    ["fertig", "fertig", "finished; ready", "adjective", "", "Ich bin fertig.", "I am finished.", 6],
+    ["schicken", "schicken", "to send", "verb", "ich schicke · du schickst", "Ich schicke dir die Datei.", "I will send you the file.", 6],
+    ["hilfe", "die Hilfe", "help; assistance", "noun", "usually singular for assistance", "Ich brauche Hilfe.", "I need help.", 6],
+    ["problem", "das Problem", "problem", "noun", "die Probleme", "Ich habe ein Problem.", "I have a problem.", 6],
+    ["datei", "die Datei", "file (computer)", "noun", "die Dateien", "Die Datei ist hier.", "The file is here.", 6],
+    ["oeffnen", "öffnen", "to open", "verb", "ich öffne · du öffnest", "Ich kann die Datei nicht öffnen.", "I cannot open the file.", 6],
+    ["fehlen", "fehlen", "to be missing", "verb", "es fehlt · sie fehlen", "Die Datei fehlt.", "The file is missing.", 6],
+    ["brauchen", "brauchen", "to need", "verb", "ich brauche · du brauchst", "Ich brauche eine kurze Erklärung.", "I need a short explanation.", 6],
+    ["erfahrung", "die Erfahrung", "experience", "noun", "die Erfahrungen; usually singular for work experience", "Ich habe Erfahrung mit Excel.", "I have experience with Excel.", 6],
+    ["team", "das Team", "team", "noun", "die Teams", "Ich arbeite gern im Team.", "I like working in a team.", 6],
+    ["stelle", "die Stelle", "job; position", "noun", "die Stellen", "Ich suche eine Stelle.", "I am looking for a job.", 6],
+    ["suchen", "suchen", "to look for; to search", "verb", "ich suche · du suchst", "Ich suche eine Werkstudentenstelle.", "I am looking for a working-student job.", 6],
+    ["zuverlaessig", "zuverlässig", "reliable", "adjective", "", "Ich bin zuverlässig.", "I am reliable.", 6],
+    ["neu", "neu", "new", "adjective", "", "Ich bin neu im Team.", "I am new to the team.", 6]
+  ],
+  "lessons": [
+    {
+      "id": "starter-room",
+      "goal": "Ask where your classroom is and check the floor or door before going there.",
+      "warmup": ["Wo ist Raum zehn?", "Where is room ten?"],
+      "wordIds": ["raum", "stockwerk", "treppe", "tuer", "finden", "gebaeude", "kurs"],
+      "patterns": [
+        ["Wo ist Raum …?", "Where is room …?", "Say the room number after Raum. If you cannot find it, say: Ich finde den Raum nicht."],
+        ["Im ersten Stock?", "On the first floor?", "Use this to confirm the floor. Stockwerk means a floor; im ersten Stock is the common location phrase. In Germany, erster Stock is above the ground floor."]
+      ],
+      "dialogue": [
+        ["Sam", "Hallo! Wo ist Raum zehn?", "Hello! Where is room ten?"],
+        ["Alex", "Im ersten Stock.", "On the first floor."],
+        ["Sam", "Wo ist die Treppe?", "Where are the stairs?"],
+        ["Alex", "Rechts. Dann ist es die erste Tür links.", "On the right. Then it is the first door on the left."],
+        ["Sam", "Die erste Tür links?", "The first door on the left?"],
+        ["Alex", "Ja, genau.", "Yes, exactly."]
+      ],
+      "practice": [
+        ["Ask for the room you need.", "Kann ich dir helfen?", "Can I help you?", "Ja, wo ist Raum zehn?", "Yes, where is room ten?"],
+        ["Ask where the stairs are.", "Der Kurs ist im ersten Stock.", "The class is on the first floor.", "Wo ist die Treppe?", "Where are the stairs?"],
+        ["Repeat one important direction to check it.", "Die erste Tür links.", "The first door on the left.", "Die erste Tür links?", "The first door on the left?"]
+      ],
+      "variations": [
+        ["You know the building but cannot find the room. Ask for help.", "Was suchst du?", "What are you looking for?", "Ich finde Raum zehn nicht.", "I cannot find room ten."],
+        ["Your class is on the ground floor today. Check what you heard.", "Heute ist der Kurs im Erdgeschoss.", "Today the class is on the ground floor.", "Im Erdgeschoss? Danke!", "On the ground floor? Thank you!"]
+      ]
+    },
+    {
+      "id": "starter-class-help",
+      "goal": "Tell a classmate you have a question and ask for an explanation or a demonstration.",
+      "warmup": ["Ich habe eine Frage.", "I have a question."],
+      "wordIds": ["helfen", "frage", "antwort", "zeigen", "erklaeren", "heft", "bitte"],
+      "patterns": [
+        ["Kannst du mir helfen?", "Can you help me?", "Use du with a classmate. Mir means to me here; learn the question as a useful whole."],
+        ["Kannst du mir das zeigen?", "Can you show me that?", "Use zeigen for a demonstration and erklären for an explanation."]
+      ],
+      "dialogue": [
+        ["Sam", "Ich habe eine Frage. Kannst du mir helfen?", "I have a question. Can you help me?"],
+        ["Alex", "Ja. Welche Frage?", "Yes. Which question?"],
+        ["Sam", "Ich verstehe Frage zwei nicht.", "I do not understand question two."],
+        ["Alex", "Ich erkläre sie dir.", "I will explain it to you."],
+        ["Sam", "Kannst du mir das im Heft zeigen?", "Can you show me that in the exercise book?"],
+        ["Alex", "Ja, hier.", "Yes, here."]
+      ],
+      "practice": [
+        ["Tell your classmate you have a question.", "Ist alles klar?", "Is everything clear?", "Ich habe eine Frage.", "I have a question."],
+        ["Ask for an explanation.", "Was verstehst du nicht?", "What do you not understand?", "Kannst du Frage zwei erklären?", "Can you explain question two?"],
+        ["Ask to see it in the exercise book.", "Die Antwort steht im Heft.", "The answer is in the exercise book.", "Kannst du mir das zeigen?", "Can you show me that?"]
+      ],
+      "variations": [
+        ["You need a short demonstration, not a long explanation. Ask for it.", "Brauchst du Hilfe?", "Do you need help?", "Ja, bitte. Kannst du mir das zeigen?", "Yes, please. Can you show me that?"],
+        ["Your classmate has explained it again. Tell them whether you understand now.", "Ist es jetzt klar?", "Is it clear now?", "Ja, danke. Jetzt verstehe ich.", "Yes, thank you. Now I understand."]
+      ]
+    },
+    {
+      "id": "starter-lunch",
+      "goal": "Invite someone to lunch, accept or decline kindly, and agree when to go.",
+      "warmup": ["Ich habe Hunger.", "I am hungry."],
+      "wordIds": ["mensa", "mittag", "zusammen", "mitkommen", "hunger", "schmecken", "essen"],
+      "patterns": [
+        ["Essen wir zusammen?", "Shall we eat together?", "Use this as a short invitation. In der Mensa means in the university canteen."],
+        ["Kommst du mit? / Ich komme mit.", "Are you coming along? / I am coming along.", "Mitkommen separates: mit goes at the end. Nein, danke. Heute nicht. is a friendly short refusal."]
+      ],
+      "dialogue": [
+        ["Alex", "Ich gehe in die Mensa. Kommst du mit?", "I am going to the canteen. Are you coming along?"],
+        ["Sam", "Ja, gern. Ich habe Hunger.", "Yes, gladly. I am hungry."],
+        ["Alex", "Wir essen heute um ein Uhr.", "We are eating at one o’clock today."],
+        ["Sam", "Gut. Treffen wir uns hier?", "Good. Shall we meet here?"],
+        ["Alex", "Ja. Das Essen schmeckt heute gut.", "Yes. The food tastes good today."],
+        ["Sam", "Super, bis gleich!", "Great, see you shortly!"]
+      ],
+      "practice": [
+        ["Invite a classmate to eat together.", "Ich habe Hunger.", "I am hungry.", "Essen wir zusammen?", "Shall we eat together?"],
+        ["Accept the invitation.", "Kommst du mit in die Mensa?", "Are you coming along to the canteen?", "Ja, ich komme mit.", "Yes, I am coming along."],
+        ["Ask what time you are going.", "Wir essen heute zusammen.", "We are eating together today.", "Um wie viel Uhr?", "At what time?"]
+      ],
+      "variations": [
+        ["You cannot join today. Decline politely.", "Kommst du mit?", "Are you coming along?", "Nein, danke. Heute kann ich nicht.", "No, thank you. I cannot today."],
+        ["You have already started lunch. Give a simple opinion of the food.", "Schmeckt es dir?", "Does it taste good to you?", "Ja, es schmeckt gut.", "Yes, it tastes good."]
+      ]
+    },
+    {
+      "id": "starter-weekend",
+      "goal": "Describe a simple weekend plan and ask what your friend plans to do.",
+      "warmup": ["Am Samstag habe ich Zeit.", "I have time on Saturday."],
+      "wordIds": ["wochenende", "samstag", "sonntag", "park", "freund", "besuchen", "morgen"],
+      "patterns": [
+        ["Am Samstag / Am Sonntag …", "On Saturday / On Sunday …", "Put the verb next when the day comes first: Am Samstag besuche ich Freunde. Present tense can describe a plan when you give the day."],
+        ["Ich besuche …", "I am visiting …", "Use a real plan: einen Freund, eine Freundin, or Freunde. You can also say: Ich habe noch keinen Plan. (I have no plan yet.)"]
+      ],
+      "dialogue": [
+        ["Alex", "Was machst du am Wochenende?", "What are you doing at the weekend?"],
+        ["Sam", "Am Samstag besuche ich einen Freund.", "On Saturday I am visiting a friend."],
+        ["Alex", "Und am Sonntag?", "And on Sunday?"],
+        ["Sam", "Da habe ich Zeit. Und du?", "Then I am free. And you?"],
+        ["Alex", "Ich gehe in den Park. Kommst du mit?", "I am going to the park. Are you coming along?"],
+        ["Sam", "Ja, gern!", "Yes, gladly!"]
+      ],
+      "practice": [
+        ["Give one real or clearly imagined Saturday plan.", "Was machst du am Samstag?", "What are you doing on Saturday?", "Ich besuche einen Freund.", "I am visiting a friend."],
+        ["Say whether you are free on Sunday.", "Hast du am Sonntag Zeit?", "Do you have time on Sunday?", "Ja, am Sonntag habe ich Zeit.", "Yes, I have time on Sunday."],
+        ["Ask about your partner’s weekend.", "Frag mich auch.", "Ask me too.", "Und du? Was machst du am Wochenende?", "And you? What are you doing at the weekend?"]
+      ],
+      "variations": [
+        ["Suggest meeting in the park on Sunday.", "Wo treffen wir uns am Sonntag?", "Where shall we meet on Sunday?", "Im Park?", "In the park?"],
+        ["You do not have a plan yet. Say so, then ask for your partner’s plan.", "Was machst du am Wochenende?", "What are you doing at the weekend?", "Ich habe noch keinen Plan. Und du?", "I have no plan yet. And you?"]
+      ]
+    },
+    {
+      "id": "starter-work-times",
+      "goal": "Give your real available days, weekly hours, and a possible starting time in short answers.",
+      "warmup": ["Am Dienstag habe ich Zeit.", "I have time on Tuesday."],
+      "wordIds": ["stunde", "woche", "dienstag", "donnerstag", "verfuegbar", "ab", "bis"],
+      "patterns": [
+        ["Ich kann am … arbeiten.", "I can work on …", "Use your actual days. For every Tuesday, say dienstags (on Tuesdays); am Dienstag means on Tuesday."],
+        ["Ab … Uhr. / Bis … Uhr.", "From … o’clock. / Until … o’clock.", "Ab gives the beginning; bis gives the end. These short answers are enough when the question is clear."]
+      ],
+      "dialogue": [
+        ["Interviewer", "Wie viele Stunden pro Woche können Sie arbeiten?", "How many hours per week can you work?"],
+        ["Sam", "Zehn Stunden pro Woche.", "Ten hours per week."],
+        ["Interviewer", "An welchen Tagen sind Sie verfügbar?", "On which days are you available?"],
+        ["Sam", "Am Dienstag und am Donnerstag.", "On Tuesday and on Thursday."],
+        ["Interviewer", "Ab wann können Sie am Dienstag arbeiten?", "From what time can you work on Tuesday?"],
+        ["Sam", "Ab zehn Uhr.", "From ten o’clock."]
+      ],
+      "practice": [
+        ["Give your own realistic number of weekly hours.", "Wie viele Stunden pro Woche können Sie arbeiten?", "How many hours per week can you work?", "Zehn Stunden pro Woche.", "Ten hours per week."],
+        ["Name days that actually work for you.", "An welchen Tagen haben Sie Zeit?", "On which days do you have time?", "Am Dienstag und am Donnerstag.", "On Tuesday and on Thursday."],
+        ["Give your starting time for one day.", "Ab wie viel Uhr können Sie arbeiten?", "From what time can you work?", "Ab zehn Uhr.", "From ten o’clock."]
+      ],
+      "variations": [
+        ["One suggested day does not work. Say so and offer another.", "Können Sie am Donnerstag arbeiten?", "Can you work on Thursday?", "Leider nicht. Am Dienstag habe ich Zeit.", "Unfortunately not. I have time on Tuesday."],
+        ["Give the time you need to finish.", "Bis wie viel Uhr haben Sie Zeit?", "Until what time do you have time?", "Bis fünf Uhr.", "Until five o’clock."]
+      ]
+    },
+    {
+      "id": "starter-first-task",
+      "goal": "Ask a colleague what to do first, confirm a simple next step, and say when you have finished.",
+      "warmup": ["Was mache ich zuerst?", "What do I do first?"],
+      "wordIds": ["aufgabe", "anfangen", "zuerst", "danach", "fertig", "schicken", "machen"],
+      "patterns": [
+        ["Was mache ich zuerst?", "What do I do first?", "Zuerst means first. Ask this instead of guessing when there are several tasks."],
+        ["Danach … / Ich bin fertig.", "After that … / I am finished.", "Examples: Danach schicke ich die Datei. Ich bin fertig. Keep the verb directly after Danach."]
+      ],
+      "dialogue": [
+        ["Sam", "Was ist meine erste Aufgabe?", "What is my first task?"],
+        ["Lea", "Bitte öffne zuerst die Datei.", "Please open the file first."],
+        ["Sam", "Und was mache ich danach?", "And what do I do after that?"],
+        ["Lea", "Danach schickst du mir die Datei.", "After that you send me the file."],
+        ["Sam", "Gut, ich fange jetzt an.", "Okay, I will start now."],
+        ["Lea", "Danke!", "Thank you!"]
+      ],
+      "practice": [
+        ["Ask which task comes first.", "Heute gibt es zwei Aufgaben.", "There are two tasks today.", "Was mache ich zuerst?", "What do I do first?"],
+        ["Confirm the next action.", "Danach schickst du mir die Datei.", "After that you send me the file.", "Danach schicke ich dir die Datei.", "After that I will send you the file."],
+        ["Say that you have finished.", "Bist du fertig?", "Are you finished?", "Ja, ich bin fertig.", "Yes, I am finished."]
+      ],
+      "variations": [
+        ["You are ready but do not know when to begin. Ask.", "Das ist deine Aufgabe.", "That is your task.", "Wann fange ich an?", "When do I start?"],
+        ["You finished the first step and need the next one.", "Die erste Aufgabe ist fertig.", "The first task is finished.", "Was mache ich danach?", "What do I do after that?"]
+      ]
+    },
+    {
+      "id": "starter-work-help",
+      "goal": "Describe one simple problem at work and ask a colleague for help.",
+      "warmup": ["Ich brauche Hilfe.", "I need help."],
+      "wordIds": ["hilfe", "problem", "datei", "oeffnen", "fehlen", "brauchen", "bitte"],
+      "patterns": [
+        ["Ich habe ein Problem. / Ich brauche Hilfe.", "I have a problem. / I need help.", "Start with one short sentence, then add the problem. You do not need a long explanation."],
+        ["Ich kann die Datei nicht öffnen.", "I cannot open the file.", "After kann, the action word öffnen goes at the end. If the file is missing, use Die Datei fehlt."]
+      ],
+      "dialogue": [
+        ["Sam", "Ich brauche Hilfe.", "I need help."],
+        ["Lea", "Was ist das Problem?", "What is the problem?"],
+        ["Sam", "Ich kann die Datei nicht öffnen.", "I cannot open the file."],
+        ["Lea", "Ich schicke sie dir noch einmal.", "I will send it to you again."],
+        ["Sam", "Jetzt geht es. Danke!", "Now it works. Thank you!"],
+        ["Lea", "Gern!", "You are welcome!"]
+      ],
+      "practice": [
+        ["Tell your colleague you need help.", "Ist alles gut?", "Is everything okay?", "Ich brauche Hilfe.", "I need help."],
+        ["Say that the file will not open.", "Was ist das Problem?", "What is the problem?", "Ich kann die Datei nicht öffnen.", "I cannot open the file."],
+        ["Say that the problem is fixed and thank them.", "Geht es jetzt?", "Does it work now?", "Ja, jetzt geht es. Danke!", "Yes, now it works. Thank you!"]
+      ],
+      "variations": [
+        ["The file is missing rather than broken. Explain the difference.", "Was fehlt?", "What is missing?", "Die Datei fehlt.", "The file is missing."],
+        ["Ask for the file to be sent again.", "Du findest die Datei nicht.", "You cannot find the file.", "Kannst du die Datei bitte noch einmal schicken?", "Can you send the file again, please?"]
+      ]
+    },
+    {
+      "id": "starter-mini-intro",
+      "goal": "Give a short work introduction using your name, studies or current activity, and one true interest or strength.",
+      "warmup": ["Ich arbeite gern im Team.", "I like working in a team."],
+      "wordIds": ["erfahrung", "team", "stelle", "suchen", "zuverlaessig", "neu", "arbeiten"],
+      "patterns": [
+        ["Ich heiße … Ich studiere …", "My name is … I study …", "Two short sentences are enough to start. Change the model to your real name and current situation."],
+        ["Ich arbeite gern … / Ich habe Erfahrung mit …", "I like working … / I have experience with …", "Choose something true. You can also say Ich habe noch keine Erfahrung. (I do not have experience yet.) Then say what you want to learn."]
+      ],
+      "dialogue": [
+        ["Interviewer", "Guten Tag! Stellen Sie sich kurz vor.", "Hello! Introduce yourself briefly."],
+        ["Sam", "Ich heiße Sam. Ich studiere Informatik.", "My name is Sam. I study computer science."],
+        ["Interviewer", "Was suchen Sie?", "What are you looking for?"],
+        ["Sam", "Ich suche eine Werkstudentenstelle.", "I am looking for a working-student job."],
+        ["Interviewer", "Was machen Sie gern?", "What do you like doing?"],
+        ["Sam", "Ich arbeite gern im Team.", "I like working in a team."]
+      ],
+      "practice": [
+        ["Introduce yourself in two short sentences.", "Stellen Sie sich bitte kurz vor.", "Please introduce yourself briefly.", "Ich heiße Sam. Ich studiere Informatik.", "My name is Sam. I study computer science."],
+        ["Name one real interest or strength.", "Was machen Sie gern?", "What do you like doing?", "Ich arbeite gern im Team.", "I like working in a team."],
+        ["Ask one simple question about the work.", "Haben Sie eine Frage?", "Do you have a question?", "Was wäre meine erste Aufgabe?", "What would my first task be?"]
+      ],
+      "variations": [
+        ["You are meeting a team for the first time. Introduce yourself as a new person.", "Guten Tag! Wer sind Sie?", "Hello! Who are you?", "Ich heiße Sam. Ich bin neu im Team.", "My name is Sam. I am new to the team."],
+        ["Someone asks about experience. Give one truthful example, or say you are just starting.", "Haben Sie schon Erfahrung?", "Do you already have experience?", "Noch nicht. Ich möchte lernen.", "Not yet. I would like to learn."]
+      ]
+    },
+    {
+      "id": "starter-food",
+      "goal": "Ask for a simple food item, add another item if needed, and say when that is everything.",
+      "warmup": ["Ein Brot, bitte.", "A loaf of bread, please."],
+      "wordIds": ["brot", "apfel", "milch", "kaufen", "frisch", "noch", "bitte"],
+      "patterns": [
+        ["Ich möchte …", "I would like …", "Practise complete items: ein Brot, einen Apfel, zwei Äpfel, Milch. Milk usually needs no article when asking for some."],
+        ["Noch …, bitte. / Nein, danke.", "Another …, please. / No, thank you.", "Use Noch … to add something. Nein, danke. answers Noch etwas? (Anything else?)."]
+      ],
+      "dialogue": [
+        ["Shop assistant", "Guten Tag! Was möchten Sie?", "Hello! What would you like?"],
+        ["Sam", "Ein Brot, bitte. Ist es frisch?", "A loaf of bread, please. Is it fresh?"],
+        ["Shop assistant", "Ja. Noch etwas?", "Yes. Anything else?"],
+        ["Sam", "Noch zwei Äpfel, bitte.", "Two apples as well, please."],
+        ["Shop assistant", "Sonst noch etwas?", "Anything else at all?"],
+        ["Sam", "Nein, danke.", "No, thank you."]
+      ],
+      "practice": [
+        ["Ask for a loaf of bread or an apple.", "Was möchten Sie?", "What would you like?", "Ein Brot, bitte.", "A loaf of bread, please."],
+        ["Add an item to your order.", "Noch etwas?", "Anything else?", "Noch einen Apfel, bitte.", "An apple as well, please."],
+        ["Say that you do not need anything else.", "Brauchen Sie noch Milch?", "Do you also need milk?", "Nein, danke.", "No, thank you."]
+      ],
+      "variations": [
+        ["This time you only need milk. Ask for it.", "Was möchten Sie kaufen?", "What would you like to buy?", "Ich möchte Milch, bitte.", "I would like some milk, please."],
+        ["Ask whether the bread is fresh before ordering.", "Möchten Sie ein Brot?", "Would you like a loaf of bread?", "Ja. Ist das Brot frisch?", "Yes. Is the bread fresh?"]
+      ]
+    },
+    {
+      "id": "starter-prices",
+      "goal": "Ask how much an item costs, choose cash or card, and check a price you did not catch.",
+      "warmup": ["Was kostet das?", "How much does that cost?"],
+      "wordIds": ["kosten", "euro", "geld", "karte", "bar", "bezahlen", "wie"],
+      "patterns": [
+        ["Was kostet das?", "How much does that cost?", "Pointing to the item is enough. Das stands for the thing you want to buy."],
+        ["Kann ich mit Karte bezahlen?", "Can I pay by card?", "Mit Karte means by card. Bar means in cash. You can answer simply: Mit Karte, bitte."]
+      ],
+      "dialogue": [
+        ["Sam", "Was kostet das Brot?", "How much does the bread cost?"],
+        ["Shop assistant", "Drei Euro.", "Three euros."],
+        ["Sam", "Kann ich mit Karte bezahlen?", "Can I pay by card?"],
+        ["Shop assistant", "Ja, natürlich.", "Yes, of course."],
+        ["Sam", "Gut, danke.", "Good, thank you."],
+        ["Shop assistant", "Danke! Auf Wiedersehen.", "Thank you! Goodbye."]
+      ],
+      "practice": [
+        ["Ask for the price of an item.", "Sie möchten dieses Brot.", "You would like this loaf of bread.", "Was kostet das?", "How much does that cost?"],
+        ["Choose cash or card.", "Bar oder mit Karte?", "Cash or card?", "Mit Karte, bitte.", "By card, please."],
+        ["Ask for the price again.", "Das kostet drei Euro.", "That costs three euros.", "Bitte noch einmal.", "Once more, please."]
+      ],
+      "variations": [
+        ["The shop accepts cash only. Say that you will pay cash.", "Leider nur bar.", "Unfortunately, cash only.", "Gut, ich bezahle bar.", "Okay, I will pay cash."],
+        ["You heard two euros. Confirm rather than guess.", "Das kostet zwei Euro.", "That costs two euros.", "Zwei Euro?", "Two euros?"]
+      ]
+    },
+    {
+      "id": "starter-directions",
+      "goal": "Ask where a place is, recognise left/right/straight ahead, and confirm one direction.",
+      "warmup": ["Wo ist der Bahnhof?", "Where is the train station?"],
+      "wordIds": ["bahnhof", "strasse", "links", "rechts", "geradeaus", "nah", "wo"],
+      "patterns": [
+        ["Entschuldigung, wo ist …?", "Excuse me, where is …?", "Examples: der Bahnhof, die Universität. Start with Entschuldigung to get someone’s attention politely."],
+        ["Also links? / Also rechts?", "So, left? / So, right?", "Repeat one important direction to check it. You can also ask: Ist das nah? (Is that close?)."]
+      ],
+      "dialogue": [
+        ["Sam", "Entschuldigung, wo ist der Bahnhof?", "Excuse me, where is the train station?"],
+        ["Passer-by", "Gehen Sie geradeaus und dann links.", "Go straight ahead and then left."],
+        ["Sam", "Geradeaus und dann links?", "Straight ahead and then left?"],
+        ["Passer-by", "Ja. Der Bahnhof ist ganz nah.", "Yes. The station is very close."],
+        ["Sam", "Danke!", "Thank you!"],
+        ["Passer-by", "Gern!", "You are welcome!"]
+      ],
+      "practice": [
+        ["Ask where the train station is.", "Sie suchen den Bahnhof.", "You are looking for the train station.", "Entschuldigung, wo ist der Bahnhof?", "Excuse me, where is the train station?"],
+        ["Repeat the important direction.", "Gehen Sie geradeaus und dann rechts.", "Go straight ahead and then right.", "Geradeaus und dann rechts?", "Straight ahead and then right?"],
+        ["Ask whether the place is close.", "Der Bahnhof ist in dieser Straße.", "The station is in this street.", "Ist das nah?", "Is that close?"]
+      ],
+      "variations": [
+        ["Ask for the university instead of the station.", "Kann ich Ihnen helfen?", "Can I help you?", "Ja, wo ist die Universität?", "Yes, where is the university?"],
+        ["You are unsure whether you should turn left. Check it.", "Der Bahnhof ist links.", "The station is on the left.", "Also links? Danke!", "So, left? Thank you!"]
+      ]
+    },
+    {
+      "id": "starter-time",
+      "goal": "Say simple numbers and whole-hour times, and distinguish the current time from an appointment time.",
+      "warmup": ["Es ist zehn Uhr.", "It is ten o’clock."],
+      "wordIds": ["eins", "zwei", "drei", "vier", "fuenf", "zehn", "uhr"],
+      "patterns": [
+        ["Es ist … Uhr.", "It is … o’clock.", "Start with whole hours. Ein Uhr means one o’clock: use ein, not eins, immediately before Uhr."],
+        ["Um … Uhr.", "At … o’clock.", "Use um for the time of an activity. We begin with 1–5 and 10; the next lessons add 6–9. German also uses the 24-hour clock."]
+      ],
+      "dialogue": [
+        ["Alex", "Wie spät ist es?", "What time is it?"],
+        ["Sam", "Es ist drei Uhr.", "It is three o’clock."],
+        ["Alex", "Treffen wir uns um vier Uhr?", "Shall we meet at four o’clock?"],
+        ["Sam", "Ja, um vier Uhr.", "Yes, at four o’clock."],
+        ["Alex", "Bis später!", "See you later!"],
+        ["Sam", "Bis später!", "See you later!"]
+      ],
+      "practice": [
+        ["Imagine the clock shows ten. Say the time.", "Wie spät ist es?", "What time is it?", "Es ist zehn Uhr.", "It is ten o’clock."],
+        ["Suggest meeting at five.", "Um wie viel Uhr treffen wir uns?", "At what time shall we meet?", "Um fünf Uhr.", "At five o’clock."],
+        ["Confirm that you heard four, not five.", "Wir treffen uns um vier Uhr.", "We will meet at four o’clock.", "Um vier Uhr?", "At four o’clock?"]
+      ],
+      "variations": [
+        ["Now the clock shows one. Say the time.", "Wie spät ist es?", "What time is it?", "Es ist ein Uhr.", "It is one o’clock."],
+        ["A friend suggests two o’clock. Agree and repeat the time.", "Geht es um zwei Uhr?", "Does two o’clock work?", "Ja, um zwei Uhr.", "Yes, at two o’clock."]
+      ]
+    },
+    {
+      "id": "starter-routine",
+      "goal": "Say when you get up and eat, then give one simple detail about your routine.",
+      "warmup": ["Ich stehe um sechs Uhr auf.", "I get up at six o’clock."],
+      "wordIds": ["aufstehen", "morgens", "essen", "schlafen", "sechs", "acht", "uhr"],
+      "patterns": [
+        ["Ich stehe um … Uhr auf.", "I get up at … o’clock.", "Aufstehen separates: stehe goes after ich, and auf goes at the end. Use your real time."],
+        ["Ich esse um … Uhr.", "I eat at … o’clock.", "Change the time to fit your routine. Morgens means in the mornings; morgen without s means tomorrow."]
+      ],
+      "dialogue": [
+        ["Alex", "Wann stehst du auf?", "When do you get up?"],
+        ["Sam", "Ich stehe um sechs Uhr auf.", "I get up at six o’clock."],
+        ["Alex", "Wann isst du morgens?", "When do you eat in the morning?"],
+        ["Sam", "Um acht Uhr.", "At eight o’clock."],
+        ["Alex", "Schläfst du gut?", "Do you sleep well?"],
+        ["Sam", "Ja, meistens.", "Yes, usually."]
+      ],
+      "practice": [
+        ["Say your usual getting-up time.", "Wann stehst du auf?", "When do you get up?", "Ich stehe um sechs Uhr auf.", "I get up at six o’clock."],
+        ["Say when you eat in the morning.", "Wann isst du morgens?", "When do you eat in the morning?", "Ich esse um acht Uhr.", "I eat at eight o’clock."],
+        ["Answer simply about your sleep.", "Schläfst du gut?", "Do you sleep well?", "Ja, ich schlafe gut.", "Yes, I sleep well."]
+      ],
+      "variations": [
+        ["Give your routine for a different day, such as a day with no classes.", "Wann stehst du dann auf?", "When do you get up then?", "Ich stehe um acht Uhr auf.", "I get up at eight o’clock."],
+        ["Ask a friend about their morning.", "Frag mich nach meinem Tag.", "Ask me about my day.", "Wann stehst du auf?", "When do you get up?"]
+      ]
+    },
+    {
+      "id": "starter-meeting-time",
+      "goal": "Ask whether a friend has time, choose a day and time, and confirm the plan.",
+      "warmup": ["Hast du morgen Zeit?", "Do you have time tomorrow?"],
+      "wordIds": ["morgen", "heute", "zeit", "treffen", "montag", "sieben", "neun"],
+      "patterns": [
+        ["Hast du … Zeit?", "Do you have time …?", "Use heute (today), morgen (tomorrow), or am Montag (on Monday)."],
+        ["Wir treffen uns um … Uhr.", "We will meet at … o’clock.", "Uns belongs with treffen when saying we meet each other. Repeat the day and time at the end."]
+      ],
+      "dialogue": [
+        ["Alex", "Hast du morgen Zeit?", "Do you have time tomorrow?"],
+        ["Sam", "Ja, um neun Uhr.", "Yes, at nine o’clock."],
+        ["Alex", "Treffen wir uns hier?", "Shall we meet here?"],
+        ["Sam", "Ja, gut.", "Yes, good."],
+        ["Alex", "Also morgen um neun Uhr.", "So, tomorrow at nine o’clock."],
+        ["Sam", "Ja. Bis morgen!", "Yes. See you tomorrow!"]
+      ],
+      "practice": [
+        ["Ask a friend whether they have time tomorrow.", "Du möchtest mich treffen.", "You would like to meet me.", "Hast du morgen Zeit?", "Do you have time tomorrow?"],
+        ["Suggest seven or nine o’clock.", "Um wie viel Uhr?", "At what time?", "Um neun Uhr.", "At nine o’clock."],
+        ["Confirm the day and time.", "Morgen um neun Uhr?", "Tomorrow at nine o’clock?", "Ja, morgen um neun Uhr.", "Yes, tomorrow at nine o’clock."]
+      ],
+      "variations": [
+        ["Choose Monday rather than tomorrow.", "Wann hast du Zeit?", "When do you have time?", "Am Montag um sieben Uhr.", "On Monday at seven o’clock."],
+        ["A friend is free today. Suggest a time that works for you.", "Ich habe heute Zeit.", "I have time today.", "Treffen wir uns um neun Uhr?", "Shall we meet at nine o’clock?"]
+      ]
+    },
+    {
+      "id": "starter-change-time",
+      "goal": "Say when a time does not work, suggest another time, and confirm the change.",
+      "warmup": ["Geht es auch später?", "Would later also work?"],
+      "wordIds": ["spaeter", "termin", "leider", "passen", "freitag", "uhr", "morgen"],
+      "patterns": [
+        ["Heute kann ich leider nicht.", "Unfortunately, I cannot today.", "This is a polite, useful short sentence. Add another possibility rather than a long explanation."],
+        ["Passt …? / … passt gut.", "Does … work? / … works well.", "Examples: Passt Freitag? Freitag passt gut. You can propose a whole day or a time."]
+      ],
+      "dialogue": [
+        ["Alex", "Passt der Termin morgen um neun Uhr?", "Does the appointment tomorrow at nine work?"],
+        ["Sam", "Leider nicht. Geht es auch später?", "Unfortunately not. Would later work too?"],
+        ["Alex", "Passt zehn Uhr?", "Does ten o’clock work?"],
+        ["Sam", "Ja, zehn Uhr passt gut.", "Yes, ten o’clock works well."],
+        ["Alex", "Also morgen um zehn Uhr.", "So, tomorrow at ten o’clock."],
+        ["Sam", "Danke! Bis morgen.", "Thank you! See you tomorrow."]
+      ],
+      "practice": [
+        ["Say that the proposed time does not work.", "Hast du heute Zeit?", "Do you have time today?", "Heute kann ich leider nicht.", "Unfortunately, I cannot today."],
+        ["Ask to meet later.", "Passt neun Uhr?", "Does nine o’clock work?", "Geht es auch später?", "Would later work too?"],
+        ["Accept the new time and repeat it.", "Passt zehn Uhr?", "Does ten o’clock work?", "Ja, zehn Uhr passt gut.", "Yes, ten o’clock works well."]
+      ],
+      "variations": [
+        ["Suggest another day instead of another time.", "Passt Montag?", "Does Monday work?", "Leider nicht. Passt Freitag?", "Unfortunately not. Does Friday work?"],
+        ["A friend asks to change the time. Accept if it works for you.", "Geht es morgen um fünf Uhr?", "Would tomorrow at five o’clock work?", "Ja, morgen um fünf Uhr passt gut.", "Yes, tomorrow at five o’clock works well."]
+      ]
+    },
+    {
+      "id": "starter-learning",
+      "goal": "Tell someone that you are learning German and can speak only a little. Ask for a manageable conversation.",
+      "warmup": ["Ich lerne Deutsch.", "I am learning German."],
+      "wordIds": ["lernen", "deutsch", "bisschen", "nicht", "danke", "ja", "nein"],
+      "patterns": [
+        ["Ich lerne Deutsch.", "I am learning German.", "Ich lerne describes what you are learning. You do not need to claim you speak well."],
+        ["Ich spreche ein bisschen Deutsch.", "I speak a little German.", "Ein bisschen is a useful way to set expectations. Nein, noch nicht. means No, not yet."]
+      ],
+      "dialogue": [
+        ["Alex", "Lernst du Deutsch?", "Are you learning German?"],
+        ["Sam", "Ja, ich lerne Deutsch.", "Yes, I am learning German."],
+        ["Alex", "Sprichst du schon viel Deutsch?", "Do you already speak a lot of German?"],
+        ["Sam", "Nein, nur ein bisschen.", "No, only a little."],
+        ["Alex", "Wir sprechen langsam.", "We will speak slowly."],
+        ["Sam", "Ja, danke!", "Yes, thank you!"]
+      ],
+      "practice": [
+        ["Say that you are learning German.", "Lernst du Deutsch?", "Are you learning German?", "Ja, ich lerne Deutsch.", "Yes, I am learning German."],
+        ["Say how much German you speak honestly.", "Sprichst du Deutsch?", "Do you speak German?", "Ein bisschen.", "A little."],
+        ["Say that you do not understand this yet.", "Verstehst du das?", "Do you understand that?", "Nein, noch nicht.", "No, not yet."]
+      ],
+      "variations": [
+        ["A new neighbour starts speaking to you. Explain that you are learning.", "Hallo! Sprichst du Deutsch?", "Hello! Do you speak German?", "Ein bisschen. Ich lerne Deutsch.", "A little. I am learning German."],
+        ["A classmate offers to practise slowly with you. Accept and thank them.", "Sprechen wir langsam?", "Shall we speak slowly?", "Ja, bitte. Danke!", "Yes, please. Thank you!"]
+      ]
+    },
+    {
+      "id": "starter-spelling",
+      "goal": "Give your surname, spell it slowly, and ask someone to spell theirs.",
+      "warmup": ["Mein Name ist Sam.", "My name is Sam."],
+      "wordIds": ["buchstabieren", "schreiben", "buchstabe", "nachname", "name", "wie", "bitte"],
+      "patterns": [
+        ["Mein Nachname ist …", "My surname is …", "Use your own name. German names are examples, not names you need to adopt."],
+        ["Können Sie das bitte buchstabieren?", "Can you spell that, please?", "Say one letter at a time. Try the audio for S – A – M, then practise your own letters. Ä, Ö, Ü and ß are additional German letters; ß is called Eszett."]
+      ],
+      "dialogue": [
+        ["Receptionist", "Wie ist Ihr Nachname?", "What is your surname?"],
+        ["Sam", "Mein Nachname ist Meyer.", "My surname is Meyer."],
+        ["Receptionist", "Können Sie das bitte buchstabieren?", "Can you spell that, please?"],
+        ["Sam", "M – E – Y – E – R.", "M – E – Y – E – R."],
+        ["Receptionist", "Meyer. Ist das richtig?", "Meyer. Is that correct?"],
+        ["Sam", "Ja, danke.", "Yes, thank you."]
+      ],
+      "practice": [
+        ["Give your real surname.", "Wie ist Ihr Nachname?", "What is your surname?", "Mein Nachname ist Meyer.", "My surname is Meyer."],
+        ["Spell your first name slowly.", "Bitte buchstabieren Sie Ihren Vornamen.", "Please spell your first name.", "S – A – M.", "S – A – M."],
+        ["Ask someone to spell an unfamiliar name.", "Mein Name ist Klein.", "My name is Klein.", "Können Sie das bitte buchstabieren?", "Can you spell that, please?"]
+      ],
+      "variations": [
+        ["You are registering for a course. Repeat and spell your surname.", "Wie schreibt man Ihren Nachnamen?", "How do you write your surname?", "Meyer. M – E – Y – E – R.", "Meyer. M – E – Y – E – R."],
+        ["The receptionist reads back the wrong spelling. Correct it gently.", "Mayer mit A?", "Mayer with an A?", "Nein, Meyer mit E.", "No, Meyer with an E."]
+      ]
+    },
+    {
+      "id": "starter-home",
+      "goal": "Say where you live and where you come from, then ask the question back.",
+      "warmup": ["Ich wohne in Köln.", "I live in Cologne."],
+      "wordIds": ["wohnen", "kommen", "stadt", "land", "hier", "wo", "aus"],
+      "patterns": [
+        ["Ich wohne in …", "I live in …", "Use in with a city: in Berlin, in Köln. Put your own city in the gap."],
+        ["Ich komme aus …", "I come from …", "Use your real place of origin. Examples: aus Indien, aus Spanien. Some countries use an article: aus der Türkei, aus den USA."]
+      ],
+      "dialogue": [
+        ["Alex", "Wo wohnst du?", "Where do you live?"],
+        ["Sam", "Ich wohne in Köln. Und du?", "I live in Cologne. And you?"],
+        ["Alex", "Ich wohne auch hier. Woher kommst du?", "I live here too. Where do you come from?"],
+        ["Sam", "Ich komme aus Indien.", "I come from India."],
+        ["Alex", "Gefällt dir die Stadt?", "Do you like the city?"],
+        ["Sam", "Ja, Köln gefällt mir.", "Yes, I like Cologne."]
+      ],
+      "practice": [
+        ["Say the city or town you live in.", "Wo wohnst du?", "Where do you live?", "Ich wohne in Köln.", "I live in Cologne."],
+        ["Give your own place of origin.", "Woher kommst du?", "Where do you come from?", "Ich komme aus Indien.", "I come from India."],
+        ["Ask your partner where they live.", "Frag mich auch.", "Ask me too.", "Wo wohnst du?", "Where do you live?"]
+      ],
+      "variations": [
+        ["You meet a neighbour. Say that you live here too.", "Ich wohne hier.", "I live here.", "Ich wohne auch hier.", "I live here too."],
+        ["At a language class, give both your city and your place of origin.", "Stell dich kurz vor.", "Introduce yourself briefly.", "Ich wohne in Köln. Ich komme aus Indien.", "I live in Cologne. I come from India."]
+      ]
+    },
+    {
+      "id": "starter-languages",
+      "goal": "Say which languages you speak and ask for simple German when you need it.",
+      "warmup": ["Ich spreche Englisch.", "I speak English."],
+      "wordIds": ["englisch", "sprache", "gut", "auch", "einfach", "sprechen", "deutsch"],
+      "patterns": [
+        ["Ich spreche … und ein bisschen Deutsch.", "I speak … and a little German.", "Language names usually have no article here. Use languages you actually speak."],
+        ["Kannst du das einfach sagen?", "Can you say that simply?", "Use this with a classmate. You can also ask for English: Auf Englisch, bitte."]
+      ],
+      "dialogue": [
+        ["Alex", "Welche Sprachen sprichst du?", "Which languages do you speak?"],
+        ["Sam", "Ich spreche Englisch und ein bisschen Deutsch.", "I speak English and a little German."],
+        ["Alex", "Ich spreche auch Englisch.", "I speak English too."],
+        ["Sam", "Gut! Können wir einfaches Deutsch sprechen?", "Good! Can we speak simple German?"],
+        ["Alex", "Ja, natürlich.", "Yes, of course."],
+        ["Sam", "Danke!", "Thank you!"]
+      ],
+      "practice": [
+        ["Name a language you speak.", "Welche Sprache sprichst du?", "Which language do you speak?", "Ich spreche Englisch.", "I speak English."],
+        ["Explain your current German honestly.", "Sprichst du gut Deutsch?", "Do you speak German well?", "Noch nicht. Ich spreche ein bisschen Deutsch.", "Not yet. I speak a little German."],
+        ["Ask for simpler words.", "Ist das klar?", "Is that clear?", "Kannst du das einfach sagen?", "Can you say that simply?"]
+      ],
+      "variations": [
+        ["A classmate also speaks one of your languages. Say that you do too.", "Ich spreche Englisch.", "I speak English.", "Ich spreche auch Englisch.", "I speak English too."],
+        ["You need a short English explanation before trying again in German.", "Verstehst du die Frage?", "Do you understand the question?", "Noch nicht. Auf Englisch, bitte.", "Not yet. In English, please."]
+      ]
+    },
+    {
+      "id": "starter-studies",
+      "goal": "Explain in one or two sentences what you study or do. Use your real situation.",
+      "warmup": ["Ich studiere Informatik.", "I study computer science."],
+      "wordIds": ["studieren", "arbeiten", "student", "universitaet", "fach", "machen", "ich"],
+      "patterns": [
+        ["Ich studiere …", "I study … at university.", "Choose your real subject. Informatik, Biologie, and Wirtschaft are examples."],
+        ["Ich bin Student. / Ich bin Studentin.", "I am a university student.", "Choose the form that fits you. If you are not a student, use Ich arbeite … or describe what you currently do."]
+      ],
+      "dialogue": [
+        ["Alex", "Was machst du?", "What do you do?"],
+        ["Sam", "Ich bin Student. Ich studiere Informatik.", "I am a student. I study computer science."],
+        ["Alex", "An welcher Universität?", "At which university?"],
+        ["Sam", "An der Universität hier in Köln.", "At the university here in Cologne."],
+        ["Alex", "Arbeitest du auch?", "Do you work as well?"],
+        ["Sam", "Noch nicht. Ich suche Arbeit.", "Not yet. I am looking for work."]
+      ],
+      "practice": [
+        ["Say what you study, or what you currently do.", "Was machst du?", "What do you do?", "Ich studiere Informatik.", "I study computer science."],
+        ["Name your own university or place of work.", "Wo studierst oder arbeitest du?", "Where do you study or work?", "Ich studiere in Köln.", "I study in Cologne."],
+        ["Ask your classmate about their studies.", "Jetzt frag mich.", "Now ask me.", "Was studierst du?", "What do you study?"]
+      ],
+      "variations": [
+        ["Introduce yourself with your name and one fact about your studies or work.", "Hallo! Wer bist du?", "Hello! Who are you?", "Ich heiße Sam. Ich studiere Informatik.", "My name is Sam. I study computer science."],
+        ["A classmate asks whether you also have a job. Answer truthfully.", "Arbeitest du auch?", "Do you work too?", "Noch nicht. Ich studiere.", "Not yet. I am studying."]
+      ]
+    },
+    {
+      "id": "starter-interests",
+      "goal": "Say something you enjoy, something you prefer, and ask about the other person’s interests.",
+      "warmup": ["Ich koche gern.", "I like cooking."],
+      "wordIds": ["gern", "lesen", "kochen", "musik", "sport", "spielen", "lieber"],
+      "patterns": [
+        ["Ich … gern.", "I like doing …", "Examples: Ich lese gern. Ich koche gern. For a dislike, add nicht before gern: Ich koche nicht gern."],
+        ["Ich … lieber.", "I prefer doing …", "Lieber compares choices: Ich lese lieber. means I would rather read."]
+      ],
+      "dialogue": [
+        ["Alex", "Was machst du gern?", "What do you like doing?"],
+        ["Sam", "Ich lese gern. Und du?", "I like reading. And you?"],
+        ["Alex", "Ich koche gern und mache Sport.", "I like cooking and doing sport."],
+        ["Sam", "Was spielst du?", "What do you play?"],
+        ["Alex", "Ich spiele Fußball. Spielst du auch?", "I play football. Do you play too?"],
+        ["Sam", "Nein. Ich höre lieber Musik.", "No. I prefer listening to music."]
+      ],
+      "practice": [
+        ["Name one thing you genuinely enjoy.", "Was machst du gern?", "What do you like doing?", "Ich koche gern.", "I like cooking."],
+        ["Choose the activity you prefer.", "Liest du lieber oder kochst du lieber?", "Do you prefer reading or cooking?", "Ich lese lieber.", "I prefer reading."],
+        ["Ask the question back.", "Jetzt bist du dran.", "Now it is your turn.", "Was machst du gern?", "What do you like doing?"]
+      ],
+      "variations": [
+        ["A classmate suggests sport. Say whether you like it.", "Machst du gern Sport?", "Do you like doing sport?", "Ja, ich mache gern Sport.", "Yes, I like doing sport."],
+        ["You prefer a quiet activity. Explain your preference simply.", "Möchtest du Fußball spielen?", "Would you like to play football?", "Nein, danke. Ich lese lieber.", "No, thank you. I would rather read."]
+      ]
+    },
+    {
+      "id": "starter-hello",
+      "goal": "Say hello, give your name, and ask the other person's name. One short sentence is enough.",
+      "warmup": ["Hallo!", "Hello!"],
+      "wordIds": ["hallo", "ich", "heissen", "du", "wie", "und", "name"],
+      "patterns": [
+        ["Ich heiße …", "My name is …", "After ich, use heiße. Put your own name in the gap."],
+        ["Wie heißt du?", "What is your name?", "Use du with a classmate. Und du? is a short way to ask the question back."]
+      ],
+      "dialogue": [
+        ["Alex", "Hallo! Ich heiße Alex.", "Hello! My name is Alex."],
+        ["Sam", "Hallo!", "Hello!"],
+        ["Alex", "Wie heißt du?", "What is your name?"],
+        ["Sam", "Ich heiße Sam.", "My name is Sam."],
+        ["Alex", "Freut mich!", "Nice to meet you!"],
+        ["Sam", "Freut mich auch!", "Nice to meet you too!"]
+      ],
+      "practice": [
+        ["Greet your new classmate.", "Hallo!", "Hello!", "Hallo!", "Hello!"],
+        ["Say your own first name.", "Wie heißt du?", "What is your name?", "Ich heiße Sam.", "My name is Sam."],
+        ["Now ask a new classmate their name.", "Du bist dran.", "It is your turn.", "Wie heißt du?", "What is your name?"]
+      ],
+      "variations": [
+        ["A second classmate joins you. Greet them and say your name.", "Hallo! Ich heiße Kim. Wie heißt du?", "Hello! My name is Kim. What is your name?", "Hallo, Kim! Ich heiße Sam.", "Hello, Kim! My name is Sam."],
+        ["You arrive first at a language class. Introduce yourself and ask a name.", "Hallo!", "Hello!", "Hallo! Ich heiße Sam. Wie heißt du?", "Hello! My name is Sam. What is your name?"]
+      ]
+    },
+    {
+      "id": "starter-repeat",
+      "goal": "Keep a conversation going when you do not understand: ask for repetition and slower speech.",
+      "warmup": ["Bitte noch einmal.", "Once more, please."],
+      "wordIds": ["bitte", "langsam", "nochmal", "verstehen", "sprechen", "wiederholen", "entschuldigung"],
+      "patterns": [
+        ["Können Sie das bitte wiederholen?", "Can you repeat that, please?", "Learn this as a whole useful sentence. Sie is polite, for someone you do not know."],
+        ["Bitte sprechen Sie langsam.", "Please speak slowly.", "The shorter Bitte langsam. also communicates the request."]
+      ],
+      "dialogue": [
+        ["Receptionist", "Der Termin ist am Dienstag.", "The appointment is on Tuesday."],
+        ["Sam", "Entschuldigung. Können Sie das bitte wiederholen?", "Excuse me. Can you repeat that, please?"],
+        ["Receptionist", "Am Dienstag.", "On Tuesday."],
+        ["Sam", "Bitte sprechen Sie langsam.", "Please speak slowly."],
+        ["Receptionist", "Dienstag. Um zehn Uhr.", "Tuesday. At ten o'clock."],
+        ["Sam", "Danke. Jetzt verstehe ich.", "Thank you. Now I understand."]
+      ],
+      "practice": [
+        ["Ask politely to hear the sentence again.", "Der Termin ist am Dienstag.", "The appointment is on Tuesday.", "Können Sie das bitte wiederholen?", "Can you repeat that, please?"],
+        ["Ask for a slower pace.", "Ist das verständlich?", "Is that understandable?", "Bitte sprechen Sie langsam.", "Please speak slowly."],
+        ["Say that you understand now.", "Dienstag. Um zehn Uhr.", "Tuesday. At ten o'clock.", "Danke. Jetzt verstehe ich.", "Thank you. Now I understand."]
+      ],
+      "variations": [
+        ["At a shop, you miss the price. Ask to hear it again.", "Das kostet vier Euro.", "That costs four euros.", "Entschuldigung, bitte noch einmal.", "Excuse me, once more, please."],
+        ["Someone explains the way too fast. Ask them to slow down.", "Gehen Sie links und dann rechts.", "Go left and then right.", "Bitte sprechen Sie langsam.", "Please speak slowly."]
+      ]
+    },
+    {
+      "id": "starter-coffee",
+      "goal": "Order one drink, choose its size, and finish politely.",
+      "warmup": ["Einen Kaffee, bitte.", "A coffee, please."],
+      "wordIds": ["kaffee", "wasser", "tee", "klein", "gross", "moechten", "trinken", "bitte"],
+      "patterns": [
+        ["Ich möchte …, bitte.", "I would like …, please.", "Use einen Kaffee / einen Tee, but ein Wasser. Practise the drink together with its little word."],
+        ["Klein, bitte. / Groß, bitte.", "Small, please. / Large, please.", "A short answer is natural when someone asks about the size."]
+      ],
+      "dialogue": [
+        ["Barista", "Guten Tag! Was möchten Sie?", "Hello! What would you like?"],
+        ["Sam", "Ich möchte einen Kaffee, bitte.", "I would like a coffee, please."],
+        ["Barista", "Klein oder groß?", "Small or large?"],
+        ["Sam", "Klein, bitte.", "Small, please."],
+        ["Barista", "Hier, bitte.", "Here you are."],
+        ["Sam", "Danke!", "Thank you!"]
+      ],
+      "practice": [
+        ["Order a coffee, tea, or water.", "Was möchten Sie trinken?", "What would you like to drink?", "Ich möchte einen Tee, bitte.", "I would like a tea, please."],
+        ["Choose a size.", "Klein oder groß?", "Small or large?", "Klein, bitte.", "Small, please."],
+        ["Thank the barista.", "Hier ist Ihr Tee.", "Here is your tea.", "Danke!", "Thank you!"]
+      ],
+      "variations": [
+        ["This time, order water instead of coffee.", "Was möchten Sie?", "What would you like?", "Ein Wasser, bitte.", "A water, please."],
+        ["Order for yourself and a friend: one coffee and one tea.", "Was möchten Sie trinken?", "What would you like to drink?", "Einen Kaffee und einen Tee, bitte.", "A coffee and a tea, please."]
+      ]
+    }
+  ]
+}

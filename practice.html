@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Ausländerbehörde-Trainer · A2 Sprech- &amp; Vokabelkarten</title>
+<style>
+/* ============================================================
+   Ausländerbehörde-Trainer  ·  A2 Flashcards + Roleplay
+   Single file app: inline CSS + JS, no dependencies
+   ============================================================ */
+
+:root{
+  --bg:#eef1f7;
+  --card:#ffffff;
+  --ink:#101a2b;
+  --muted:#5a6580;
+  --line:#dde3ee;
+  --brand:#0d5cab;
+  --brand-dark:#0b4c8d;
+  --brand-2:#0e9e8f;
+  --soft:#eef4fd;
+  --soft-2:#e8f8f4;
+  --good:#0f8a4d;
+  --shadow:0 10px 30px rgba(16,26,43,.10);
+  --r:18px;
+  --r-sm:12px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0c1120;
+    --card:#151d2e;
+    --ink:#e9eefb;
+    --muted:#a2adc6;
+    --line:#27324a;
+    --brand:#7db8f5;
+    --brand-dark:#123a63;
+    --brand-2:#4fd3c0;
+    --soft:#1b2740;
+    --soft-2:#16323a;
+    --good:#5fd08d;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  line-height:1.5;
+}
+h1,h2,h3{margin:0 0 .35rem;line-height:1.25}
+p{margin:0 0 .6rem}
+button,input,select{font:inherit;color:inherit}
+.wrap{width:min(1120px,100% - 1.4rem);margin-inline:auto}
+.skip{position:absolute;left:-9999px;top:0}
+.skip:focus{left:.5rem;top:.5rem;z-index:99;background:var(--card);padding:.5rem .8rem;border-radius:10px}
+:focus-visible{outline:3px solid #ffbf47;outline-offset:2px}
+
+/* ---------- sticky header ---------- */
+.topbar{
+  position:sticky;top:0;z-index:30;
+  background:linear-gradient(180deg,var(--brand),var(--brand-dark));
+  color:#fff;padding:.6rem 0 .7rem;
+  box-shadow:0 6px 20px rgba(11,60,110,.28);
+}
+.bar-inner{display:flex;flex-wrap:wrap;gap:.5rem 1rem;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:.6rem;align-items:center;min-width:0}
+.logo{font-size:1.7rem;line-height:1}
+.brand strong{display:block;font-size:1.02rem}
+.brand small{display:block;color:#cfe4ff;font-size:.76rem}
+.tabs{display:flex;gap:.25rem;flex-wrap:wrap;background:rgba(255,255,255,.16);padding:.25rem;border-radius:99px}
+.tab{
+  border:0;background:transparent;color:#eaf3ff;cursor:pointer;
+  padding:.4rem .8rem;border-radius:99px;font-size:.87rem;font-weight:600;
+}
+.tab.is-active{background:#fff;color:var(--brand-dark)}
+.voice-box{display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;font-size:.78rem}
+.voice-box label{color:#d7e8ff}
+#voice{
+  max-width:16rem;background:rgba(255,255,255,.16);color:#fff;
+  border:1px solid rgba(255,255,255,.4);border-radius:9px;padding:.25rem .4rem;
+}
+#voice option{color:#101a2b}
+input[type=range]{width:7rem;accent-color:#9ad4ff}
+.ghost-light{
+  background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.45);
+  color:#fff;border-radius:10px;padding:.3rem .6rem;cursor:pointer;font-size:.8rem;font-weight:600;
+}
+.ghost-light:hover{background:rgba(255,255,255,.28)}
+.voice-warn{
+  margin:.5rem auto 0;background:#ffe9c7;color:#6b3d00;
+  padding:.45rem .7rem;border-radius:10px;font-size:.83rem;
+}
+.voice-warn a{color:#6b3d00}
+
+/* ---------- panels & tabs ---------- */
+main.wrap{padding:1rem 0 3rem}
+.panel{display:none}
+.panel.is-active{display:block}
+.panel-head{margin:.2rem 0 .9rem}
+.panel-head h2{font-size:clamp(1.05rem,2.4vw,1.4rem)}
+.panel-head p{color:var(--muted);font-size:.92rem;max-width:76ch}
+kbd{
+  background:var(--card);border:1px solid var(--line);border-bottom-width:2px;
+  border-radius:6px;padding:.05rem .35rem;font-size:.78rem;font-family:ui-monospace,Consolas,monospace;
+}
+.progress-wrap{display:flex;align-items:center;gap:.7rem;margin:0 0 .8rem}
+.progress{flex:1;height:10px;background:var(--line);border-radius:99px;overflow:hidden}
+.progress-bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .3s ease}
+#progressText{font-size:.82rem;color:var(--muted);white-space:nowrap}
+.chips{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.8rem}
+.chip{
+  border:1px solid var(--line);background:var(--card);color:var(--muted);
+  padding:.35rem .7rem;border-radius:99px;cursor:pointer;font-size:.81rem;
+}
+.chip:hover{border-color:var(--brand)}
+.chip.is-active{border-color:var(--brand);background:var(--soft);color:var(--brand);font-weight:700}
+.chip .n{opacity:.7;font-size:.75rem}
+.toolbar{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:1rem}
+.btn{
+  border:1px solid transparent;background:var(--brand);color:#fff;cursor:pointer;
+  padding:.5rem .85rem;border-radius:12px;font-size:.86rem;font-weight:700;
+  box-shadow:0 2px 8px rgba(13,92,171,.25);
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:var(--card);color:var(--brand);border-color:var(--line);box-shadow:none}
+.btn.is-playing{background:var(--brand-2);color:#fff;border-color:transparent}
+.count{font-size:.81rem;color:var(--muted);margin-left:auto}
+.switch{display:inline-flex;align-items:center;gap:.45rem;font-size:.86rem;color:var(--muted)}
+.switch input{width:1.1rem;height:1.1rem;accent-color:var(--brand)}
+
+/* ---------- flashcards ---------- */
+.cards{display:grid;gap:1rem;grid-template-columns:repeat(auto-fill,minmax(19rem,1fr))}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:.9rem;display:flex;flex-direction:column;gap:.7rem;
+}
+.card-top{display:flex;align-items:center;gap:.5rem;justify-content:space-between;flex-wrap:wrap}
+.badge{
+  font-size:.7rem;text-transform:uppercase;letter-spacing:.07em;font-weight:800;
+  color:var(--brand);background:var(--soft);padding:.2rem .55rem;border-radius:99px;
+}
+.learn-flag{
+  font-size:.76rem;color:var(--muted);background:transparent;cursor:pointer;
+  border:1px dashed var(--line);border-radius:99px;padding:.18rem .55rem;
+}
+.learn-flag.on{color:var(--good);border:1px solid var(--good);font-weight:700}
+.flip{perspective:1400px;cursor:pointer;border-radius:var(--r-sm)}
+.flip-inner{display:grid;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.1,.2,1)}
+.flip.is-flipped .flip-inner{transform:rotateY(180deg)}
+.face{
+  grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r-sm);padding:.85rem .9rem;min-height:12.5rem;
+  display:flex;flex-direction:column;gap:.5rem;background:var(--soft);
+}
+.face.back{transform:rotateY(180deg);background:var(--soft-2)}
+.tag{font-size:.7rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;font-weight:800}
+.de{font-size:clamp(1.02rem,2.4vw,1.22rem);font-weight:700;margin:0}
+.en{font-size:1rem;margin:0;color:var(--ink)}
+.pron{
+  font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:.85rem;
+  color:var(--muted);background:rgba(13,92,171,.09);
+  border-left:3px solid var(--brand);border-radius:0 10px 10px 0;
+  padding:.45rem .6rem;margin:0;
+}
+.pron strong{color:var(--ink)}
+.tip{
+  background:rgba(14,158,143,.14);border-left:3px solid var(--brand-2);
+  border-radius:0 10px 10px 0;padding:.45rem .6rem;font-size:.82rem;margin:0;
+}
+.hint{margin-top:auto;font-size:.72rem;color:var(--muted);text-align:center}
+.card-actions{display:flex;gap:.45rem;flex-wrap:wrap}
+.card-actions .btn{flex:1 1 6.5rem;padding:.45rem .5rem;font-size:.81rem;box-shadow:none}
+.speaking{box-shadow:0 0 0 3px rgba(14,158,143,.45);border-radius:var(--r-sm)}
+.empty{color:var(--muted);font-size:.9rem;text-align:center;padding:1rem}
+
+/* ---------- roleplay dialogue ---------- */
+.scene{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--shadow);padding:1rem;margin-bottom:1.1rem;
+}
+.scene-head{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:center;justify-content:space-between;margin-bottom:.2rem}
+.scene-head h3{font-size:1rem}
+.scene-goal{font-size:.82rem;color:var(--muted);margin:0 0 .7rem}
+.lines{display:flex;flex-direction:column;gap:.75rem}
+.line{display:flex;gap:.55rem;align-items:flex-start}
+.line.me{flex-direction:row-reverse}
+.avatar{
+  flex:0 0 auto;width:2.1rem;height:2.1rem;border-radius:50%;
+  display:grid;place-items:center;font-size:1.05rem;background:var(--soft);
+}
+.line.me .avatar{background:var(--soft-2)}
+.bubble{
+  flex:1 1 auto;max-width:48rem;background:var(--soft);border:1px solid var(--line);
+  border-radius:14px;padding:.6rem .7rem;
+}
+.line.me .bubble{background:var(--soft-2);border-color:rgba(14,158,143,.4)}
+.who{
+  display:block;font-size:.72rem;font-weight:800;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:.15rem;
+}
+.line .de{margin:0 0 .25rem;font-size:1rem}
+.line .pron{margin:0 0 .3rem;font-size:.79rem}
+.line .en{margin:0;color:var(--muted);font-size:.88rem}
+.line-actions{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.45rem}
+.line-actions .btn{padding:.3rem .6rem;font-size:.78rem;box-shadow:none}
+.reveal{
+  width:100%;text-align:left;background:var(--card);border:1px dashed var(--line);
+  color:var(--muted);padding:.55rem .65rem;border-radius:12px;cursor:pointer;font-size:.86rem;
+}
+
+/* ---------- cheat sheet ---------- */
+.grid2{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(17rem,1fr));margin-bottom:1rem}
+.box{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:1rem}
+.box h3{font-size:.98rem;margin-bottom:.45rem}
+.sound{display:grid;grid-template-columns:auto 1fr;gap:.3rem .7rem;align-items:baseline;font-size:.86rem}
+.sound dt{font-family:ui-monospace,Consolas,monospace;font-weight:800;color:var(--brand);white-space:nowrap}
+.sound dd{margin:0;color:var(--muted)}
+ul.tight{margin:.2rem 0 .2rem 1.1rem;padding:0;font-size:.88rem}
+ul.tight li{margin-bottom:.32rem}
+ol.steps{margin:.2rem 0 .2rem 1.2rem;padding:0;font-size:.88rem}
+ol.steps li{margin-bottom:.4rem}
+ol.steps strong{color:var(--brand)}
+.tbl-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow)}
+table.tbl{width:100%;border-collapse:collapse;font-size:.86rem}
+.tbl th,.tbl td{text-align:left;padding:.5rem .6rem;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl .de{font-weight:700;font-size:.92rem}
+.tbl .pron{background:none;border:0;padding:0;font-size:.78rem;margin-top:.15rem}
+.tbl .btn{padding:.28rem .5rem;font-size:.78rem;box-shadow:none}
+.foot{color:var(--muted);font-size:.78rem;text-align:center;padding:0 0 2.5rem}
+
+/* ---------- small screens ---------- */
+@media (max-width:640px){
+  .brand small{display:none}
+  .cards{grid-template-columns:1fr}
+  .face{min-height:11rem}
+  .tabs{order:3;width:100%;justify-content:center}
+  .voice-box{order:2}
+  .count{margin-left:0}
+  .line .bubble{max-width:100%}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+@media print{
+  .topbar,.toolbar,.card-actions,.chips,.line-actions,.switch,.progress-wrap{display:none!important}
+  .panel{display:block!important}
+  .face{backface-visibility:visible;min-height:auto}
+  .flip-inner{transform:none!important}
+  .face.back{transform:none}
+  .card,.box,.scene,.tbl-wrap{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<header class="topbar">
+  <div class="wrap bar-inner">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🛂</span>
+      <span>
+        <strong>Ausländerbehörde-Trainer</strong>
+        <small>A2 · Termin 08:00 Uhr · Zimmer 150 · Hamza Ali</small>
+      </span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Bereiche">
+      <button class="tab is-active" id="tab-cards" role="tab" data-tab="cards" aria-selected="true" aria-controls="panel-cards">🃏 Karteikarten</button>
+      <button class="tab" id="tab-dialog" role="tab" data-tab="dialog" aria-selected="false" aria-controls="panel-dialog">💬 Rollenspiel</button>
+      <button class="tab" id="tab-cheat" role="tab" data-tab="cheat" aria-selected="false" aria-controls="panel-cheat">📖 Spickzettel</button>
+    </nav>
+    <div class="voice-box">
+      <label for="voice">🔈 Stimme</label>
+      <select id="voice" aria-label="Deutsche Stimme auswählen"></select>
+      <label for="rate">Tempo <output id="rateOut">0,90</output></label>
+      <input type="range" id="rate" min="0.6" max="1.2" step="0.05" value="0.9" aria-label="Sprechgeschwindigkeit">
+      <button class="ghost-light" id="testVoice" type="button">🔊 Test</button>
+    </div>
+  </div>
+  <p class="voice-warn wrap" id="voiceWarn" hidden>
+    ⚠️ Es wurde keine deutsche Stimme (<code>de-DE</code>) gefunden. Die Sätze werden trotzdem vorgelesen –
+    für eine echte deutsche Aussprache: <strong>Windows</strong> → Einstellungen → Zeit &amp; Sprache → Sprache
+    &amp; Region → <em>Deutsch (Deutschland)</em> hinzufügen, dann Browser neu starten. (Edge und Chrome klingen am besten.)
+  </p>
+</header>
+
+<main id="main" class="wrap">
+
+  <!-- ============ 1 · FLASHCARDS ============ -->
+  <section class="panel is-active" id="panel-cards" role="tabpanel" aria-labelledby="tab-cards" tabindex="-1">
+    <div class="panel-head">
+      <h2>🃏 Karteikarten – kurz und einfach</h2>
+      <p>
+        <strong>So sprichst du am Schalter: kurz und freundlich.</strong> Lieber drei kurze Sätze als ein langer –
+        du darfst mitten im Satz stoppen. „Bitte“ und „Danke“ machen jeden Satz höflich.
+        Karte antippen = umdrehen · <strong>🔊 Listen</strong> = vorlesen · <strong>🐢 Langsam</strong> = langsamer vorlesen ·
+        <strong>✓ Gelernt</strong> = Fortschritt speichern. Die <em>GROSSBUCHSTABEN</em> zeigen die betonte Silbe.
+      </p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress" role="progressbar" aria-label="Lernfortschritt" id="progressEl" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+      <span id="progressText">0 von 0 gelernt</span>
+    </div>
+
+    <div class="chips" id="chips" role="group" aria-label="Kategorien filtern"></div>
+
+    <div class="toolbar">
+      <button class="btn" id="playVisible" type="button">▶️ Alle sichtbaren Sätze hören</button>
+      <button class="btn ghost" id="stopAll" type="button">⏹️ Stop</button>
+      <button class="btn ghost" id="resetLearned" type="button">↺ Fortschritt zurücksetzen</button>
+      <span class="count" id="visibleCount"></span>
+    </div>
+
+    <div class="cards" id="cards"></div>
+    <p class="empty" id="cardsEmpty" hidden>Keine Karten in dieser Auswahl.</p>
+  </section>
+
+  <!-- ============ 2 · ROLEPLAY ============ -->
+  <section class="panel" id="panel-dialog" role="tabpanel" aria-labelledby="tab-dialog" tabindex="-1" hidden>
+    <div class="panel-head">
+      <h2>💬 Rollenspiel – der Termin als Gespräch</h2>
+      <p>
+        Drei kurze Szenen: Empfang → Zimmer 150 → Plan B. Jede Zeile hat Aussprache-Hilfe und 🔊 zum Hören.
+        <strong>▶️ Szene abspielen</strong> liest alles automatisch vor,
+        <strong>🙋 Nur meine Sätze</strong> übt nur deine Antworten.
+      </p>
+    </div>
+
+    <div class="toolbar">
+      <label class="switch" for="practiceMode">
+        <input type="checkbox" id="practiceMode">
+        🙈 Übungsmodus: meine Antworten sind versteckt
+      </label>
+      <button class="btn ghost" id="playAllScenes" type="button">▶️ Ganzes Gespräch hören</button>
+      <button class="btn ghost" id="stopDialog" type="button">⏹️ Stop</button>
+      <button class="btn ghost" id="revealAll" type="button">👁️ Alle Antworten zeigen</button>
+    </div>
+
+    <div id="dialogRoot"></div>
+  </section>
+
+  <!-- ============ 3 · CHEAT SHEET ============ -->
+  <section class="panel" id="panel-cheat" role="tabpanel" aria-labelledby="tab-cheat" tabindex="-1" hidden>
+    <div class="panel-head">
+      <h2>📖 Spickzettel – kurz und praktisch</h2>
+      <p>Aussprache, Zahlen und die wichtigsten Sätze. Zum Ausdrucken: <kbd>Strg</kbd> + <kbd>P</kbd>.</p>
+    </div>
+
+    <div class="grid2">
+      <div class="box">
+        <h3>🔤 Aussprache – die wichtigsten Laute</h3>
+        <dl class="sound">
+          <dt>ü</dt><dd>Lippen rund + „ii“ sagen → <em>für, fünf</em></dd>
+          <dt>ö</dt><dd>Lippen rund + „eh“ sagen → <em>schön, können</em></dd>
+          <dt>ch (a/o/u)</dt><dd>kratzig aus dem Hals → <em>acht, noch</em></dd>
+          <dt>ch (i/e)</dt><dd>weich, fast wie „h“ → <em>ich, nicht</em></dd>
+          <dt>sch</dt><dd>wie englisch „sh“ → <em>schön, schreiben</em></dd>
+          <dt>z</dt><dd>immer „ts“ → <em>Zimmer, zahlen</em></dd>
+          <dt>w / v</dt><dd>w wie „v“ (<em>wann</em>) · v wie „f“ (<em>von</em>)</dd>
+          <dt>ei / ie / eu</dt><dd>ei = „eye“ (<em>eine</em>) · ie = „ii“ (<em>Wiedersehen</em>) · eu = „oy“ (<em>Euro</em>)</dd>
+          <dt>-er am Ende</dt><dd>weich, wie „-ah“ → <em>Zimmer = TSIM-muh</em></dd>
+        </dl>
+      </div>
+
+      <div class="box">
+        <h3>🔢 Zahlen &amp; Geld</h3>
+        <ul class="tight">
+          <li><strong>acht</strong> = 8 · <strong>dreizehn</strong> = 13 (DRY-tsayn) · <strong>dreißig</strong> = 30 (DRY-sikh)</li>
+          <li><strong>fünfzig</strong> = 50 · <strong>hundertfünfzig</strong> = 150 (= Zimmer 150)</li>
+          <li><strong>13 Euro</strong> = DRY-tsayn OY-ro · <strong>die Gebühr</strong> = fee (sprich: guh-BUER)</li>
+          <li><strong>der Automat</strong> = machine · <strong>das Erdgeschoss</strong> = ground floor</li>
+          <li><strong>die Quittung</strong> = receipt · <strong>der Stempel</strong> = stamp</li>
+          <li>Antworten: <em>„Mit Karte, bitte.“</em> · <em>„Bar, bitte.“</em></li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>🗣️ Höflich und einfach (so sprichst du)</h3>
+        <ul class="tight">
+          <li><strong>Bitte.</strong> / <strong>Danke.</strong> – die zwei wichtigsten Wörter</li>
+          <li><strong>Kann ich bitte …?</strong> → Can I … please?</li>
+          <li><strong>Können Sie bitte …?</strong> → Can you … please?</li>
+          <li><strong>Ich brauche …</strong> → I need …</li>
+          <li><strong>Wo ist …?</strong> → Where is …?</li>
+          <li><strong>Wie bitte?</strong> → Pardon? · <strong>Noch einmal, bitte.</strong> → Again, please.</li>
+          <li><strong>Langsam, bitte.</strong> → Slowly, please.</li>
+          <li>Kurz antworten: <em>Gerne.</em> · <em>Genau.</em> · <em>Alles klar.</em> · <em>Verstehe.</em></li>
+        </ul>
+        <p class="tip"><strong>Kurz ist nicht unhöflich:</strong> „Kann ich mit Karte zahlen?“ klingt klar und freundlich. Lange Sätze sind am Schalter nicht nötig. 😉</p>
+      </div>
+
+      <div class="box">
+        <h3>📚 Wörter, die du am Schalter hörst</h3>
+        <ul class="tight">
+          <li><strong>der Termin</strong> – appointment · <strong>der Ausweis</strong> – ID card (OWS-vise)</li>
+          <li><strong>der Aufenthaltstitel</strong> – residence permit card · <strong>der Pass</strong> – passport</li>
+          <li><strong>die Terminbestätigung</strong> – appointment confirmation</li>
+          <li><strong>die Papiere / die Unterlagen</strong> – the papers / documents</li>
+          <li><strong>die Gebühr</strong> – fee · <strong>der Automat</strong> – machine · <strong>die Quittung</strong> – receipt</li>
+          <li><strong>der Stempel</strong> – stamp · <strong>der Brief</strong> – letter · <strong>die Post</strong> – mail</li>
+          <li><strong>der Anwalt</strong> – lawyer · <strong>die Fiktionsbescheinigung</strong> – temporary stay paper</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="box" style="margin-bottom:1rem">
+      <h3>🕐 So läuft dein Termin (kurz)</h3>
+      <ol class="steps">
+        <li><strong>Am Eingang:</strong> <em>„Guten Morgen! Mein Name ist Hamza Ali. Ich habe einen Termin um acht Uhr.“</em></li>
+        <li><strong>Zimmer suchen:</strong> <em>„Zimmer 150. Wo ist das, bitte?“</em> · <em>„Muss ich hier warten?“</em></li>
+        <li><strong>Papiere geben:</strong> <em>„Hier ist mein Aufenthaltstitel.“</em> · <em>„Hier ist die Terminbestätigung.“</em></li>
+        <li><strong>Pass-Frage:</strong> <em>„Mein Pass ist schon bei Ihnen.“</em> · <em>„Hier ist die Bestätigung.“</em></li>
+        <li><strong>Anwalts-Frage:</strong> <em>„Mein Anwalt ist Herr Hecht. Bitte sprechen Sie mit ihm.“</em></li>
+        <li><strong>Bezahlen:</strong> <em>„Muss ich jetzt bezahlen?“</em> · <em>„Wo ist der Automat, bitte?“</em> · <em>„Bekomme ich eine Quittung?“</em></li>
+        <li><strong>Plan B:</strong> noch kein Papier fertig? → <em>„Ich brauche einen Brief für die Bank. Mit Stempel, bitte.“</em></li>
+        <li><strong>Zum Schluss:</strong> <em>„Vielen Dank! Einen schönen Tag noch!“</em></li>
+      </ol>
+    </div>
+    <div class="box" style="margin-bottom:1.2rem">
+      <h3>🚨 Wenn du nicht verstehst</h3>
+      <ul class="tight">
+        <li><strong>Wie bitte?</strong> · <strong>Bitte noch einmal.</strong> – höflich nachfragen (nie nur „Was?“)</li>
+        <li><strong>Bitte langsam.</strong> – wenn es zu schnell geht</li>
+        <li><strong>Können Sie das bitte aufschreiben?</strong> – bei Namen, Zahlen und Terminen</li>
+        <li><strong>Ich verstehe nicht.</strong> – sagen ist besser als raten</li>
+        <li><strong>Bitte sprechen Sie mit meinem Anwalt.</strong> – dein freundlicher Stopp</li>
+        <li><strong>Bleib ruhig und freundlich.</strong> Kurze Sätze und kleine Pausen sind völlig okay.</li>
+      </ul>
+    </div>
+
+    <h3 style="margin:0 0 .5rem">📋 Alle Sätze als Liste</h3>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th style="width:44%">Deutsch + Aussprache</th>
+            <th style="width:44%">English</th>
+            <th style="width:12%">Hören</th>
+          </tr>
+        </thead>
+        <tbody id="sentenceTable"></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <p>Übungstrainer für den Ausländerbehörde-Termin · <strong>gesprochenes A2</strong> (kurze Sätze) · läuft komplett offline im Browser.</p>
+  <p>Aussprache-Zeichen: <kbd>GROSS</kbd> = betonte Silbe · 🐢 = extra langsam gesprochen. Viel Erfolg, Hamza! 🍀</p>
+</footer>
+<script>
+(function () {
+'use strict';
+
+/* ============================================================
+   1 · HELPERS
+   ============================================================ */
+var $  = function (sel, root) { return (root || document).querySelector(sel); };
+var $$ = function (sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); };
+var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+    return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+  });
+}
+/* Stressed syllables are written in CAPITALS in the pronunciation guide → bold them. */
+function pronHtml(p) {
+  if (!p) return '';
+  return esc(p).split(/([A-ZÄÖÜ]{2,})/g).map(function (t, i) {
+    return (i % 2) ? '<strong>' + t + '</strong>' : t;
+  }).join('');
+}
+function safeGet(key, fallback) {
+  try { var v = localStorage.getItem(key); return v === null ? fallback : v; }
+  catch (e) { return fallback; }
+}
+function safeSet(key, value) {
+  try { localStorage.setItem(key, value); } catch (e) { /* private mode – ignore */ }
+}
+var LS_LEARNED = 'ab-trainer-learned-v1';
+var LS_RATE    = 'ab-trainer-rate-v1';
+var LS_VOICE   = 'ab-trainer-voice-v1';
+
+/* ============================================================
+   2 · FLASHCARD DATA  (A2 · Ausländerbehörde)
+   cat  = category id · de = German · en = English
+   pron = pronunciation guide (CAPITALS = stressed syllable)
+   ctx  = when to use it (front) · tip = language note (back)
+   ============================================================ */
+var CARDS = [
+
+  /* ---------- 1 · Begrüßung & Termin ---------- */
+  { id: 'g1', cat: 'greet',
+    de: 'Guten Morgen! Mein Name ist Hamza Ali.',
+    en: 'Good morning! My name is Hamza Ali.',
+    pron: 'GOO-ten MOR-gen! mine NAH-muh ist HAM-za AH-lee.',
+    ctx: 'At the door or at the reception desk.',
+    tip: 'Short and friendly. Say the surname slowly: AH-lee.' },
+
+  { id: 'g2', cat: 'greet',
+    de: 'Ich habe einen Termin um acht Uhr.',
+    en: 'I have an appointment at eight.',
+    pron: 'ikh HAH-buh EYE-nen tair-MEEN um AKHT oor.',
+    ctx: 'The one sentence that gets you inside.',
+    tip: 'Spoken German says "um acht Uhr" – never "null-acht". One sentence is enough.' },
+
+  { id: 'g3', cat: 'greet',
+    de: 'Zimmer 150. Wo ist das, bitte?',
+    en: 'Room 150. Where is that, please?',
+    pron: 'TSIM-mer HUN-dert-fuenf-tsikh. voh ist das, BIT-tuh?',
+    ctx: 'In the corridor if you cannot find the room.',
+    tip: 'Two mini-sentences are perfect. "bitte" at the end makes it polite.' },
+
+  { id: 'g4', cat: 'greet',
+    de: 'Muss ich hier warten?',
+    en: 'Do I have to wait here?',
+    pron: 'mus ikh heer VAR-ten?',
+    ctx: 'In the waiting area.',
+    tip: 'The answer is short too: "Ja, bitte." or "Nein, gehen Sie hoch."' },
+
+  /* ---------- 2 · Papiere & Ausweis ---------- */
+  { id: 'd1', cat: 'docs',
+    de: 'Hier ist mein Aufenthaltstitel.',
+    en: 'Here is my residence permit.',
+    pron: 'HEER ist mine OWF-ent-halts-tee-tel.',
+    ctx: 'When you hand the card over.',
+    tip: '"Hier ist …" = here is … One paper, one short sentence. Slow: OWF-ent-halts-tee-tel.' },
+
+  { id: 'd2', cat: 'docs',
+    de: 'Hier ist die Terminbestätigung.',
+    en: 'Here is the appointment confirmation.',
+    pron: 'HEER ist dee tair-MEEN-buh-shteh-ti-goong.',
+    ctx: 'The second paper, the second short sentence.',
+    tip: 'Long word – say it in two parts: tair-MEEN + buh-SHTEH-ti-goong.' },
+
+  { id: 'd3', cat: 'docs',
+    de: 'Mein Pass ist schon bei Ihnen.',
+    en: 'My passport is already with you.',
+    pron: 'mine PUSS ist shohn by EE-nen.',
+    ctx: 'If they ask for the passport but the office already has it.',
+    tip: '"schon" = already. Letters write "bereits" – same meaning, but people say "schon". Add "Hier ist die Bestätigung." if you have the paper.' },
+
+  /* ---------- 3 · Anwalt ---------- */
+  { id: 'r1', cat: 'legal',
+    de: 'Mein Anwalt ist Herr Hecht.',
+    en: 'My lawyer is Mr. Hecht.',
+    pron: 'mine AHN-valt ist hair HEKHT.',
+    ctx: 'Give the name first – that is enough.',
+    tip: 'No long sentence needed. If they want more, just add: "Er hat schon geschrieben."' },
+
+  { id: 'r2', cat: 'legal',
+    de: 'Er hat schon mit Ihnen geschrieben.',
+    en: 'He has already written to you.',
+    pron: 'er hat shohn mit EE-nen guh-SHREE-ben.',
+    ctx: 'When they ask about your case.',
+    tip: 'Easy past form: hat … geschrieben. "Ihnen" = to you (polite).' },
+
+  { id: 'r3', cat: 'legal',
+    de: 'Bitte sprechen Sie mit meinem Anwalt.',
+    en: 'Please speak to my lawyer.',
+    pron: 'BIT-tuh SHPREKH-en zee mit MY-nem AHN-valt.',
+    ctx: 'If the questions get difficult.',
+    tip: 'Calm and polite – this closes the topic. Also possible: "Das weiß mein Anwalt besser."' },
+
+  /* ---------- 4 · Bezahlen (13 Euro) ---------- */
+  { id: 'p1', cat: 'pay',
+    de: 'Muss ich jetzt bezahlen?',
+    en: 'Do I have to pay now?',
+    pron: 'mus ikh yetst buh-TSAH-len?',
+    ctx: 'When the appointment is almost over.',
+    tip: 'Very useful, very short. Answer: "Ja, am Automaten." or "Nein, das ist gratis."' },
+
+  { id: 'p2', cat: 'pay',
+    de: 'Wo ist der Automat?',
+    en: 'Where is the machine?',
+    pron: 'voh ist dair ow-toh-MAHT?',
+    ctx: 'If you have to pay at a machine in the building.',
+    tip: 'Stress the last syllable: ow-toh-MAHT.' },
+
+  { id: 'p3', cat: 'pay',
+    de: 'Kann ich mit Karte zahlen?',
+    en: 'Can I pay by card?',
+    pron: 'kahn ikh mit KAR-tuh TSAH-len?',
+    ctx: 'Before you pay.',
+    tip: 'Cash version: "Kann ich bar zahlen?" – "Kann ich …?" is your best question starter.' },
+
+  { id: 'p4', cat: 'pay',
+    de: 'Bekomme ich eine Quittung?',
+    en: 'Do I get a receipt?',
+    pron: 'buh-KO-muh ikh EYE-nuh kvih-TOONG?',
+    ctx: 'Right after paying.',
+    tip: 'Say it slowly: kvih-TOONG. Keep the paper – the bank often asks for it.' },
+
+  /* ---------- 5 · Plan B: Brief für die Bank ---------- */
+  { id: 'b1', cat: 'planb',
+    de: 'Ich brauche einen Brief für die Bank.',
+    en: 'I need a letter for the bank.',
+    pron: 'ikh BROW-khuh EYE-nen breef fuer dee BUNK.',
+    ctx: 'Plan B if the certificate is not ready today.',
+    tip: '"Ich brauche …" = I need … Short and clear. You do not need "falls" or "würde" – one plain sentence is better.' },
+
+  { id: 'b2', cat: 'planb',
+    de: 'Mit Stempel, bitte.',
+    en: 'With a stamp, please.',
+    pron: 'mit SHTEM-pel, BIT-tuh.',
+    ctx: 'Right after the sentence above.',
+    tip: 'Three words, big effect: the stamp makes the paper official for the bank.' },
+
+  { id: 'b3', cat: 'planb',
+    de: 'Wann ist es fertig?',
+    en: 'When will it be ready?',
+    pron: 'van ist es FAIR-tikh?',
+    ctx: 'If the certificate is delayed.',
+    tip: '"fertig" = ready / finished. If you do not understand the answer: "Wie bitte?"' },
+
+  { id: 'b4', cat: 'planb',
+    de: 'Haben Sie das auch schriftlich?',
+    en: 'Do you have that in writing too?',
+    pron: 'HAH-ben zee das oukh SHRIHFT-likh?',
+    ctx: 'For every important answer.',
+    tip: '"schriftlich" = in writing (SHRIHFT-likh). With this sentence you always have proof.' },
+
+  /* ---------- 6 · Abschied ---------- */
+  { id: 'c1', cat: 'close',
+    de: 'Vielen Dank!',
+    en: 'Thank you very much!',
+    pron: 'FEE-len DUNK!',
+    ctx: 'Always – you can never say this too often.',
+    tip: '"Danke schön!" is just as good.' },
+
+  { id: 'c2', cat: 'close',
+    de: 'Einen schönen Tag noch!',
+    en: 'Have a nice day!',
+    pron: 'EYE-nen SHÖ-nen TAHK nokh!',
+    ctx: 'When you leave the room.',
+    tip: 'The classic goodbye. The reply you will hear: "Danke, Ihnen auch!"' },
+
+  { id: 'c3', cat: 'close',
+    de: 'Auf Wiedersehen!',
+    en: 'Goodbye!',
+    pron: 'owf VEE-der-zay-en!',
+    ctx: 'Leaving the building or ending a phone call.',
+    tip: 'Always fine. "Tschüss" is okay in an office too.' },
+
+  /* ---------- 7 · Rettungssätze ---------- */
+  { id: 's1', cat: 'rescue',
+    de: 'Wie bitte? Bitte noch einmal.',
+    en: 'Pardon? Once again, please.',
+    pron: 'vee BIT-tuh? BIT-tuh nokh ine-MILE.',
+    ctx: 'You did not understand a sentence.',
+    tip: '"Wie bitte?" is the polite "what?" – never just "Was?". "noch einmal" = one more time.' },
+
+  { id: 's2', cat: 'rescue',
+    de: 'Bitte langsam.',
+    en: 'Slowly, please.',
+    pron: 'BIT-tuh LANG-zahm.',
+    ctx: 'If the caseworker speaks too fast.',
+    tip: 'Two words that save the appointment. Nobody will be annoyed.' },
+
+  { id: 's3', cat: 'rescue',
+    de: 'Können Sie das bitte aufschreiben?',
+    en: 'Could you please write that down?',
+    pron: 'KÖN-nen zee das BIT-tuh OWF-shry-ben?',
+    ctx: 'For names, dates, numbers, room numbers.',
+    tip: 'Paper beats memory. Another useful one: "Wie schreibt man das?"' },
+
+  { id: 's4', cat: 'rescue',
+    de: 'Ich verstehe nicht.',
+    en: 'I do not understand.',
+    pron: 'ikh fair-SHTAY-uh nikht.',
+    ctx: 'The honest sentence – say it without shame.',
+    tip: 'Then add: "Bitte noch einmal." or "Bitte langsam."' }
+];
+
+
+/* ============================================================
+   3 · CATEGORY LABELS (in the order of the appointment)
+   ============================================================ */
+var CATS = [
+  { id: 'all',    label: 'Alle Karten' },
+  { id: 'greet',  label: '1 · Begrüßung & Termin' },
+  { id: 'docs',   label: '2 · Papiere & Ausweis' },
+  { id: 'legal',  label: '3 · Anwalt' },
+  { id: 'pay',    label: '4 · Bezahlen (13 €)' },
+  { id: 'planb',  label: '5 · Plan B: Brief für die Bank' },
+  { id: 'close',  label: '6 · Abschied' },
+  { id: 'rescue', label: '7 · Rettungssätze' }
+];
+var CAT_NAME = {};
+CATS.forEach(function (c) { CAT_NAME[c.id] = c.label.replace(/^[0-9]+ · /, ''); });
+
+/* ============================================================
+   4 · ROLEPLAY DATA · the full appointment as a dialogue
+   me: true = your line · pron = pronunciation · tip = optional
+   ============================================================ */
+var SCENES = [
+
+  { id: 'sc1', set: 'Szene 1', title: 'Am Empfang · 07:55 Uhr',
+    avatars: { other: '👩‍💼', me: '🙋🏽' }, other: 'Frau Neumann (Empfang)', mine: 'Du · Hamza Ali',
+    goal: 'Goal: say hello, give your name and the time of your appointment.',
+    lines: [
+      { de: 'Guten Morgen! Haben Sie einen Termin?',
+        en: 'Good morning! Do you have an appointment?',
+        pron: 'GOO-ten MOR-gen! HAH-ben zee EYE-nen tair-MEEN?' },
+
+      { me: true,
+        de: 'Ja, guten Morgen. Mein Name ist Hamza Ali. Ich habe einen Termin um acht Uhr.',
+        en: 'Yes, good morning. My name is Hamza Ali. I have an appointment at eight.',
+        pron: 'yah, GOO-ten MOR-gen. mine NAH-muh ist HAM-za AH-lee. ikh HAH-buh EYE-nen tair-MEEN um AKHT oor.',
+        tip: 'Three short sentences with a small pause after each one. That sounds much better than one long sentence.' },
+
+      { de: 'Einen Moment, bitte. … Ja, Zimmer 150. Erster Stock, links.',
+        en: 'One moment, please. … Yes, Room 150. First floor, on the left.',
+        pron: 'EYE-nen moh-MENT, BIT-tuh. yah, TSIM-mer HUN-dert-fuenf-tsikh. AIR-ster SHTOK, links.' },
+
+      { me: true,
+        de: 'Danke. Muss ich hier warten?',
+        en: 'Thank you. Do I have to wait here?',
+        pron: 'DUN-kuh. mus ikh heer VAR-ten?' },
+
+      { de: 'Nein, gehen Sie direkt hoch.',
+        en: 'No, go straight up.',
+        pron: 'nine, GAY-en zee dee-REKT hokh.',
+        tip: 'Listen for direction words: "hoch" = up, "links" = left, "rechts" = right.' }
+    ] }
+,
+
+  { id: 'sc2', set: 'Szene 2', title: 'Zimmer 150 · Papiere & Bezahlen',
+    avatars: { other: '👨‍💼', me: '🙋🏽' }, other: 'Herr Schröder (Sachbearbeiter)', mine: 'Du · Hamza Ali',
+    goal: 'Goal: hand over the papers, keep the lawyer topic short, pay the 13 euros.',
+    lines: [
+      { de: 'Guten Morgen, Herr Ali. Ihren Ausweis, bitte.',
+        en: 'Good morning, Mr. Ali. Your ID, please.',
+        pron: 'GOO-ten MOR-gen, hair AH-lee. EE-ren OWS-vise, BIT-tuh.',
+        tip: '"Ausweis" = ID card – the word you will hear most often. If you do not know what they want, just say: "Wie bitte?"' },
+
+      { me: true,
+        de: 'Ja, hier ist mein Aufenthaltstitel.',
+        en: 'Yes, here is my residence permit.',
+        pron: 'yah, HEER ist mine OWF-ent-halts-tee-tel.',
+        tip: 'One paper, one short sentence. Then wait – no extra explanation needed.' },
+
+      { de: 'Danke. Und die Terminbestätigung?',
+        en: 'Thank you. And the appointment confirmation?',
+        pron: 'DUN-kuh. unt dee tair-MEEN-buh-shteh-ti-goong?' },
+
+      { me: true,
+        de: 'Hier, bitte. Mein Pass ist schon bei Ihnen.',
+        en: 'Here you are. My passport is already with you.',
+        pron: 'HEER, BIT-tuh. mine PUSS ist shohn by EE-nen.',
+        tip: 'Do not explain a lot – just give the fact. "schon" = already.' },
+
+      { de: 'Ja, richtig. Ihr Anwalt hat uns geschrieben.',
+        en: 'Yes, right. Your lawyer has written to us.',
+        pron: 'yah, RIKH-tikh. eer AHN-valt hat oons guh-SHREE-ben.' },
+
+      { me: true,
+        de: 'Genau. Bitte sprechen Sie mit meinem Anwalt.',
+        en: 'Exactly. Please speak to my lawyer.',
+        pron: 'guh-NOW. BIT-tuh SHPREKH-en zee mit MY-nem AHN-valt.',
+        tip: '"Genau" = exactly. Friendly and short – the topic is closed.' },
+
+      { de: 'Alles klar. Die Gebühr ist 13 Euro. Bitte am Automaten.',
+        en: 'All right. The fee is 13 euros. Please pay at the machine.',
+        pron: 'AH-les klahr. dee guh-BUER ist DRY-tsayn OY-ro. BIT-tuh am ow-toh-MAH-ten.',
+        tip: 'Listen for "Gebühr" (fee) and for "dreizehn" = 13. Careful: "dreißig" = 30!' },
+
+      { me: true,
+        de: 'Wo ist der Automat, bitte?',
+        en: 'Where is the machine, please?',
+        pron: 'voh ist dair ow-toh-MAHT, BIT-tuh?' },
+
+      { de: 'Im Erdgeschoss, links.',
+        en: 'On the ground floor, on the left.',
+        pron: 'im AIRT-guh-shos, links.',
+        tip: '"Erdgeschoss" = ground floor (EG), "erster Stock" = one floor up.' },
+
+      { me: true,
+        de: 'Danke. Bekomme ich eine Quittung?',
+        en: 'Thank you. Do I get a receipt?',
+        pron: 'DUN-kuh. buh-KO-muh ikh EYE-nuh kvih-TOONG?',
+        tip: 'Always ask for the receipt and take it home – the bank likes to see it.' },
+
+      { de: 'Ja, klar. Die Quittung kommt aus dem Automaten.',
+        en: 'Yes, sure. The receipt comes out of the machine.',
+        pron: 'yah, klahr. dee kvih-TOONG kommt ows daym ow-toh-MAH-ten.' }
+    ] }
+,
+
+  { id: 'sc3', set: 'Szene 3', title: 'Plan B · Brief für die Bank',
+    avatars: { other: '👨‍💼', me: '🙋🏽' }, other: 'Herr Schröder (Sachbearbeiter)', mine: 'Du · Hamza Ali',
+    goal: 'Goal: the certificate needs more time → get a short letter with a stamp for the bank.',
+    lines: [
+      { de: 'Die Fiktionsbescheinigung ist noch nicht fertig.',
+        en: 'The fictitious certificate is not ready yet.',
+        pron: 'dee fik-TSYOHNS-buh-shry-ni-goong ist nokh nikht FAIR-tikh.',
+        tip: 'This word is really hard. You only need to UNDERSTAND it. Or point at your paper and ask: "Wann ist es fertig?"' },
+
+      { me: true,
+        de: 'Kein Problem. Ich brauche einen Brief für die Bank.',
+        en: 'No problem. I need a letter for the bank.',
+        pron: 'kine proh-BLAYM. ikh BROW-khuh EYE-nen breef fuer dee BUNK.',
+        tip: '"Kein Problem." keeps it friendly – then your Plan B in one short sentence.' },
+
+      { de: 'Was soll in dem Brief stehen?',
+        en: 'What should the letter say?',
+        pron: 'vas zol in daym breef SHTAY-en?',
+        tip: '"Was soll … stehen?" = what should it say. Do not panic – answer with words, not with a sentence.' },
+
+      { me: true,
+        de: 'Mein Name, mein Termin und ein Stempel, bitte.',
+        en: 'My name, my appointment and a stamp, please.',
+        pron: 'mine NAH-muh, mine tair-MEEN unt ine SHTEM-pel, BIT-tuh.',
+        tip: 'Lists are easy! Just say the words one after the other – no grammar needed.' },
+
+      { de: 'Einen Moment, bitte. … Bitte hier unterschreiben.',
+        en: 'One moment, please. … Please sign here.',
+        pron: 'EYE-nen moh-MENT, BIT-tuh. BIT-tuh heer OON-ter-shry-ben.' },
+
+      { me: true,
+        de: 'Gerne. Wann ist die Fiktionsbescheinigung fertig?',
+        en: 'With pleasure. When will the certificate be ready?',
+        pron: 'GAIR-nuh. van ist dee fik-TSYOHNS-buh-shry-ni-goong FAIR-tikh?',
+        tip: '"fertig" = ready. This question is worth gold – ask it every time.' },
+
+      { de: 'In etwa zwei Wochen. Sie bekommen Post von uns.',
+        en: 'In about two weeks. You will get a letter from us.',
+        pron: 'in ET-va tsvy VOKH-en. zee buh-KO-men POST fon oons.',
+        tip: '"Post bekommen" = to get a letter in the post.' },
+
+      { me: true,
+        de: 'Danke. Haben Sie das auch schriftlich?',
+        en: 'Thank you. Do you have that in writing too?',
+        pron: 'DUN-kuh. HAH-ben zee das oukh SHRIHFT-likh?',
+        tip: 'Your proof sentence. Ask it for every important answer.' },
+
+      { de: 'Ja, hier ist der Brief mit Stempel.',
+        en: 'Yes, here is the letter with the stamp.',
+        pron: 'yah, heer ist dair breef mit SHTEM-pel.' },
+
+      { me: true,
+        de: 'Vielen Dank! Einen schönen Tag noch!',
+        en: 'Thank you very much! Have a nice day!',
+        pron: 'FEE-len DUNK! EYE-nen SHÖ-nen TAHK nokh!' },
+
+      { de: 'Danke, Ihnen auch. Auf Wiedersehen!',
+        en: 'Thank you, you too. Goodbye!',
+        pron: 'DUN-kuh, EE-nen oukh. owf VEE-der-zay-en!' }
+    ] }
+];
+
+
+/* ============================================================
+   5 · SPEECH ENGINE  ·  Web Speech API (window.speechSynthesis)
+   ============================================================ */
+var synth = window.speechSynthesis || null;
+var voices = [];
+var deVoices = [];
+var rate = parseFloat(safeGet(LS_RATE, '0.9'));
+if (!(rate >= 0.5 && rate <= 1.5)) rate = 0.9;
+var token = 0;   /* incremented to cancel every running speech sequence */
+
+function voiceById(id) {
+  for (var i = 0; i < voices.length; i++) {
+    if (voices[i].voiceURI === id || voices[i].name === id) return voices[i];
+  }
+  return null;
+}
+function currentVoice() {
+  var sel = $('#voice');
+  return voiceById(sel && sel.value) || deVoices[0] || voices[0] || null;
+}
+/* Chrome/Edge load the voice list asynchronously → refresh a few times. */
+function loadVoices(isFinal) {
+  if (!synth) return;
+  voices = synth.getVoices() || [];
+  deVoices = voices.filter(function (v) { return /^de/i.test(v.lang); });
+  var sel = $('#voice');
+  var warn = $('#voiceWarn');
+  if (!sel) return;
+  var list = deVoices.length ? deVoices : voices;
+  if (!list.length) {
+    /* the voice list may still be loading – only warn once the attempts are over */
+    sel.innerHTML = '<option value="">' + (isFinal ? '– keine Stimme gefunden –' : '– Stimme wird geladen … –') + '</option>';
+    if (warn) warn.hidden = !isFinal;
+    return;
+  }
+  if (warn) warn.hidden = deVoices.length > 0;
+  sel.innerHTML = (deVoices.length ? '' : '<option disabled>⚠️ keine deutsche Stimme – bitte in Windows nachinstallieren:</option>') +
+    list.map(function (v) {
+      return '<option value="' + esc(v.voiceURI) + '">' + esc(v.name) + ' (' + esc(v.lang) + ')</option>';
+    }).join('');
+  var saved = safeGet(LS_VOICE, '');
+  var pick = voiceById(saved);
+  ['^de[-_]DE', '^de'].forEach(function (re) {
+    if (pick) return;
+    var rx = new RegExp(re, 'i');
+    for (var i = 0; i < list.length; i++) { if (rx.test(list[i].lang)) { pick = list[i]; break; } }
+  });
+  sel.value = (pick || list[0]).voiceURI;
+}
+
+function speak(text, opts) {
+  opts = opts || {};
+  return new Promise(function (resolve) {
+    if (!synth) { resolve(); return; }
+    var u = new SpeechSynthesisUtterance(text);
+    var v = currentVoice();
+    if (v) u.voice = v;
+    u.lang = (v && v.lang) ? v.lang : 'de-DE';
+    u.rate = opts.rate || rate;
+    u.pitch = 1;
+    u.volume = 1;
+    var el = opts.el || null;
+    var finished = false;
+    function done() {
+      if (finished) return;
+      finished = true;
+      if (el) el.classList.remove('speaking');
+      resolve();
+    }
+    u.onend = done;
+    u.onerror = done;
+    if (el) el.classList.add('speaking');
+    /* watchdog: some browsers occasionally swallow onend */
+    setTimeout(done, Math.max(2500, text.length * 130));
+    try { synth.speak(u); } catch (e) { done(); }
+  });
+}
+
+function stopAll() {
+  token++;
+  if (synth) { try { synth.cancel(); } catch (e) { /* ignore */ } }
+  $$('.speaking').forEach(function (el) { el.classList.remove('speaking'); });
+  $$('.btn.is-playing').forEach(function (b) {
+    b.classList.remove('is-playing');
+    if (b.dataset.label) b.textContent = b.dataset.label;
+  });
+}
+
+/* play [{text, el, rate}, …] one after another; returns the run token */
+function speakSequence(items, opts) {
+  opts = opts || {};
+  stopAll();
+  var my = ++token;
+  var btn = opts.btn || null;
+  var i = 0;
+  if (btn) {
+    if (!btn.dataset.label) btn.dataset.label = btn.textContent;
+    btn.classList.add('is-playing');
+    btn.textContent = '🔈 … läuft';
+  }
+  function finish() {
+    if (btn) {
+      btn.classList.remove('is-playing');
+      if (btn.dataset.label) btn.textContent = btn.dataset.label;
+    }
+  }
+  (function step() {
+    if (my !== token) return;                     /* cancelled */
+    if (i >= items.length) { finish(); return; }
+    var it = items[i++];
+    speak(it.text, { el: it.el, rate: it.rate }).then(function () {
+      if (my !== token) return;
+      sleep(opts.gap == null ? 420 : opts.gap).then(step);
+    });
+  })();
+  return my;
+}
+
+/* ============================================================
+   6 · FLASHCARD UI  (filter · flip · listen · learned progress)
+   ============================================================ */
+var learned = {};
+try { learned = JSON.parse(safeGet(LS_LEARNED, '{}')) || {}; } catch (e) { learned = {}; }
+var activeCat = 'all';
+
+CARDS.forEach(function (c) { c.flipped = false; c.learned = !!learned[c.id]; });
+
+function visibleCards() {
+  return CARDS.filter(function (c) { return activeCat === 'all' || c.cat === activeCat; });
+}
+function updateProgress() {
+  var done = CARDS.filter(function (c) { return c.learned; }).length;
+  var pct = CARDS.length ? Math.round(done * 100 / CARDS.length) : 0;
+  $('#progressBar').style.width = pct + '%';
+  $('#progressText').textContent = done + ' von ' + CARDS.length + ' gelernt · ' + pct + ' %';
+  $('#progressEl').setAttribute('aria-valuenow', String(pct));
+}
+function saveLearned() {
+  var out = {};
+  CARDS.forEach(function (c) { if (c.learned) out[c.id] = 1; });
+  safeSet(LS_LEARNED, JSON.stringify(out));
+  updateProgress();
+}
+function renderChips() {
+  var html = '';
+  CATS.forEach(function (cat) {
+    var n = cat.id === 'all'
+      ? CARDS.length
+      : CARDS.filter(function (c) { return c.cat === cat.id; }).length;
+    if (!n) return;
+    var on = (activeCat === cat.id);
+    html += '<button type="button" class="chip' + (on ? ' is-active' : '') + '" data-cat="' + esc(cat.id) + '"' +
+            ' aria-pressed="' + (on ? 'true' : 'false') + '">' + esc(cat.label) +
+            ' <span class="n">(' + n + ')</span></button>';
+  });
+  $('#chips').innerHTML = html;
+}
+function flipCard(card, art) {
+  card.flipped = !card.flipped;
+  var flip = art.querySelector('.flip');
+  flip.classList.toggle('is-flipped', card.flipped);
+  flip.setAttribute('aria-pressed', card.flipped ? 'true' : 'false');
+}
+function toggleLearned(card, art) {
+  card.learned = !card.learned;
+  var btn = art.querySelector('.learn-flag');
+  btn.classList.toggle('on', card.learned);
+  btn.setAttribute('aria-pressed', card.learned ? 'true' : 'false');
+  btn.textContent = card.learned ? '✓ gelernt' : '☆ als gelernt merken';
+  saveLearned();
+}
+
+function cardEl(card) {
+  var art = document.createElement('article');
+  art.className = 'card';
+  art.setAttribute('data-id', card.id);
+  art.innerHTML =
+    '<div class="card-top">' +
+      '<span class="badge">' + esc(CAT_NAME[card.cat] || card.cat) + '</span>' +
+      '<button type="button" class="learn-flag' + (card.learned ? ' on' : '') + '" data-act="learn"' +
+        ' aria-pressed="' + (card.learned ? 'true' : 'false') + '">' +
+        (card.learned ? '✓ gelernt' : '☆ als gelernt merken') + '</button>' +
+    '</div>' +
+    '<div class="flip' + (card.flipped ? ' is-flipped' : '') + '" data-act="flip" role="button" tabindex="0"' +
+      ' aria-pressed="' + (card.flipped ? 'true' : 'false') + '" aria-label="Karte umdrehen: Deutsch und Englisch">' +
+      '<div class="flip-inner">' +
+        '<div class="face front">' +
+          '<span class="tag">🇩🇪 Deutsch</span>' +
+          '<p class="de">' + esc(card.de) + '</p>' +
+          '<p class="pron">🔊 ' + pronHtml(card.pron) + '</p>' +
+          (card.ctx ? '<p class="tip">📍 ' + esc(card.ctx) + '</p>' : '') +
+          '<span class="hint">Antippen für Englisch ↻</span>' +
+        '</div>' +
+        '<div class="face back">' +
+          '<span class="tag">🇬🇧 English</span>' +
+          '<p class="en">' + esc(card.en) + '</p>' +
+          (card.tip ? '<p class="tip">💡 ' + esc(card.tip) + '</p>' : '') +
+          '<span class="hint">Antippen für Deutsch ↻</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="card-actions">' +
+      '<button type="button" class="btn" data-act="speak">🔊 Listen</button>' +
+      '<button type="button" class="btn ghost" data-act="slow">🐢 Langsam</button>' +
+      '<button type="button" class="btn ghost" data-act="flip">↻ Übersetzen</button>' +
+    '</div>';
+
+  var flip = art.querySelector('.flip');
+  flip.addEventListener('click', function () { flipCard(card, art); });
+  flip.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
+      e.preventDefault();
+      flipCard(card, art);
+    }
+  });
+  art.addEventListener('click', function (e) {
+    var btn = e.target && e.target.closest ? e.target.closest('button[data-act]') : null;
+    if (!btn) return;
+    var act = btn.getAttribute('data-act');
+    var front = art.querySelector('.face.front');
+    if (act === 'learn') { toggleLearned(card, art); }
+    else if (act === 'speak') { speakSequence([{ text: card.de, el: front }]); }
+    else if (act === 'slow') { speakSequence([{ text: card.de, el: front, rate: 0.6 }]); }
+    else if (act === 'flip') { flipCard(card, art); }
+  });
+  return art;
+}
+
+function renderCards() {
+  var root = $('#cards');
+  var list = visibleCards();
+  var frag = document.createDocumentFragment();
+  list.forEach(function (c) { frag.appendChild(cardEl(c)); });
+  root.innerHTML = '';
+  root.appendChild(frag);
+  $('#cardsEmpty').hidden = list.length > 0;
+  $('#visibleCount').textContent = list.length + ' von ' + CARDS.length + ' Karten sichtbar';
+  updateProgress();
+}
+
+$('#chips').addEventListener('click', function (e) {
+  var chip = e.target && e.target.closest ? e.target.closest('.chip') : null;
+  if (!chip) return;
+  activeCat = chip.getAttribute('data-cat') || 'all';
+  renderChips();
+  renderCards();
+});
+$('#playVisible').addEventListener('click', function () {
+  var items = visibleCards().map(function (c) {
+    return { text: c.de, el: $('.card[data-id="' + c.id + '"] .face.front') };
+  });
+  if (items.length) speakSequence(items, { btn: $('#playVisible'), gap: 550 });
+});
+$('#stopAll').addEventListener('click', stopAll);
+$('#resetLearned').addEventListener('click', function () {
+  if (!window.confirm('Fortschritt wirklich zurücksetzen? Alle Karten werden wieder als „nicht gelernt“ markiert.')) return;
+  CARDS.forEach(function (c) { c.learned = false; });
+  saveLearned();
+  renderCards();
+});
+/* ============================================================
+   7 · ROLEPLAY UI  (scene playback · practice mode)
+   ============================================================ */
+var practiceMode = false;
+var revealed = {};   /* line id → German already revealed (practice mode) */
+
+function lineEl(scene, line, si, li) {
+  var mine = !!line.me;
+  var id = scene.id + '-' + li;
+  var hidden = mine && practiceMode && !revealed[id];
+
+  var wrap = document.createElement('div');
+  wrap.className = 'line' + (mine ? ' me' : '');
+  wrap.setAttribute('data-si', String(si));
+  wrap.setAttribute('data-li', String(li));
+
+  var bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.innerHTML =
+    '<span class="who">' + esc(mine ? scene.mine : scene.other) + '</span>' +
+    (hidden
+      ? '<button type="button" class="reveal" data-act="reveal">🙈 Deine Zeile – klicken, wenn du sie gesagt hast</button>'
+      : '<p class="de">' + esc(line.de) + '</p>' +
+        '<p class="pron">🔊 ' + pronHtml(line.pron) + '</p>') +
+    '<p class="en">' + esc(line.en) + '</p>' +
+    (line.tip ? '<p class="tip">💡 ' + esc(line.tip) + '</p>' : '') +
+    '<div class="line-actions">' +
+      '<button type="button" class="btn" data-act="play">🔊 Listen</button>' +
+      '<button type="button" class="btn ghost" data-act="slow">🐢 Langsam</button>' +
+    '</div>';
+
+  var av = document.createElement('span');
+  av.className = 'avatar';
+  av.setAttribute('aria-hidden', 'true');
+  av.textContent = mine ? scene.avatars.me : scene.avatars.other;
+
+  if (mine) { wrap.appendChild(bubble); wrap.appendChild(av); }
+  else { wrap.appendChild(av); wrap.appendChild(bubble); }
+  return wrap;
+}
+
+function renderDialogue() {
+  var root = $('#dialogRoot');
+  root.innerHTML = '';
+  SCENES.forEach(function (scene, si) {
+    var box = document.createElement('section');
+    box.className = 'scene';
+    box.id = scene.id;
+
+    var head = document.createElement('div');
+    head.className = 'scene-head';
+    head.innerHTML =
+      '<h3>' + esc(scene.set + ' · ' + scene.title) + '</h3>' +
+      '<div>' +
+        '<button type="button" class="btn" data-scene="' + si + '">▶️ Szene abspielen</button> ' +
+        '<button type="button" class="btn ghost" data-scene-mine="' + si + '">🙋 Nur meine Sätze</button>' +
+      '</div>';
+    box.appendChild(head);
+
+    var goal = document.createElement('p');
+    goal.className = 'scene-goal';
+    goal.textContent = scene.goal;
+    box.appendChild(goal);
+
+    var lines = document.createElement('div');
+    lines.className = 'lines';
+    scene.lines.forEach(function (line, li) { lines.appendChild(lineEl(scene, line, si, li)); });
+    box.appendChild(lines);
+    root.appendChild(box);
+  });
+}
+
+function sceneItems(scene, onlyMine) {
+  var items = [];
+  var nodes = $$('.scene#' + scene.id + ' .line');
+  nodes.forEach(function (node, li) {
+    var line = scene.lines[li];
+    if (!line) return;
+    if (onlyMine && !line.me) return;
+    items.push({ text: line.de, el: node.querySelector('.bubble') });
+  });
+  return items;
+}
+
+$('#dialogRoot').addEventListener('click', function (e) {
+  var t = e.target;
+  if (!t || !t.closest) return;
+
+  var revealBtn = t.closest('[data-act="reveal"]');
+  if (revealBtn) {
+    var node = revealBtn.closest('.line');
+    var s = SCENES[parseInt(node.getAttribute('data-si'), 10)];
+    if (s) { revealed[s.id + '-' + node.getAttribute('data-li')] = true; renderDialogue(); }
+    return;
+  }
+
+  var playBtn = t.closest('[data-act="play"], [data-act="slow"]');
+  if (playBtn) {
+    var lineNode = playBtn.closest('.line');
+    var scene = SCENES[parseInt(lineNode.getAttribute('data-si'), 10)];
+    if (!scene) return;
+    var line = scene.lines[parseInt(lineNode.getAttribute('data-li'), 10)];
+    if (!line) return;
+    var slow = playBtn.getAttribute('data-act') === 'slow';
+    speakSequence([{ text: line.de, el: lineNode.querySelector('.bubble'), rate: slow ? 0.6 : null }], { btn: playBtn });
+    return;
+  }
+
+  var sceneBtn = t.closest('[data-scene]');
+  if (sceneBtn) {
+    var si = parseInt(sceneBtn.getAttribute('data-scene'), 10);
+    speakSequence(sceneItems(SCENES[si], false), { btn: sceneBtn, gap: 700 });
+    return;
+  }
+
+  var mineBtn = t.closest('[data-scene-mine]');
+  if (mineBtn) {
+    var mi = parseInt(mineBtn.getAttribute('data-scene-mine'), 10);
+    speakSequence(sceneItems(SCENES[mi], true), { btn: mineBtn, gap: 700 });
+  }
+});
+
+$('#practiceMode').addEventListener('change', function (e) {
+  practiceMode = !!e.target.checked;
+  renderDialogue();
+});
+$('#revealAll').addEventListener('click', function () {
+  SCENES.forEach(function (s) { s.lines.forEach(function (l, li) { revealed[s.id + '-' + li] = true; }); });
+  practiceMode = true;
+  $('#practiceMode').checked = true;
+  renderDialogue();
+});
+$('#playAllScenes').addEventListener('click', function () {
+  var items = [];
+  SCENES.forEach(function (scene) { items = items.concat(sceneItems(scene, false)); });
+  if (items.length) speakSequence(items, { btn: $('#playAllScenes'), gap: 700 });
+});
+$('#stopDialog').addEventListener('click', stopAll);
+/* ============================================================
+   8 · CHEAT SHEET TABLE  ·  every sentence in one printable list
+   ============================================================ */
+function renderSentenceTable() {
+  $('#sentenceTable').innerHTML = CARDS.map(function (c) {
+    return '<tr>' +
+      '<td><div class="de">' + esc(c.de) + '</div><div class="pron">' + pronHtml(c.pron) + '</div></td>' +
+      '<td>' + esc(c.en) + '</td>' +
+      '<td><button type="button" class="btn" data-say="' + esc(c.id) + '">🔊</button></td>' +
+    '</tr>';
+  }).join('');
+}
+$('#sentenceTable').addEventListener('click', function (e) {
+  var btn = e.target && e.target.closest ? e.target.closest('[data-say]') : null;
+  if (!btn) return;
+  var id = btn.getAttribute('data-say');
+  var card = CARDS.filter(function (c) { return c.id === id; })[0];
+  var row = btn.closest('tr');
+  if (card) speakSequence([{ text: card.de, el: row ? row.cells[0] : null }], { btn: btn });
+});
+
+/* ============================================================
+   9 · TABS, VOICE CONTROLS & START
+   ============================================================ */
+var TABS = $$('.tab');
+function activateTab(name) {
+  TABS.forEach(function (tab) {
+    var panel = $('#panel-' + tab.getAttribute('data-tab'));
+    var on = (tab.getAttribute('data-tab') === name);
+    tab.classList.toggle('is-active', on);
+    tab.setAttribute('aria-selected', on ? 'true' : 'false');
+    if (!panel) return;
+    panel.classList.toggle('is-active', on);
+    if (on) { panel.removeAttribute('hidden'); } else { panel.setAttribute('hidden', ''); }
+  });
+  stopAll();
+  if (window.scrollTo) { try { window.scrollTo({ top: 0, behavior: 'smooth' }); } catch (e) { window.scrollTo(0, 0); } }
+}
+TABS.forEach(function (tab, i) {
+  tab.addEventListener('click', function () { activateTab(tab.getAttribute('data-tab')); });
+  tab.addEventListener('keydown', function (e) {
+    if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+    e.preventDefault();
+    var step = (e.key === 'ArrowRight') ? 1 : TABS.length - 1;
+    var next = TABS[(i + step) % TABS.length];
+    next.focus();
+    activateTab(next.getAttribute('data-tab'));
+  });
+});
+
+var rateInput = $('#rate');
+rateInput.value = String(rate);
+$('#rateOut').textContent = rate.toFixed(2).replace('.', ',');
+rateInput.addEventListener('input', function () {
+  rate = parseFloat(rateInput.value) || 0.9;
+  $('#rateOut').textContent = rate.toFixed(2).replace('.', ',');
+  safeSet(LS_RATE, String(rate));
+});
+$('#voice').addEventListener('change', function () { safeSet(LS_VOICE, $('#voice').value); });
+$('#testVoice').addEventListener('click', function () {
+  speakSequence([{ text: 'Guten Morgen! Ich habe einen Termin um acht Uhr bei Zimmer hundertfünfzig.' }],
+    { btn: $('#testVoice') });
+});
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') stopAll();
+});
+window.addEventListener('beforeunload', function () { if (synth) { try { synth.cancel(); } catch (e) {} } });
+
+/* first render */
+renderChips();
+renderCards();
+renderDialogue();
+renderSentenceTable();
+
+if (synth) {
+  loadVoices(false);
+  if (typeof synth.addEventListener === 'function') {
+    synth.addEventListener('voiceschanged', function () { loadVoices(false); });
+  } else {
+    synth.onvoiceschanged = function () { loadVoices(false); };
+  }
+  var retries = [250, 800, 1600, 3000];
+  retries.forEach(function (ms, i) {
+    setTimeout(function () { loadVoices(i === retries.length - 1); }, ms);
+  });
+} else {
+  var warn = $('#voiceWarn');
+  if (warn) {
+    warn.hidden = false;
+    warn.textContent = '⚠️ Dein Browser unterstützt die Sprachausgabe (Web Speech API) nicht. ' +
+      'Bitte öffne diese Datei in Microsoft Edge, Google Chrome oder Safari – dann funktioniert der 🔊-Button.';
+  }
+}
+})();
+</script>
+</body>
+</html>
