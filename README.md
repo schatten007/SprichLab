@@ -1,204 +1,167 @@
-# Sprich 2.3 · Start speaking German
+# Sprich — Start speaking German
 
-A free, local-first German trainer with a classified 48-lesson speaking course, a recommended path, 250 useful words, and workplace practice. Learn a small lesson, then export it for a natural Gemini conversation on your phone. Built for Windows and Android.
+A free German speaking trainer that runs entirely in your browser. Short lessons, 250 useful words, real workplace practice, and a one-click export you can paste into Gemini for a spoken conversation on your phone.
 
-## Start on this computer
+No account, no subscription, no API key needed for the core app. Your progress stays on your device.
 
-Use Node.js 22.13+ (22.x LTS) or Node.js 24+. Dependencies have been installed in this workspace.
+Works on Windows, macOS, Linux, and Android (install it like an app from Chrome).
+
+---
+
+## Quick start
+
+You need [Node.js](https://nodejs.org) 22.13+ or 24+.
 
 ```powershell
+npm install     # first time only
 npm run dev
 ```
 
-Open **http://localhost:8080/**. For a fresh copy of the project, run `npm install` first.
+Then open **http://localhost:8080/** and you're in.
 
-Use the server URL rather than double-clicking `app/index.html`: the app uses JavaScript modules and browser storage.
+> **Tip:** open it through the server, don't double-click `app/index.html`. The app uses browser modules and storage, which need a real server to work.
 
-## Start practising
+---
 
-1. On **Today**, keep **Start speaking · near-beginner** selected and start the recommended lesson.
-2. Hear and say the first short phrase, then learn the words and sentence patterns.
-3. Try three guided replies and a small variation. Record if you want, or confirm you practised aloud.
-4. Open **Export for Gemini**. Copy the lesson pack, download it as `.txt`, or use your phone’s share menu.
-5. Paste it into a normal Gemini chat and use **Live** on your phone. Return to save one useful takeaway.
-6. Open **Lessons → My path** to see your stage and what comes next, or **All lessons** to filter by level, topic, speaking skill, and status.
-7. Use **Words** to learn small batches and review meanings, spoken recall, or your own sentences.
-8. Choose **Workplace course · A2–B1** on Today or in Settings when you want the longer interview/workplace missions.
+## Try a lesson in 60 seconds
 
-See the [short Start Speaking guide](docs/START_SPEAKING.md). Beginner lessons always show English support. Every lesson can be started **Guided** or with **less help**; both record support the same way. Revealing an answer model is recorded as assistance.
+1. Stay on **Today** with **Start speaking · near-beginner** selected, and hit the recommended lesson.
+2. Listen to the first short phrase, then say it back.
+3. Learn the words and the sentence pattern behind it.
+4. Try three guided replies and one variation. Record yourself if you like — or just confirm you said it out loud.
+5. Open **Export for Gemini**, copy the lesson pack, and paste it into a normal Gemini chat. On your phone, use **Live** for a real spoken conversation.
+6. Come back and save one phrase you liked.
 
-Beginner lessons offer a roughly 10–15-minute speaking loop, plus optional word reviews and Gemini practice. The workplace path retains the configurable daily budget and short-mission option. Time is measured from active in-app practice; Gemini minutes are separately self-reported.
+That's the core loop: **learn a little → say it out loud → talk to Gemini → save what worked.**
 
-## What is included
+A full walkthrough lives in [docs/START_SPEAKING.md](docs/START_SPEAKING.md).
 
-- **48 lessons** in twelve modules and five path stages: first conversations, talking about yourself, everyday needs, time and plans, getting around, shopping and services, home and administration, health and appointments, social conversations, university and people, first work conversations, and university/work bridges.
-- Every lesson is classified by **level** (Starter, A1, A2, B1), **topic**, **speaking skill**, and advisory **preparation**. Levels describe the task, not a claim about you.
-- **My path** shows your stage, one recommended next lesson with a plain reason, and per-stage progress. **All lessons** filters by level, topic, skill, status, and search. Nothing is locked.
-- **250 starter vocabulary entries**, each with English meaning, an example and its translation, audio controls, and useful forms. Nouns include articles and plurals or a singular-only note.
-- Each lesson has 5–8 word targets, 1–2 sentence patterns, a bilingual model conversation, three guided replies, and two variations. The 24 newer lessons have **two** model conversations, and practising again uses the other one.
-- Eight short **language focus** notes: question words, verb position, numbers and times, negation, modal verbs, separable verbs, the perfect tense, and dative pronouns.
-- Start any lesson **Guided** or with **less help**, which keeps the English meaning and model hidden until you ask.
-- A **Words** section with search, topics, word types, saved words, five-word learning batches, and separate recognition/spoken-recall/sentence-use practice.
-- **Lesson-specific Gemini packs** from the path, lesson overviews, active lessons, workplace missions, and the companion selector: level target, help setting, editable preview, optional selected profile facts, copy, UTF-8 `.txt` download, and native share where supported.
-- Beginner progress, word reviews, and Gemini takeaways included in progress transfer. Versioned course packs are cached per pack for offline use.
-- Twelve complete missions covering interviews, vacancy calls, appointments, availability, instructions, updates, problems, small talk, projects, meetings, requests, and a mixed mock interview.
-- 120 distinct curated phrases, three original bilingual dialogues per mission, and 108 checked comprehension questions in total.
-- A flexible six-stage path with normal and short routes for every mission.
-- Contextual follow-ups for availability, job enquiries, and appointment confirmations.
-- Microphone recording, replay, download, and an optional separate dictation tool.
-- Model answers, explicit self-assessment, and a second speaking attempt.
-- Checked listening questions with separate reading-supported results.
-- Spaced recall and independently reported spoken-use evidence on different days.
-- Resumable sessions, draft recovery, measured active time, and seven-day progress.
-- Light/dark appearance, keyboard-accessible controls, and Android-sized layouts.
-- Progress export/import for moving between devices.
-- Fifteen curated German resource activities with access, level, registration, transcript, and voice-type information.
-- Resource search/filtering, bookmarks, difficulty ratings, and alternatives for inaccessible or difficult sources.
-- Personal phrases with English meanings, your own examples, and source links. Repeated saves merge; saving a phrase already in the course preserves your annotation without duplicating its recall identity.
-- A persistent daily queue that assigns a mission, due reviews, a suitable source, a retry, and a reflection within the selected budget.
-- **AI Talk**: an optional push-to-talk conversation with a real partner reply, sent only when you choose Send, plus a short grounded review that never becomes a score. See [AI Talk](#ai-talk-and-gemini-companion).
-- **Gemini Companion**: a no-gateway card with a copyable practice brief for a Gemini voice conversation on your own phone, plus a manual reflection you keep in Sprich.
-- An installable offline-capable production web app.
-- The original vocabulary/chunk reference under **Words → Useful phrases & your own collection → More reference words**.
+---
 
-The lessons use authored conversations and explicit self-assessment. Checking comprehension, recalling a meaning, repeating a model, and speaking independently are different kinds of practice. There is no automatic grammar/pronunciation score or inferred CEFR level. Starter lessons, vocabulary, and Gemini export need no API key; AI Talk has its own optional gateway.
+## What's inside
 
-## German resources and guided activities
+**The course**
+- **48 lessons** across 12 modules and 5 stages: first conversations, talking about yourself, everyday needs, time and plans, getting around, shopping, home and paperwork, health, social talk, university, and your first work conversations.
+- Every lesson is tagged by **level** (Starter → A1 → A2 → B1), **topic**, and **speaking skill**, so you can always find something at your level. Nothing is locked — jump anywhere you like.
+- Each lesson gives you a model conversation, 5–8 key words, 1–2 sentence patterns, three guided replies, and variations to practise again.
+- Eight short **language notes** cover the grammar that actually matters: question words, verb position, numbers and time, negation, modals, separable verbs, past tense, and dative pronouns.
 
-Open **http://localhost:8080/#resources**. The catalog includes DW Nicos Weg and Deutschtrainer, VHS Deutsch Beruf, Goethe resources, Easy German, Slow German, and the Bundesagentur für Arbeit.
+**Practice modes**
+- Start any lesson **Guided** (English help always visible) or with **less help** (answers hidden until you ask).
+- Record your voice, replay it, download it — recordings never leave your device.
+- A **Words** section with 250 entries: meanings, example sentences, audio, articles and plurals for nouns. Practise in small batches by recognition, spoken recall, or writing your own sentence.
 
-1. Filter by topic/search, level, format, practice time, text support, or registration needs.
-2. Open **View guided activity** to see a concrete follow-up task and access details.
-3. Start the activity, visit the publisher, then return to record or write your own response.
-4. Save useful phrases, with their meaning and your own example, for later spoken recall.
-5. If a source is too difficult or unavailable, use a suggested alternative or the matching in-app mission.
+**Workplace practice**
+- 12 full **missions** for real situations: interviews, calling about a vacancy, making appointments, describing problems, small talk, meetings, and a mock interview.
+- 120 curated phrases, 36 bilingual dialogues, and 108 comprehension questions.
+- Six-stage paths for each mission, with a short version when you're short on time.
 
-Opening a link alone cannot complete an activity. A saved written response or recording is required. These resource artifacts are unscored practice; self-reported publisher-study minutes are separate from measured active time.
+**Everyday tools**
+- **My path** tells you what to do next and why. **All lessons** lets you filter by level, topic, skill, or status.
+- A daily queue that hands you one mission, your due reviews, a resource, and a reflection — sized to whatever time budget you set.
+- 15 curated German learning resources (Nicos Weg, Easy German, Slow German, Goethe, VHS Deutsch Beruf, and more) with guided follow-up tasks.
+- Personal phrase book, bookmarks, dark mode, keyboard navigation, and progress export/import.
 
-Live checks on **2 October 2026** reached ten source pages and confirmed muted media playback for five specific lessons/episodes. Four Goethe pages and the selected YouTube page restricted automated access. Their cards show the need for a manual check, and they are excluded from automatic daily assignments. They may still work in your normal browser. See [the source catalog and check results](docs/RESOURCE_CATALOG.md).
+**How practice is scored** — it isn't, really. Sprich never gives you a grammar or pronunciation grade or claims a CEFR level. It shows what you did: what you heard, what you said, what you recalled. You judge your own speaking. That's deliberate.
 
-## Voice and microphone
+---
 
-**Start here:** [Short free setup guide: German device voices, Groq, optional ElevenLabs, and Android hosting](docs/FREE_SETUP.md).
+## AI features
 
-- Recording uses `MediaRecorder` and saves audio in this browser's IndexedDB.
-- Read-aloud defaults to an installed German system/browser voice. Add German in your device's speech settings if necessary. Automatic selection prefers installed voices.
-- **Settings → AI Talk voice** offers optional ElevenLabs Free speech, a test button, cached replay, slower playback, and device-voice fallback.
-- Some voices and browser dictation services require internet. Dictation may send audio to the browser provider.
-- Microphone recording requires **HTTPS** or **localhost**. Opening a desktop LAN address over plain HTTP on your phone does not meet that requirement.
-- If recording or read-aloud is unavailable, use the reading alternative and practise aloud. The app labels this evidence appropriately.
+### Gemini Companion (no setup needed)
 
-## AI Talk and Gemini Companion
+Pick any lesson or workplace mission, hit **Export for Gemini**, and you get a ready-made pack: vocabulary, examples, and roleplay instructions.
 
-Open **http://localhost:8080/#ai**.
+- On a **computer**: paste it into a Gemini chat.
+- On your **phone**: share the pack directly, open the same chat, and tap **Live** to actually talk.
+- Come back to Sprich and save one takeaway from the conversation.
 
-**Gemini Companion needs no gateway.** Choose any beginner lesson or workplace mission to export its own vocabulary, examples, and roleplay instructions. On a computer, paste the pack into a normal Gemini text chat; open the same chat on your phone and tap Live. On a phone, copy/share the pack directly. Export saves and stops active lesson recording first. Return to save a takeaway, shown in Progress as self-reported outside practice.
+This needs no gateway, no API key, and no configuration.
 
-**AI Talk needs a small gateway you run yourself.** Provider keys stay on that server, and model/provider selection is fixed there. The page calls `/api/v1/*` on its own origin. Follow the [free setup guide](docs/FREE_SETUP.md) for the account, secrets, and two-terminal setup.
+### AI Talk (optional, self-hosted)
+
+A push-to-talk conversation with an AI partner that replies out loud. Your audio is only sent when you press **Send**. Setup takes about five minutes — see the [free setup guide](docs/FREE_SETUP.md).
 
 ```powershell
-npm run ai:access
-npm run ai:gateway
+npm run ai:access     # creates your owner code and secrets
+npm run ai:gateway    # starts the local gateway on port 8787
 ```
 
-`ai:access` prints a 43-character owner code plus the `OWNER_TOKEN_HASH` and `SESSION_SECRET` values to put in `.dev.vars` (start from `.dev.vars.example`), together with a `GROQ_API_KEY` and `GROQ_FREE_TIER_CONFIRMED=true`. `ai:gateway` serves `http://127.0.0.1:8787`, and Vite proxies `/api` to it in both `npm run dev` and `npm run preview`. Paste the owner code into **Unlock AI Talk**.
+Paste the owner code into **Unlock AI Talk** in the app. Your provider key stays on your own machine, and everything that doesn't involve AI keeps working even without it.
 
-- Your answer is sent only when you choose **Send**. Clips are at most 60 seconds and 1.5 MB. Optional natural-voice playback separately sends the text to speak through the gateway.
-- Typed answers work as well and are labelled as never counting as speaking.
-- An interrupted reply keeps its request ID and offers **Check for my reply** instead of generating the answer twice.
-- The review quotes your own words or withholds a correction, and is labelled "not a score".
-- With no credentials, AI Talk only reports what is missing; every offline lesson and resource is unaffected.
+---
 
-`npm run ai:gateway:test` runs a test-mode gateway (mock provider, in-memory database, fixed test-only code, loopback only) for the automated checks. The interface always labels it as a test provider. `npm run deploy:check` runs `wrangler deploy --dry-run` to confirm the Worker bundle without deploying anything.
+## Using the microphone
 
-## Build and use on Android
+- Recording needs **HTTPS or localhost**. A plain `http://192.168.x.x` address on your phone won't work — use a hosted URL or keep it on your computer.
+- Read-aloud uses an installed German system voice. If you don't have one, add German under your device's speech settings.
+- **Settings → AI Talk voice** lets you add a free ElevenLabs voice, test it, and fall back to your device voice.
+- No mic or no voice? Use the reading alternative and practise aloud — the app labels it honestly as reading, not speaking.
+
+Full details: [docs/FREE_SETUP.md](docs/FREE_SETUP.md) · [docs/TTS_SETUP_VERIFICATION.md](docs/TTS_SETUP_VERIFICATION.md)
+
+---
+
+## Install it on your phone
 
 ```powershell
 npm run build
-npm run preview
+npm run preview      # check it at http://127.0.0.1:4173/
 ```
 
-Preview is normally at http://127.0.0.1:4173/. The production files are in **`dist/`**. Upload that directory to an HTTPS static host such as GitHub Pages or Netlify. No application server, API key, or database service is needed.
+Upload the `dist/` folder to any free static host (GitHub Pages, Netlify, Cloudflare Pages). No server, no database, no API key.
 
-To include AI Talk, deploy the app and gateway together on Workers Free + D1 using the [Android hosting steps](docs/FREE_SETUP.md#4-optional-free-https-hosting-for-android). A static-only upload serves the core course and Gemini Companion.
+Then on Android: open the URL in Chrome → menu → **Install app**. Open **Today** once while online so the course downloads, and after that the lessons work offline.
 
-On Android, open the hosted URL in Chrome and use **Install app / Add to Home screen**. Let the first online load finish and open Today, Lessons, or Words once to save the beginner course pack. The built app caches its shell and core workplace exercises; the starter pack lives in IndexedDB. External websites and online speech services still need a connection. Offline shell caching is enabled in the production build, not the development server.
+To add AI Talk on mobile, host the app and gateway together on Cloudflare Workers Free — steps are in [the setup guide](docs/FREE_SETUP.md#4-optional-free-https-hosting-for-android).
 
-The app uses relative asset paths and hash routes, so a static-host subdirectory is supported. Hosting/deployment is not performed automatically by the development commands.
+---
 
-## Progress and backups
+## Moving progress between devices
 
-In **Settings**, choose **Export progress**. Import that JSON file on your other device. Re-importing a file merges attempts by ID without awarding duplicate results. Importing a newer checkpoint also preserves the longer measured interval instead of counting it twice.
+**Settings → Export progress** saves everything as a JSON file: your attempts, timings, unfinished sessions, personal phrases, bookmarks, and AI takeaways. Import it on the other device.
 
-- Exports include your profile, attempts, active-time intervals, unfinished sessions, and any migrated legacy backup.
-- Exports also include personal phrases, source bookmarks/difficulty ratings, resource responses, daily assignments/reflections, AI conversations/reviews, companion notes, and the content snapshots needed to resume lessons reliably. Cached generated speech stays on the device.
-- Audio blobs are device-local. Download individual recordings during a session if you want to keep or move them.
-- Browser storage is tied to the exact origin: host, protocol, and port. `localhost:8080`, `127.0.0.1:4173`, and a hosted HTTPS site have separate storage. Use export/import to move between them.
-- Old `deutsch-trainer-v1` data is copied into a legacy backup when present on the same origin. Its unreliable automatic grades and estimated minutes do not become new evidence. The original key is not removed.
-- If the old trainer was used at `http://localhost:8080/`, the default development URL matches that origin and can migrate its data. Files opened with `file://` have browser-specific storage; export any old data from that original browser context if needed.
-- Earlier progress (schemas 2/3/4) migrates to **schema 5** in the same database. Frozen lesson content, saved answers, AI conversations, and recording keys are preserved. Settings offers a pre-upgrade backup. New beginner sessions, word reviews/bookmarks, and takeaways also merge by stable IDs.
+Importing is safe to repeat — attempts merge by ID, so you never get double credit. Audio recordings stay on the device they were made on; download individual clips during a session if you want to keep them.
 
-## Checks
+One thing to remember: browser storage belongs to the exact address you're on. `localhost:8080`, `127.0.0.1:4173`, and a hosted site all have separate storage, so use export/import to move between them.
+
+Old data from version 2.0 (`deutsch-trainer-v1`) is picked up automatically if it's on the same address.
+
+---
+
+## For contributors
+
+Every check in one go:
 
 ```powershell
-npm test
-npm run lint
-npm run build
-npm run test:e2e
+npm test             # unit tests
+npm run lint         # ESLint
+npm run build        # production build (150 KB gzip budget for core JS/CSS)
+npm run test:e2e     # Playwright browser tests
 npm run check:openapi
-npm run deploy:check
+npm run deploy:check # dry-run of the Worker bundle
 ```
 
-Browser tests run the built app in Microsoft Edge/Chromium with desktop and Pixel 7 emulation. Edge is used because it is installed on this Windows computer. For another environment, change the Playwright channel and install the corresponding browser. Microphone tests use Chromium's synthetic microphone, never your actual microphone.
+Browser tests run in Edge/Chromium (installed on this machine) with desktop and Pixel 7 layouts, using a synthetic microphone — never yours. Optional live resource checks: `npm run check:resources`.
 
-The checks cover migration, duplicates, review spacing, local dates/DST, persistence, cross-tab updates, meaningful self-assessment rules, a complete mission, recording lifecycle, offline reloads, mobile overflow, and backup import/export. Android emulation checks the layout and Chromium paths; physical-device speech service availability still depends on the phone.
+Test suites cover data migration, review spacing, dates/DST, recordings, offline reloads, all 48 lessons and 250 words, every mission/dialogue combination, and the AI gateway's auth, quotas, and error contracts.
 
-They also validate all 72 mission/length/dialogue combinations, personal/core phrase deduplication, German/English content coverage, daily queue stability, resource completion rules, and old-session snapshots. The build enforces a **150 KB gzip budget for core JavaScript and CSS**. Publisher media is requested only after the learner opens it.
+### Where things live
 
-The AI gateway has its own suite (`tests/gateway.test.js`) that runs the real handler against an in-memory database and a mock provider, covering authentication, origin and cookie tampering, quota counters, idempotent receipts, uncertain outcomes, review quote grounding, and the problem-JSON contract. `tests/v-ai.test.js` covers the client's recovery rules, and `tests/browser/ai-talk.spec.js` unlocks, records, sends, and reads a review through the production build against the test gateway.
-
-TTS and setup also have client/voice tests and seven browser flows covering real WAV decoding, cached replay, Stop/Slower, recording handoff, late cancellation, free-tier fallback, and missing-gateway recovery. See the [TTS/setup verification report](docs/TTS_SETUP_VERIFICATION.md) for results and the live checks still pending.
-
-Course checks validate all 48 lessons and 250 words, classification and prerequisite ordering, complete word coverage, two-dialogue alternation, path recommendations, support modes, frozen snapshots, assisted recall, schema migration, duplicate transfers, and per-pack offline loading. Eleven browser flows cover the path view and filters, prerequisite links, a lighter-support lesson, the lesson runner, word practice, correct Gemini exports, cancelled sharing, microphone handoff, and portable takeaways. See [iteration 5](docs/ITERATION_5.md).
-
-For an optional live source check (network-dependent, separate from the tests):
-
-```powershell
-npm run check:resources
-# Or only selected entries:
-npm run check:resources -- nicos-interview dw-phone
-```
-
-The check uses a fresh browser context, does not sign in, and tests directly available media muted. A restricted automated request is reported as requiring manual checking, rather than treated as proof the resource is unavailable to every user.
-
-## Code map
-
-| File | Responsibility |
+| Path | What it does |
 | --- | --- |
-| `app/data/missions.js`, `mission-packs/` | Twelve original mission packs and bilingual teaching content |
-| `app/data/phrases.js` | Core phrase bank and personal-phrase annotations |
-| `app/data/resources.js`, `curriculum.js` | Curated sources, access metadata, and the six-stage path |
-| `app/data/legacy-content.js`, `app/js/legacy-session.js` | Frozen 2.0 content used during migration |
-| `app/data/starter-catalog.js` | Levels, topics, skills, twelve modules, five path stages, prerequisites, language notes, and the content-pack manifest |
-| `app/public/course/*.json` | Versioned content packs: 48 lessons and 250 vocabulary entries |
-| `app/js/starter-content.js`, `starter-state.js`, `starter-progress.js` | Course validation/downloads, snapshots, beginner evidence, and mode-specific word scheduling |
-| `app/js/v-lessons.js`, `v-words.js`, `starter-ui.js` | Path and library views, lesson runner, daily routine, vocabulary, and reusable cards |
-| `app/js/gemini-pack.js`, `gemini-export.js`, `v-gemini.js` | A shared lesson pack builder and copy/download/share handoff |
-| `app/js/model.js` | Data validation, time boundaries, import merging, derived progress |
-| `app/js/store.js` | IndexedDB transactions and recordings |
-| `app/js/draft-journal.js` | Recovery of input typed just before a reload |
-| `app/js/srs.js` | Recall scheduling and spaced spoken-use evidence |
-| `app/js/session.js` | Resumable task sequences, branching, assessment contracts |
-| `app/js/resources.js`, `daily.js` | Resource activity contracts, recommendations, and stable daily queues |
-| `app/js/clock.js` | Visible/active practice timing and compact checkpoints |
-| `app/js/tts.js`, `recorder.js` | Speech playback, dictation, and recording lifecycle |
-| `app/js/v-*.js` | Today, practice, resource workspace, phrases, session, progress, settings, and AI Talk views |
-| `app/js/ai-gateway.js`, `ai-state.js` | The only browser client for `/api/v1`, and conversation/draft/review state |
-| `app/js/ai-speech.js` | Cancellable natural speech, IndexedDB audio caching, and German device-voice fallback |
-| `shared/ai-contracts.js` | Limits, model IDs, JSON schemas, and validators shared by browser and gateway |
-| `worker/` | The optional AI gateway: routing, auth, quotas, providers, prompts, OpenAPI contract |
-| `tools/` | Owner-code generator, local/test gateways, mock provider, source checks |
-| `vite.config.js` | Build, versioned/scoped offline asset cache, and the `/api` proxy |
-| `practice.html` | Original standalone Ausländerbehörde trainer |
+| `app/data/` | Course content: missions, phrases, resources, curriculum |
+| `app/public/course/` | Versioned content packs (48 lessons, 250 words) |
+| `app/js/` | App logic: views (`v-*.js`), storage, sessions, speech, export |
+| `shared/ai-contracts.js` | Limits and schemas shared by browser and gateway |
+| `worker/` | The optional AI gateway (routing, auth, quotas, providers) |
+| `tools/` | Owner-code generator, local gateways, source checks |
+| `tests/` | Unit and Playwright browser tests |
+| `docs/` | Guides and design notes |
 
-See [LEARNING_MODEL.md](LEARNING_MODEL.md), [RESEARCH.md](RESEARCH.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), and [the course path release notes](docs/ITERATION_5.md).
+### Further reading
+
+- [Architecture](docs/ARCHITECTURE.md) · [Learning model](LEARNING_MODEL.md) · [Research notes](RESEARCH.md)
+- [Course release notes](docs/ITERATION_5.md) · [Resource catalog](docs/RESOURCE_CATALOG.md)
+- [AI build brief](docs/AI_BUILD_BRIEF.md) · [Iteration history](docs/ITERATION_2.md)
+
