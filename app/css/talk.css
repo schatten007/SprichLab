@@ -1,0 +1,71 @@
+/* AI Talk: gateway lobby, push-to-talk session, and the short review. */
+.setup-list { margin: 0 0 15px; padding-left: 20px; color: var(--muted); font-size: .8rem; }
+.setup-list li { margin: 5px 0; }
+
+.usage-block { border-top: 1px solid var(--line); margin-top: 18px; padding-top: 15px; }
+.usage-row { display: flex; justify-content: space-between; gap: 12px; font-size: .79rem; padding: 4px 0; }
+.usage-row span:last-child { color: var(--muted); font-variant-numeric: tabular-nums; }
+.usage-block .fine { margin: 10px 0 0; }
+
+.inline-form { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 10px; margin: 4px 0 13px; }
+.inline-form label { flex: 1; min-width: 210px; font-size: .78rem; }
+.inline-form input { margin-top: 6px; letter-spacing: .07em; }
+.inline-form .btn { flex: 0 0 auto; }
+
+.stack-list { display: grid; }
+.stack-row { display: flex; align-items: center; justify-content: space-between; gap: 15px; padding: 15px 0; border-top: 1px solid var(--line); }
+.stack-row:first-child { border-top: 0; padding-top: 0; }
+.stack-row > span { min-width: 0; }
+.stack-row strong { display: block; font-size: .9rem; line-height: 1.4; }
+.stack-row small { display: block; color: var(--muted); font-size: .74rem; }
+.stack-row .btn { flex: 0 0 auto; }
+
+.fact-list { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 7px 16px; margin: 0 0 13px; }
+.fact-list dt { color: var(--muted); font-size: .76rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; }
+.fact-list dd { margin: 0; font-size: .88rem; overflow-wrap: anywhere; }
+
+.copy-box { white-space: pre-wrap; overflow-wrap: anywhere; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 13px; padding: 17px 19px; margin: 17px 0; font-family: inherit; font-size: .82rem; line-height: 1.7; }
+
+.note-form { border-top: 1px solid var(--line); margin-top: 21px; padding-top: 19px; }
+.note-form .form-grid { gap: 16px; }
+.note-form .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.note-form .form-actions .fine { margin: 0; }
+
+.transcript-card .transcript { max-height: min(54vh, 540px); overflow-y: auto; overscroll-behavior: contain; }
+.transcript-card .callout { margin-top: 16px; }
+.transcript-line { border: 1px solid var(--line); background: var(--surface); border-radius: 13px 13px 13px 3px; padding: 13px 15px; margin-bottom: 11px; }
+.transcript-line:last-child { margin-bottom: 0; }
+.transcript-line.you { background: var(--tint); border-color: transparent; border-radius: 13px 13px 3px 13px; }
+.transcript-who { display: block; font-size: .61rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+.transcript-line p { font-size: .95rem; margin-bottom: 8px; }
+.transcript-line p:last-child { margin-bottom: 0; }
+.transcript-line .reply-text { font-weight: 600; }
+
+#ai-time { font-size: .84rem; font-weight: 650; font-variant-numeric: tabular-nums; color: var(--muted); white-space: nowrap; }
+.ai-operations { border-top: 1px solid var(--line); margin-top: 19px; padding-top: 16px; }
+.ai-operations .btn { font-size: .8rem; min-height: 41px; }
+
+.review-card h3 { margin-bottom: 11px; }
+.review-list { list-style: none; padding: 0; margin: 0 0 21px; display: grid; gap: 14px; }
+.review-list li { border-left: 3px solid var(--line); padding-left: 14px; }
+.review-list li > span, .review-list li > s { font-size: 1rem; font-weight: 600; }
+.review-list.corrections li { border-left-color: var(--danger); }
+.review-list.phrases li { border-left-color: var(--brand); }
+.review-list .text-button { display: inline-flex; align-items: center; gap: 5px; font-size: .76rem; min-height: 34px; }
+.review-list .icon { width: 15px; height: 15px; }
+.retry-box { background: var(--surface-soft); border-radius: 14px; padding: 19px 20px; margin-bottom: 20px; }
+.retry-box .eyebrow { margin-bottom: 8px; }
+.retry-box p { font-size: 1.03rem; margin-bottom: 7px; }
+
+@media (max-width: 760px) {
+  .inline-form { flex-direction: column; align-items: stretch; }
+  .inline-form .btn { width: 100%; }
+  .stack-row { flex-wrap: wrap; gap: 10px; }
+  .stack-row .btn { flex: 1 1 100%; }
+  .fact-list { grid-template-columns: 1fr; gap: 3px; }
+  .fact-list dd { margin-bottom: 9px; }
+  .copy-box { font-size: .8rem; padding: 15px 16px; }
+  .transcript-card .transcript { max-height: 45vh; }
+  .transcript-line p { font-size: 1rem; }
+  .note-form .form-actions .btn { width: 100%; }
+}

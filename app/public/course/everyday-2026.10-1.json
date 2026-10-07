@@ -1,0 +1,972 @@
+{
+  "id": "everyday",
+  "version": "everyday-2026.10-1",
+  "words": [
+    ["fahrkarte", "die Fahrkarte", "ticket", "noun", "die Fahrkarten", "Eine Fahrkarte nach Köln, bitte.", "A ticket to Cologne, please.", 7],
+    ["zug", "der Zug", "train", "noun", "die Züge", "Der Zug kommt um acht Uhr.", "The train arrives at eight o'clock.", 7],
+    ["hinundzurueck", "hin und zurück", "return; round trip", "expression", "einfach = one way", "Hin und zurück, bitte.", "Return, please.", 7],
+    ["gleis", "das Gleis", "platform; track", "noun", "die Gleise", "Der Zug fährt von Gleis drei.", "The train leaves from platform three.", 7],
+    ["welcher", "welcher", "which", "pronoun", "welcher · welche · welches", "Von welchem Gleis fährt der Zug?", "Which platform does the train leave from?", 7],
+    ["bus", "der Bus", "bus", "noun", "die Busse", "Der Bus fährt um neun Uhr.", "The bus leaves at nine o'clock.", 7],
+    ["haltestelle", "die Haltestelle", "stop (bus or tram)", "noun", "die Haltestellen", "Wo ist die Haltestelle?", "Where is the stop?", 7],
+    ["naechste", "nächste", "next", "adjective", "der nächste Zug · die nächste Haltestelle", "Wann fährt der nächste Zug?", "When does the next train leave?", 7],
+    ["abfahren", "abfahren", "to depart", "verb", "der Zug fährt ab · wir fahren ab", "Der Zug fährt um zehn Uhr ab.", "The train departs at ten o'clock.", 7],
+    ["ankommen", "ankommen", "to arrive", "verb", "ich komme an · der Zug kommt an", "Ich komme um elf Uhr an.", "I arrive at eleven o'clock.", 7],
+    ["umsteigen", "umsteigen", "to change (trains)", "verb", "ich steige um · muss ich umsteigen?", "Muss ich in Köln umsteigen?", "Do I have to change in Cologne?", 7],
+    ["fahren", "fahren", "to go (by vehicle); to travel", "verb", "ich fahre · du fährst · der Zug fährt", "Ich fahre nach Berlin.", "I am travelling to Berlin.", 7],
+    ["wann", "wann", "when", "adverb", "", "Wann fährt der Bus?", "When does the bus leave?", 7],
+    ["richtung", "die Richtung", "direction", "noun", "die Richtungen", "Der Bus fährt in Richtung Bahnhof.", "The bus goes in the direction of the station.", 7],
+    ["verspaetung", "die Verspätung", "delay", "noun", "die Verspätungen", "Der Zug hat Verspätung.", "The train is delayed.", 7],
+    ["minute", "die Minute", "minute", "noun", "die Minuten", "Ich komme zehn Minuten später.", "I will come ten minutes later.", 7],
+    ["warten", "warten", "to wait", "verb", "ich warte · du wartest", "Ich warte an der Haltestelle.", "I am waiting at the stop.", 7],
+    ["puenktlich", "pünktlich", "on time; punctual", "adjective", "", "Ich bin immer pünktlich.", "I am always on time.", 7],
+
+    ["groesse", "die Größe", "size", "noun", "die Größen", "Haben Sie das in Größe M?", "Do you have that in size M?", 8],
+    ["hemd", "das Hemd", "shirt", "noun", "die Hemden", "Das Hemd ist zu klein.", "The shirt is too small.", 8],
+    ["anprobieren", "anprobieren", "to try on", "verb", "ich probiere an · kann ich das anprobieren?", "Kann ich das Hemd anprobieren?", "Can I try the shirt on?", 8],
+    ["jacke", "die Jacke", "jacket", "noun", "die Jacken", "Die Jacke ist sehr schön.", "The jacket is very nice.", 8],
+    ["farbe", "die Farbe", "colour", "noun", "die Farben", "Haben Sie eine andere Farbe?", "Do you have another colour?", 8],
+    ["vergleichen", "vergleichen", "to compare", "verb", "ich vergleiche · wir vergleichen", "Ich vergleiche die Preise.", "I am comparing the prices.", 8],
+    ["besser", "besser", "better", "adjective", "gut → besser", "Diese Jacke ist besser.", "This jacket is better.", 8],
+    ["teuer", "teuer", "expensive", "adjective", "", "Das Hemd ist zu teuer.", "The shirt is too expensive.", 8],
+    ["billig", "billig", "cheap", "adjective", "günstig is more polite", "Die Jacke ist billig.", "The jacket is cheap.", 8],
+    ["zurueckgeben", "zurückgeben", "to give back; to return", "verb", "ich gebe zurück · möchte zurückgeben", "Ich möchte das Hemd zurückgeben.", "I would like to return the shirt.", 8],
+    ["umtauschen", "umtauschen", "to exchange", "verb", "ich tausche um · kann ich umtauschen?", "Kann ich die Jacke umtauschen?", "Can I exchange the jacket?", 8],
+    ["kassenbon", "der Kassenbon", "receipt", "noun", "die Kassenbons", "Hier ist mein Kassenbon.", "Here is my receipt.", 8],
+    ["paket", "das Paket", "parcel", "noun", "die Pakete", "Ich möchte ein Paket abholen.", "I would like to collect a parcel.", 8],
+    ["abholen", "abholen", "to collect; to pick up", "verb", "ich hole ab · du holst ab", "Ich hole das Paket ab.", "I am picking up the parcel.", 8],
+    ["verschicken", "verschicken", "to send off", "verb", "ich verschicke · wir verschicken", "Ich möchte das Paket verschicken.", "I would like to send the parcel.", 8],
+    ["post", "die Post", "post office; mail", "noun", "usually singular", "Die Post ist bis sechs Uhr offen.", "The post office is open until six o'clock.", 8],
+    ["nummer", "die Nummer", "number", "noun", "die Nummern", "Meine Nummer ist 24.", "My number is 24.", 8],
+
+    ["adresse", "die Adresse", "address", "noun", "die Adressen", "Meine Adresse ist Lindenstraße 4.", "My address is Lindenstraße 4.", 9],
+    ["hausnummer", "die Hausnummer", "house number", "noun", "die Hausnummern", "Die Hausnummer ist vier.", "The house number is four.", 9],
+    ["postleitzahl", "die Postleitzahl", "postcode", "noun", "die Postleitzahlen", "Die Postleitzahl ist 50667.", "The postcode is 50667.", 9],
+    ["telefonnummer", "die Telefonnummer", "phone number", "noun", "die Telefonnummern", "Meine Telefonnummer ist 0221 55 44.", "My phone number is 0221 55 44.", 9],
+    ["zimmer", "das Zimmer", "room", "noun", "die Zimmer", "Ist das Zimmer noch frei?", "Is the room still available?", 9],
+    ["wohnung", "die Wohnung", "flat; apartment", "noun", "die Wohnungen", "Die Wohnung ist sehr klein.", "The flat is very small.", 9],
+    ["miete", "die Miete", "rent", "noun", "die Mieten", "Wie hoch ist die Miete?", "How much is the rent?", 9],
+    ["frei", "frei", "free; available", "adjective", "", "Das Zimmer ist noch frei.", "The room is still available.", 9],
+    ["besichtigen", "besichtigen", "to view (a room or flat)", "verb", "ich besichtige · wir besichtigen", "Kann ich das Zimmer besichtigen?", "Can I view the room?", 9],
+    ["anmelden", "anmelden", "to register", "verb", "ich melde mich an · ich melde an", "Ich möchte mich anmelden.", "I would like to register.", 9],
+    ["heizung", "die Heizung", "heating", "noun", "die Heizungen", "Die Heizung ist kaputt.", "The heating is broken.", 9],
+    ["funktionieren", "funktionieren", "to work; to function", "verb", "es funktioniert · sie funktionieren", "Das Licht funktioniert nicht.", "The light does not work.", 9],
+    ["kaputt", "kaputt", "broken", "adjective", "", "Die Dusche ist kaputt.", "The shower is broken.", 9],
+    ["reparieren", "reparieren", "to repair", "verb", "ich repariere · Sie reparieren", "Können Sie die Heizung reparieren?", "Can you repair the heating?", 9],
+    ["vermieter", "der Vermieter", "landlord", "noun", "die Vermieter; feminine: die Vermieterin", "Ich schreibe dem Vermieter.", "I am writing to the landlord.", 9],
+    ["licht", "das Licht", "light", "noun", "die Lichter", "Das Licht im Bad ist kaputt.", "The light in the bathroom is broken.", 9],
+    ["dusche", "die Dusche", "shower", "noun", "die Duschen", "Die Dusche ist sehr klein.", "The shower is very small.", 9],
+
+    ["arzt", "der Arzt", "doctor", "noun", "die Ärzte; feminine: die Ärztin", "Ich brauche einen Arzt.", "I need a doctor.", 10],
+    ["praxis", "die Praxis", "doctor’s practice", "noun", "die Praxen", "Die Praxis ist bis fünf Uhr offen.", "The practice is open until five o'clock.", 10],
+    ["dringend", "dringend", "urgent", "adjective", "", "Es ist dringend.", "It is urgent.", 10],
+    ["versicherungskarte", "die Versicherungskarte", "insurance card", "noun", "die Versicherungskarten", "Bitte bringen Sie Ihre Versicherungskarte mit.", "Please bring your insurance card.", 10],
+    ["mitbringen", "mitbringen", "to bring along", "verb", "ich bringe mit · was soll ich mitbringen?", "Was soll ich mitbringen?", "What should I bring?", 10],
+    ["krank", "krank", "ill; sick", "adjective", "", "Ich bin krank.", "I am ill.", 10],
+    ["wehtun", "wehtun", "to hurt", "verb", "es tut weh · mein Hals tut weh", "Mein Kopf tut weh.", "My head hurts.", 10],
+    ["hals", "der Hals", "throat; neck", "noun", "die Hälse", "Mein Hals tut weh.", "My throat hurts.", 10],
+    ["kopf", "der Kopf", "head", "noun", "die Köpfe", "Ich habe Kopfschmerzen.", "I have a headache.", 10],
+    ["bauch", "der Bauch", "stomach; belly", "noun", "die Bäuche", "Mein Bauch tut weh.", "My stomach hurts.", 10],
+    ["fieber", "das Fieber", "fever", "noun", "usually singular", "Ich habe Fieber.", "I have a fever.", 10],
+    ["husten", "der Husten", "cough", "noun", "usually singular", "Ich habe Husten.", "I have a cough.", 10],
+    ["apotheke", "die Apotheke", "pharmacy", "noun", "die Apotheken", "Die Apotheke ist neben dem Bahnhof.", "The pharmacy is next to the station.", 10],
+    ["medikament", "das Medikament", "medicine", "noun", "die Medikamente", "Brauche ich ein Medikament?", "Do I need a medicine?", 10],
+    ["tablette", "die Tablette", "tablet", "noun", "die Tabletten", "Nehmen Sie eine Tablette.", "Take one tablet.", 10],
+    ["gesund", "gesund", "healthy", "adjective", "", "Ich bin wieder gesund.", "I am healthy again.", 10],
+
+    ["familie", "die Familie", "family", "noun", "die Familien", "Meine Familie wohnt in Indien.", "My family lives in India.", 11],
+    ["bruder", "der Bruder", "brother", "noun", "die Brüder", "Ich habe einen Bruder.", "I have a brother.", 11],
+    ["schwester", "die Schwester", "sister", "noun", "die Schwestern", "Meine Schwester studiert auch.", "My sister studies too.", 11],
+    ["eltern", "die Eltern", "parents", "noun", "plural only", "Meine Eltern wohnen nicht hier.", "My parents do not live here.", 11],
+    ["wollen", "wollen", "to want to", "verb", "ich will · wollen wir …?", "Wollen wir ins Kino gehen?", "Shall we go to the cinema?", 11],
+    ["kino", "das Kino", "cinema", "noun", "die Kinos", "Wir gehen ins Kino.", "We are going to the cinema.", 11],
+    ["film", "der Film", "film; movie", "noun", "die Filme", "Der Film war gut.", "The film was good.", 11],
+    ["cafe", "das Café", "café", "noun", "die Cafés", "Treffen wir uns im Café?", "Shall we meet in the café?", 11],
+    ["abend", "der Abend", "evening", "noun", "die Abende; heute Abend = this evening", "Heute Abend habe ich Zeit.", "I have time this evening.", 11],
+    ["tutmirleid", "Tut mir leid", "I am sorry", "expression", "", "Tut mir leid, heute geht es nicht.", "I am sorry, today does not work.", 11],
+    ["vielleicht", "vielleicht", "maybe; perhaps", "adverb", "", "Vielleicht am Samstag?", "Maybe on Saturday?", 11],
+    ["gestern", "gestern", "yesterday", "adverb", "", "Gestern war ich im Park.", "Yesterday I was in the park.", 11],
+    ["sein", "sein", "to be", "verb", "ich bin · ich war · ich bin gewesen", "Ich war gestern müde.", "I was tired yesterday.", 11],
+    ["gehen", "gehen", "to go", "verb", "ich gehe · ich bin gegangen", "Ich bin ins Kino gegangen.", "I went to the cinema.", 11],
+    ["spass", "der Spaß", "fun", "noun", "usually singular; Spaß haben = to have fun", "Das hat Spaß gemacht.", "That was fun.", 11],
+    ["schoen", "schön", "nice; beautiful", "adjective", "", "Das war ein schöner Abend.", "That was a nice evening.", 11],
+
+    ["abgabe", "die Abgabe", "deadline; submission", "noun", "die Abgaben", "Wann ist die Abgabe?", "When is the deadline?", 12],
+    ["vorlesung", "die Vorlesung", "lecture", "noun", "die Vorlesungen", "Die Vorlesung beginnt um zehn Uhr.", "The lecture starts at ten o'clock.", 12],
+    ["pruefung", "die Prüfung", "exam", "noun", "die Prüfungen", "Die Prüfung ist am Freitag.", "The exam is on Friday.", 12],
+    ["wichtig", "wichtig", "important", "adjective", "", "Die Abgabe ist wichtig.", "The deadline is important.", 12],
+    ["absagen", "absagen", "to cancel", "verb", "ich sage ab · ich muss absagen", "Ich muss den Termin absagen.", "I have to cancel the appointment.", 12],
+    ["bescheid", "der Bescheid", "notice; word", "noun", "usually singular; Bescheid sagen = to let someone know", "Ich sage Ihnen Bescheid.", "I will let you know.", 12],
+    ["moeglich", "möglich", "possible", "adjective", "", "Ist das möglich?", "Is that possible?", 12],
+    ["projekt", "das Projekt", "project", "noun", "die Projekte", "Mein Projekt war eine kleine App.", "My project was a small app.", 12],
+    ["programmieren", "programmieren", "to program; to code", "verb", "ich programmiere · wir programmieren", "Ich programmiere gern.", "I like programming.", 12],
+    ["app", "die App", "app", "noun", "die Apps", "Ich habe eine App gebaut.", "I built an app.", 12],
+    ["bauen", "bauen", "to build", "verb", "ich baue · ich habe gebaut", "Wir haben eine Website gebaut.", "We built a website.", 12],
+    ["benutzen", "benutzen", "to use", "verb", "ich benutze · wir benutzen", "Wir benutzen Python.", "We use Python.", 12],
+    ["schwierig", "schwierig", "difficult", "adjective", "", "Das war ein bisschen schwierig.", "That was a little difficult.", 12],
+    ["zurueckrufen", "zurückrufen", "to call back", "verb", "ich rufe zurück · können Sie zurückrufen?", "Können Sie mich zurückrufen?", "Can you call me back?", 12],
+    ["nachricht", "die Nachricht", "message", "noun", "die Nachrichten", "Ich schicke Ihnen eine Nachricht.", "I will send you a message.", 12],
+    ["erreichen", "erreichen", "to reach (someone)", "verb", "ich erreiche · Sie erreichen mich", "Sie erreichen mich am Montag.", "You can reach me on Monday.", 12]
+  ],
+  "lessons": [
+    {
+      "id": "starter-ticket",
+      "goal": "Buy one ticket: say where you are going, choose single or return, and pay.",
+      "warmup": ["Eine Fahrkarte, bitte.", "A ticket, please."],
+      "wordIds": ["fahrkarte", "zug", "hinundzurueck", "kaufen", "kosten", "bitte"],
+      "patterns": [
+        ["Eine Fahrkarte nach …, bitte.", "A ticket to …, please.", "Use nach with a town: nach Köln, nach Berlin. One short sentence is enough to start."],
+        ["Einfach oder hin und zurück?", "Single or return?", "Answer with just the words you need: Hin und zurück, bitte."]
+      ],
+      "dialogues": [
+        [
+          ["Clerk", "Guten Tag! Wohin möchten Sie?", "Hello! Where would you like to go?"],
+          ["Sam", "Eine Fahrkarte nach Köln, bitte.", "A ticket to Cologne, please."],
+          ["Clerk", "Einfach oder hin und zurück?", "Single or return?"],
+          ["Sam", "Hin und zurück, bitte. Was kostet das?", "Return, please. How much is that?"],
+          ["Clerk", "Zwanzig Euro.", "Twenty euros."],
+          ["Sam", "Gut, ich bezahle mit Karte.", "Good, I will pay by card."]
+        ],
+        [
+          ["Clerk", "Guten Tag!", "Hello!"],
+          ["Sam", "Guten Tag. Eine Fahrkarte nach Berlin, bitte.", "Hello. A ticket to Berlin, please."],
+          ["Clerk", "Für heute?", "For today?"],
+          ["Sam", "Ja, für heute. Einfach, bitte.", "Yes, for today. Single, please."],
+          ["Clerk", "Das macht achtzehn Euro.", "That is eighteen euros."],
+          ["Sam", "Danke!", "Thank you!"]
+        ]
+      ],
+      "practice": [
+        ["Ask for a ticket to a town you choose.", "Wohin möchten Sie?", "Where would you like to go?", "Eine Fahrkarte nach Köln, bitte.", "A ticket to Cologne, please."],
+        ["Choose single or return.", "Einfach oder hin und zurück?", "Single or return?", "Hin und zurück, bitte.", "Return, please."],
+        ["Ask what it costs.", "Noch etwas?", "Anything else?", "Was kostet das?", "How much does that cost?"]
+      ],
+      "variations": [
+        ["The ticket is for tomorrow, not today. Say so.", "Für heute?", "For today?", "Nein, für morgen, bitte.", "No, for tomorrow, please."],
+        ["Buy two tickets instead of one.", "Wie viele Fahrkarten?", "How many tickets?", "Zwei Fahrkarten nach Köln, bitte.", "Two tickets to Cologne, please."]
+      ]
+    },
+    {
+      "id": "starter-platform",
+      "goal": "Find where your train or bus leaves and check the platform or stop.",
+      "warmup": ["Von welchem Gleis?", "From which platform?"],
+      "wordIds": ["gleis", "welcher", "bus", "haltestelle", "wo", "zug"],
+      "patterns": [
+        ["Von welchem Gleis fährt der Zug?", "Which platform does the train leave from?", "Learn this as one useful question. The short form Welches Gleis? also works."],
+        ["Wo ist die Haltestelle?", "Where is the stop?", "Use wo for a place. Repeat the answer back to check it: Gleis drei?"]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Entschuldigung, von welchem Gleis fährt der Zug nach Köln?", "Excuse me, which platform does the train to Cologne leave from?"],
+          ["Staff", "Von Gleis drei.", "From platform three."],
+          ["Sam", "Gleis drei?", "Platform three?"],
+          ["Staff", "Ja, genau. Die Treppe ist rechts.", "Yes, exactly. The stairs are on the right."],
+          ["Sam", "Danke!", "Thank you!"]
+        ],
+        [
+          ["Sam", "Entschuldigung, wo ist die Haltestelle?", "Excuse me, where is the stop?"],
+          ["Passer-by", "Gehen Sie geradeaus. Die Haltestelle ist links.", "Go straight ahead. The stop is on the left."],
+          ["Sam", "Welcher Bus fährt zum Bahnhof?", "Which bus goes to the station?"],
+          ["Passer-by", "Der Bus nummer fünf.", "Bus number five."],
+          ["Sam", "Danke schön!", "Thank you very much!"]
+        ]
+      ],
+      "practice": [
+        ["Ask which platform your train leaves from.", "Kann ich Ihnen helfen?", "Can I help you?", "Von welchem Gleis fährt der Zug?", "Which platform does the train leave from?"],
+        ["Check the platform you heard.", "Von Gleis drei.", "From platform three.", "Gleis drei?", "Platform three?"],
+        ["Ask where the stop is.", "Sie suchen den Bus.", "You are looking for the bus.", "Wo ist die Haltestelle?", "Where is the stop?"]
+      ],
+      "variations": [
+        ["Ask which bus goes to the university.", "Welchen Bus brauchen Sie?", "Which bus do you need?", "Welcher Bus fährt zur Universität?", "Which bus goes to the university?"],
+        ["You did not hear the platform. Ask again politely.", "Von Gleis sieben.", "From platform seven.", "Entschuldigung, bitte noch einmal.", "Excuse me, once more, please."]
+      ]
+    },
+    {
+      "id": "starter-connection",
+      "goal": "Ask when the next train leaves, whether you must change, and in which direction.",
+      "warmup": ["Wann fährt der nächste Zug?", "When does the next train leave?"],
+      "wordIds": ["naechste", "abfahren", "umsteigen", "fahren", "wann", "richtung"],
+      "patterns": [
+        ["Wann fährt der nächste Zug?", "When does the next train leave?", "Use nächste for the next one. For a bus: der nächste Bus."],
+        ["Muss ich umsteigen?", "Do I have to change?", "umsteigen splits in a normal sentence: Ich steige in Köln um. After muss it stays at the end."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Wann fährt der nächste Zug nach Bonn?", "Hello. When does the next train to Bonn leave?"],
+          ["Staff", "Um vierzehn Uhr. Er fährt von Gleis zwei ab.", "At 2 p.m. It departs from platform two."],
+          ["Sam", "Muss ich umsteigen?", "Do I have to change?"],
+          ["Staff", "Ja, in Köln.", "Yes, in Cologne."],
+          ["Sam", "Danke. Dann warte ich hier.", "Thank you. Then I will wait here."]
+        ],
+        [
+          ["Sam", "Entschuldigung, fährt dieser Bus in Richtung Bahnhof?", "Excuse me, does this bus go in the direction of the station?"],
+          ["Driver", "Nein, in die andere Richtung.", "No, in the other direction."],
+          ["Sam", "Wann fährt der nächste Bus zum Bahnhof?", "When does the next bus to the station leave?"],
+          ["Driver", "In zehn Minuten, von der Haltestelle dort.", "In ten minutes, from the stop over there."],
+          ["Sam", "Vielen Dank!", "Many thanks!"]
+        ]
+      ],
+      "practice": [
+        ["Ask when the next train leaves.", "Kann ich helfen?", "Can I help?", "Wann fährt der nächste Zug?", "When does the next train leave?"],
+        ["Ask whether you need to change.", "Der Zug fährt um vierzehn Uhr.", "The train leaves at 2 p.m.", "Muss ich umsteigen?", "Do I have to change?"],
+        ["Check the direction of a bus.", "Dieser Bus fährt gleich ab.", "This bus is leaving shortly.", "Fährt dieser Bus in Richtung Bahnhof?", "Does this bus go towards the station?"]
+      ],
+      "variations": [
+        ["Ask where you have to change.", "Ja, Sie müssen umsteigen.", "Yes, you have to change.", "Wo muss ich umsteigen?", "Where do I have to change?"],
+        ["Ask when the train arrives, not when it leaves.", "Der Zug fährt um zehn Uhr ab.", "The train departs at ten o'clock.", "Wann kommt der Zug an?", "When does the train arrive?"]
+      ]
+    },
+    {
+      "id": "starter-delay",
+      "goal": "Say that you are delayed, give a short reason, and say when you will arrive.",
+      "warmup": ["Ich komme später.", "I will come later."],
+      "wordIds": ["verspaetung", "minute", "warten", "puenktlich", "ankommen", "spaeter"],
+      "patterns": [
+        ["Ich komme zehn Minuten später.", "I will arrive ten minutes later.", "Give the number of minutes. This is clearer than a long explanation."],
+        ["Der Zug hat Verspätung.", "The train is delayed.", "Verspätung haben is the normal way to say something is late. For yourself, use Ich bin spät."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Hallo Lea, ich komme später.", "Hello Lea, I will come later."],
+          ["Lea", "Kein Problem. Wie viel später?", "No problem. How much later?"],
+          ["Sam", "Zehn Minuten. Der Zug hat Verspätung.", "Ten minutes. The train is delayed."],
+          ["Lea", "Gut, ich warte im Café.", "Okay, I will wait in the café."],
+          ["Sam", "Danke! Bis gleich.", "Thank you! See you shortly."]
+        ],
+        [
+          ["Lea", "Bist du schon da?", "Are you there already?"],
+          ["Sam", "Nein, tut mir leid. Mein Bus hat Verspätung.", "No, I am sorry. My bus is delayed."],
+          ["Lea", "Wann kommst du an?", "When will you arrive?"],
+          ["Sam", "Um halb drei. Normalerweise bin ich pünktlich.", "At half past two. I am normally on time."],
+          ["Lea", "Alles gut, bis später!", "It is all fine, see you later!"]
+        ]
+      ],
+      "practice": [
+        ["Tell a friend you will be a little late.", "Bist du schon da?", "Are you there already?", "Ich komme zehn Minuten später.", "I will come ten minutes later."],
+        ["Give the reason in one short sentence.", "Warum kommst du später?", "Why are you coming later?", "Der Zug hat Verspätung.", "The train is delayed."],
+        ["Say when you will arrive.", "Wann kommst du an?", "When will you arrive?", "Ich komme um drei Uhr an.", "I will arrive at three o'clock."]
+      ],
+      "variations": [
+        ["Your bus is delayed instead of your train.", "Was ist passiert?", "What happened?", "Mein Bus hat Verspätung.", "My bus is delayed."],
+        ["Tell a colleague politely at work, using Sie.", "Guten Morgen, alles in Ordnung?", "Good morning, is everything all right?", "Entschuldigung, ich komme zehn Minuten später.", "Sorry, I will come ten minutes later."]
+      ]
+    },
+    {
+      "id": "starter-size",
+      "goal": "Ask for a size, ask to try something on, and say whether it fits.",
+      "warmup": ["Haben Sie das in M?", "Do you have that in M?"],
+      "wordIds": ["groesse", "hemd", "anprobieren", "passen", "klein", "gross"],
+      "patterns": [
+        ["Haben Sie das in Größe …?", "Do you have that in size …?", "German shops use S, M, L and numbers. Point at the item and say das."],
+        ["Es ist zu klein. / Es passt gut.", "It is too small. / It fits well.", "zu plus an adjective means too: zu klein, zu groß, zu teuer."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Entschuldigung, haben Sie das Hemd in Größe M?", "Excuse me, do you have this shirt in size M?"],
+          ["Assistant", "Ja, hier bitte.", "Yes, here you are."],
+          ["Sam", "Kann ich das anprobieren?", "Can I try it on?"],
+          ["Assistant", "Natürlich. Die Kabine ist dort.", "Of course. The changing room is over there."],
+          ["Sam", "Danke. Es passt gut.", "Thank you. It fits well."]
+        ],
+        [
+          ["Assistant", "Kann ich Ihnen helfen?", "Can I help you?"],
+          ["Sam", "Ja, bitte. Haben Sie die Jacke in L?", "Yes, please. Do you have the jacket in L?"],
+          ["Assistant", "Einen Moment… hier.", "One moment… here."],
+          ["Sam", "Danke. Leider ist sie zu klein.", "Thank you. Unfortunately it is too small."],
+          ["Assistant", "Ich bringe Ihnen Größe XL.", "I will bring you size XL."]
+        ]
+      ],
+      "practice": [
+        ["Ask for your own size.", "Kann ich Ihnen helfen?", "Can I help you?", "Haben Sie das in Größe M?", "Do you have that in size M?"],
+        ["Ask to try it on.", "Hier ist Ihre Größe.", "Here is your size.", "Kann ich das anprobieren?", "Can I try it on?"],
+        ["Say that it does not fit.", "Und, passt es?", "So, does it fit?", "Nein, es ist zu klein.", "No, it is too small."]
+      ],
+      "variations": [
+        ["This time the item fits. Say so and finish politely.", "Passt das Hemd?", "Does the shirt fit?", "Ja, es passt gut. Ich nehme es.", "Yes, it fits well. I will take it."],
+        ["Ask for a bigger size after trying it.", "Es ist zu klein?", "It is too small?", "Ja, haben Sie das eine Größe größer?", "Yes, do you have that one size bigger?"]
+      ]
+    },
+    {
+      "id": "starter-compare",
+      "goal": "Compare two items, say which you prefer, and give one simple reason.",
+      "warmup": ["Welches ist besser?", "Which one is better?"],
+      "wordIds": ["vergleichen", "besser", "teuer", "billig", "jacke", "farbe"],
+      "patterns": [
+        ["Diese Jacke ist besser.", "This jacket is better.", "Use diese for the one in front of you. besser is the comparison of gut."],
+        ["Die blaue ist billiger, aber die schwarze gefällt mir.", "The blue one is cheaper, but I like the black one.", "aber joins two short ideas. You can also compare with teurer (more expensive)."]
+      ],
+      "dialogues": [
+        [
+          ["Assistant", "Wir haben zwei Jacken in Ihrer Größe.", "We have two jackets in your size."],
+          ["Sam", "Ich vergleiche gern. Was kosten sie?", "I would like to compare. How much are they?"],
+          ["Assistant", "Diese kostet vierzig Euro, die andere sechzig.", "This one costs forty euros, the other one sixty."],
+          ["Sam", "Die erste ist billiger. Welche Farbe haben Sie noch?", "The first one is cheaper. Which other colours do you have?"],
+          ["Assistant", "Schwarz und blau.", "Black and blue."],
+          ["Sam", "Dann nehme ich die blaue. Sie ist besser.", "Then I will take the blue one. It is better."]
+        ],
+        [
+          ["Lea", "Welches Hemd findest du besser?", "Which shirt do you think is better?"],
+          ["Sam", "Das weiße ist schön, aber zu teuer.", "The white one is nice, but too expensive."],
+          ["Lea", "Und das blaue?", "And the blue one?"],
+          ["Sam", "Das blaue ist billiger und die Farbe ist gut.", "The blue one is cheaper and the colour is good."],
+          ["Lea", "Dann nimm das blaue.", "Then take the blue one."]
+        ]
+      ],
+      "practice": [
+        ["Say which of two items is better.", "Welche Jacke ist besser?", "Which jacket is better?", "Diese Jacke ist besser.", "This jacket is better."],
+        ["Say that something is too expensive.", "Diese kostet sechzig Euro.", "This one costs sixty euros.", "Das ist zu teuer.", "That is too expensive."],
+        ["Ask about other colours.", "Wir haben mehrere Farben.", "We have several colours.", "Welche Farben haben Sie?", "Which colours do you have?"]
+      ],
+      "variations": [
+        ["Give a reason with aber.", "Warum nimmst du die blaue?", "Why are you taking the blue one?", "Sie ist billiger, aber die Farbe ist auch gut.", "It is cheaper, but the colour is also good."],
+        ["A friend asks your opinion between two phones.", "Welches Handy ist besser?", "Which phone is better?", "Dieses ist besser. Es ist nicht so teuer.", "This one is better. It is not so expensive."]
+      ]
+    },
+    {
+      "id": "starter-return",
+      "goal": "Return or exchange something, give a short reason, and show your receipt.",
+      "warmup": ["Ich möchte das zurückgeben.", "I would like to return this."],
+      "wordIds": ["zurueckgeben", "umtauschen", "kassenbon", "moechten", "bitte"],
+      "patterns": [
+        ["Ich möchte das zurückgeben.", "I would like to return this.", "zurückgeben splits in a normal sentence: Ich gebe das Hemd zurück. After möchte it stays at the end."],
+        ["Kann ich das umtauschen?", "Can I exchange this?", "Returning gets your money back; umtauschen swaps it for something else."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Ich möchte das Hemd zurückgeben.", "Hello. I would like to return this shirt."],
+          ["Assistant", "Haben Sie den Kassenbon?", "Do you have the receipt?"],
+          ["Sam", "Ja, hier bitte.", "Yes, here you are."],
+          ["Assistant", "Warum geben Sie es zurück?", "Why are you returning it?"],
+          ["Sam", "Es ist zu klein.", "It is too small."],
+          ["Assistant", "Kein Problem.", "No problem."]
+        ],
+        [
+          ["Sam", "Entschuldigung, kann ich die Jacke umtauschen?", "Excuse me, can I exchange the jacket?"],
+          ["Assistant", "Natürlich. Ist etwas kaputt?", "Of course. Is something broken?"],
+          ["Sam", "Nein, sie ist zu groß.", "No, it is too big."],
+          ["Assistant", "Welche Größe brauchen Sie?", "Which size do you need?"],
+          ["Sam", "Größe M, bitte.", "Size M, please."]
+        ]
+      ],
+      "practice": [
+        ["Say that you would like to return something.", "Guten Tag, kann ich helfen?", "Hello, can I help?", "Ich möchte das zurückgeben.", "I would like to return this."],
+        ["Give a short reason.", "Warum möchten Sie es zurückgeben?", "Why would you like to return it?", "Es ist zu klein.", "It is too small."],
+        ["Say that you have the receipt.", "Haben Sie den Kassenbon?", "Do you have the receipt?", "Ja, hier ist der Kassenbon.", "Yes, here is the receipt."]
+      ],
+      "variations": [
+        ["Ask to exchange instead of return.", "Möchten Sie das Geld zurück?", "Would you like the money back?", "Nein, kann ich das umtauschen?", "No, can I exchange this?"],
+        ["You do not have the receipt. Say so politely.", "Haben Sie den Kassenbon?", "Do you have the receipt?", "Nein, tut mir leid. Ist das ein Problem?", "No, I am sorry. Is that a problem?"]
+      ]
+    },
+    {
+      "id": "starter-parcel",
+      "goal": "Collect or send a parcel, and give the information the counter asks for.",
+      "warmup": ["Ich möchte ein Paket abholen.", "I would like to collect a parcel."],
+      "wordIds": ["paket", "abholen", "verschicken", "post", "nummer", "bezahlen"],
+      "patterns": [
+        ["Ich möchte ein Paket abholen.", "I would like to collect a parcel.", "abholen is for picking something up; verschicken is for sending it off."],
+        ["Meine Nummer ist …", "My number is …", "Read numbers slowly, in pairs if that helps. Ask Noch einmal, bitte? if you need the question repeated."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Ich möchte ein Paket abholen.", "Hello. I would like to collect a parcel."],
+          ["Staff", "Haben Sie die Nummer?", "Do you have the number?"],
+          ["Sam", "Ja, die Nummer ist 24 85.", "Yes, the number is 24 85."],
+          ["Staff", "Und Ihren Namen, bitte.", "And your name, please."],
+          ["Sam", "Sam Meyer. M – E – Y – E – R.", "Sam Meyer. M – E – Y – E – R."],
+          ["Staff", "Einen Moment, bitte.", "One moment, please."]
+        ],
+        [
+          ["Sam", "Guten Tag. Ich möchte dieses Paket verschicken.", "Hello. I would like to send this parcel."],
+          ["Staff", "Nach Deutschland?", "Within Germany?"],
+          ["Sam", "Ja, nach Berlin. Was kostet das?", "Yes, to Berlin. How much does that cost?"],
+          ["Staff", "Fünf Euro fünfzig.", "Five euros fifty."],
+          ["Sam", "Gut, ich bezahle bar.", "Good, I will pay cash."]
+        ]
+      ],
+      "practice": [
+        ["Say that you want to collect a parcel.", "Guten Tag, was möchten Sie?", "Hello, what would you like?", "Ich möchte ein Paket abholen.", "I would like to collect a parcel."],
+        ["Give a number clearly.", "Haben Sie die Nummer?", "Do you have the number?", "Ja, die Nummer ist 24 85.", "Yes, the number is 24 85."],
+        ["Ask the price of sending it.", "Sie möchten das Paket verschicken?", "You would like to send the parcel?", "Ja. Was kostet das?", "Yes. How much does that cost?"]
+      ],
+      "variations": [
+        ["Send the parcel rather than collect it.", "Abholen oder verschicken?", "Collecting or sending?", "Ich möchte das Paket verschicken.", "I would like to send the parcel."],
+        ["The counter asks for identification. Offer your name and address.", "Haben Sie einen Ausweis?", "Do you have identification?", "Ja. Mein Name ist Sam Meyer.", "Yes. My name is Sam Meyer."]
+      ]
+    },
+    {
+      "id": "starter-contact-details",
+      "goal": "Give your address, postcode, and phone number clearly enough to be written down.",
+      "warmup": ["Meine Adresse ist …", "My address is …"],
+      "wordIds": ["adresse", "hausnummer", "postleitzahl", "telefonnummer", "buchstabieren", "wohnen"],
+      "patterns": [
+        ["Meine Adresse ist … , Hausnummer …", "My address is …, house number …", "German order is street then number: Lindenstraße 4. Say the street, then the number."],
+        ["Meine Telefonnummer ist …", "My phone number is …", "Say digits in small groups and pause. If asked, spell the street: L – I – N – D – E – N."]
+      ],
+      "dialogues": [
+        [
+          ["Clerk", "Wie ist Ihre Adresse?", "What is your address?"],
+          ["Sam", "Lindenstraße vier.", "Lindenstraße four."],
+          ["Clerk", "Können Sie das buchstabieren?", "Can you spell that?"],
+          ["Sam", "L – I – N – D – E – N. Hausnummer vier.", "L – I – N – D – E – N. House number four."],
+          ["Clerk", "Und die Postleitzahl?", "And the postcode?"],
+          ["Sam", "50667.", "50667."]
+        ],
+        [
+          ["Clerk", "Wie können wir Sie erreichen?", "How can we reach you?"],
+          ["Sam", "Meine Telefonnummer ist 0221 55 44.", "My phone number is 0221 55 44."],
+          ["Clerk", "0221 55 44. Ist das richtig?", "0221 55 44. Is that correct?"],
+          ["Sam", "Ja, genau.", "Yes, exactly."],
+          ["Clerk", "Danke schön.", "Thank you."]
+        ]
+      ],
+      "practice": [
+        ["Give your street and house number.", "Wie ist Ihre Adresse?", "What is your address?", "Lindenstraße vier.", "Lindenstraße four."],
+        ["Give a postcode.", "Und die Postleitzahl?", "And the postcode?", "50667.", "50667."],
+        ["Give a phone number slowly.", "Wie ist Ihre Telefonnummer?", "What is your phone number?", "Meine Telefonnummer ist 0221 55 44.", "My phone number is 0221 55 44."]
+      ],
+      "variations": [
+        ["Spell your street name when asked.", "Können Sie die Straße buchstabieren?", "Can you spell the street?", "L – I – N – D – E – N.", "L – I – N – D – E – N."],
+        ["Confirm a number that was read back wrongly.", "0221 55 43?", "0221 55 43?", "Nein, 55 44.", "No, 55 44."]
+      ]
+    },
+    {
+      "id": "starter-room-ask",
+      "goal": "Ask whether a room is still available, how much the rent is, and how big it is.",
+      "warmup": ["Ist das Zimmer noch frei?", "Is the room still available?"],
+      "wordIds": ["zimmer", "wohnung", "miete", "frei", "kosten", "gross"],
+      "patterns": [
+        ["Ist das Zimmer noch frei?", "Is the room still available?", "noch frei means still free. The same question works for a Wohnung (flat)."],
+        ["Wie hoch ist die Miete?", "How much is the rent?", "Rent uses wie hoch (how high). For things in a shop you still use Was kostet …?"]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Ist das Zimmer noch frei?", "Hello. Is the room still available?"],
+          ["Landlord", "Ja, es ist noch frei.", "Yes, it is still available."],
+          ["Sam", "Wie hoch ist die Miete?", "How much is the rent?"],
+          ["Landlord", "Dreihundertfünfzig Euro.", "Three hundred and fifty euros."],
+          ["Sam", "Und wie groß ist das Zimmer?", "And how big is the room?"],
+          ["Landlord", "Achtzehn Quadratmeter.", "Eighteen square metres."]
+        ],
+        [
+          ["Sam", "Guten Tag, ich suche ein Zimmer.", "Hello, I am looking for a room."],
+          ["Landlord", "Für wann brauchen Sie es?", "From when do you need it?"],
+          ["Sam", "Ab Oktober. Ist die Wohnung noch frei?", "From October. Is the flat still available?"],
+          ["Landlord", "Ja. Die Miete ist vierhundert Euro.", "Yes. The rent is four hundred euros."],
+          ["Sam", "Danke für die Information.", "Thank you for the information."]
+        ]
+      ],
+      "practice": [
+        ["Ask whether the room is still available.", "Guten Tag!", "Hello!", "Ist das Zimmer noch frei?", "Is the room still available?"],
+        ["Ask about the rent.", "Ja, es ist frei.", "Yes, it is available.", "Wie hoch ist die Miete?", "How much is the rent?"],
+        ["Ask how big it is.", "Haben Sie noch eine Frage?", "Do you have another question?", "Wie groß ist das Zimmer?", "How big is the room?"]
+      ],
+      "variations": [
+        ["Say from when you need the room.", "Ab wann brauchen Sie das Zimmer?", "From when do you need the room?", "Ab Oktober, bitte.", "From October, please."],
+        ["Ask about a flat instead of a single room.", "Suchen Sie ein Zimmer?", "Are you looking for a room?", "Ich suche eine kleine Wohnung.", "I am looking for a small flat."]
+      ]
+    },
+    {
+      "id": "starter-viewing",
+      "goal": "Arrange a time to view a room and confirm the appointment.",
+      "warmup": ["Wann kann ich das Zimmer sehen?", "When can I see the room?"],
+      "wordIds": ["besichtigen", "anmelden", "termin", "wann", "moechten"],
+      "patterns": [
+        ["Kann ich das Zimmer besichtigen?", "Can I view the room?", "besichtigen is the usual word for viewing a room or flat. After kann it goes to the end."],
+        ["Passt Freitag um fünf Uhr?", "Does Friday at five work?", "Offer one concrete day and time. Confirm by repeating it at the end."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Kann ich das Zimmer besichtigen?", "Hello. Can I view the room?"],
+          ["Landlord", "Ja, gern. Wann haben Sie Zeit?", "Yes, gladly. When do you have time?"],
+          ["Sam", "Passt Freitag um fünf Uhr?", "Does Friday at five work?"],
+          ["Landlord", "Freitag ist gut.", "Friday is good."],
+          ["Sam", "Also Freitag um fünf Uhr. Danke!", "So Friday at five o'clock. Thank you!"]
+        ],
+        [
+          ["Landlord", "Möchten Sie einen Termin?", "Would you like an appointment?"],
+          ["Sam", "Ja, bitte. Geht es am Montag?", "Yes, please. Does Monday work?"],
+          ["Landlord", "Montag um vier Uhr?", "Monday at four o'clock?"],
+          ["Sam", "Ja, das passt gut.", "Yes, that works well."],
+          ["Landlord", "Dann bis Montag.", "See you on Monday then."]
+        ]
+      ],
+      "practice": [
+        ["Ask to view the room.", "Guten Tag!", "Hello!", "Kann ich das Zimmer besichtigen?", "Can I view the room?"],
+        ["Offer a day and time.", "Wann haben Sie Zeit?", "When do you have time?", "Passt Freitag um fünf Uhr?", "Does Friday at five work?"],
+        ["Confirm the appointment.", "Montag um vier Uhr?", "Monday at four o'clock?", "Ja, Montag um vier Uhr passt.", "Yes, Monday at four o'clock works."]
+      ],
+      "variations": [
+        ["The offered time does not suit you. Suggest another.", "Passt Montag um zehn Uhr?", "Does Monday at ten work?", "Leider nicht. Geht es am Dienstag?", "Unfortunately not. Does Tuesday work?"],
+        ["Ask whether you need to register for the viewing.", "Wir haben viele Besucher.", "We have many visitors.", "Muss ich mich anmelden?", "Do I have to register?"]
+      ]
+    },
+    {
+      "id": "starter-household-problem",
+      "goal": "Report one problem at home clearly and ask for it to be repaired.",
+      "warmup": ["Die Heizung funktioniert nicht.", "The heating does not work."],
+      "wordIds": ["heizung", "funktionieren", "kaputt", "reparieren", "vermieter", "licht", "dusche"],
+      "patterns": [
+        ["Die Heizung funktioniert nicht.", "The heating does not work.", "nicht comes after the verb. You can also say Die Heizung ist kaputt."],
+        ["Können Sie das reparieren?", "Can you repair that?", "After können the action word goes last. Add wann: Wann können Sie das reparieren?"]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Die Heizung funktioniert nicht.", "Hello. The heating does not work."],
+          ["Landlord", "Seit wann?", "Since when?"],
+          ["Sam", "Seit gestern. Es ist sehr kalt.", "Since yesterday. It is very cold."],
+          ["Landlord", "Ich schicke jemanden am Montag.", "I will send someone on Monday."],
+          ["Sam", "Danke. Können Sie das bitte schnell reparieren?", "Thank you. Can you repair it quickly, please?"]
+        ],
+        [
+          ["Sam", "Hallo, das Licht im Bad ist kaputt.", "Hello, the light in the bathroom is broken."],
+          ["Landlord", "Nur das Licht?", "Only the light?"],
+          ["Sam", "Nein, die Dusche funktioniert auch nicht.", "No, the shower does not work either."],
+          ["Landlord", "Ich komme heute Abend.", "I will come this evening."],
+          ["Sam", "Gut, danke!", "Good, thank you!"]
+        ]
+      ],
+      "practice": [
+        ["Report that the heating does not work.", "Guten Tag, was ist das Problem?", "Hello, what is the problem?", "Die Heizung funktioniert nicht.", "The heating does not work."],
+        ["Ask for a repair.", "Das ist ärgerlich.", "That is annoying.", "Können Sie das reparieren?", "Can you repair that?"],
+        ["Ask when someone will come.", "Ich schicke jemanden.", "I will send someone.", "Wann kommt jemand?", "When will someone come?"]
+      ],
+      "variations": [
+        ["Report the shower instead of the heating.", "Was funktioniert nicht?", "What does not work?", "Die Dusche ist kaputt.", "The shower is broken."],
+        ["Write a short message to your landlord.", "Sie schreiben dem Vermieter.", "You are writing to the landlord.", "Guten Tag, das Licht im Bad ist kaputt.", "Hello, the light in the bathroom is broken."]
+      ]
+    },
+    {
+      "id": "starter-appointment",
+      "goal": "Book a doctor's appointment and say how soon you need it.",
+      "warmup": ["Ich brauche einen Termin.", "I need an appointment."],
+      "wordIds": ["arzt", "praxis", "termin", "dringend", "brauchen"],
+      "patterns": [
+        ["Ich brauche einen Termin.", "I need an appointment.", "One short sentence is enough to start. Add beim Arzt if you need to be specific."],
+        ["Es ist dringend.", "It is urgent.", "Use this only when it is true. Otherwise say Es ist nicht dringend."]
+      ],
+      "dialogues": [
+        [
+          ["Receptionist", "Praxis Dr. Weber, guten Tag.", "Dr Weber's practice, hello."],
+          ["Sam", "Guten Tag. Ich brauche einen Termin.", "Hello. I need an appointment."],
+          ["Receptionist", "Wann haben Sie Zeit?", "When do you have time?"],
+          ["Sam", "Am Dienstag, bitte. Es ist dringend.", "On Tuesday, please. It is urgent."],
+          ["Receptionist", "Dienstag um neun Uhr?", "Tuesday at nine o'clock?"],
+          ["Sam", "Ja, das passt. Danke!", "Yes, that works. Thank you!"]
+        ],
+        [
+          ["Receptionist", "Guten Tag, wie können wir helfen?", "Hello, how can we help?"],
+          ["Sam", "Ich möchte einen Termin beim Arzt.", "I would like an appointment with the doctor."],
+          ["Receptionist", "Sind Sie zum ersten Mal hier?", "Is this your first time here?"],
+          ["Sam", "Ja. Haben Sie etwas am Freitag?", "Yes. Do you have something on Friday?"],
+          ["Receptionist", "Freitag um elf Uhr.", "Friday at eleven o'clock."],
+          ["Sam", "Gut, Freitag um elf Uhr.", "Good, Friday at eleven o'clock."]
+        ]
+      ],
+      "practice": [
+        ["Say that you need an appointment.", "Praxis Dr. Weber, guten Tag.", "Dr Weber's practice, hello.", "Ich brauche einen Termin.", "I need an appointment."],
+        ["Give a day that works for you.", "Wann haben Sie Zeit?", "When do you have time?", "Am Dienstag, bitte.", "On Tuesday, please."],
+        ["Confirm the appointment time.", "Dienstag um neun Uhr?", "Tuesday at nine o'clock?", "Ja, Dienstag um neun Uhr.", "Yes, Tuesday at nine o'clock."]
+      ],
+      "variations": [
+        ["Say that it is not urgent.", "Ist es dringend?", "Is it urgent?", "Nein, es ist nicht dringend.", "No, it is not urgent."],
+        ["Ask for an earlier appointment.", "Wir haben erst nächste Woche Zeit.", "We only have time next week.", "Haben Sie etwas früher? Es ist dringend.", "Do you have something earlier? It is urgent."]
+      ]
+    },
+    {
+      "id": "starter-bring-when",
+      "goal": "Check what to bring to an appointment and when to arrive.",
+      "warmup": ["Was soll ich mitbringen?", "What should I bring?"],
+      "wordIds": ["versicherungskarte", "mitbringen", "frage", "wann", "bitte"],
+      "patterns": [
+        ["Was soll ich mitbringen?", "What should I bring?", "soll asks for instructions. mitbringen goes to the end after soll."],
+        ["Wann soll ich kommen?", "When should I come?", "Use the same pattern for time: Wann soll ich da sein?"]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Ich habe eine Frage. Was soll ich mitbringen?", "I have a question. What should I bring?"],
+          ["Receptionist", "Bitte bringen Sie Ihre Versicherungskarte mit.", "Please bring your insurance card."],
+          ["Sam", "Und wann soll ich kommen?", "And when should I come?"],
+          ["Receptionist", "Zehn Minuten früher.", "Ten minutes earlier."],
+          ["Sam", "Gut, danke!", "Good, thank you!"]
+        ],
+        [
+          ["Receptionist", "Ihr Termin ist am Freitag um elf Uhr.", "Your appointment is on Friday at eleven o'clock."],
+          ["Sam", "Soll ich etwas mitbringen?", "Should I bring anything?"],
+          ["Receptionist", "Nur die Versicherungskarte.", "Only the insurance card."],
+          ["Sam", "Habe ich noch eine Frage… Wo ist die Praxis?", "I have one more question… where is the practice?"],
+          ["Receptionist", "Lindenstraße zwölf, erster Stock.", "Lindenstraße twelve, first floor."]
+        ]
+      ],
+      "practice": [
+        ["Ask what to bring.", "Ihr Termin ist am Freitag.", "Your appointment is on Friday.", "Was soll ich mitbringen?", "What should I bring?"],
+        ["Ask when to arrive.", "Bringen Sie die Versicherungskarte mit.", "Bring your insurance card.", "Wann soll ich kommen?", "When should I come?"],
+        ["Say that you have one more question.", "Haben Sie alles?", "Do you have everything?", "Ich habe noch eine Frage.", "I have one more question."]
+      ],
+      "variations": [
+        ["Ask where the practice is.", "Noch etwas?", "Anything else?", "Wo ist die Praxis?", "Where is the practice?"],
+        ["Check whether you need to bring anything at all.", "Der Termin ist am Montag.", "The appointment is on Monday.", "Soll ich etwas mitbringen?", "Should I bring anything?"]
+      ]
+    },
+    {
+      "id": "starter-symptoms",
+      "goal": "Say what hurts, since when, and one extra detail.",
+      "warmup": ["Mein Hals tut weh.", "My throat hurts."],
+      "wordIds": ["krank", "wehtun", "hals", "kopf", "bauch", "fieber", "husten"],
+      "patterns": [
+        ["Mein … tut weh.", "My … hurts.", "Use mein Hals, mein Kopf, mein Bauch. For several places: Meine Beine tun weh."],
+        ["Ich habe Fieber / Husten.", "I have a fever / a cough.", "With haben you do not need an article here. Ich bin krank is a useful general sentence."]
+      ],
+      "dialogues": [
+        [
+          ["Doctor", "Guten Tag. Was fehlt Ihnen?", "Hello. What is wrong?"],
+          ["Sam", "Mein Hals tut weh und ich habe Husten.", "My throat hurts and I have a cough."],
+          ["Doctor", "Seit wann?", "Since when?"],
+          ["Sam", "Seit drei Tagen.", "For three days."],
+          ["Doctor", "Haben Sie Fieber?", "Do you have a fever?"],
+          ["Sam", "Ja, ein bisschen.", "Yes, a little."]
+        ],
+        [
+          ["Doctor", "Wie geht es Ihnen?", "How are you?"],
+          ["Sam", "Nicht gut. Ich bin krank.", "Not good. I am ill."],
+          ["Doctor", "Was tut weh?", "What hurts?"],
+          ["Sam", "Mein Kopf und mein Bauch.", "My head and my stomach."],
+          ["Doctor", "Seit gestern?", "Since yesterday?"],
+          ["Sam", "Ja, seit gestern.", "Yes, since yesterday."]
+        ]
+      ],
+      "practice": [
+        ["Say what hurts.", "Was fehlt Ihnen?", "What is wrong?", "Mein Hals tut weh.", "My throat hurts."],
+        ["Say since when.", "Seit wann?", "Since when?", "Seit drei Tagen.", "For three days."],
+        ["Answer about fever.", "Haben Sie Fieber?", "Do you have a fever?", "Ja, ich habe Fieber.", "Yes, I have a fever."]
+      ],
+      "variations": [
+        ["Your stomach hurts instead of your throat.", "Was tut weh?", "What hurts?", "Mein Bauch tut weh.", "My stomach hurts."],
+        ["Tell a colleague you are ill, informally.", "Alles gut bei dir?", "Is everything okay with you?", "Nein, ich bin krank.", "No, I am ill."]
+      ]
+    },
+    {
+      "id": "starter-pharmacy",
+      "goal": "Ask for something for a symptom, check how to take it, and ask the price.",
+      "warmup": ["Haben Sie etwas dagegen?", "Do you have something for that?"],
+      "wordIds": ["apotheke", "medikament", "tablette", "gesund", "kosten"],
+      "patterns": [
+        ["Haben Sie etwas gegen Husten?", "Do you have something for a cough?", "gegen means against. Replace the symptom: gegen Kopfschmerzen, gegen Fieber."],
+        ["Wie oft soll ich das nehmen?", "How often should I take it?", "Ask this before leaving. Useful answers: einmal / zweimal am Tag."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag. Haben Sie etwas gegen Husten?", "Hello. Do you have something for a cough?"],
+          ["Pharmacist", "Ja, diese Tabletten helfen gut.", "Yes, these tablets help well."],
+          ["Sam", "Wie oft soll ich das nehmen?", "How often should I take it?"],
+          ["Pharmacist", "Zweimal am Tag.", "Twice a day."],
+          ["Sam", "Was kostet das Medikament?", "How much does the medicine cost?"],
+          ["Pharmacist", "Acht Euro.", "Eight euros."]
+        ],
+        [
+          ["Sam", "Entschuldigung, ich habe Kopfschmerzen.", "Excuse me, I have a headache."],
+          ["Pharmacist", "Haben Sie auch Fieber?", "Do you also have a fever?"],
+          ["Sam", "Nein, nur Kopfschmerzen.", "No, only a headache."],
+          ["Pharmacist", "Dann nehmen Sie diese Tabletten.", "Then take these tablets."],
+          ["Sam", "Danke. Dann bin ich hoffentlich bald wieder gesund.", "Thank you. Then I will hopefully be healthy again soon."]
+        ]
+      ],
+      "practice": [
+        ["Ask for something for a cough.", "Guten Tag, was brauchen Sie?", "Hello, what do you need?", "Haben Sie etwas gegen Husten?", "Do you have something for a cough?"],
+        ["Ask how often to take it.", "Diese Tabletten helfen gut.", "These tablets help well.", "Wie oft soll ich das nehmen?", "How often should I take it?"],
+        ["Ask the price.", "Sonst noch etwas?", "Anything else?", "Was kostet das Medikament?", "How much does the medicine cost?"]
+      ],
+      "variations": [
+        ["Ask for something for a headache.", "Was brauchen Sie?", "What do you need?", "Haben Sie etwas gegen Kopfschmerzen?", "Do you have something for a headache?"],
+        ["Ask whether you need a prescription.", "Dieses Medikament ist stärker.", "This medicine is stronger.", "Brauche ich ein Rezept?", "Do I need a prescription?"]
+      ]
+    },
+    {
+      "id": "starter-family",
+      "goal": "Say who is in your family, where they live, and ask the same back.",
+      "warmup": ["Ich habe einen Bruder.", "I have a brother."],
+      "wordIds": ["familie", "bruder", "schwester", "eltern", "wohnen"],
+      "patterns": [
+        ["Ich habe einen Bruder / eine Schwester.", "I have a brother / a sister.", "einen with Bruder, eine with Schwester. For none: Ich habe keine Geschwister."],
+        ["Meine Eltern wohnen in …", "My parents live in …", "Eltern is always plural, so the verb is wohnen. Use your real situation."]
+      ],
+      "dialogues": [
+        [
+          ["Lea", "Hast du Geschwister?", "Do you have siblings?"],
+          ["Sam", "Ja, ich habe einen Bruder.", "Yes, I have a brother."],
+          ["Lea", "Wohnt er auch hier?", "Does he live here too?"],
+          ["Sam", "Nein, meine Familie wohnt in Indien.", "No, my family lives in India."],
+          ["Lea", "Und deine Eltern?", "And your parents?"],
+          ["Sam", "Meine Eltern wohnen auch dort.", "My parents live there too."]
+        ],
+        [
+          ["Lea", "Erzähl mir von deiner Familie.", "Tell me about your family."],
+          ["Sam", "Ich habe eine Schwester. Sie studiert auch.", "I have a sister. She is studying too."],
+          ["Lea", "Was studiert sie?", "What does she study?"],
+          ["Sam", "Biologie. Und du? Hast du Geschwister?", "Biology. And you? Do you have siblings?"],
+          ["Lea", "Ja, zwei Brüder.", "Yes, two brothers."]
+        ]
+      ],
+      "practice": [
+        ["Say who is in your family.", "Hast du Geschwister?", "Do you have siblings?", "Ich habe einen Bruder.", "I have a brother."],
+        ["Say where your family lives.", "Wohnt deine Familie hier?", "Does your family live here?", "Meine Familie wohnt in Indien.", "My family lives in India."],
+        ["Ask the question back.", "Das ist interessant.", "That is interesting.", "Und du? Hast du Geschwister?", "And you? Do you have siblings?"]
+      ],
+      "variations": [
+        ["You have no siblings. Say so.", "Hast du Geschwister?", "Do you have siblings?", "Nein, ich habe keine Geschwister.", "No, I do not have any siblings."],
+        ["Say one extra detail about a sibling.", "Was macht dein Bruder?", "What does your brother do?", "Mein Bruder arbeitet in Delhi.", "My brother works in Delhi."]
+      ]
+    },
+    {
+      "id": "starter-suggest",
+      "goal": "Suggest an activity, propose a time, and agree on where to meet.",
+      "warmup": ["Wollen wir ins Kino gehen?", "Shall we go to the cinema?"],
+      "wordIds": ["wollen", "kino", "film", "cafe", "abend", "mitkommen"],
+      "patterns": [
+        ["Wollen wir … gehen?", "Shall we go …?", "Wollen wir is a friendly suggestion. ins Kino, ins Café, in den Park."],
+        ["Heute Abend oder morgen?", "This evening or tomorrow?", "Offer two options so the answer is easy. heute Abend = this evening."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Wollen wir ins Kino gehen?", "Shall we go to the cinema?"],
+          ["Lea", "Gute Idee! Welcher Film?", "Good idea! Which film?"],
+          ["Sam", "Der neue Film um acht Uhr.", "The new film at eight o'clock."],
+          ["Lea", "Heute Abend oder morgen?", "This evening or tomorrow?"],
+          ["Sam", "Heute Abend. Kommst du mit?", "This evening. Are you coming along?"],
+          ["Lea", "Ja, gern!", "Yes, gladly!"]
+        ],
+        [
+          ["Sam", "Hast du morgen Zeit? Wollen wir ins Café gehen?", "Do you have time tomorrow? Shall we go to a café?"],
+          ["Lea", "Ja, gern. Wann?", "Yes, gladly. When?"],
+          ["Sam", "Um vier Uhr?", "At four o'clock?"],
+          ["Lea", "Gut. Wo treffen wir uns?", "Good. Where shall we meet?"],
+          ["Sam", "Am Bahnhof.", "At the station."]
+        ]
+      ],
+      "practice": [
+        ["Suggest going somewhere together.", "Was machen wir heute?", "What are we doing today?", "Wollen wir ins Kino gehen?", "Shall we go to the cinema?"],
+        ["Offer a time.", "Gute Idee! Wann?", "Good idea! When?", "Heute Abend um acht Uhr.", "This evening at eight o'clock."],
+        ["Agree where to meet.", "Wo treffen wir uns?", "Where shall we meet?", "Am Bahnhof.", "At the station."]
+      ],
+      "variations": [
+        ["Suggest a café instead of the cinema.", "Was wollen wir machen?", "What shall we do?", "Wollen wir ins Café gehen?", "Shall we go to a café?"],
+        ["Invite a second friend along.", "Kim hat auch Zeit.", "Kim has time too.", "Super, kommt Kim mit?", "Great, is Kim coming along?"]
+      ]
+    },
+    {
+      "id": "starter-decline",
+      "goal": "Say no kindly, give a short reason, and offer another time.",
+      "warmup": ["Heute passt es nicht.", "Today does not work."],
+      "wordIds": ["tutmirleid", "vielleicht", "passen", "leider", "spaeter"],
+      "patterns": [
+        ["Tut mir leid, heute passt es nicht.", "I am sorry, today does not work.", "Two short pieces: the apology, then the fact. You do not need a long explanation."],
+        ["Vielleicht am Samstag?", "Maybe on Saturday?", "Always offer an alternative. vielleicht keeps it friendly and open."]
+      ],
+      "dialogues": [
+        [
+          ["Lea", "Wollen wir heute ins Kino gehen?", "Shall we go to the cinema today?"],
+          ["Sam", "Tut mir leid, heute passt es nicht.", "I am sorry, today does not work."],
+          ["Lea", "Kein Problem. Wann hast du Zeit?", "No problem. When do you have time?"],
+          ["Sam", "Vielleicht am Samstag?", "Maybe on Saturday?"],
+          ["Lea", "Samstag ist gut.", "Saturday is good."]
+        ],
+        [
+          ["Lea", "Kommst du um sechs Uhr mit?", "Will you come along at six o'clock?"],
+          ["Sam", "Leider nicht. Ich habe einen Termin.", "Unfortunately not. I have an appointment."],
+          ["Lea", "Und später?", "And later?"],
+          ["Sam", "Später geht es. Um acht Uhr?", "Later works. At eight o'clock?"],
+          ["Lea", "Perfekt.", "Perfect."]
+        ]
+      ],
+      "practice": [
+        ["Decline politely.", "Wollen wir heute ins Kino gehen?", "Shall we go to the cinema today?", "Tut mir leid, heute passt es nicht.", "I am sorry, today does not work."],
+        ["Give a short reason.", "Warum nicht?", "Why not?", "Ich habe einen Termin.", "I have an appointment."],
+        ["Offer another day.", "Wann hast du Zeit?", "When do you have time?", "Vielleicht am Samstag?", "Maybe on Saturday?"]
+      ],
+      "variations": [
+        ["You can come, but later. Say so.", "Kommst du um sechs Uhr?", "Are you coming at six o'clock?", "Später geht es. Um acht Uhr?", "Later works. At eight o'clock?"],
+        ["Decline politely at work, using Sie.", "Können Sie heute länger bleiben?", "Can you stay longer today?", "Tut mir leid, heute geht es leider nicht.", "I am sorry, unfortunately today does not work."]
+      ]
+    },
+    {
+      "id": "starter-yesterday",
+      "goal": "Say what you did yesterday in two or three short sentences.",
+      "warmup": ["Gestern war ich im Park.", "Yesterday I was in the park."],
+      "wordIds": ["gestern", "sein", "gehen", "spass", "schoen", "machen"],
+      "patterns": [
+        ["Gestern war ich …", "Yesterday I was …", "war is the past of bin. Starting with Gestern puts the verb next: Gestern war ich müde."],
+        ["Ich habe … gemacht. / Ich bin … gegangen.", "I did … / I went …", "Most verbs use habe plus a participle at the end. Movement verbs use bin: Ich bin ins Kino gegangen."]
+      ],
+      "dialogues": [
+        [
+          ["Lea", "Was hast du gestern gemacht?", "What did you do yesterday?"],
+          ["Sam", "Ich bin ins Kino gegangen.", "I went to the cinema."],
+          ["Lea", "Wie war der Film?", "How was the film?"],
+          ["Sam", "Sehr gut. Das hat Spaß gemacht.", "Very good. That was fun."],
+          ["Lea", "Schön!", "Nice!"]
+        ],
+        [
+          ["Lea", "Und am Wochenende?", "And at the weekend?"],
+          ["Sam", "Am Samstag war ich im Park.", "On Saturday I was in the park."],
+          ["Lea", "Mit wem?", "With whom?"],
+          ["Sam", "Mit einem Freund. Es war ein schöner Tag.", "With a friend. It was a nice day."],
+          ["Lea", "Das klingt gut.", "That sounds good."]
+        ]
+      ],
+      "practice": [
+        ["Say where you were yesterday.", "Was hast du gestern gemacht?", "What did you do yesterday?", "Gestern war ich im Park.", "Yesterday I was in the park."],
+        ["Say one thing you did.", "Und am Abend?", "And in the evening?", "Ich bin ins Kino gegangen.", "I went to the cinema."],
+        ["Give a short opinion about it.", "Wie war es?", "How was it?", "Es war schön. Das hat Spaß gemacht.", "It was nice. That was fun."]
+      ],
+      "variations": [
+        ["Talk about last Saturday instead of yesterday.", "Was hast du am Samstag gemacht?", "What did you do on Saturday?", "Am Samstag war ich im Café.", "On Saturday I was in a café."],
+        ["Say that yesterday was quiet, and why.", "War es interessant?", "Was it interesting?", "Nein, ich war müde. Ich war zu Hause.", "No, I was tired. I was at home."]
+      ]
+    },
+    {
+      "id": "starter-course-deadline",
+      "goal": "Ask when a lecture is, when the deadline is, and confirm what matters.",
+      "warmup": ["Wann ist die Abgabe?", "When is the deadline?"],
+      "wordIds": ["abgabe", "vorlesung", "pruefung", "wichtig", "wann", "frage"],
+      "patterns": [
+        ["Wann ist die Abgabe?", "When is the deadline?", "The same pattern works for die Prüfung and die Vorlesung."],
+        ["Ist das wichtig für die Prüfung?", "Is that important for the exam?", "A useful question in any course. für means for."]
+      ],
+      "dialogues": [
+        [
+          ["Sam", "Guten Tag, ich habe eine Frage. Wann ist die Abgabe?", "Hello, I have a question. When is the deadline?"],
+          ["Lecturer", "Am Freitag um achtzehn Uhr.", "On Friday at 6 p.m."],
+          ["Sam", "Und wann ist die Prüfung?", "And when is the exam?"],
+          ["Lecturer", "In zwei Wochen.", "In two weeks."],
+          ["Sam", "Ist die Abgabe wichtig für die Prüfung?", "Is the deadline important for the exam?"],
+          ["Lecturer", "Ja, sehr wichtig.", "Yes, very important."]
+        ],
+        [
+          ["Sam", "Entschuldigung, wann beginnt die Vorlesung?", "Excuse me, when does the lecture start?"],
+          ["Classmate", "Um zehn Uhr, in Raum zwölf.", "At ten o'clock, in room twelve."],
+          ["Sam", "Danke. Ist die Vorlesung wichtig?", "Thank you. Is the lecture important?"],
+          ["Classmate", "Ja, die Prüfung kommt daraus.", "Yes, the exam comes from it."],
+          ["Sam", "Gut, dann komme ich.", "Good, then I will come."]
+        ]
+      ],
+      "practice": [
+        ["Ask when the deadline is.", "Haben Sie eine Frage?", "Do you have a question?", "Wann ist die Abgabe?", "When is the deadline?"],
+        ["Ask when the lecture starts.", "Noch eine Frage?", "Another question?", "Wann beginnt die Vorlesung?", "When does the lecture start?"],
+        ["Check whether something matters for the exam.", "Das ist Thema vier.", "That is topic four.", "Ist das wichtig für die Prüfung?", "Is that important for the exam?"]
+      ],
+      "variations": [
+        ["Ask a classmate informally instead.", "Hast du eine Frage?", "Do you have a question?", "Wann ist die Abgabe?", "When is the deadline?"],
+        ["Ask whether the deadline can be extended.", "Die Abgabe ist am Freitag.", "The deadline is on Friday.", "Ist später auch möglich?", "Is later also possible?"]
+      ]
+    },
+    {
+      "id": "starter-absence",
+      "goal": "Explain that you were away or ill, apologise briefly, and say what you will do.",
+      "warmup": ["Ich war krank.", "I was ill."],
+      "wordIds": ["absagen", "bescheid", "moeglich", "krank", "leider"],
+      "patterns": [
+        ["Leider war ich krank.", "Unfortunately I was ill.", "war is the past of bin. Starting with Leider keeps the verb next."],
+        ["Ich sage Ihnen Bescheid.", "I will let you know.", "Bescheid sagen is a fixed expression. Use Ihnen with Sie and dir with du."]
+      ],
+      "dialogues": [
+        [
+          ["Lecturer", "Sie waren letzte Woche nicht da.", "You were not here last week."],
+          ["Sam", "Leider war ich krank.", "Unfortunately I was ill."],
+          ["Lecturer", "Geht es Ihnen wieder gut?", "Are you well again?"],
+          ["Sam", "Ja, danke. Ist die Abgabe später möglich?", "Yes, thank you. Is the deadline possible later?"],
+          ["Lecturer", "Schicken Sie mir eine Nachricht.", "Send me a message."],
+          ["Sam", "Gut, ich sage Ihnen Bescheid.", "Good, I will let you know."]
+        ],
+        [
+          ["Lea", "Du warst gestern nicht im Kurs.", "You were not in the class yesterday."],
+          ["Sam", "Nein, ich war beim Arzt. Ich musste absagen.", "No, I was at the doctor. I had to cancel."],
+          ["Lea", "Alles okay?", "Is everything okay?"],
+          ["Sam", "Ja, jetzt geht es wieder.", "Yes, it is fine again now."],
+          ["Lea", "Gut. Ich schicke dir meine Notizen.", "Good. I will send you my notes."]
+        ]
+      ],
+      "practice": [
+        ["Explain that you were ill.", "Sie waren nicht da.", "You were not here.", "Leider war ich krank.", "Unfortunately I was ill."],
+        ["Ask whether a later deadline is possible.", "Die Abgabe war am Freitag.", "The deadline was on Friday.", "Ist später auch möglich?", "Is later also possible?"],
+        ["Say that you will let them know.", "Schicken Sie mir eine Nachricht.", "Send me a message.", "Gut, ich sage Ihnen Bescheid.", "Good, I will let you know."]
+      ],
+      "variations": [
+        ["You have to cancel a shift today. Tell your colleague.", "Kommst du heute?", "Are you coming today?", "Tut mir leid, ich muss heute absagen.", "I am sorry, I have to cancel today."],
+        ["Explain an absence informally to a classmate.", "Wo warst du gestern?", "Where were you yesterday?", "Ich war krank. Jetzt geht es wieder.", "I was ill. It is fine again now."]
+      ]
+    },
+    {
+      "id": "starter-project",
+      "goal": "Describe one small project: what it was, what you used, and one difficulty.",
+      "warmup": ["Ich habe eine App gebaut.", "I built an app."],
+      "wordIds": ["projekt", "programmieren", "app", "bauen", "benutzen", "schwierig"],
+      "patterns": [
+        ["Ich habe … gebaut / programmiert.", "I built / programmed …", "Use habe plus the participle at the end: Ich habe eine App gebaut."],
+        ["Wir haben Python benutzt.", "We used Python.", "Name the real tools you used. For a team project use wir."]
+      ],
+      "dialogues": [
+        [
+          ["Interviewer", "Erzählen Sie von einem Projekt.", "Tell me about a project."],
+          ["Sam", "Ich habe eine kleine App gebaut.", "I built a small app."],
+          ["Interviewer", "Was macht die App?", "What does the app do?"],
+          ["Sam", "Sie zeigt Vokabeln. Ich habe Python benutzt.", "It shows vocabulary. I used Python."],
+          ["Interviewer", "War das schwierig?", "Was that difficult?"],
+          ["Sam", "Ein Teil war schwierig, aber es hat funktioniert.", "One part was difficult, but it worked."]
+        ],
+        [
+          ["Lea", "Was hast du im Studium gemacht?", "What did you do during your studies?"],
+          ["Sam", "Wir haben zusammen eine Website gebaut.", "We built a website together."],
+          ["Lea", "Wie viele Leute?", "How many people?"],
+          ["Sam", "Drei. Ich habe programmiert.", "Three. I did the programming."],
+          ["Lea", "Und was war schwierig?", "And what was difficult?"],
+          ["Sam", "Die Zeit war schwierig.", "The time was difficult."]
+        ]
+      ],
+      "practice": [
+        ["Say what you built or made.", "Erzählen Sie von einem Projekt.", "Tell me about a project.", "Ich habe eine kleine App gebaut.", "I built a small app."],
+        ["Say what you used.", "Was haben Sie benutzt?", "What did you use?", "Ich habe Python benutzt.", "I used Python."],
+        ["Name one difficulty honestly.", "War etwas schwierig?", "Was anything difficult?", "Ja, ein Teil war schwierig.", "Yes, one part was difficult."]
+      ],
+      "variations": [
+        ["Describe a team project with wir.", "Waren Sie allein?", "Were you alone?", "Nein, wir haben zusammen gearbeitet.", "No, we worked together."],
+        ["Describe a university project rather than code.", "Was war Ihr Projekt?", "What was your project?", "Ich habe eine Präsentation gemacht.", "I made a presentation."]
+      ]
+    },
+    {
+      "id": "starter-callback",
+      "goal": "Leave a short message: your name, why you are calling, and how to reach you.",
+      "warmup": ["Können Sie mich zurückrufen?", "Can you call me back?"],
+      "wordIds": ["zurueckrufen", "nachricht", "erreichen", "telefonnummer", "bitte"],
+      "patterns": [
+        ["Hier ist … Ich rufe wegen … an.", "This is … I am calling about …", "Start with your name. wegen means about: wegen dem Termin, wegen der Stelle."],
+        ["Sie erreichen mich unter …", "You can reach me on …", "Give your number slowly, then repeat it once."]
+      ],
+      "dialogues": [
+        [
+          ["Voicemail", "Sie sprechen mit der Mailbox von Firma Nord.", "You have reached the voicemail of Firma Nord."],
+          ["Sam", "Guten Tag, hier ist Sam Meyer.", "Hello, this is Sam Meyer."],
+          ["Sam", "Ich rufe wegen der Werkstudentenstelle an.", "I am calling about the working-student job."],
+          ["Sam", "Können Sie mich bitte zurückrufen?", "Can you call me back, please?"],
+          ["Sam", "Sie erreichen mich unter 0221 55 44. Danke!", "You can reach me on 0221 55 44. Thank you!"]
+        ],
+        [
+          ["Colleague", "Firma Nord, guten Tag.", "Firma Nord, hello."],
+          ["Sam", "Guten Tag, hier ist Sam Meyer. Ist Frau Weber da?", "Hello, this is Sam Meyer. Is Ms Weber there?"],
+          ["Colleague", "Nein, sie ist erst morgen wieder da.", "No, she is only back tomorrow."],
+          ["Sam", "Kann ich eine Nachricht hinterlassen?", "Can I leave a message?"],
+          ["Colleague", "Natürlich.", "Of course."],
+          ["Sam", "Bitte sagen Sie ihr, sie kann mich morgen erreichen.", "Please tell her she can reach me tomorrow."]
+        ]
+      ],
+      "practice": [
+        ["Say who you are.", "Sie sprechen mit der Mailbox.", "You have reached the voicemail.", "Guten Tag, hier ist Sam Meyer.", "Hello, this is Sam Meyer."],
+        ["Ask for a call back.", "Was möchten Sie?", "What would you like?", "Können Sie mich bitte zurückrufen?", "Can you call me back, please?"],
+        ["Give your number.", "Wie erreichen wir Sie?", "How can we reach you?", "Sie erreichen mich unter 0221 55 44.", "You can reach me on 0221 55 44."]
+      ],
+      "variations": [
+        ["Ask to leave a message with a colleague.", "Frau Weber ist nicht da.", "Ms Weber is not here.", "Kann ich eine Nachricht hinterlassen?", "Can I leave a message?"],
+        ["Say when you are reachable.", "Wann können wir anrufen?", "When can we call?", "Sie erreichen mich am Montag.", "You can reach me on Monday."]
+      ]
+    }
+  ]
+}

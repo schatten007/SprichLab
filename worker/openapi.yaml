@@ -1,0 +1,289 @@
+openapi: 3.1.0
+info:
+  title: Sprich Private AI Gateway
+  version: 1.0.0
+  license: { name: UNLICENSED, identifier: LicenseRef-Proprietary }
+  description: |
+    Single-owner gateway for short German practice conversations. Provider keys are
+    server-side. Mutation requests require a same-origin Origin header. No endpoint
+    changes provider billing. Use only a separately verified Free Groq account.
+servers:
+  - url: /api/v1
+security:
+  - OwnerSession: []
+tags:
+  - name: Connection
+    description: Owner authentication and configuration status.
+  - name: Practice
+    description: Bounded generation requests and recoverable receipts.
+paths:
+  /status:
+    get:
+      operationId: connectionStatus
+      tags: [Connection]
+      security: []
+      summary: Inspect configuration without exposing secrets or calling a model
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '405': { $ref: '#/components/responses/Problem' }
+        '500': { $ref: '#/components/responses/Problem' }
+  /session:
+    post:
+      operationId: createOwnerSession
+      tags: [Connection]
+      security: []
+      summary: Exchange the generated owner access code for an HttpOnly cookie
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [token]
+              properties:
+                token: { type: string, minLength: 43, maxLength: 43, writeOnly: true, description: Generated high-entropy owner access code. }
+      responses:
+        '200':
+          description: A signed owner session cookie was issued.
+          headers:
+            Set-Cookie:
+              schema: { type: string }
+              description: HttpOnly, SameSite=Strict, Secure outside localhost.
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Envelope' }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+    delete:
+      operationId: deleteOwnerSession
+      tags: [Connection]
+      summary: Clear the owner session cookie
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '403': { $ref: '#/components/responses/Problem' }
+  /capabilities:
+    get:
+      operationId: inspectProviderCapabilities
+      tags: [Connection]
+      summary: Check configured Groq model availability without generating content
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+  /usage:
+    get:
+      operationId: appUsage
+      tags: [Connection]
+      summary: Return this gateway's UTC-day counters and configured limits
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '401': { $ref: '#/components/responses/Problem' }
+  /turns:
+    post:
+      operationId: createConversationTurn
+      tags: [Practice]
+      summary: Transcribe an optional clip and generate one contextual reply
+      description: |
+        Use the same requestId only for unchanged retries. Duplicate completed
+        requests return their receipt. A changed payload with the same ID returns 409.
+        Audio is at most 60 seconds / 1.5 MB. No raw audio is persisted by the gateway.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TurnInput' }
+          multipart/form-data:
+            schema:
+              type: object
+              required: [metadata, audio]
+              properties:
+                metadata: { type: string, description: JSON-encoded TurnInput with empty text and a positive recordingMs. }
+                audio:
+                  type: string
+                  format: binary
+                  description: WebM, M4A, WAV, MP3 or OGG, under 1.5 MB.
+      responses:
+        '200':
+          description: Validated reply or an unclear-input result.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data: { $ref: '#/components/schemas/TurnResult' }
+                  meta: { type: object, additionalProperties: true }
+        '202': { $ref: '#/components/responses/Pending' }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '409': { $ref: '#/components/responses/Problem' }
+        '413': { $ref: '#/components/responses/Problem' }
+        '415': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+        '504': { $ref: '#/components/responses/Problem' }
+  /reviews:
+    post:
+      operationId: createConversationReview
+      tags: [Practice]
+      summary: Produce a brief review grounded in at least two learner responses
+      description: Quotes are checked against the supplied learner history. AI suggestions never award mastery automatically.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/TurnInput' }
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '202': { $ref: '#/components/responses/Pending' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '409': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+        '504': { $ref: '#/components/responses/Problem' }
+  /requests/{requestId}:
+    get:
+      operationId: retrieveRequestReceipt
+      tags: [Practice]
+      summary: Recover a result without submitting another generation
+      parameters:
+        - in: path
+          name: requestId
+          required: true
+          schema: { type: string, maxLength: 160 }
+      responses:
+        '200': { $ref: '#/components/responses/Success' }
+        '202': { $ref: '#/components/responses/Pending' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '409': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+  /speech:
+    post:
+      operationId: createNaturalSpeech
+      tags: [Practice]
+      summary: Generate optional speech only after confirming an ElevenLabs Free account
+      description: |
+        JSON input, binary audio output. The account must explicitly report tier=free,
+        can_extend_character_limit=false, and enough remaining credits. Application
+        caps are 1500 characters per UTC day and 8000 per calendar month. Paid or
+        unverifiable tiers are rejected. The browser caches audio locally and falls
+        back to its German device voice on failure.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text: { type: string, minLength: 1, maxLength: 800 }
+      responses:
+        '200':
+          description: Audio to cache and replay locally.
+          content:
+            audio/mpeg: { schema: { type: string, format: binary } }
+            audio/mp3: { schema: { type: string, format: binary } }
+            audio/wav: { schema: { type: string, format: binary } }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '409': { $ref: '#/components/responses/Problem' }
+        '413': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+        '504': { $ref: '#/components/responses/Problem' }
+components:
+  securitySchemes:
+    OwnerSession: { type: apiKey, in: cookie, name: sprich_ai_session }
+  schemas:
+    Envelope:
+      type: object
+      required: [data, meta]
+      properties:
+        data: { type: object, additionalProperties: true }
+        meta: { type: object, additionalProperties: true }
+    TurnInput:
+      type: object
+      required: [requestId, sessionId, missionId, operation, level, profile, text, opening, history, recordingMs]
+      properties:
+        requestId: { type: string, maxLength: 160 }
+        sessionId: { type: string, maxLength: 160 }
+        missionId: { type: string, example: first-interview }
+        operation: { type: string, enum: [reply, rephrase, hint] }
+        level: { type: string, enum: [A2, B1] }
+        profile: { type: object, additionalProperties: { type: string, maxLength: 500 }, description: Only selected name/studies/experience/availability/start/motivation fields; 1800 characters total. }
+        text: { type: string, maxLength: 3000 }
+        opening: { type: string, maxLength: 1200 }
+        history:
+          type: array
+          maxItems: 12
+          description: At most 8000 characters across all entries. Review requests contain actual learner exchanges only.
+          items:
+            type: object
+            required: [user, assistant]
+            properties:
+              user: { type: string, maxLength: 3000 }
+              assistant: { type: string, maxLength: 1500 }
+        recordingMs: { type: number, minimum: 0, maximum: 60000 }
+    TurnResult:
+      type: object
+      required: [requestId, sessionId, inputStatus, transcript, model, promptVersion, testMode]
+      properties:
+        requestId: { type: string }
+        sessionId: { type: string }
+        inputStatus: { type: string, enum: [clear, unclear] }
+        transcript: { type: string }
+        reply:
+          type: object
+          required: [replyDe, meaningEn, action]
+          properties:
+            replyDe: { type: string }
+            meaningEn: { type: string }
+            action: { type: string, enum: [question, clarify, acknowledge, finish] }
+        model: { type: string }
+        promptVersion: { type: string }
+        testMode: { type: boolean }
+        usage: { type: object, additionalProperties: { type: number } }
+    Problem:
+      type: object
+      required: [type, title, status, detail, code, requestId, retryAfterSeconds]
+      properties:
+        type: { type: string, format: uri, example: 'urn:sprich:problem:provider_quota' }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        code: { type: string }
+        requestId: { type: string }
+        retryAfterSeconds: { type: integer, minimum: 0 }
+  responses:
+    Success:
+      description: Successful request.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Envelope' }
+    Pending:
+      description: The same request is still running. Retrieve its receipt instead of generating again.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Envelope' }
+    Problem:
+      description: Actionable error; no provider secret or raw upstream response is included.
+      headers:
+        Retry-After: { schema: { type: integer }, description: Optional cooldown in seconds. }
+      content:
+        application/problem+json:
+          schema: { $ref: '#/components/schemas/Problem' }

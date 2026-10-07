@@ -1,0 +1,30 @@
+{
+  "name": "sprich-werkstudent-german",
+  "version": "2.3.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": "^22.13.0 || >=24.0.0" },
+  "scripts": {
+    "dev": "vite --host localhost --port 8080 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "lint": "eslint .",
+    "test": "node --test \"tests/*.test.js\"",
+    "test:e2e": "playwright test",
+    "check:resources": "node tools/check-resources.js",
+    "check:openapi": "redocly lint worker/openapi.yaml",
+    "ai:access": "node tools/create-ai-access.js",
+    "ai:gateway": "node tools/gateway-dev.js",
+    "ai:gateway:test": "node tools/gateway-dev.js --test",
+    "deploy:check": "wrangler deploy --dry-run --outdir .local/wrangler-dry-run"
+  },
+  "dependencies": { "idb": "8.0.3" },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@redocly/cli": "2.57.0",
+    "eslint": "10.11.0",
+    "fake-indexeddb": "6.2.5",
+    "vite": "8.3.2",
+    "wrangler": "4.147.0"
+  }
+}
