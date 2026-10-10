@@ -29,7 +29,7 @@ export default defineConfig({
     },
     {
       command: 'npm run ai:gateway:test',
-      url: 'http://127.0.0.1:8787/api/v1/status',
+      url: `http://127.0.0.1:${process.env.AI_GATEWAY_PORT || 8787}/api/v1/status`,
       reuseExistingServer: !process.env.CI,
       timeout: 30_000,
     },

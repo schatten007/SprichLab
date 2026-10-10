@@ -62,7 +62,7 @@
   .inline-form .btn { width: 100%; }
   .stack-row { flex-wrap: wrap; gap: 10px; }
   .stack-row .btn { flex: 1 1 100%; }
-  .fact-list { grid-template-columns: 1fr; gap: 3px; }
+  .fact-list { grid-template-columns: minmax(0, 1fr); gap: 3px; }
   .fact-list dd { margin-bottom: 9px; }
   .copy-box { font-size: .8rem; padding: 15px 16px; }
   .transcript-card .transcript { max-height: 45vh; }

@@ -8,7 +8,7 @@
 .transcript > div > p { margin-bottom: 12px; }
 .transcript > div > p:last-child { margin-bottom: 0; }
 .listening-questions legend + .meaning { margin-top: 0; }
-.daily-layout { grid-template-columns: 1.45fr 1fr; }
+.daily-layout { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); }
 .daily-layout > .stack { align-content: start; }
 .daily-focus-label { font-size: .78rem; margin-bottom: 18px; }
 .daily-focus-label select { font-size: .82rem; }
@@ -38,7 +38,7 @@
 .mission-german-title { font-size: .79rem; color: var(--muted); margin-bottom: 0; }
 .mission-card .meaning { margin-top: 0; }
 .mission-card .mission-goal { border-top: 0; margin-top: 12px; padding-top: 0; color: var(--ink); }
-.resource-filter-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr .85fr; gap: 16px; }
+.resource-filter-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, .85fr); gap: 16px; }
 .resource-filter-grid > label { min-width: 0; font-size: .78rem; }
 .resource-filter-grid select, .resource-filter-grid input { font-size: .8rem; }
 .resource-checks { display: flex; flex-wrap: wrap; gap: 10px 23px; margin-top: 14px; }
@@ -77,7 +77,7 @@
 .alternative-list small { display: block; }
 .alternative-list .btn { flex: 0 0 auto; }
 .resource-workspace { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 22px; align-items: start; }
-.resource-workspace .personal-phrase-form .form-grid { grid-template-columns: 1fr; }
+.resource-workspace .personal-phrase-form .form-grid { grid-template-columns: minmax(0, 1fr); }
 .resource-workspace h2 { margin-bottom: 13px; }
 .resource-workspace .personal-phrase-form label { font-size: .77rem; }
 .personal-phrase-form { margin-top: 20px; }
@@ -88,7 +88,7 @@
 .outside-time .field-hint { display: block; }
 .phrase-add > summary { font-size: .93rem; }
 .phrase-source { margin-bottom: 18px; overflow-wrap: anywhere; }
-.resource-progress { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin: 20px 0; }
+.resource-progress { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; margin: 20px 0; }
 .resource-progress strong { display: block; font-size: 1.7rem; font-weight: 600; }
 .resource-progress span { display: block; color: var(--muted); font-size: .76rem; }
 .takeaway { border-left: 3px solid var(--brand); margin: 20px 0 0; padding: 8px 16px; background: var(--surface-soft); border-radius: 0 10px 10px 0; }
@@ -97,24 +97,24 @@
 
 @media (max-width: 1200px) {
   .curriculum-strip { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .resource-filter-grid { grid-template-columns: 1fr 1fr; }
-  .resource-workspace { grid-template-columns: 1fr; }
-  .resource-workspace > aside { grid-template-columns: 1fr 1fr; }
+  .resource-filter-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .resource-workspace { grid-template-columns: minmax(0, 1fr); }
+  .resource-workspace > aside { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 }
 @media (max-width: 1000px) {
-  .daily-layout { grid-template-columns: 1fr; }
+  .daily-layout { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 760px) {
   .meaning > summary { min-height: 38px; padding-top: 7px; font-size: .78rem; }
   .meaning > div { font-size: .83rem; }
   .lesson-copy > p { font-size: .91rem; }
-  .curriculum-strip { grid-template-columns: 1fr 1fr; }
+  .curriculum-strip { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
   .stage-card { min-height: 135px; }
   .stage-card > strong { font-size: .86rem; }
   .mission-filter { display: block; }
   .mission-filter label { display: block; }
   .mission-filter p { margin-top: 10px; }
-  .resource-catalog-grid, .resource-filter-grid, .resource-workspace > aside, .resource-progress { grid-template-columns: 1fr; }
+  .resource-catalog-grid, .resource-filter-grid, .resource-workspace > aside, .resource-progress { grid-template-columns: minmax(0, 1fr); }
   .resource-filter-grid select, .resource-filter-grid input { font-size: 16px; }
   .resource-checks { display: block; }
   .catalog-card .btn { align-self: stretch; }

@@ -47,7 +47,7 @@ export function render(el, ctx) {
     const button = event.target.closest('[data-bookmark]');
     if (!button || button.disabled) return;
     button.disabled = true;
-    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); draw(); }
+    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); const id = button.dataset.bookmark; draw(); [...el.querySelectorAll('[data-bookmark]')].find(item => item.dataset.bookmark === id)?.focus(); }
     catch (error) { ctx.error(error.message); button.disabled = false; }
   });
   draw();
@@ -173,7 +173,7 @@ export async function renderActivity(el, ctx, sessionId) {
       ${locked ? `<div class="callout"><strong>Practice response saved.</strong><p>This is unscored practice. ${draft.recordingMs ? `${duration(draft.recordingMs)} of recording was saved.` : 'Your written response is saved.'}</p></div>
         <div class="btn-row section-gap"><button class="btn" id="continue-mission">Practise the matching mission ${icon('arrow')}</button><a class="btn secondary" href="#today">Back to Today</a></div>` : `
         <label class="outside-time">Minutes studied on the publisher’s site (optional)<input type="number" id="outside-minutes" min="0" max="120" step="1" value="${draft.externalMinutes}" aria-describedby="outside-time-error"><span class="field-hint">Self-reported, kept out of the measured timer.</span></label>
-        <p class="callout error small" id="outside-time-error" role="status" hidden>Use a whole number from 0 to 120 minutes.</p>
+         <p class="callout error small" id="outside-time-error" role="alert" hidden>Use a whole number from 0 to 120 minutes.</p>
         <p class="fine">Save a recording or a written response to finish.</p>
         <button class="btn" id="finish-resource">Save response &amp; complete activity ${icon('check')}</button>`}</section>
       <aside class="stack"><section class="card"><p class="eyebrow">A SHORT WORKFLOW</p><ol class="guided-steps" lang="de">${resource.stepsDe.map(step => `<li>${esc(step)}</li>`).join('')}</ol>${englishMeaning(resource.stepsEn.join('\n'), { always })}

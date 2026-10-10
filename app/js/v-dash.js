@@ -27,7 +27,7 @@ export async function render(el, ctx) {
   const heroDescription = session?.kind === 'review' ? 'Recall your phrases, compare with a model, and choose an honest rating.' : session?.kind === 'resource' ? 'Return to the source activity and save your own German response.' : mission.subtitle;
   el.innerHTML = `
     <div class="dashboard-heading"><div><p class="eyebrow">${esc(new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', timeZone: state.preferences.timeZone }))}</p>
-      <h1>${esc(greeting)}</h1><p class="lede">Useful German for your next interview, your next colleague, your next step.</p></div><span class="pill green">Stage ${stage.number} of 6 · your pace</span></div>
+       <h1 tabindex="-1">${esc(greeting)}</h1><p class="lede">Useful German for your next interview, your next colleague, your next step.</p></div><span class="pill green">Stage ${stage.number} of 6 · your pace</span></div>
     ${pathPicker(state)}
     ${state.legacy && !state.attempts.length ? '<div class="callout amber section-gap"><strong>A fresh, reliable baseline.</strong> Previous trainer data is preserved in your progress backup.</div>' : ''}
     <section class="hero section-gap" aria-labelledby="mission-title"><div class="hero-main"><div class="pills"><span class="pill">${session ? 'CONTINUE YOUR PRACTICE' : 'YOUR DAILY FOCUS'}</span><span class="hero-number">${mission.number} / ${MISSIONS.length}</span></div>

@@ -31,7 +31,7 @@
 .starter-first > p:not(.fine), .starter-question > p:first-child { font-size: 1.1rem; }
 .starter-first > .btn-row { margin-top: 18px; }
 .starter-hero-words { font-size: 1.5rem !important; font-weight: 600; margin-top: 23px; }
-.starter-hero { grid-template-columns: 1fr; min-height: 0; }
+.starter-hero { grid-template-columns: minmax(0, 1fr); min-height: 0; }
 .starter-hero .hero-main { padding: 24px 28px; }
 .starter-hero .hero-main > p { max-width: 64ch; }
 .starter-hero .hero-main > .eyebrow { font-size: .71rem; max-width: none; }
@@ -64,7 +64,7 @@
 .starter-progress-list small { display: block; color: var(--muted); }
 .starter-progress-list > a > span:last-child { flex-shrink: 0; }
 @media (max-width: 760px) {
-  .starter-grid { grid-template-columns: 1fr; }
+  .starter-grid { grid-template-columns: minmax(0, 1fr); }
   .starter-session-meta { align-items: flex-start; flex-direction: column; }
   .starter-question, .starter-pattern { padding: 16px; }
   .gemini-export textarea { font-size: 16px; }

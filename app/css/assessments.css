@@ -57,7 +57,7 @@
   .assessment-toolbar, .assessment-timer { align-items: flex-start; }
   .assessment-toolbar { flex-direction: column; gap: 8px; }
   .assessment-timer { align-items: center; gap: 6px 12px; }
-  .assessment-slots { grid-template-columns: 1fr; }
+  .assessment-slots { grid-template-columns: minmax(0, 1fr); }
   .assessment-question, .assessment-stimulus, .assessment-writing { padding: 18px; }
   .assessment-prompt { font-size: 1rem; }
   .assessment-support { padding: 15px; }
@@ -72,7 +72,7 @@
 .assessment-gemini textarea { font-size: .84rem; line-height: 1.6; }
 .assessment-gemini .btn-row { margin-top: 14px; }
 @media (max-width: 760px) {
-  .assessment-ratings { grid-template-columns: 1fr; }
+  .assessment-ratings { grid-template-columns: minmax(0, 1fr); }
   .assessment-gemini textarea { font-size: 16px; }
   .assessment-gemini .btn-row > .btn { flex: 1 1 100%; }
 }
