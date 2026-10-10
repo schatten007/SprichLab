@@ -13,12 +13,12 @@ import * as Progress from './v-progress.js';
 import * as Settings from './v-settings.js';
 import * as Session from './v-train1.js';
 import * as Resources from './v-resources.js';
-import * as AI from './v-ai.js';
 import * as Lessons from './v-lessons.js';
 import * as Words from './v-words.js';
 import * as Gemini from './v-gemini.js';
 import { loadCourse, starterSnapshot } from './starter-content.js';
 import { createStarterSession, createWordSession } from './starter-state.js';
+import { warmAssessmentShell } from './assessment-offline.js';
 
 const main = document.querySelector('#main');
 const toast = document.querySelector('#toast');
@@ -153,7 +153,7 @@ async function boot() {
       const route = location.hash.slice(1) || 'today';
       const nav = route === 'ai' || route.startsWith('ai/session/') ? 'ai'
         : route === 'words' || route.startsWith('word-session/') || route === 'phrases' ? 'words'
-          : route === 'practice' || route.startsWith('session/') || route.startsWith('resource') || route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
+          : route === 'practice' || route.startsWith('assessment') || route.startsWith('session/') || route.startsWith('resource') || route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
       document.querySelectorAll('[data-nav]').forEach(link => {
         if (link.dataset.nav === nav) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
@@ -166,16 +166,24 @@ async function boot() {
             ? await Resources.renderActivity(main, viewContext, id) : await Session.render(main, viewContext, id);
         }
         else if (route.startsWith('resource/')) cleanup = await Resources.renderDetail(main, viewContext, route.slice(9));
-        else if (route.startsWith('ai/session/')) cleanup = await AI.renderSession(main, viewContext, route.slice(11));
+        else if (route.startsWith('ai/session/')) cleanup = await (await import('./v-ai.js')).renderSession(main, viewContext, route.slice(11));
+        else if (route === 'ai') cleanup = await (await import('./v-ai.js')).render(main, viewContext);
         else if (route.startsWith('lesson/')) cleanup = await Lessons.renderOverview(main, viewContext, route.slice('lesson/'.length));
         else if (route.startsWith('learn/')) cleanup = await Lessons.renderSession(main, viewContext, route.slice('learn/'.length));
         else if (route.startsWith('word-session/')) cleanup = await Words.renderSession(main, viewContext, route.slice('word-session/'.length));
         else if (route.startsWith('gemini/')) cleanup = await Gemini.render(main, viewContext, route.slice('gemini/'.length));
+        else if (route === 'assessments' || route.startsWith('assessments/lesson/')) {
+          const views = await import('./v-assessments.js');
+          cleanup = await views.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));
+        }
+        else if (route.startsWith('assessment-result/')) cleanup = await (await import('./v-assessments.js')).renderResult(main, viewContext, route.slice('assessment-result/'.length));
+        else if (route.startsWith('assessment/')) cleanup = await (await import('./v-assessments.js')).renderRun(main, viewContext, route.slice('assessment/'.length));
         else {
-          const view = { today: Today, lessons: Lessons, words: Words, practice: Practice, phrases: Phrases, resources: Resources, progress: Progress, settings: Settings, ai: AI }[route] ?? Today;
+          const view = { today: Today, lessons: Lessons, words: Words, practice: Practice, phrases: Phrases, resources: Resources, progress: Progress, settings: Settings }[route] ?? Today;
           cleanup = await view.render(main, viewContext);
         }
         document.title = `${main.querySelector('h1')?.textContent ?? 'German practice'} · Sprich`;
+        if (route.startsWith('assessment') || route === 'ai' || route.startsWith('ai/session/')) void warmAssessmentShell().then(ready => { document.body.dataset.assessmentOfflineReady = String(ready); });
         if (!firstRender) main.querySelector('h1')?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: 'instant' });
         firstRender = false;

@@ -1,6 +1,6 @@
 # Sprich — Start speaking German
 
-A free German speaking trainer that runs entirely in your browser. Short lessons, 250 useful words, real workplace practice, and a one-click export you can paste into Gemini for a spoken conversation on your phone.
+A free German speaking trainer with a browser-based core. Short lessons, 250 useful words, workplace practice, checked exercises, and lesson packs for spoken conversations with Gemini on your phone.
 
 No account, no subscription, no API key needed for the core app. Your progress stays on your device.
 
@@ -48,7 +48,7 @@ A full walkthrough lives in [docs/START_SPEAKING.md](docs/START_SPEAKING.md).
 
 **Practice modes**
 - Start any lesson **Guided** (English help always visible) or with **less help** (answers hidden until you ask).
-- Record your voice, replay it, download it — recordings never leave your device.
+- Record your voice, replay it, and download it. Lesson recordings stay local; AI Talk sends a clip only when you choose Send.
 - A **Words** section with 250 entries: meanings, example sentences, audio, articles and plurals for nouns. Practise in small batches by recognition, spoken recall, or writing your own sentence.
 
 **Workplace practice**
@@ -62,7 +62,14 @@ A full walkthrough lives in [docs/START_SPEAKING.md](docs/START_SPEAKING.md).
 - 15 curated German learning resources (Nicos Weg, Easy German, Slow German, Goethe, VHS Deutsch Beruf, and more) with guided follow-up tasks.
 - Personal phrase book, bookmarks, dark mode, keyboard navigation, and progress export/import.
 
-**How practice is scored** — it isn't, really. Sprich never gives you a grammar or pronunciation grade or claims a CEFR level. It shows what you did: what you heard, what you said, what you recalled. You judge your own speaking. That's deliberate.
+**Checks and grades**
+- Open **Lessons → Checks & grades**, or choose the graded-roleplay link on a lesson.
+- **60 pilot questions** check vocabulary, grammar, reading, and constrained writing with authored answer keys. Choose practice with recorded help, or a checkpoint with answers shown afterward.
+- Four short writing tasks and graded roleplay variations use a five-part rubric. The app calculates the score from the marks and shows the evidence and corrections.
+- Every published lesson and workplace mission has two graded-roleplay variations. Use the in-app gateway or a Gemini pack, then import Gemini's report.
+- Results clearly distinguish **Checked locally**, **AI estimate**, and **Imported Gemini assessment**. They do not award a CEFR level or pronunciation score, and do not automatically add SRS mastery.
+
+Regular lesson speaking remains self-rated. The graded checks are a separate view of a specific submitted task. See [the assessment guide](docs/ASSESSMENTS.md).
 
 ---
 
@@ -77,6 +84,8 @@ Pick any lesson or workplace mission, hit **Export for Gemini**, and you get a r
 - Come back to Sprich and save one takeaway from the conversation.
 
 This needs no gateway, no API key, and no configuration.
+
+For a numerical task grade, choose **Use a graded roleplay**. The graded pack includes the target level, goals and rubric. After Live, ask Gemini for the report in text, paste it into Sprich, choose **Check report**, then **Save imported grade**. Sprich checks identities, quotations where it has the original text, and arithmetic; an imported Live report remains an external claim.
 
 ### AI Talk (optional, self-hosted)
 
@@ -111,7 +120,7 @@ npm run preview      # check it at http://127.0.0.1:4173/
 
 Upload the `dist/` folder to any free static host (GitHub Pages, Netlify, Cloudflare Pages). No server, no database, no API key.
 
-Then on Android: open the URL in Chrome → menu → **Install app**. Open **Today** once while online so the course downloads, and after that the lessons work offline.
+Then on Android: open the URL in Chrome → menu → **Install app**. Open **Today** once while online so the course downloads. Open the checks you want once too: their content and optional assessment code are cached for offline use. AI grading still needs a connection.
 
 To add AI Talk on mobile, host the app and gateway together on Cloudflare Workers Free — steps are in [the setup guide](docs/FREE_SETUP.md#4-optional-free-https-hosting-for-android).
 
@@ -119,9 +128,11 @@ To add AI Talk on mobile, host the app and gateway together on Cloudflare Worker
 
 ## Moving progress between devices
 
-**Settings → Export progress** saves everything as a JSON file: your attempts, timings, unfinished sessions, personal phrases, bookmarks, and AI takeaways. Import it on the other device.
+**Settings → Export progress** saves your attempts, timings, unfinished sessions, personal phrases, bookmarks, AI takeaways, assessment submissions and grades. Import it on the other device.
 
 Importing is safe to repeat — attempts merge by ID, so you never get double credit. Audio recordings stay on the device they were made on; download individual clips during a session if you want to keep them.
+
+Submitted assessment answers are sealed. Repeats create new attempts; conflicting submissions or unsent roleplay answers are reported during import rather than silently overwritten.
 
 One thing to remember: browser storage belongs to the exact address you're on. `localhost:8080`, `127.0.0.1:4173`, and a hosted site all have separate storage, so use export/import to move between them.
 
@@ -136,7 +147,7 @@ Every check in one go:
 ```powershell
 npm test             # unit tests
 npm run lint         # ESLint
-npm run build        # production build (150 KB gzip budget for core JS/CSS)
+npm run build        # production build (150 KiB gzip budget for initial JS/CSS)
 npm run test:e2e     # Playwright browser tests
 npm run check:openapi
 npm run deploy:check # dry-run of the Worker bundle
@@ -146,12 +157,17 @@ Browser tests run in Edge/Chromium (installed on this machine) with desktop and 
 
 Test suites cover data migration, review spacing, dates/DST, recordings, offline reloads, all 48 lessons and 250 words, every mission/dialogue combination, and the AI gateway's auth, quotas, and error contracts.
 
+Assessment checks also cover accepted German forms, partial credit, frozen submissions, cross-device conflicts, quoted evidence, shared review quotas, receipt recovery, Gemini imports, and all 120 lesson-derived roleplay variants. Provider fixtures prove the software contract, not live grading accuracy. `dist/asset-budget.json` lists initial versus on-demand assets; opening assessments or AI Talk caches the optional feature code.
+
 ### Where things live
 
 | Path | What it does |
 | --- | --- |
 | `app/data/` | Course content: missions, phrases, resources, curriculum |
 | `app/public/course/` | Versioned content packs (48 lessons, 250 words) |
+| `app/public/assessments/` | Four pilot packs: 60 keyed items, four writing tasks, four roleplays |
+| `shared/assessment-*.js` | Assessment validation, rubric definitions, scoring, hashes, and manifests |
+| `app/js/assessment-*.js` | Immutable assessment state, evidence, jobs, loaders, and Gemini protocol |
 | `app/js/` | App logic: views (`v-*.js`), storage, sessions, speech, export |
 | `shared/ai-contracts.js` | Limits and schemas shared by browser and gateway |
 | `worker/` | The optional AI gateway (routing, auth, quotas, providers) |
@@ -164,4 +180,4 @@ Test suites cover data migration, review spacing, dates/DST, recordings, offline
 - [Architecture](docs/ARCHITECTURE.md) · [Learning model](LEARNING_MODEL.md) · [Research notes](RESEARCH.md)
 - [Course release notes](docs/ITERATION_5.md) · [Resource catalog](docs/RESOURCE_CATALOG.md)
 - [AI build brief](docs/AI_BUILD_BRIEF.md) · [Iteration history](docs/ITERATION_2.md)
-
+- [Assessments and grading](docs/ASSESSMENTS.md) · [Grading architecture](docs/ASSESSMENT_IMPLEMENTATION.md)
