@@ -93,3 +93,34 @@ export function lessonCopy(german, english, options = {}) {
   if (!german) return `<p>${esc(english)}</p>`;
   return `<div class="lesson-copy"><p lang="de">${esc(german)}</p>${englishMeaning(english, options)}</div>`;
 }
+
+/**
+ * Where a number came from. Shown once beside the figure it describes, instead of
+ * repeating the same disclaimer prose on every screen. Wording matches the
+ * assessment views so one vocabulary covers the whole app.
+ */
+export const PROVENANCE = {
+  measured: 'Measured',
+  checked: 'Checked locally',
+  'self-rated': 'Self-rated',
+  reported: 'Self-reported',
+  ai: 'AI estimate',
+  external: 'Imported Gemini assessment',
+};
+
+export function provenance(kind, extra = '') {
+  const label = PROVENANCE[kind];
+  if (!label) throw new Error(`Unknown provenance: ${kind}`);
+  return `<span class="prov" data-prov="${esc(kind)}">${esc(label)}${extra ? ` · ${esc(extra)}` : ''}</span>`;
+}
+
+/** One link per screen to the single explanation, replacing repeated in-place caveats. */
+export function howLink(text = 'How progress is measured') {
+  return `<a class="inline-link how-link" href="#how">${icon('eye')}${esc(text)}</a>`;
+}
+
+/** Discrete pixel blocks: countable at a glance, unlike a smooth bar. */
+export function blockMeter(states, label) {
+  const cells = states.map(state => `<i data-on="${state === true ? 'true' : state === 'rest' ? 'rest' : 'false'}"></i>`).join('');
+  return `<div class="block-meter" role="img" aria-label="${esc(label)}">${cells}</div>`;
+}

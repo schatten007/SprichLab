@@ -22,8 +22,9 @@ const views = {
   gemini: () => import('./v-gemini.js'),
   ai: () => import('./v-ai.js'),
   assessments: () => import('./v-assessments.js'),
+  how: () => import('./v-how.js'),
 };
-const SIMPLE_ROUTES = new Set(['today', 'lessons', 'words', 'practice', 'phrases', 'resources', 'progress', 'settings']);
+const SIMPLE_ROUTES = new Set(['today', 'lessons', 'words', 'practice', 'phrases', 'resources', 'progress', 'settings', 'how']);
 import { loadCourse, starterSnapshot } from './starter-content.js';
 import { createStarterSession, createWordSession } from './starter-state.js';
 import { warmAssessmentShell } from './assessment-offline.js';

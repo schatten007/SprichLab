@@ -22,7 +22,7 @@ function profileSummary(state) {
   const fields = selectedFields(state);
   if (!fields.length) return '<p class="fine">No profile facts selected yet. Open Settings and add your studies or experience so replies stay consistent with you.</p>';
   return `<dl class="fact-list">${fields.map(field => `<dt>${esc(PROFILE_LABELS[field])}</dt><dd lang="de">${esc(state.profile[field])}</dd>`).join('')}</dl>
-    <p class="fine">These profile facts accompany the answers you choose to send. The name field is excluded; names you write inside an answer or selected fact are still included.</p>`;
+    <p class="fine">Sent with the answers you choose. Your name is never added for you.</p>`;
 }
 
 function statusLine(status) {
