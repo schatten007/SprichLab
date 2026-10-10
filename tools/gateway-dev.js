@@ -5,6 +5,7 @@ import { createGateway } from '../worker/index.js';
 import { sqliteD1 } from '../worker/sqlite-adapter.js';
 import { sha256 } from '../worker/auth.js';
 import { createMockProvider, TEST_ACCESS_CODE, TEST_SESSION_SECRET } from './mock-ai-provider.js';
+import { loadLocalAssessment } from './assessment-definitions.js';
 
 const testMode = process.argv.includes('--test');
 const port = Number(process.env.AI_GATEWAY_PORT || 8787);
@@ -25,8 +26,8 @@ const env = { ...fileEnv, ...Object.fromEntries(Object.entries(process.env).filt
 let gateway;
 if (testMode) {
   Object.assign(env, { OWNER_TOKEN_HASH: await sha256(TEST_ACCESS_CODE), SESSION_SECRET: TEST_SESSION_SECRET, GROQ_API_KEY: 'test-provider-only', GROQ_FREE_TIER_CONFIRMED: 'true', ELEVENLABS_API_KEY: 'test-provider-only', ELEVENLABS_VOICE_ID: 'test-voice', AI_DAILY_TURNS: '100', AI_MINUTE_TURNS: '100', AI_DAILY_REVIEWS: '50', AI_AUTH_ATTEMPTS: '500' });
-  gateway = createGateway({ fetcher: createMockProvider().fetch, testMode: true });
-} else gateway = createGateway();
+  gateway = createGateway({ fetcher: createMockProvider().fetch, testMode: true, loadAssessmentDefinition: loadLocalAssessment });
+} else gateway = createGateway({ loadAssessmentDefinition: loadLocalAssessment });
 
 const server = createServer(async (incoming, outgoing) => {
   try {

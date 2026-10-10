@@ -26,7 +26,7 @@ export async function render(el, ctx) {
   let view = 'path';
   el.innerHTML = `${pageHeading('YOUR PATH', 'Small lessons, in a useful order.', `${course.lessons.length} lessons from first words to work conversations. Every lesson stays open — the path only suggests what comes next.`)}
     <div class="practice-toolbar"><div class="btn-row" role="tablist" aria-label="Lesson view"><button class="btn" id="view-path" role="tab" aria-selected="true">My path</button><button class="btn secondary" id="view-all" role="tab" aria-selected="false">All lessons</button></div>
-      <div class="btn-row"><a class="btn secondary" href="#words">Vocabulary ${icon('book')}</a><a class="inline-link" href="#practice">Workplace missions · A2–B1</a></div></div>
+      <div class="btn-row"><a class="btn secondary" href="#assessments">Checks &amp; grades</a><a class="btn secondary" href="#words">Vocabulary ${icon('book')}</a><a class="inline-link" href="#practice">Workplace missions · A2–B1</a></div></div>
     <section id="path-view">
       <section class="card section-gap next-lesson"><div class="card-title"><div><p class="eyebrow">RECOMMENDED NEXT · STAGE ${stageIndex + 1} OF ${stages.length}</p><h2>${esc(nextMeta.title)}</h2></div>${levelPill(nextMeta.level)}</div>
         <p lang="de" class="starter-model">${esc(nextMeta.titleDe)}</p><p>${esc(next.lesson.goal)}</p>
@@ -99,6 +99,7 @@ export async function renderOverview(el, ctx, id) {
       <div class="btn-row"><button class="btn secondary" data-say="${esc(lesson.warmup.de)}">${icon('volume')}Hear and repeat</button></div>
       ${active ? `<div class="btn-row section-gap"><a class="btn" href="#learn/${esc(active.id)}">Resume this lesson ${icon('arrow')}</a><span class="pill">${supportOf(active) === 'light' ? 'Less help' : 'Guided'}</span></div>` : `<div class="section-gap">${supportButtons(id, { guided: done ? 'Practise again · guided' : 'Start guided' })}</div>`}</section>
     ${languageFocus(lesson)}
+    <section class="card section-gap"><h2>Check what you can do</h2><p class="fine section-gap">Try a graded conversation for this lesson. Checkpoints hide answer help; supported practice records it.</p><a class="btn secondary" href="#assessments/lesson/${esc(id)}">Checks &amp; graded roleplays ${icon('arrow')}</a></section>
     <div class="section-gap" id="starter-export"></div>
     <section class="section-gap"><h2>Words you will use</h2><div class="starter-grid section-gap">${content.words.map(word => wordCard(word, { saved: starter.wordMarks.some(mark => mark.id === word.id && mark.saved) })).join('')}</div></section>
     <div class="section-gap" id="starter-takeaway"></div>`;

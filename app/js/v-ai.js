@@ -4,6 +4,8 @@ import { STARTER_LESSONS } from '../data/starter-catalog.js';
 import { geminiSource } from './v-gemini.js';
 import { mountGeminiExport } from './gemini-export.js';
 import { mountCompanionReflection } from './starter-ui.js';
+import { assessmentDefinition } from './assessment-state.js';
+import { runAssessmentJob } from './assessment-jobs.js';
 import { createRecorder } from './recorder.js';
 import { aiClient, isCancelled } from './ai-gateway.js';
 import { createAISpeech } from './ai-speech.js';
@@ -140,7 +142,7 @@ export async function renderLobby(el, ctx) {
       <div class="form-grid"><label>Situation<select id="ai-mission">${MISSIONS.map(mission => `<option value="${mission.id}">${esc(mission.shortTitle)}</option>`).join('')}</select></label>
       <label>Level<select id="ai-level">${['A2', 'B1'].map(level => `<option value="${level}" ${level === current ? 'selected' : ''}>${level} · ${level === 'A2' ? 'short, supported answers' : 'longer, more detail'}</option>`).join('')}</select></label></div>
       <p class="fine">What the partner may know about you:</p>${profileSummary(state)}
-      <div class="btn-row"><button class="btn" id="ai-start-button" ${status?.configured && status?.groqReady && status?.authenticated ? '' : 'disabled'}>Start conversation ${icon('arrow')}</button></div>`;
+      <div class="btn-row"><button class="btn" id="ai-start-button" ${status?.configured && status?.groqReady && status?.authenticated ? '' : 'disabled'}>Start conversation ${icon('arrow')}</button><a class="btn secondary" href="#assessments">Choose a graded roleplay</a></div>`;
     safeAction(el.querySelector('#ai-start-button'), async () => {
       if (!status?.authenticated || !status?.groqReady) throw new Error('Configure and unlock the private AI connection first, or use Gemini Companion below.');
       const missionId = el.querySelector('#ai-mission').value;
@@ -159,7 +161,7 @@ export async function renderLobby(el, ctx) {
       <div class="stack-list">${sessions.map(session => {
         const mission = missionById(session.missionId);
         const turns = activeAITurns(session).length;
-        return `<div class="stack-row"><span><strong>${esc(mission?.shortTitle ?? session.missionId)}</strong><small>${turns} exchanges · ${esc(session.level)} · ${session.review ? 'reviewed' : session.endedAt ? 'closed' : 'in progress'}</small></span><a class="btn secondary small-btn" href="#ai/session/${session.id}">Open ${icon('arrow')}</a></div>`;
+        return `<div class="stack-row"><span><strong>${esc(mission?.shortTitle ?? session.context.title)}</strong><small>${turns} exchanges · ${esc(session.level)} · ${session.review ? 'reviewed' : session.endedAt ? 'closed' : 'in progress'}</small></span><a class="btn secondary small-btn" href="#ai/session/${session.id}">Open ${icon('arrow')}</a></div>`;
       }).join('')}</div></section>`;
   }
 
@@ -213,21 +215,34 @@ export async function renderSession(el, ctx, id) {
   let busy = false;
   let alive = true;
 
-  const mission = missionById(session.missionId);
-  if (!mission) throw new Error('This conversation uses a mission that is no longer available.');
+  const assessed = Boolean(session.assessmentRef);
+  const checkpoint = session.assessmentRef?.mode === 'checkpoint';
+  const attemptId = session.assessmentRef?.attemptId;
+  const definition = assessed ? assessmentDefinition(ctx.store.state.assessments, ctx.store.state.assessments.attempts.find(item => item.id === attemptId)) : null;
+  const mission = missionById(session.missionId) ?? { shortTitle: session.context.title };
+  let pendingSupport = Promise.resolve();
+  const loggedTranslations = new Set((session.assessmentEvents ?? []).filter(event => event.kind === 'question_translation').map(event => event.refId));
+  const logSupport = (kind, refId) => {
+    if (!assessed || session.endedAt) return pendingSupport;
+    const event = { id: crypto.randomUUID(), kind, refId, phase: 'assessment', at: Date.now() };
+    pendingSupport = pendingSupport.then(() => ctx.store.updateAIConversation(id, item => { if (!item.endedAt) item.assessmentEvents.push(event); }));
+    return pendingSupport;
+  };
+  const meaning = value => checkpoint ? '' : englishMeaning(value, { always: always(ctx.store.state) });
   const aiSpeech = createAISpeech(ctx, client);
 
   el.innerHTML = `<a class="inline-link" href="#ai">${icon('back')}AI Talk</a>
+    ${assessed ? `${pageHeading('GRADED ROLEPLAY', session.context.title, definition.scenario.learnerTask)}<p class="fine">${checkpoint ? 'Checkpoint: answer models and English question translations are hidden.' : 'Practice: answer help and English question meanings are recorded.'} Aim for 5–8 short replies, then choose End &amp; grade. This grade is based on submitted text/transcripts, not pronunciation.</p>` : ''}
     <div id="ai-session"></div>`;
 
   function transcriptCard() {
     const turns = activeAITurns(session);
-    return `<section class="card transcript-card"><div class="card-title"><div><p class="eyebrow">${esc(mission.shortTitle)}</p><h2>${esc(session.context.title)}</h2></div><span class="pill">${esc(session.level)} · ${esc(session.context.register)}</span></div>
+    return `<section class="card transcript-card"><div class="card-title"><div><p class="eyebrow">${esc(mission.shortTitle)}</p><h2>${assessed ? 'Your conversation' : esc(session.context.title)}</h2></div><span class="pill">${esc(session.level)} · ${esc(session.context.register)}</span></div>
       <p class="fine">${esc(session.context.goal)}</p>
       <div class="transcript" role="log" aria-live="polite">
-        <div class="transcript-line assistant"><span class="transcript-who">Partner</span><p lang="de">${esc(session.context.openingDe)}</p>${englishMeaning(session.context.openingEn, { always: always(ctx.store.state) })}</div>
+        <div class="transcript-line assistant" data-evidence-ref="${session.id}:opening"><span class="transcript-who">Partner</span><p lang="de">${esc(session.context.openingDe)}</p>${meaning(session.context.openingEn)}</div>
         ${turns.map(turn => `${turn.transcript ? `<div class="transcript-line you"><span class="transcript-who">You</span><p lang="de">${esc(turn.transcript)}</p></div>` : ''}
-          <div class="transcript-line assistant"><span class="transcript-who">Partner</span><p lang="de">${esc(turn.replyDe)}</p>${englishMeaning(turn.meaningEn, { always: always(ctx.store.state) })}</div>`).join('')}
+          <div class="transcript-line assistant" data-evidence-ref="${turn.id}:partner"><span class="transcript-who">Partner</span><p lang="de">${esc(turn.replyDe)}</p>${meaning(turn.meaningEn)}</div>`).join('')}
       </div>
       ${sendError ? `<div class="callout ${session.draft.status === 'sending' ? 'amber' : 'error'}" role="alert">${esc(sendError)}</div>` : ''}
     </section>`;
@@ -237,11 +252,11 @@ export async function renderSession(el, ctx, id) {
     const draft = session.draft;
     const sending = draft.status === 'sending';
     const ended = Boolean(session.endedAt);
-    const canReview = activeAITurns(session).filter(turn => turn.operation === 'reply').length >= 2;
+    const canReview = activeAITurns(session).filter(turn => turn.operation === 'reply').length >= (assessed ? 3 : 2);
     const ready = Boolean(draft.recordingMs || draft.text.trim());
     const heading = ended ? 'Conversation finished' : busy ? 'Talking to your partner…' : sending ? 'Waiting for the reply…' : 'Answer out loud';
     return `<section class="card"><div class="card-title"><div><p class="eyebrow">YOUR TURN</p><h2>${esc(heading)}</h2></div><output id="ai-time" aria-label="Recording duration">${duration(draft.recordingMs)}</output></div>
-      ${ended ? `<p class="small">This conversation is closed so its review stays tied to these words. Start a new one to keep practising.</p><a class="btn" href="#ai">Start another conversation ${icon('arrow')}</a>`
+      ${ended ? `<p class="small">This conversation is closed so its feedback stays tied to these words.</p>${assessed ? `<a class="btn" href="#assessment-result/${attemptId}">View assessment result ${icon('arrow')}</a>` : `<a class="btn" href="#ai">Start another conversation ${icon('arrow')}</a>`}`
         : `<div class="record-controls"><button class="btn" id="ai-record">${icon('mic')}${draft.recordingMs ? 'Record again' : 'Hold a short answer'}</button>
         <button class="btn danger" id="ai-stop" hidden>${icon('stop')}Stop</button>
         <button class="btn" id="ai-send" ${sending || !ready || busy ? 'disabled' : ''}>${sending ? 'Sending…' : `${icon('arrow')}Send to partner`}</button>
@@ -252,12 +267,13 @@ export async function renderSession(el, ctx, id) {
         <details class="notes-details" ${draft.text ? 'open' : ''}><summary>Type a correction instead</summary>
           <label for="ai-text" class="fine">Use this only if recording is not possible. Typed text is never counted as speaking.</label>
           <textarea id="ai-text" maxlength="3000" placeholder="Deine Antwort …" lang="de">${esc(draft.text)}</textarea></details>
+        ${assessed && (draft.text || draft.audioKey) ? '<button class="text-button" id="discard-assessment-answer">Discard unsent answer</button>' : ''}
         <div class="btn-row ai-operations">
           <button class="btn soft" data-op="repeat">${icon('volume')}Hear it again</button>
           <button class="btn soft" data-op="slow">Slower</button>
           <button class="btn soft" data-op="rephrase">${esc(operationLabel.rephrase)}</button>
           <button class="btn soft" data-op="hint">${esc(operationLabel.hint)}</button>
-          <button class="btn secondary" id="ai-review" ${!canReview || busy ? 'disabled' : ''}>End &amp; get a review ${icon('check')}</button>
+          <button class="btn secondary" id="ai-review" ${!canReview || busy ? 'disabled' : ''}>${assessed ? 'End &amp; grade' : 'End &amp; get a review'} ${icon('check')}</button>
         </div>`}
     </section>`;
   }
@@ -321,6 +337,7 @@ export async function renderSession(el, ctx, id) {
 
   async function sendTurn(operation = 'reply') {
     if (busy || recorder.phase !== 'idle' || session.draft.status === 'sending') return;
+    if (assessed && operation !== 'reply' && (session.draft.text.trim() || session.draft.audioKey)) { sendError = 'Send or discard your current draft before requesting another question or hint.'; draw(); return; }
     busy = true; sendError = ''; draw();
     const draft = session.draft;
     const wantsAudio = operation === 'reply' && draft.recordingMs > 0 && Boolean(draft.audioKey);
@@ -362,6 +379,20 @@ export async function renderSession(el, ctx, id) {
 
   async function requestReview() {
     if (busy || recorder.phase !== 'idle' || session.draft.status === 'sending') return;
+    if (assessed) {
+      busy = true; sendError = ''; draw();
+      try {
+        await pendingSupport; await saveDraft();
+        await ctx.store.submitAssessment(attemptId);
+        session = ctx.store.state.aiSessions.find(item => item.id === id);
+        draw();
+        const job = await ctx.store.ensureAssessmentJob(attemptId);
+        try { await runAssessmentJob(ctx.store, client, job.id, { signal: ctx.signal }); }
+        finally { if (alive) ctx.go(`assessment-result/${attemptId}`); }
+      } catch (error) { if (alive && !isCancelled(error)) sendError = error.message; }
+      finally { busy = false; if (alive) draw(); }
+      return;
+    }
     busy = true; sendError = ''; draw();
     try {
       await ctx.store.updateAIConversation(id, item => { item.reviewStatus = 'sending'; item.reviewError = ''; });
@@ -393,9 +424,11 @@ export async function renderSession(el, ctx, id) {
     if (send) send.disabled = blocked || (!session.draft.recordingMs && !session.draft.text.trim());
     const text = el.querySelector('#ai-text');
     if (text) text.disabled = blocked;
-    el.querySelectorAll('[data-op]').forEach(button => { button.disabled = blocked; });
+    el.querySelectorAll('[data-op]').forEach(button => { button.disabled = blocked || checkpoint && button.dataset.op === 'hint'; });
     const review = el.querySelector('#ai-review');
-    if (review) review.disabled = blocked || activeAITurns(session).filter(turn => turn.operation === 'reply').length < 2;
+    const discard = el.querySelector('#discard-assessment-answer');
+    if (discard) discard.disabled = blocked;
+    if (review) review.disabled = blocked || activeAITurns(session).filter(turn => turn.operation === 'reply').length < (assessed ? 3 : 2);
   }
 
   function buildRecorder() {
@@ -441,15 +474,30 @@ export async function renderSession(el, ctx, id) {
     safeAction(el.querySelector('#ai-send'), () => sendTurn('reply'), ctx.error);
     safeAction(el.querySelector('#ai-recover'), () => recover(), ctx.error);
     safeAction(el.querySelector('#ai-review'), requestReview, ctx.error);
+    safeAction(el.querySelector('#discard-assessment-answer'), async () => {
+      if (busy || recorder.phase !== 'idle' || session.draft.status === 'sending') return;
+      await saveDraft({ text: '', recordingMs: 0, audioKey: '' }); draw();
+    }, ctx.error);
     el.querySelectorAll('[data-op]').forEach(button => button.addEventListener('click', async () => {
       const op = button.dataset.op;
       const last = activeAITurns(session).at(-1);
       if (op === 'repeat' || op === 'slow') {
+        await logSupport('question_repeat', last ? `${last.id}:partner` : `${session.id}:opening`);
         await aiSpeech.play(last ? last.replyDe : session.context.openingDe, button, { slow: op === 'slow' });
         return;
       }
       await sendTurn(op);
     }));
+    if (assessed && !checkpoint) el.querySelectorAll('[data-evidence-ref] .meaning').forEach(details => {
+      const recordMeaning = () => {
+        const ref = details.closest('[data-evidence-ref]').dataset.evidenceRef;
+        if (details.open && !loggedTranslations.has(ref) && !session.endedAt) {
+          loggedTranslations.add(ref);
+          void logSupport('question_translation', ref).catch(error => { if (alive) ctx.error(error.message); });
+        }
+      };
+      details.addEventListener('toggle', recordMeaning); recordMeaning();
+    });
     el.querySelector('#ai-review-replay')?.addEventListener('click', event => { void aiSpeech.play(session.review?.content.retryDe ?? '', event.currentTarget); });
     el.querySelectorAll('[data-save-phrase]').forEach(button => button.addEventListener('click', async () => {
       try {
@@ -471,6 +519,7 @@ export async function renderSession(el, ctx, id) {
     alive = false;
     aiSpeech.dispose();
     await recorder?.dispose();
+    await pendingSupport;
     document.querySelectorAll('audio').forEach(audio => audio.pause());
     if (audioUrl) URL.revokeObjectURL(audioUrl);
   };

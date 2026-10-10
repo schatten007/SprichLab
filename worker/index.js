@@ -5,6 +5,9 @@ import { APIError, problem, errorResponse, restoreError } from './errors.js';
 import { RequestLedger } from './ledger.js';
 import * as providers from './providers.js';
 import { PROMPT_VERSION } from './prompts.js';
+import { loadWorkerAssessment } from './assessment-definitions.js';
+import { evaluateAssessment, trustedAssessment } from './assessments.js';
+import { ASSESSMENT_LIMITS } from '../shared/assessment-contracts.js';
 
 const PREFIX = '/api/v1';
 const AUDIO_TYPES = new Map([['audio/webm', 'webm'], ['audio/mp4', 'm4a'], ['audio/m4a', 'm4a'], ['audio/ogg', 'ogg'], ['audio/wav', 'wav'], ['audio/mpeg', 'mp3'], ['audio/mp3', 'mp3']]);
@@ -36,7 +39,7 @@ async function turnBody(request, kind) {
   } else raw = await jsonBody(request);
   let input;
   try { input = validateTurnInput(raw); } catch (error) { throw problem(422, 'validation', error.message); }
-  if (!missionById(input.missionId)) throw problem(422, 'mission', 'Choose one of Sprich’s current missions.');
+  if (!input.assessmentRef && !missionById(input.missionId)) throw problem(422, 'mission', 'Choose one of Sprich’s current missions.');
   if (audio && (input.operation !== 'reply' || input.text || input.recordingMs <= 0)) throw problem(422, 'audio_metadata', 'An audio turn needs its recording duration and no separate text.');
   if (!audio && input.recordingMs !== 0) throw problem(422, 'audio_missing', 'The recording is missing. Re-record or send a text correction.');
   if (input.operation === 'reply' && !audio && !input.text && kind !== 'review') throw problem(422, 'empty_input', 'Record a response or enter a transcript first.');
@@ -44,7 +47,7 @@ async function turnBody(request, kind) {
   return { input, audio, extension, hash: await sha256(canonical({ input, audioHash })) };
 }
 
-export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console } = {}) {
+export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console, loadAssessmentDefinition = loadWorkerAssessment } = {}) {
   async function handle(request, env, execution = {}) {
     const path = new URL(request.url).pathname;
     if (!path.startsWith('/api/')) return env.ASSETS ? env.ASSETS.fetch(request) : new Response('Not found', { status: 404 });
@@ -111,12 +114,27 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
         const audio = await providers.freeSpeech(fetcher, env, input.text);
         return securityHeaders(new Response(audio.bytes, { headers: { 'Content-Type': audio.contentType } }), request);
       }
+      if (path === `${PREFIX}/assessments/evaluations` && request.method === 'POST') {
+        if (!groqReady) throw problem(503, 'provider_setup', 'Configure the Groq Free connection, or use a Gemini grading report.');
+        const input = await jsonBody(request, ASSESSMENT_LIMITS.requestBytes);
+        requestId = isId(input?.requestId) ? input.requestId : '';
+        const result = await evaluateAssessment(input, { loadDefinition: loadAssessmentDefinition, request, env, ledger, limits, now, testMode, execution,
+          grade: (definition, submission, mode) => providers.assess(fetcher, env, definition, submission, mode) });
+        return securityHeaders(success(result.data, result.status, result.meta), request);
+      }
       if (![`${PREFIX}/turns`, `${PREFIX}/reviews`].includes(path) || request.method !== 'POST') throw problem(404, 'not_found', 'This AI resource does not exist.');
       if (!groqReady) throw problem(503, 'provider_setup', 'The Groq Free connection is not configured. Use the setup guide or Gemini Companion.');
       const isReview = path.endsWith('/reviews');
       const parsed = await turnBody(request, isReview ? 'review' : 'turn');
       const { input, audio, extension, hash } = parsed;
       requestId = input.requestId;
+      let assessedDefinition = null;
+      if (input.assessmentRef) {
+        if (isReview) throw problem(422, 'assessment_kind', 'Use the grading endpoint for assessed conversations.');
+        assessedDefinition = await trustedAssessment({ id: input.assessmentRef.definitionId, version: input.assessmentRef.definitionVersion }, input.assessmentRef.definitionHash, loadAssessmentDefinition, { env, request });
+        if (assessedDefinition.kind !== 'roleplay' || assessedDefinition.level !== input.level) throw problem(422, 'assessment_kind', 'The roleplay must use its published level and scenario.');
+        if (input.assessmentRef.mode === 'checkpoint' && input.operation === 'hint') throw problem(422, 'assessment_support', 'Checkpoint answer hints are unavailable. You can ask to repeat or simplify the question.');
+      }
       if (isReview && (audio || input.history.filter(turn => turn.user.trim()).length < 2)) throw problem(422, 'review_context', 'Have at least two spoken or typed exchanges before requesting a review.');
       const claim = await ledger.claim(requestId, hash, isReview ? 'review' : 'turn');
       if (!claim.claimed) return securityHeaders(claim.pending ? success({ requestId, status: 'pending' }, 202) : success(claim.response, 200, { cached: true }), request);
@@ -129,19 +147,19 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
           else {
             let transcript = input.text;
             if (audio) {
-              transcript = claim.transcript ?? await providers.transcribe(fetcher, env, audio, `turn.${extension}`);
+              transcript = claim.transcript ?? await providers.transcribe(fetcher, env, audio, `turn.${extension}`, Boolean(assessedDefinition));
               await ledger.saveTranscript(requestId, transcript);
             }
             result = input.operation === 'reply' && !transcript
               ? { requestId, sessionId: input.sessionId, inputStatus: 'unclear', transcript: '', model: AI_MODELS.chat, promptVersion: PROMPT_VERSION, testMode }
-              : { requestId, sessionId: input.sessionId, inputStatus: 'clear', transcript, ...await providers.reply(fetcher, env, input, transcript), testMode };
+              : { requestId, sessionId: input.sessionId, inputStatus: 'clear', transcript, ...await providers.reply(fetcher, env, input, transcript, assessedDefinition), testMode };
+            if (input.assessmentRef) result.assessmentRef = input.assessmentRef;
           }
           await ledger.finish(requestId, result);
           return result;
         } catch (error) {
           const status = error.code === 'provider_timeout' ? 'uncertain' : error.status === 429 ? 'retryable' : 'failed';
-          await ledger.fail(requestId, error, status);
-          throw error;
+          throw await ledger.fail(requestId, error, status);
         }
       };
       const running = run();

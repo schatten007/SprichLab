@@ -19,8 +19,10 @@ export function validateProfile(profile) {
 
 export function validateTurnInput(input) {
   ensure(isObject(input), 'Provide a conversation turn.');
-  ensure(isId(input.requestId) && isId(input.sessionId) && isId(input.missionId), 'Invalid conversation identifiers.');
-  ensure(AI_OPERATIONS.includes(input.operation) && ['A2', 'B1'].includes(input.level), 'Choose a valid operation and level.');
+  const assessed = input.assessmentRef !== undefined && input.assessmentRef !== null;
+  if (assessed) { validateAssessmentRef(input.assessmentRef); ensure(input.missionId === undefined || input.missionId === null, 'Choose one conversation source.'); }
+  ensure(isId(input.requestId) && isId(input.sessionId) && (assessed || isId(input.missionId)), 'Invalid conversation identifiers.');
+  ensure(AI_OPERATIONS.includes(input.operation) && (assessed ? ASSESSMENT_LEVELS : ['A2', 'B1']).includes(input.level), 'Choose a valid operation and level.');
   validateProfile(input.profile);
   ensure(isText(input.text, AI_LIMITS.textChars) && isText(input.opening, 1200), 'The response or opening is too long.');
   ensure(Array.isArray(input.history) && input.history.length <= AI_LIMITS.historyTurns, 'Start a new short conversation or reduce the history.');
@@ -28,7 +30,8 @@ export function validateTurnInput(input) {
   ensure(input.history.reduce((sum, turn) => sum + turn.user.length + turn.assistant.length, 0) <= AI_LIMITS.historyChars, 'Conversation context is too long.');
   ensure(Number.isFinite(input.recordingMs) && input.recordingMs >= 0 && input.recordingMs <= AI_LIMITS.clipMs, 'Record at most 60 seconds per AI turn.');
   // Rebuild the object: the client cannot select a provider URL, system prompt, or model.
-  return { requestId: input.requestId, sessionId: input.sessionId, missionId: input.missionId, operation: input.operation, level: input.level,
+  return { requestId: input.requestId, sessionId: input.sessionId, missionId: assessed ? null : input.missionId,
+    ...(assessed ? { assessmentRef: { ...input.assessmentRef } } : {}), operation: input.operation, level: input.level,
     profile: { ...input.profile }, text: input.text.trim(), opening: input.opening,
     history: input.history.map(turn => ({ user: turn.user, assistant: turn.assistant })), recordingMs: input.recordingMs };
 }
@@ -71,5 +74,7 @@ export function validateTurnResult(result) {
   ensure(['clear', 'unclear'].includes(result.inputStatus) && isText(result.transcript, AI_LIMITS.textChars), 'Invalid transcription response.');
   if (result.inputStatus === 'clear') validateReply(result.reply);
   ensure(isText(result.model, 150) && isText(result.promptVersion, 100), 'Missing AI response provenance.');
+  if (result.assessmentRef) validateAssessmentRef(result.assessmentRef);
   return result;
 }
+import { validateAssessmentRef, ASSESSMENT_LEVELS } from './assessment-contracts.js';
