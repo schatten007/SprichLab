@@ -53,9 +53,20 @@ function notify(message, error = false) {
   toastTimer = setTimeout(() => { toast.hidden = true; }, error ? 12_000 : 6500);
 }
 const showError = message => notify(message, true);
+export const LIGHT_PALETTES = ['paper', 'contrast'];
+/** The light palette is per-device, so one browser can stay high-contrast without changing the other. */
+function readPalette() {
+  try { return LIGHT_PALETTES.includes(localStorage.getItem('sprich.palette')) ? localStorage.getItem('sprich.palette') : 'paper'; }
+  catch { return 'paper'; }
+}
 function applyTheme() {
-  const theme = store?.state.preferences.theme ?? 'system';
-  document.documentElement.dataset.theme = theme === 'system' ? (themeQuery.matches ? 'dark' : 'light') : theme;
+  const mode = store?.state.preferences.theme ?? 'system';
+  const dark = mode === 'dark' || (mode === 'system' && themeQuery.matches);
+  const root = document.documentElement;
+  root.dataset.theme = dark ? 'dark' : 'light';
+  root.dataset.palette = dark ? 'night' : readPalette();
+  // Mirrored for the pre-paint script in index.html, which cannot read IndexedDB.
+  try { localStorage.setItem('sprich.mode', mode); } catch { /* Appearance still applies this session. */ }
 }
 themeQuery.addEventListener('change', applyTheme);
 
