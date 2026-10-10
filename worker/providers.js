@@ -1,6 +1,7 @@
 import { AI_MODELS, AI_LIMITS, REPLY_SCHEMA, REVIEW_SCHEMA, validateReply, validateReview } from '../shared/ai-contracts.js';
 import { conversationMessages, reviewMessages, PROMPT_VERSION, REVIEW_PROMPT_VERSION } from './prompts.js';
 import { problem } from './errors.js';
+import { assessmentGraderMessages, assessmentRoleplayMessages, assessmentRatingsSchema, ASSESSMENT_GRADER_PROMPT_VERSION, ASSESSMENT_ROLEPLAY_PROMPT_VERSION } from './assessment-prompts.js';
 
 async function boundedJSON(response, maxBytes = 100_000) {
   const body = await readLimited(response, maxBytes);
@@ -52,10 +53,10 @@ async function call(fetcher, url, options, ms = 20_000) {
   } finally { clearTimeout(timer); }
 }
 
-export async function transcribe(fetcher, env, audio, filename) {
+export async function transcribe(fetcher, env, audio, filename, assessed = false) {
   const form = new FormData();
   form.set('file', audio, filename); form.set('model', AI_MODELS.transcription); form.set('language', 'de'); form.set('response_format', 'verbose_json');
-  form.set('prompt', 'Ein kurzes Gespräch auf Deutsch für eine Werkstudentenstelle.');
+  form.set('prompt', assessed ? 'Ein kurzes Alltagsgespräch auf Deutsch.' : 'Ein kurzes Gespräch auf Deutsch für eine Werkstudentenstelle.');
   const response = await call(fetcher, 'https://api.groq.com/openai/v1/audio/transcriptions', { method: 'POST', headers: { Authorization: `Bearer ${env.GROQ_API_KEY}` }, body: form });
   const value = await boundedJSON(response);
   if (Number(value.duration ?? 0) > 65) throw problem(413, 'clip_too_long', 'Use at most 60 seconds for each AI turn.');
@@ -66,10 +67,10 @@ export async function transcribe(fetcher, env, audio, filename) {
   return text;
 }
 
-async function completion(fetcher, env, messages, schema, name, maxTokens) {
+async function completion(fetcher, env, messages, schema, name, maxTokens, temperature = .5) {
   const response = await call(fetcher, 'https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST', headers: { Authorization: `Bearer ${env.GROQ_API_KEY}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ model: AI_MODELS.chat, messages, temperature: .5, reasoning_effort: 'low', max_completion_tokens: maxTokens,
+    body: JSON.stringify({ model: AI_MODELS.chat, messages, temperature, reasoning_effort: 'low', max_completion_tokens: maxTokens,
       response_format: { type: 'json_schema', json_schema: { name, strict: true, schema } } }),
   });
   const value = await boundedJSON(response);
@@ -80,10 +81,15 @@ async function completion(fetcher, env, messages, schema, name, maxTokens) {
   return { parsed, usage: { inputTokens: Number(value.usage?.prompt_tokens) || 0, outputTokens: Number(value.usage?.completion_tokens) || 0 } };
 }
 
-export async function reply(fetcher, env, input, transcript) {
-  const { parsed, usage } = await completion(fetcher, env, conversationMessages(input, transcript), REPLY_SCHEMA, 'german_reply', 700);
-  try { return { reply: validateReply(parsed), usage, model: AI_MODELS.chat, promptVersion: PROMPT_VERSION }; }
+export async function reply(fetcher, env, input, transcript, assessment = null) {
+  const messages = assessment ? assessmentRoleplayMessages(input, transcript, assessment) : conversationMessages(input, transcript);
+  const { parsed, usage } = await completion(fetcher, env, messages, REPLY_SCHEMA, 'german_reply', 700);
+  try { return { reply: validateReply(parsed), usage, model: AI_MODELS.chat, promptVersion: assessment ? ASSESSMENT_ROLEPLAY_PROMPT_VERSION : PROMPT_VERSION }; }
   catch { throw problem(502, 'provider_format', 'The reply did not meet the short-conversation format. Try again with your saved input.'); }
+}
+export async function assess(fetcher, env, definition, submission, mode) {
+  const { parsed } = await completion(fetcher, env, assessmentGraderMessages(definition, submission, mode), assessmentRatingsSchema(definition.rubricId), 'sprich_assessment_ratings', 2048, .1);
+  return { raw: parsed, model: AI_MODELS.chat, promptVersion: ASSESSMENT_GRADER_PROMPT_VERSION };
 }
 export async function review(fetcher, env, input) {
   const { parsed, usage } = await completion(fetcher, env, reviewMessages(input), REVIEW_SCHEMA, 'german_review', 1800);

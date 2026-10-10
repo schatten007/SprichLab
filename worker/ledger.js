@@ -25,6 +25,9 @@ export class RequestLedger {
       const error = problem(409, 'uncertain', 'The previous request may have reached the provider. Check for its reply before choosing an explicit new attempt.');
       await this.fail(id, error, 'uncertain'); throw error;
     }
+    if (current.status === 'retryable' && current.attempts >= 2) {
+      throw await this.fail(id, problem(409, 'retry_exhausted', 'This request reached its retry limit. Explicitly start a new request using the saved input.'), 'failed');
+    }
     if (current.status === 'retryable' && current.attempts < 2) {
       if (current.retry_at > now) throw problem(429, 'cooldown', 'Please wait for the provider cooldown before retrying.', Math.ceil((current.retry_at - now) / 1000));
       const retry = await this.db.prepare(`UPDATE ai_requests SET status = 'pending', attempts = attempts + 1, lease_until = ?, updated_at = ?
@@ -38,8 +41,14 @@ export class RequestLedger {
   async saveTranscript(id, transcript) { await this.db.prepare('UPDATE ai_requests SET transcript = ?, updated_at = ? WHERE id = ?').bind(transcript, this.now(), id).run(); }
   async finish(id, result) { await this.db.prepare("UPDATE ai_requests SET status = 'complete', response_json = ?, error_json = NULL, updated_at = ? WHERE id = ?").bind(JSON.stringify(result), this.now(), id).run(); }
   async fail(id, error, status = 'failed') {
+    let failure = error;
+    if (status === 'retryable' && (await this.get(id))?.attempts >= 2) {
+      failure = problem(409, 'retry_exhausted', 'This request reached its retry limit. After the quota resets, explicitly request a new grade or turn using the saved input.');
+      status = 'failed';
+    }
     await this.db.prepare('UPDATE ai_requests SET status = ?, error_json = ?, retry_at = ?, updated_at = ? WHERE id = ?')
-      .bind(status, JSON.stringify(savedError(error)), this.now() + (error.retryAfter || 0) * 1000, this.now(), id).run();
+      .bind(status, JSON.stringify(savedError(failure)), this.now() + (failure.retryAfter || 0) * 1000, this.now(), id).run();
+    return failure;
   }
   async cleanup() {
     await this.db.batch([

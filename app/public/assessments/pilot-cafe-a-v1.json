@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "id": "pilot-cafe-a",
+  "version": "1",
+  "definitions": [
+    {
+      "schemaVersion": 1,
+      "id": "pilot.cafe.a.objective",
+      "version": "1",
+      "kind": "objective",
+      "title": "At the café — form A",
+      "level": "A1",
+      "lessonIds": ["starter-coffee", "starter-prices", "starter-time"],
+      "skillIds": ["cafe-vocabulary", "numbers-prices", "polite-phrases", "accusative-articles", "time-prepositions", "modal-verbs", "word-order", "cafe-reading", "ordering-drinks", "payment"],
+      "familyId": "cafe",
+      "formId": "a",
+      "exposureGroupIds": ["pilot.cafe.a"],
+      "instructions": "Answer all 15 items. Read the linked German text for each reading question. Choose one option, write a short answer, fill each labelled gap, or arrange all the tokens once. For the two constrained writing items, follow the given frames. A short phrase can earn full credit. The café and its details are fictional.",
+      "stimuli": [
+        {
+          "id": "cafe.a.menu",
+          "de": "Café am Park — Karte\nKleiner Tee: 2 Euro. Kleiner Kaffee: 3 Euro. Wasser: 1 Euro. Sie können bar oder mit Karte bezahlen.",
+          "en": "Café am Park — menu\nSmall tea: 2 euros. Small coffee: 3 euros. Water: 1 euro. You can pay cash or by card."
+        },
+        {
+          "id": "cafe.a.hours",
+          "de": "Café am Park — Öffnungszeiten\nAm Montag ist das Café von 08:00 bis 16:00 Uhr geöffnet. Am Sonntag ist es geschlossen. Kuchen gibt es am Montag ab 10:00 Uhr.",
+          "en": "Café am Park — opening hours\nOn Monday the café is open from 08:00 to 16:00. On Sunday it is closed. On Monday cake is available from 10:00."
+        }
+      ],
+      "items": [
+        {
+          "id": "cafe.a.vocab.tea",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Welches Wort bedeutet „tea“?",
+          "promptEn": "Which German word means tea?",
+          "stimulusIds": [],
+          "skillIds": ["cafe-vocabulary"],
+          "feedback": {
+            "de": "Tea heißt der Tee. Kaffee und Wasser sind andere Getränke.",
+            "en": "Tea is der Tee, a masculine noun. Der Kaffee is coffee; das Wasser is water."
+          },
+          "points": 1,
+          "options": [
+            { "id": "coffee", "text": "der Kaffee" },
+            { "id": "tea", "text": "der Tee" },
+            { "id": "water", "text": "das Wasser" }
+          ],
+          "answer": "tea"
+        },
+        {
+          "id": "cafe.a.vocab.size",
+          "type": "text",
+          "domain": "vocabulary",
+          "promptDe": "Was ist das Gegenteil von groß? Schreiben Sie ein Wort.",
+          "promptEn": "Write the German opposite of groß (large), using one word.",
+          "stimulusIds": [],
+          "skillIds": ["cafe-vocabulary"],
+          "feedback": {
+            "de": "Das Gegenteil von groß ist klein. Auf „Klein oder groß?“ passt die kurze Antwort „Klein, bitte.“",
+            "en": "The opposite of groß is klein (small). Klein, bitte is a natural short answer when choosing a size."
+          },
+          "points": 1,
+          "accepted": ["klein"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "cafe.a.vocab.cash",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Welcher Ausdruck bedeutet „in cash“?",
+          "promptEn": "Which expression means in cash?",
+          "stimulusIds": [],
+          "skillIds": ["cafe-vocabulary", "payment"],
+          "feedback": {
+            "de": "Bar bedeutet mit Bargeld. Mit Karte ist eine andere Art zu bezahlen.",
+            "en": "Bar means in cash. Mit Karte means by card; bitte means please."
+          },
+          "points": 1,
+          "options": [
+            { "id": "card", "text": "mit Karte" },
+            { "id": "please", "text": "bitte" },
+            { "id": "cash", "text": "bar" }
+          ],
+          "answer": "cash"
+        },
+        {
+          "id": "cafe.a.vocab.number",
+          "type": "text",
+          "domain": "vocabulary",
+          "promptDe": "Schreiben Sie die Zahl 2 als deutsches Wort.",
+          "promptEn": "Write the number 2 as a German word.",
+          "stimulusIds": [],
+          "skillIds": ["numbers-prices"],
+          "feedback": {
+            "de": "Die Zahl 2 heißt zwei. Zum Beispiel: Der Tee kostet zwei Euro.",
+            "en": "The number 2 is zwei. For example, Der Tee kostet zwei Euro means the tea costs two euros."
+          },
+          "points": 1,
+          "accepted": ["zwei"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "cafe.a.vocab.thanks",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Sie bekommen Ihren Tee. Wie bedanken Sie sich?",
+          "promptEn": "You receive your tea. Which reply thanks the barista?",
+          "stimulusIds": [],
+          "skillIds": ["polite-phrases"],
+          "feedback": {
+            "de": "Danke! ist eine höfliche, vollständige Antwort in dieser Situation.",
+            "en": "Danke! politely thanks the barista. This short reply fully achieves the task; a longer sentence is unnecessary."
+          },
+          "points": 1,
+          "options": [
+            { "id": "thanks", "text": "Danke!" },
+            { "id": "day", "text": "Montag." },
+            { "id": "price", "text": "Zwei Euro." }
+          ],
+          "answer": "thanks"
+        },
+        {
+          "id": "cafe.a.grammar.article",
+          "type": "choice",
+          "domain": "grammar",
+          "promptDe": "Ergänzen Sie: Ich möchte ____ Tee.",
+          "promptEn": "Complete the order with the correct indefinite article: Ich möchte ____ Tee.",
+          "stimulusIds": [],
+          "skillIds": ["accusative-articles", "ordering-drinks"],
+          "feedback": {
+            "de": "Ich möchte einen Tee. Tee ist maskulin: der Tee. Hier steht einen im Akkusativ.",
+            "en": "Use einen Tee. Tee is masculine, and the thing you would like takes the accusative: einen, not ein or eine."
+          },
+          "points": 1,
+          "options": [
+            { "id": "ein", "text": "ein" },
+            { "id": "einen", "text": "einen" },
+            { "id": "eine", "text": "eine" }
+          ],
+          "answer": "einen"
+        },
+        {
+          "id": "cafe.a.grammar.prepositions",
+          "type": "slots",
+          "domain": "grammar",
+          "promptDe": "Ergänzen Sie je ein Wort: Wir treffen uns ____ Montag ____ zehn Uhr.",
+          "promptEn": "Fill each gap with one word: Wir treffen uns ____ Montag ____ zehn Uhr.",
+          "stimulusIds": [],
+          "skillIds": ["time-prepositions"],
+          "feedback": {
+            "de": "Wir treffen uns am Montag um zehn Uhr. Am steht vor dem Tag, um vor der Uhrzeit.",
+            "en": "We will meet on Monday at ten. Use am before a weekday and um before a clock time. Each gap earns its own point."
+          },
+          "parts": [
+            { "id": "day", "label": "Before Montag", "points": 1, "accepted": ["am"], "policy": { "case": "fold", "punctuation": "terminal" } },
+            { "id": "time", "label": "Before zehn Uhr", "points": 1, "accepted": ["um"], "policy": { "case": "fold", "punctuation": "terminal" } }
+          ]
+        },
+        {
+          "id": "cafe.a.grammar.modal",
+          "type": "text",
+          "domain": "grammar",
+          "promptDe": "Ergänzen Sie die Form von möchten für ich: Ich ____ einen Tee.",
+          "promptEn": "Use the ich form of möchten: Ich ____ einen Tee.",
+          "stimulusIds": [],
+          "skillIds": ["modal-verbs", "ordering-drinks"],
+          "feedback": {
+            "de": "Ich möchte einen Tee. Zu ich gehört möchte, mit ö und ohne n am Ende.",
+            "en": "Ich möchte means I would like. Keep the ö and use möchte, without the final n, after ich. Mochte without the umlaut has a different meaning."
+          },
+          "points": 1,
+          "accepted": ["möchte"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "cafe.a.grammar.order",
+          "type": "order",
+          "domain": "grammar",
+          "promptDe": "Bilden Sie eine Frage. Beginnen Sie mit „Kann ich“. Nutzen Sie alle Teile einmal.",
+          "promptEn": "Arrange all the tokens once to ask about paying by card. Begin with Kann ich.",
+          "stimulusIds": [],
+          "skillIds": ["word-order", "modal-verbs", "payment"],
+          "feedback": {
+            "de": "Kann ich bitte mit Karte bezahlen? Auch „Kann ich mit Karte bitte bezahlen?“ ist möglich. Bezahlen steht am Ende.",
+            "en": "Can I please pay by card? Bitte can go before or after mit Karte. The infinitive bezahlen goes at the end."
+          },
+          "points": 2,
+          "tokens": [
+            { "id": "card", "text": "mit Karte" },
+            { "id": "can", "text": "Kann" },
+            { "id": "pay", "text": "bezahlen?" },
+            { "id": "please", "text": "bitte" },
+            { "id": "i", "text": "ich" }
+          ],
+          "orders": [
+            ["can", "i", "please", "card", "pay"],
+            ["can", "i", "card", "please", "pay"]
+          ]
+        },
+        {
+          "id": "cafe.a.reading.price",
+          "type": "text",
+          "domain": "reading",
+          "promptDe": "Wie viel kostet ein kleiner Tee? Schreiben Sie nur den Preis.",
+          "promptEn": "According to the menu, what does a small tea cost? Write only the price in digits or as a German number word. Euro or € is optional.",
+          "stimulusIds": ["cafe.a.menu"],
+          "skillIds": ["cafe-reading", "numbers-prices"],
+          "feedback": {
+            "de": "Ein kleiner Tee kostet 2 Euro. Der kleine Kaffee kostet 3 Euro. Achten Sie auf das Getränk.",
+            "en": "A small tea costs 2 euros; 3 euros is the price of the small coffee. Both 2 Euro and zwei Euro are accepted."
+          },
+          "points": 1,
+          "accepted": ["2", "2 Euro", "2 €", "2€", "2,00", "2,00 Euro", "2,00 €", "2,00€", "2.00", "2.00 Euro", "2.00 €", "2.00€", "zwei", "zwei Euro"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "cafe.a.reading.payment",
+          "type": "choice",
+          "domain": "reading",
+          "promptDe": "Wie können Sie im Café am Park bezahlen?",
+          "promptEn": "According to the menu, which payment methods does Café am Park accept?",
+          "stimulusIds": ["cafe.a.menu"],
+          "skillIds": ["cafe-reading", "payment"],
+          "feedback": {
+            "de": "Sie können bar oder mit Karte bezahlen. Beide Möglichkeiten stehen auf der Karte.",
+            "en": "Both cash and card are accepted. Oder links the two available payment methods; the text does not say cash only or card only."
+          },
+          "points": 1,
+          "options": [
+            { "id": "cash-only", "text": "Nur bar." },
+            { "id": "card-only", "text": "Nur mit Karte." },
+            { "id": "cash-card", "text": "Bar oder mit Karte." }
+          ],
+          "answer": "cash-card"
+        },
+        {
+          "id": "cafe.a.reading.hours",
+          "type": "slots",
+          "domain": "reading",
+          "promptDe": "Wann öffnet und schließt das Café am Montag? Schreiben Sie beide Uhrzeiten.",
+          "promptEn": "Give Monday's opening and closing times using the 24-hour clock. Use digits or German number words; um and Uhr are optional.",
+          "stimulusIds": ["cafe.a.hours"],
+          "skillIds": ["cafe-reading", "time-prepositions"],
+          "feedback": {
+            "de": "Am Montag öffnet das Café um 8 Uhr und schließt um 16 Uhr. Von 8 bis 16 Uhr beschreibt die Öffnungszeiten.",
+            "en": "On Monday the café opens at 08:00 and closes at 16:00. Von … bis … gives the time range. Opening and closing each earn one point."
+          },
+          "parts": [
+            { "id": "open", "label": "Opening time (24-hour clock)", "points": 1, "accepted": ["8", "08", "8:00", "08:00", "8.00", "08.00", "acht", "8 Uhr", "08 Uhr", "8:00 Uhr", "08:00 Uhr", "8.00 Uhr", "08.00 Uhr", "acht Uhr", "um 8", "um 08", "um 8:00", "um 08:00", "um 8.00", "um 08.00", "um acht", "um 8 Uhr", "um 08 Uhr", "um 8:00 Uhr", "um 08:00 Uhr", "um 8.00 Uhr", "um 08.00 Uhr", "um acht Uhr"], "policy": { "case": "fold", "punctuation": "terminal" } },
+            { "id": "close", "label": "Closing time (24-hour clock)", "points": 1, "accepted": ["16", "16:00", "16.00", "sechzehn", "16 Uhr", "16:00 Uhr", "16.00 Uhr", "sechzehn Uhr", "um 16", "um 16:00", "um 16.00", "um sechzehn", "um 16 Uhr", "um 16:00 Uhr", "um 16.00 Uhr", "um sechzehn Uhr"], "policy": { "case": "fold", "punctuation": "terminal" } }
+          ]
+        },
+        {
+          "id": "cafe.a.reading.cake",
+          "type": "choice",
+          "domain": "reading",
+          "promptDe": "Ab wann gibt es am Montag Kuchen?",
+          "promptEn": "According to the notice, from what time is cake available on Monday?",
+          "stimulusIds": ["cafe.a.hours"],
+          "skillIds": ["cafe-reading"],
+          "feedback": {
+            "de": "Kuchen gibt es ab 10 Uhr. Das Café öffnet schon um 8 Uhr, aber dann gibt es noch keinen Kuchen.",
+            "en": "Cake is available from 10:00. The café opens at 08:00, but cake is not available until later. Ab means from this time onwards."
+          },
+          "points": 1,
+          "options": [
+            { "id": "eight", "text": "Ab 08:00 Uhr." },
+            { "id": "ten", "text": "Ab 10:00 Uhr." },
+            { "id": "sixteen", "text": "Ab 16:00 Uhr." }
+          ],
+          "answer": "ten"
+        },
+        {
+          "id": "cafe.a.writing.order",
+          "type": "text",
+          "domain": "writing",
+          "promptDe": null,
+          "promptEn": "Order one small tea. Use Einen … Tee or Ich möchte einen … Tee, adding the correct form of klein. You may add bitte at the end, with or without a comma. Use correct German capitalization. A short phrase earns full credit.",
+          "stimulusIds": [],
+          "skillIds": ["ordering-drinks", "accusative-articles"],
+          "feedback": {
+            "de": "Einen kleinen Tee, bitte. Auch „Ich möchte einen kleinen Tee.“ passt. Nach einen steht hier kleinen. Die kurze Bestellung ist natürlich.",
+            "en": "Einen kleinen Tee, bitte and Ich möchte einen kleinen Tee both earn full credit. Use einen kleinen with masculine Tee in this order. Bitte is optional."
+          },
+          "points": 2,
+          "accepted": ["Einen kleinen Tee.", "Einen kleinen Tee, bitte.", "Einen kleinen Tee bitte.", "Ich möchte einen kleinen Tee.", "Ich möchte einen kleinen Tee, bitte.", "Ich möchte einen kleinen Tee bitte."],
+          "policy": { "case": "exact", "punctuation": "terminal" }
+        },
+        {
+          "id": "cafe.a.writing.payment",
+          "type": "text",
+          "domain": "writing",
+          "promptDe": null,
+          "promptEn": "The café accepts cash and card. Say that you choose cash. Write the short German payment word, or use Ich zahle … / Ich bezahle … . You may add bitte at the end, with or without a comma. Use correct German capitalization. A short phrase earns full credit.",
+          "stimulusIds": [],
+          "skillIds": ["payment", "polite-phrases"],
+          "feedback": {
+            "de": "Bar, bitte. Oder: Ich zahle bar. Auch „Ich bezahle bar.“ passt. Bar steht nach dem Verb klein.",
+            "en": "Bar, bitte, Ich zahle bar and Ich bezahle bar all state your cash choice. The short answer earns full credit. Write bar in lower case within a sentence."
+          },
+          "points": 2,
+          "accepted": ["Bar.", "Bar, bitte.", "Bar bitte.", "Ich zahle bar.", "Ich zahle bar, bitte.", "Ich zahle bar bitte.", "Ich bezahle bar.", "Ich bezahle bar, bitte.", "Ich bezahle bar bitte."],
+          "policy": { "case": "exact", "punctuation": "terminal" }
+        }
+      ],
+      "rubricId": null,
+      "task": null,
+      "scenario": null
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pilot.cafe.a.writing",
+      "version": "1",
+      "kind": "writing",
+      "title": "Invite a friend for coffee — form A",
+      "level": "A1",
+      "lessonIds": ["starter-coffee", "starter-prices", "starter-time"],
+      "skillIds": ["message-writing", "time-prepositions", "polite-phrases"],
+      "familyId": "cafe",
+      "formId": "a",
+      "exposureGroupIds": ["pilot.cafe.a"],
+      "instructions": "Write 20–40 words in German. Use du with your friend and cover the three goals. Short A1 sentences and natural message fragments can earn full task credit. A greeting and friendly closing fit this message. The target is clear A1 communication, with no native-speaker fluency requirement.",
+      "stimuli": [],
+      "items": [],
+      "rubricId": "writing:1",
+      "task": {
+        "prompt": "Fictional situation: invite your friend Mia for coffee at Café am Park on Monday at 10:00. The café is open on Monday from 08:00 to 16:00. You do not yet know whether Mia has time. Write her a short invitation in German.",
+        "goals": [
+          "Invite Mia to Café am Park for coffee.",
+          "Suggest Monday at 10:00.",
+          "Ask whether Mia has time."
+        ],
+        "words": [20, 40]
+      },
+      "scenario": null
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pilot.cafe.a.roleplay",
+      "version": "1",
+      "kind": "roleplay",
+      "title": "Order a small tea — form A",
+      "level": "A1",
+      "lessonIds": ["starter-coffee", "starter-prices", "starter-time"],
+      "skillIds": ["ordering-drinks", "numbers-prices", "payment", "polite-phrases"],
+      "familyId": "cafe",
+      "formId": "a",
+      "exposureGroupIds": ["pilot.cafe.a"],
+      "instructions": "Order your drink and size in German, ask the price, ask about card payment, and close politely. Use Sie when addressing the barista. Natural short phrases and elliptical questions can earn full task credit at A1; no native-speaker fluency is required.",
+      "stimuli": [],
+      "items": [],
+      "rubricId": "conversation:1",
+      "task": null,
+      "scenario": {
+        "id": "cafe-ordering",
+        "variantId": "a",
+        "register": "Sie",
+        "learnerRole": "A customer at the fictional Café am Park.",
+        "partnerRole": "A barista at the fictional Café am Park.",
+        "learnerTask": "It is Monday at 10:00. Café am Park is open on Monday from 08:00 to 16:00. In this fictional visit you want one small tea, which costs €2. You can pay cash or by card. Order the drink and size, ask its price, ask whether card payment is possible, and finish with thanks or a goodbye. You may give the drink and size together or in separate replies.",
+        "partnerInstructions": "Use the supplied opening. Speak in short A1 German turns using Sie and ask one question at a time. Fictional facts: Café am Park is open on Monday from 08:00 to 16:00; the learner visits at 10:00, wants one small tea for €2, and can pay cash or by card. Wait for the order. Ask Klein oder groß? only if the size is missing. Give the learner a chance to ask the price and ask about payment before supplying those facts. If needed, invite a question with Haben Sie eine Frage? Answer a price question with Zwei Euro. Answer a card-payment question with Ja, Sie können mit Karte bezahlen. If a goal remains unattempted, invite another question. Once price and payment have been discussed, say Hier ist Ihr Tee and leave room for thanks or a goodbye. Allow at least three learner replies and an opportunity for every goal before closing. If the learner covers several goals in one turn, acknowledge them without forcing repetition. Give full task credit for clear natural elliptical orders, size replies, and questions. Judge language against A1 expectations; complete sentences and native-speaker fluency are not required.",
+        "openingDe": "Guten Tag! Was möchten Sie trinken?",
+        "openingEn": "Hello! What would you like to drink?",
+        "preparation": "Fictional facts: Café am Park; Monday at 10:00; open on Monday from 08:00 to 16:00; one small tea for €2; cash or by card. Plan your drink, size, a price question, a card-payment question, and a polite ending. Address the barista with Sie. Clear short phrases are enough.",
+        "goals": [
+          { "id": "order-size", "text": "Order one small tea, stating the drink and size together or in separate short replies." },
+          { "id": "ask-price", "text": "Ask how much the tea costs; a clear short price question is sufficient." },
+          { "id": "ask-payment", "text": "Ask whether payment by card is possible; a clear elliptical question is sufficient." },
+          { "id": "close", "text": "Thank the barista or say goodbye to close politely." }
+        ]
+      }
+    }
+  ]
+}

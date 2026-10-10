@@ -27,6 +27,14 @@ export async function recoverDrafts(store) {
     try {
       raw = localStorage.getItem(key);
       const journal = JSON.parse(raw);
+      if (journal.channel === 'assessment') {
+        const attempt = store.state.assessments.attempts.find(item => item.id === journal.sessionId);
+        if (attempt && ['prepared', 'in_progress'].includes(attempt.state) && journal.taskId === 'draft' && journal.writtenAt >= attempt.updatedAt) {
+          await store.saveAssessmentDraft(attempt.id, journal.draft);
+        }
+        clearJournal(journal.sessionId, raw);
+        continue;
+      }
       if (['starter', 'word'].includes(journal.channel)) {
         const field = journal.channel === 'starter' ? 'sessions' : 'wordSessions';
         const session = store.state.starter[field].find(item => item.id === journal.sessionId);
