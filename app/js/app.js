@@ -6,16 +6,24 @@ import { resourceById } from '../data/resources.js';
 import { createResourceSession } from './resources.js';
 import { createSpeechService } from './tts.js';
 import { esc, icon } from './ui.js';
-import * as Today from './v-dash.js';
-import * as Practice from './v-practice.js';
-import * as Phrases from './v-vocab.js';
-import * as Progress from './v-progress.js';
-import * as Settings from './v-settings.js';
-import * as Session from './v-train1.js';
-import * as Resources from './v-resources.js';
 import * as Lessons from './v-lessons.js';
 import * as Words from './v-words.js';
-import * as Gemini from './v-gemini.js';
+
+// Only the beginner path is in the core bundle. Every other screen is a
+// separate chunk, so the default route never downloads the workplace course UI.
+const views = {
+  today: () => import('./v-dash.js'),
+  practice: () => import('./v-practice.js'),
+  phrases: () => import('./v-vocab.js'),
+  progress: () => import('./v-progress.js'),
+  settings: () => import('./v-settings.js'),
+  resources: () => import('./v-resources.js'),
+  session: () => import('./v-train1.js'),
+  gemini: () => import('./v-gemini.js'),
+  ai: () => import('./v-ai.js'),
+  assessments: () => import('./v-assessments.js'),
+};
+const SIMPLE_ROUTES = new Set(['today', 'lessons', 'words', 'practice', 'phrases', 'resources', 'progress', 'settings']);
 import { loadCourse, starterSnapshot } from './starter-content.js';
 import { createStarterSession, createWordSession } from './starter-state.js';
 import { warmAssessmentShell } from './assessment-offline.js';
@@ -163,27 +171,35 @@ async function boot() {
         if (route.startsWith('session/')) {
           const id = route.slice(8);
           cleanup = store.state.sessions.find(session => session.id === id)?.kind === 'resource'
-            ? await Resources.renderActivity(main, viewContext, id) : await Session.render(main, viewContext, id);
+            ? await (await views.resources()).renderActivity(main, viewContext, id)
+            : await (await views.session()).render(main, viewContext, id);
         }
-        else if (route.startsWith('resource/')) cleanup = await Resources.renderDetail(main, viewContext, route.slice(9));
-        else if (route.startsWith('ai/session/')) cleanup = await (await import('./v-ai.js')).renderSession(main, viewContext, route.slice(11));
-        else if (route === 'ai') cleanup = await (await import('./v-ai.js')).render(main, viewContext);
+        else if (route.startsWith('resource/')) cleanup = await (await views.resources()).renderDetail(main, viewContext, route.slice(9));
+        else if (route.startsWith('ai/session/')) cleanup = await (await views.ai()).renderSession(main, viewContext, route.slice(11));
+        else if (route === 'ai') cleanup = await (await views.ai()).render(main, viewContext);
         else if (route.startsWith('lesson/')) cleanup = await Lessons.renderOverview(main, viewContext, route.slice('lesson/'.length));
         else if (route.startsWith('learn/')) cleanup = await Lessons.renderSession(main, viewContext, route.slice('learn/'.length));
         else if (route.startsWith('word-session/')) cleanup = await Words.renderSession(main, viewContext, route.slice('word-session/'.length));
-        else if (route.startsWith('gemini/')) cleanup = await Gemini.render(main, viewContext, route.slice('gemini/'.length));
+        else if (route.startsWith('gemini/')) cleanup = await (await views.gemini()).render(main, viewContext, route.slice('gemini/'.length));
         else if (route === 'assessments' || route.startsWith('assessments/lesson/')) {
-          const views = await import('./v-assessments.js');
-          cleanup = await views.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));
+          const module = await views.assessments();
+          cleanup = await module.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));
         }
-        else if (route.startsWith('assessment-result/')) cleanup = await (await import('./v-assessments.js')).renderResult(main, viewContext, route.slice('assessment-result/'.length));
-        else if (route.startsWith('assessment/')) cleanup = await (await import('./v-assessments.js')).renderRun(main, viewContext, route.slice('assessment/'.length));
+        else if (route.startsWith('assessment-result/')) cleanup = await (await views.assessments()).renderResult(main, viewContext, route.slice('assessment-result/'.length));
+        else if (route.startsWith('assessment/')) cleanup = await (await views.assessments()).renderRun(main, viewContext, route.slice('assessment/'.length));
+        else if (route === 'lessons') cleanup = await Lessons.render(main, viewContext);
+        else if (route === 'words') cleanup = await Words.render(main, viewContext);
         else {
-          const view = { today: Today, lessons: Lessons, words: Words, practice: Practice, phrases: Phrases, resources: Resources, progress: Progress, settings: Settings }[route] ?? Today;
-          cleanup = await view.render(main, viewContext);
+          const name = SIMPLE_ROUTES.has(route) ? route : 'today';
+          // The beginner path owns Today, so the workplace dashboard stays out of the default load.
+          cleanup = name === 'today' && store.state.preferences.learningPath === 'starter'
+            ? await Lessons.renderToday(main, viewContext)
+            : await (await views[name]()).render(main, viewContext);
         }
         document.title = `${main.querySelector('h1')?.textContent ?? 'German practice'} · Sprich`;
-        if (route.startsWith('assessment') || route === 'ai' || route.startsWith('ai/session/')) void warmAssessmentShell().then(ready => { document.body.dataset.assessmentOfflineReady = String(ready); });
+        // Every screen beyond the beginner path is an optional chunk. Warm them after the
+        // first render so an installed app still opens them offline, unvisited.
+        void warmAssessmentShell().then(ready => { document.body.dataset.assessmentOfflineReady = String(ready); });
         if (!firstRender) main.querySelector('h1')?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: 'instant' });
         firstRender = false;
