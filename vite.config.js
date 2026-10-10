@@ -69,7 +69,7 @@ self.addEventListener('fetch', event => {
 
 // The browser must reach /api on its own origin: the gateway rejects cross-origin
 // mutations, so the dev and preview servers proxy to the loopback gateway instead.
-const gatewayProxy = { '/api': { target: 'http://127.0.0.1:8787', changeOrigin: false } };
+const gatewayProxy = { '/api': { target: `http://127.0.0.1:${process.env.AI_GATEWAY_PORT || 8787}`, changeOrigin: false } };
 
 export default defineConfig({
   root: 'app',

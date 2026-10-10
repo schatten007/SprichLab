@@ -76,19 +76,19 @@ export function milestones(state, stats) {
   const spokenMissions = (stats.speaking ?? []).length;
   const practiceMs = [...stats.days.values()].reduce((total, ms) => total + ms, 0);
   const raw = [
-    ['lessons', 'Lessons practised', practisedLessons(starter).size, 'self-rated', value => `${value} practised`],
-    ['recalled', 'German said from memory', words.recalled, 'self-rated', value => `${value} words`],
-    ['recognised', 'Meanings recalled', words.recognition, 'self-rated', value => `${value} words`],
-    ['spoken', 'Spoken answers', spokenMissions + spokenStarter, 'self-rated', value => `${value} answers`],
-    ['recordedMinutes', 'Speaking recorded', Math.floor(stats.recordingMs / 60_000), 'measured', value => `${value} min`],
-    ['practiceHours', 'Practice time', Math.floor(practiceMs / 3_600_000), 'measured', value => `${value} h`],
+    ['lessons', 'Lessons practised', practisedLessons(starter).size, 'self-rated', 'lessons'],
+    ['recalled', 'German said from memory', words.recalled, 'self-rated', 'words'],
+    ['recognised', 'Meanings recalled', words.recognition, 'self-rated', 'words'],
+    ['spoken', 'Spoken answers', spokenMissions + spokenStarter, 'self-rated', 'answers'],
+    ['recordedMinutes', 'Speaking recorded', Math.floor(stats.recordingMs / 60_000), 'measured', 'min'],
+    ['practiceHours', 'Practice time', Math.floor(practiceMs / 3_600_000), 'measured', 'h'],
   ];
-  return raw.map(([id, label, value, prov, format]) => {
+  return raw.map(([id, label, value, prov, unit]) => {
     const steps = STEPS[id];
     const reached = steps.filter(step => value >= step);
     const target = steps.find(step => value < step) ?? steps.at(-1);
-    return { id, label, value, prov, target, met: reached.length > 0,
-      earned: reached.at(-1) ?? 0, display: format(value), goal: format(target) };
+    return { id, label, value, prov, target, unit, met: reached.length > 0,
+      earned: reached.at(-1) ?? 0, display: `${value} ${unit}`, goal: `${target} ${unit}` };
   });
 }
 

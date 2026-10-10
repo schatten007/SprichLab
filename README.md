@@ -57,10 +57,13 @@ A full walkthrough lives in [docs/START_SPEAKING.md](docs/START_SPEAKING.md).
 - Six-stage paths for each mission, with a short version when you're short on time.
 
 **Everyday tools**
+- The quiet navigation keeps **Today · Lessons · Words · Progress** visible; less-frequent destinations live under **More**.
 - **My path** tells you what to do next and why. **All lessons** lets you filter by level, topic, skill, or status.
 - A daily queue that hands you one mission, your due reviews, a resource, and a reflection — sized to whatever time budget you set.
 - 15 curated German learning resources (Nicos Weg, Easy German, Slow German, Goethe, VHS Deutsch Beruf, and more) with guided follow-up tasks.
-- Personal phrase book, bookmarks, dark mode, keyboard navigation, and progress export/import.
+- Personal phrase book, bookmarks, keyboard navigation, and progress export/import.
+- Three visual choices: warm **Paper**, high-legibility **Contrast**, and low-glare **Night**. Choose them in **More → Settings**.
+- Calm effort rewards: a measured daily goal, a forgiving streak, a seven-day strip, and one next milestone. Rewards count practice activity, not language ability or assessment grades.
 
 **Checks and grades**
 - Open **Lessons → Checks & grades**, or choose the graded-roleplay link on a lesson.
@@ -70,6 +73,10 @@ A full walkthrough lives in [docs/START_SPEAKING.md](docs/START_SPEAKING.md).
 - Results clearly distinguish **Checked locally**, **AI estimate**, and **Imported Gemini assessment**. They do not award a CEFR level or pronunciation score, and do not automatically add SRS mastery.
 
 Regular lesson speaking remains self-rated. The graded checks are a separate view of a specific submitted task. See [the assessment guide](docs/ASSESSMENTS.md).
+
+### The forgiving streak
+
+A day qualifies after **15 minutes of measured in-app practice**. Six qualifying days earn one rest day, with at most two rest days banked. One missed day can spend a banked rest day; two missed days in a row end the streak. A streak is a gentle routine reminder, not a measure of German ability.
 
 ---
 
@@ -168,7 +175,7 @@ Assessment checks also cover accepted German forms, partial credit, frozen submi
 | `app/public/assessments/` | Four pilot packs: 60 keyed items, four writing tasks, four roleplays |
 | `shared/assessment-*.js` | Assessment validation, rubric definitions, scoring, hashes, and manifests |
 | `app/js/assessment-*.js` | Immutable assessment state, evidence, jobs, loaders, and Gemini protocol |
-| `app/js/` | App logic: views (`v-*.js`), storage, sessions, speech, export |
+| `app/js/` | App logic: views (`v-*.js`), storage, sessions, speech, rewards, export |
 | `shared/ai-contracts.js` | Limits and schemas shared by browser and gateway |
 | `worker/` | The optional AI gateway (routing, auth, quotas, providers) |
 | `tools/` | Owner-code generator, local gateways, source checks |

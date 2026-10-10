@@ -237,7 +237,7 @@ async function boot() {
         window.scrollTo({ top: 0, behavior: 'instant' });
         firstRender = false;
       } catch (error) {
-        main.innerHTML = `<section class="card"><h1>Let’s get your practice back.</h1><p class="section-gap">${esc(error.message)}</p><a class="btn" href="#practice">Choose a mission</a></section>`;
+        main.innerHTML = `<section class="card"><h1 tabindex="-1">Let’s get your practice back.</h1><p class="section-gap">${esc(error.message)}</p><a class="btn" href="#practice">Choose a mission</a></section>`;
         console.error(error);
       }
     }
@@ -253,7 +253,7 @@ async function boot() {
     await requestRender();
     void registerOffline(context);
   } catch (error) {
-    main.innerHTML = `<section class="card"><p class="eyebrow">LOCAL PROGRESS</p><h1>Your browser storage isn’t ready.</h1><p class="section-gap">${esc(error.message)}</p><p>Allow this site to store data, then reload. Existing stored data has not been reset.</p><button class="btn" id="retry-boot">Try again</button></section>`;
+    main.innerHTML = `<section class="card"><p class="eyebrow">LOCAL PROGRESS</p><h1 tabindex="-1">Your browser storage isn’t ready.</h1><p class="section-gap">${esc(error.message)}</p><p>Allow this site to store data, then reload. Existing stored data has not been reset.</p><button class="btn" id="retry-boot">Try again</button></section>`;
     document.querySelector('#retry-boot').addEventListener('click', () => location.reload());
     console.error(error);
   }

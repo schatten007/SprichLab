@@ -8,8 +8,8 @@ export async function mountRecording(el, { draft, key, store, ctx, onChange, loc
   let dictating = false;
   const guidance = maxMs <= 60_000 ? 'Up to 60 seconds. One short sentence is enough.' : 'Up to 3 minutes. You can listen back before saving.';
   el.innerHTML = `<div class="record-panel"><div class="record-heading"><span class="record-label">${icon('mic')} ${locked ? 'Your response' : 'Make room for your voice'}</span><output id="record-time" aria-label="Recording duration">${duration(draft.recordingMs)}</output></div>
-    ${!locked ? `<div class="record-controls"><button class="btn" id="record-start">${icon('mic')}Record an answer</button><button class="btn danger" id="record-stop" hidden>${icon('stop')}Stop recording</button><span class="fine" id="record-status">${guidance}</span></div>` : ''}
-    <div id="record-error" class="callout error" role="status" hidden></div><div id="audio-preview" class="audio-preview"></div>
+    ${!locked ? `<div class="record-controls"><button class="btn secondary" id="record-start">${icon('mic')}Record an answer</button><button class="btn danger" id="record-stop" hidden>${icon('stop')}Stop recording</button><span class="fine" id="record-status">${guidance}</span></div>` : ''}
+     <div id="record-error" class="callout error" role="alert" hidden></div><div id="audio-preview" class="audio-preview"></div>
     ${!locked ? `<label class="check-label aloud-check"><input type="checkbox" id="answered-aloud" ${draft.aloud ? 'checked' : ''}>I practised aloud (recording is optional)</label><details class="notes-details" ${draft.text ? 'open' : ''}><summary>Optional notes or transcript</summary><label for="response-text" class="fine">Write what you said, or keep a few key words.</label><textarea id="response-text" maxlength="6000" placeholder="Deine Notizen …" lang="de">${esc(draft.text)}</textarea><button class="text-button" id="dictate-note">${icon('mic')}Dictate a note</button><p class="fine">Dictation is separate from recording and may use your browser’s online speech service.</p></details>` : draft.text ? `<div class="saved-response" lang="de">${esc(draft.text)}</div>` : ''}
   </div>`;
 
