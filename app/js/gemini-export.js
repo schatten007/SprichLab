@@ -16,7 +16,7 @@ export function mountGeminiExport(host, ctx, source, { beforeExport = async () =
     <div class="btn-row section-gap"><button class="btn" data-pack-copy>${icon('book')}Copy practice pack</button><button class="btn secondary" data-pack-download>${icon('download')}Download .txt</button><button class="btn secondary" data-pack-share ${typeof navigator.share === 'function' ? '' : 'hidden'}>${icon('external')}Share</button></div>
     <p class="fine section-gap" data-pack-status role="status"></p>
     <ol class="guided-steps"><li><strong>On your phone:</strong> copy this pack into a normal Gemini chat, then tap Live.</li><li><strong>On your computer:</strong> paste it into a normal <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini text chat</a>. Open that same chat in the Gemini phone app and tap Live. The .txt file is another way to carry the lesson between devices.</li><li>Ask Gemini to start the warm-up. Come back afterward to save a takeaway. Copying or downloading does not complete this lesson.</li></ol>
-    <p class="fine">Sprich prepares the pack locally. You decide when to send it to Gemini. Live features and account limits are managed in your Gemini app.</p>
+    <p class="fine">Prepared on this device. You choose when to send it.</p>
     <a class="btn secondary section-gap" href="#assessments/lesson/${esc(source.id)}">Use a graded roleplay ${icon('arrow')}</a></details>`;
   const editor = host.querySelector('[data-pack-text]');
   const status = host.querySelector('[data-pack-status]');

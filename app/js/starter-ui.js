@@ -32,7 +32,7 @@ export function lessonCard(course, starter, lesson, { showPrep = true } = {}) {
 }
 export function supportButtons(id, { guided = 'Start guided', light = 'Try with less help' } = {}) {
   return `<div class="btn-row"><button class="btn" data-start-lesson="${esc(id)}" data-support="guided">${guided} ${icon('arrow')}</button><button class="btn secondary" data-start-lesson="${esc(id)}" data-support="light">${light}</button></div>
-    <p class="fine">Guided keeps English meanings and a model answer one tap away. With less help, the meaning and model stay hidden until you ask. Both record support the same way.</p>`;
+    <p class="fine">Guided keeps the meaning and a model one tap away.</p>`;
 }
 export function bindSupportButtons(el, ctx) {
   el.querySelectorAll('[data-start-lesson]').forEach(button => safeAction(button,

@@ -260,3 +260,10 @@ audio { width: 100%; max-width: 100%; height: 44px; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 }
+
+/* How-progress-works explainer */
+.prov-list { display: grid; gap: var(--space-2); margin: var(--space-4) 0 0; }
+.prov-list dt { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; font-weight: 650; font-size: var(--text-sm); margin-top: var(--space-3); }
+.prov-list dd { margin: 0; color: var(--muted); font-size: var(--text-sm); max-width: 70ch; }
+.plain-list { margin: var(--space-4) 0 0; padding-left: var(--space-5); display: grid; gap: var(--space-2); font-size: var(--text-sm); max-width: 70ch; }
+.how-link { font-size: var(--text-xs); }

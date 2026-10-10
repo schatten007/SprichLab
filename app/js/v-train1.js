@@ -81,7 +81,7 @@ export async function render(el, ctx, sessionId) {
   side.innerHTML = `<section class="side-note"><span class="circle-icon">${icon(mission.icon)}</span><p class="eyebrow">THE REAL-WORLD GOAL</p>
     <h2>${esc(mission.titleDe || mission.shortTitle)}</h2>${copy(mission.goalDe, mission.goal)}<span class="pill">${esc(mission.register)}</span></section>
     <section class="side-note quiet"><h3>One idea, then a detail.</h3><p lang="de">Sprich eine klare Idee aus. Atme kurz durch. Ergänze ein Detail oder stelle eine Frage.</p>
-    <p class="fine">Replay and self-assess honestly. English meanings support understanding; answer models are recorded as help.</p></section>`;
+    <p class="fine">Replay, then rate yourself honestly.</p></section>`;
 
   if (!session.completedAt) {
     clock = createPracticeClock({
@@ -147,7 +147,7 @@ export async function render(el, ctx, sessionId) {
         ${!locked ? '<button class="btn" id="check-listening" type="submit">Check understanding</button>' : ''}</form>
       ${locked ? `<div class="callout"><strong>${attempts.filter(attempt => attempt.outcome === 'correct').length} of ${listening.questions.length} answers correct.</strong>
         ${draft.readInstead ? 'Reading-supported practice. Excluded from unassisted listening statistics.' : 'Your first submitted answers are saved once. Read the transcript, then listen again.'}</div>${nextButton()}`
-      : '<p class="fine">English question meanings support the task. Opening the transcript marks the listening attempt as reading-supported.</p>'}`;
+      : '<p class="fine">Opening the transcript marks this attempt as reading-supported.</p>'}`;
     const playListening = async (button, slow = false) => {
       const result = await say(listening.transcript, button, { slow });
       if (alive && result?.status === 'ended' && !locked) {
@@ -193,7 +193,7 @@ export async function render(el, ctx, sessionId) {
     body.innerHTML = `${copy('Höre einmal zu. Sprich die Zeile nach und vergleiche dann Rhythmus und Betonung.', 'Listen once, repeat the line, then compare rhythm and stress.')}
       <div class="shadow-line" lang="de">${esc(task.model)}</div>${meaning(task.modelEn)}
       <div class="btn-row"><button class="btn secondary" id="shadow-listen">${icon('volume')}Listen</button><button class="btn secondary" id="shadow-slow">Listen slowly</button></div>
-      <div id="response-recorder" class="section-gap"></div>${locked ? savedFeedback(attempts[0]) + nextButton() : '<p class="fine">Repetition is unscored practice, separate from independent production.</p><button class="btn" id="save-shadow">I repeated the line</button>'}`;
+      <div id="response-recorder" class="section-gap"></div>${locked ? savedFeedback(attempts[0]) + nextButton() : '<p class="fine">Borrow the rhythm; this one is not rated.</p><button class="btn" id="save-shadow">I repeated the line</button>'}`;
     await attachRecorder();
     el.querySelector('#shadow-listen').addEventListener('click', event => { void say(task.model, event.currentTarget); });
     el.querySelector('#shadow-slow').addEventListener('click', event => { void say(task.model, event.currentTarget, { slow: true }); });
@@ -217,10 +217,10 @@ export async function render(el, ctx, sessionId) {
         <fieldset aria-label="Speaking self-assessment">${task.criteria.map((criterion, index) => `<label class="check-label"><input type="checkbox" data-criterion="${index}" ${draft.criteria.includes(criterion) ? 'checked' : ''}><span lang="${task.criteriaDe ? 'de' : 'en'}">${esc(task.criteriaDe?.[index] ?? criterion)}</span></label>`).join('')}</fieldset>
         ${task.criteriaDe ? meaning(task.criteria.join('\n')) : ''}
         ${task.intents ? `<fieldset class="intent-options"><legend>Which matches what you said?</legend>${task.intents.map(intent => `<label class="check-label"><input type="radio" name="reply-intent" value="${esc(intent.id)}" ${draft.intent === intent.id ? 'checked' : ''}><span>${esc(intent.labelDe ?? intent.label)}</span></label>`).join('')}${meaning(task.intents.map(intent => intent.label).join('\n'))}<p class="fine">Your choice determines the next follow-up.</p></fieldset>` : ''}
-        <details id="used-phrases" ${draft.phrasesRevealed ? 'open' : ''}><summary>Phrases I actually used without reading</summary><p class="fine">Select only phrases used in your completed spoken answer. This is self-reported evidence.</p>
+        <details id="used-phrases" ${draft.phrasesRevealed ? 'open' : ''}><summary>Phrases I actually used without reading</summary><p class="fine">Tick only phrases you actually used.</p>
           ${(task.phraseIds ?? []).map(id => `<label class="check-label"><input type="checkbox" data-used-phrase="${esc(id)}" ${draft.phraseIds.includes(id) ? 'checked' : ''}><span lang="de">${esc(phrase(id).de)}</span></label>`).join('')}</details>
         <label class="focus-field">One thing to improve next time<select id="next-focus">${FOCUS_OPTIONS.map(([value, label]) => `<option value="${value}" ${draft.focus === value ? 'selected' : ''}>${label}</option>`).join('')}</select></label>
-        <p class="fine" id="independence-note"></p>${gradeButtons()}<p class="fine">Your self-rating is saved once. Open-ended German is not automatically graded.</p></section>`}`;
+        <p class="fine" id="independence-note"></p>${gradeButtons()}<p class="fine">Your rating is saved once.</p></section>`}`;
     await attachRecorder();
     el.querySelector('#hear-question').addEventListener('click', event => { void say(el.querySelector('#current-prompt').textContent, event.currentTarget); });
     el.querySelector('#rephrase-question').addEventListener('click', event => {
