@@ -71,10 +71,26 @@ function applyTheme() {
 }
 themeQuery.addEventListener('change', applyTheme);
 
-document.querySelector('#navigation').innerHTML = [
-  ['today', 'home', 'Today'], ['lessons', 'messages', 'Lessons'], ['words', 'book', 'Words'], ['ai', 'mic', 'AI Talk'], ['progress', 'chart', 'Progress'],
-].map(([route, symbol, label]) => `<a class="nav-link" href="#${route}" data-nav="${route}">${icon(symbol)}<span>${label}</span></a>`).join('');
+const PRIMARY_NAV = [['today', 'home', 'Today'], ['lessons', 'messages', 'Lessons'], ['words', 'book', 'Words'], ['progress', 'chart', 'Progress']];
+const MORE_NAV = [['ai', 'mic', 'AI Talk'], ['assessments', 'check', 'Checks'], ['practice', 'briefcase', 'Workplace'], ['settings', 'settings', 'Settings'], ['how', 'eye', 'How progress works']];
+const navLink = ([route, symbol, label]) => `<a class="nav-link" href="#${route}" data-nav="${route}">${icon(symbol)}<span>${label}</span></a>`;
+document.querySelector('#navigation').innerHTML = `${PRIMARY_NAV.map(navLink).join('')}
+  <details class="nav-more"><summary class="nav-link">${icon('layers')}<span>More</span></summary>
+    <div class="nav-more-panel">${MORE_NAV.map(navLink).join('')}</div></details>`;
+// Settings is in the menu now, so the sidebar footer link is desktop decoration only.
 document.querySelector('#settings-link').insertAdjacentHTML('afterbegin', icon('settings'));
+const moreMenu = document.querySelector('.nav-more');
+// The sidebar shows every entry at once; the bottom bar needs a real menu.
+const wideNav = matchMedia('(min-width: 761px)');
+const syncMoreMenu = () => { moreMenu.open = wideNav.matches; };
+wideNav.addEventListener('change', syncMoreMenu);
+syncMoreMenu();
+document.addEventListener('click', event => {
+  if (!wideNav.matches && moreMenu.open && !moreMenu.contains(event.target)) moreMenu.open = false;
+});
+moreMenu.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !wideNav.matches && moreMenu.open) { moreMenu.open = false; moreMenu.querySelector('summary').focus(); }
+});
 
 window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; });
 function updateConnection() {
@@ -172,12 +188,17 @@ async function boot() {
       applyTheme();
       const route = location.hash.slice(1) || 'today';
       const nav = route === 'ai' || route.startsWith('ai/session/') ? 'ai'
-        : route === 'words' || route.startsWith('word-session/') || route === 'phrases' ? 'words'
-          : route === 'practice' || route.startsWith('assessment') || route.startsWith('session/') || route.startsWith('resource') || route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
+        : route.startsWith('assessment') ? 'assessments'
+          : route === 'words' || route.startsWith('word-session/') || route === 'phrases' ? 'words'
+            : route === 'practice' || route.startsWith('session/') || route.startsWith('resource') ? 'practice'
+              : route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
       document.querySelectorAll('[data-nav]').forEach(link => {
         if (link.dataset.nav === nav) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
+      // Mark the menu itself when one of its entries is the current screen.
+      moreMenu.dataset.active = String(MORE_NAV.some(([entry]) => entry === nav));
+      syncMoreMenu();
       const viewContext = { ...context, signal: routeController.signal };
       try {
         if (route.startsWith('session/')) {

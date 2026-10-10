@@ -104,6 +104,8 @@ html[data-theme='dark'] {
 }
 
 * { box-sizing: border-box; }
+/* The fixed mobile nav must never cover a scrolled-to target. */
+html { scroll-padding-bottom: 96px; }
 body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.6; font-family: var(--font-ui); }
 button, input, textarea, select { font: inherit; }
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
@@ -242,7 +244,7 @@ audio { width: 100%; max-width: 100%; height: 44px; }
   #navigation { position: fixed; z-index: var(--z-nav); bottom: 0; left: 0; right: 0; display: flex; gap: 3px; padding: 7px 15px calc(7px + env(safe-area-inset-bottom)); background: var(--surface); border-top: var(--border) solid var(--line); }
   .nav-link { flex: 1; flex-direction: column; gap: 3px; padding: 7px 8px; font-size: var(--text-xs); min-height: 54px; }
   .nav-link .icon { width: 20px; height: 20px; }
-  .topbar { position: absolute; right: 0; top: 0; height: 73px; min-height: 0; padding: 16px 20px; border-bottom: 0; }
+  .topbar { position: sticky; top: 0; z-index: calc(var(--z-nav) - 1); min-height: 0; padding: var(--space-3) var(--space-4); border-bottom: var(--border) solid var(--line); background: var(--surface); justify-content: flex-end; }
   .topbar-title, .connection { display: none; }
   #main { padding: 25px 18px; }
   h1 { font-size: var(--text-2xl); }
@@ -267,3 +269,21 @@ audio { width: 100%; max-width: 100%; height: 44px; }
 .prov-list dd { margin: 0; color: var(--muted); font-size: var(--text-sm); max-width: 70ch; }
 .plain-list { margin: var(--space-4) 0 0; padding-left: var(--space-5); display: grid; gap: var(--space-2); font-size: var(--text-sm); max-width: 70ch; }
 .how-link { font-size: var(--text-xs); }
+/* Navigation: a flat list in the desktop sidebar, a bottom bar with a menu on mobile. */
+.nav-more > summary { list-style: none; cursor: pointer; }
+.nav-more > summary::-webkit-details-marker { display: none; }
+.nav-more[data-active='true'] > summary { background: var(--tint); color: var(--tint-ink); font-weight: 650; }
+@media (min-width: 761px) {
+  .nav-more { display: contents; }
+  .nav-more > summary { display: none; }
+  .nav-more-panel { display: grid; gap: var(--space-2); }
+}
+@media (max-width: 760px) {
+  .nav-more { position: relative; flex: 1; display: flex; }
+  .nav-more > summary { flex: 1; }
+  .nav-more-panel { position: absolute; bottom: calc(100% + var(--space-2)); right: 0; min-width: 232px;
+    display: grid; gap: var(--space-1); padding: var(--space-2); background: var(--surface);
+    border: var(--border) solid var(--line); border-radius: var(--radius-md); box-shadow: 0 -6px 24px rgb(0 0 0 / 18%); }
+  .nav-more-panel .nav-link { flex-direction: row; justify-content: flex-start; gap: var(--space-3);
+    font-size: var(--text-sm); min-height: 46px; padding: var(--space-2) var(--space-3); }
+}
