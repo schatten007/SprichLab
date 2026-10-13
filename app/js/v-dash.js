@@ -5,7 +5,7 @@ import { recommendation } from './adaptive.js';
 import { curriculumStage, dailyQueue } from './daily.js';
 import { duePhrases } from './srs.js';
 import { tasksFor } from './session.js';
-import { esc, icon, minutes, progressBar, safeAction } from './ui.js';
+import { esc, icon, minutes, progressBar, safeAction, provenance, howLink } from './ui.js';
 import { renderToday as renderStarterToday } from './v-lessons.js';
 import { pathPicker, bindPathPicker } from './starter-ui.js';
 
@@ -27,7 +27,7 @@ export async function render(el, ctx) {
   const heroDescription = session?.kind === 'review' ? 'Recall your phrases, compare with a model, and choose an honest rating.' : session?.kind === 'resource' ? 'Return to the source activity and save your own German response.' : mission.subtitle;
   el.innerHTML = `
     <div class="dashboard-heading"><div><p class="eyebrow">${esc(new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', timeZone: state.preferences.timeZone }))}</p>
-      <h1>${esc(greeting)}</h1><p class="lede">Useful German for your next interview, your next colleague, your next step.</p></div><span class="pill green">Stage ${stage.number} of 6 · your pace</span></div>
+       <h1 tabindex="-1">${esc(greeting)}</h1><p class="lede">Useful German for your next interview, your next colleague, your next step.</p></div><span class="pill green">Stage ${stage.number} of 6 · your pace</span></div>
     ${pathPicker(state)}
     ${state.legacy && !state.attempts.length ? '<div class="callout amber section-gap"><strong>A fresh, reliable baseline.</strong> Previous trainer data is preserved in your progress backup.</div>' : ''}
     <section class="hero section-gap" aria-labelledby="mission-title"><div class="hero-main"><div class="pills"><span class="pill">${session ? 'CONTINUE YOUR PRACTICE' : 'YOUR DAILY FOCUS'}</span><span class="hero-number">${mission.number} / ${MISSIONS.length}</span></div>
@@ -50,13 +50,13 @@ export async function render(el, ctx) {
         <div><div class="queue-heading"><strong>${esc(item.title)}</strong><span>${item.minutes} min</span></div><p>${esc(item.detail)}</p>
         <div class="queue-actions"><span class="pill ${item.done ? 'green' : ''}">${item.done ? 'Saved' : item.optional ? 'Optional for this short session' : 'Ready'}</span>
           <button class="text-button" data-queue-action="${item.id}">${item.done ? 'Review saved work' : { review: 'Start due review', resource: 'Open resource activity', mission: 'Start / resume mission', phrases: 'Open phrase models', reflection: 'Add reflection' }[item.action]} ${icon('arrow')}</button></div></div></li>`).join('')}</ol>
-      <p class="fine">Budgets guide your practice. The timer counts active in-app sessions; outside study is self-reported separately. Completed work stays in Progress when you change focus.</p></section>
+      ${provenance('measured')} ${howLink()}</section>
     <div class="stack"><section class="card"><p class="eyebrow">${RESOURCES.length} CURATED RESOURCES</p><h2>Hear German in real situations.</h2><p class="small muted section-gap">Short lessons, workplace audio, pronunciation practice, and a speaking task to bring back here.</p><a class="btn secondary" href="#resources">Browse German resources ${icon('arrow')}</a></section>
       <section class="card review-card"><div class="card-title"><h2>Make it easier to remember</h2><span class="circle-icon">${icon('refresh')}</span></div><p class="small muted">${due.length ? `${due.length} phrases are due. Recall before revealing the model.` : 'Your phrases return when they are due. You can also collect your own useful expressions.'}</p><button class="btn secondary" id="review-now">${due.length ? 'Review due phrases' : 'Explore useful phrases'} ${icon('arrow')}</button></section>
       <section class="card personal-card"><p class="eyebrow">MAKE IT YOURS</p><h2>${state.profile.studies ? 'Practise with your own story.' : 'Your story makes better practice.'}</h2><p class="small muted section-gap">${state.profile.studies ? `Your studies: ${esc(state.profile.studies)}. Bring one real example into the conversation.` : 'Add your studies, experience, and availability to keep your answers true to you.'}</p><a class="inline-link" href="#settings">${state.profile.studies ? 'Edit your profile' : 'Add your background'} ${icon('arrow')}</a></section></div></div>
     <section class="card section-gap"><div class="card-title"><div><p class="eyebrow">ONE TAKEAWAY</p><h2>What can you use in real life?</h2></div>${plan.reflectionAt ? '<span class="pill green">Reflection saved</span>' : ''}</div>
       <form id="reflection-form"><label for="daily-reflection">A useful sentence and where you will use it</label><textarea id="daily-reflection" lang="de" maxlength="2000" required placeholder="Heute kann ich … Das möchte ich … benutzen.">${esc(plan.reflection)}</textarea>
-      <div class="btn-row"><button class="btn" type="submit">Save today’s takeaway ${icon('check')}</button><span class="fine">A qualitative note, with no automatic time or language score.</span></div></form></section>
+      <div class="btn-row"><button class="btn" type="submit">Save today’s takeaway ${icon('check')}</button><span class="fine">${provenance('reported')}</span></div></form></section>
     <div class="daily-nudge"><span>${icon('spark')}</span><p><strong>Stage ${stage.number}: ${esc(stage.title)}.</strong> ${esc(stage.realWorld)}</p></div>`;
   safeAction(el.querySelector('#start-mission'), () => session ? ctx.go(`session/${session.id}`) : ctx.startMission(mission.id), ctx.error);
   bindPathPicker(el, ctx);

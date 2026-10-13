@@ -22,7 +22,7 @@ function profileSummary(state) {
   const fields = selectedFields(state);
   if (!fields.length) return '<p class="fine">No profile facts selected yet. Open Settings and add your studies or experience so replies stay consistent with you.</p>';
   return `<dl class="fact-list">${fields.map(field => `<dt>${esc(PROFILE_LABELS[field])}</dt><dd lang="de">${esc(state.profile[field])}</dd>`).join('')}</dl>
-    <p class="fine">These profile facts accompany the answers you choose to send. The name field is excluded; names you write inside an answer or selected fact are still included.</p>`;
+    <p class="fine">Sent with the answers you choose. Your name is never added for you.</p>`;
 }
 
 function statusLine(status) {
@@ -82,8 +82,8 @@ export async function renderLobby(el, ctx) {
   let alive = true;
 
   el.innerHTML = `${pageHeading('AI TALK', 'A private German conversation that waits for you.', 'Optional, unscored roleplay. Answers you choose to send go through your gateway to its provider; conversations are saved on this device.')}
-    <div class="practice-toolbar"><span class="pill green">Push to talk · 60 seconds · send only when you choose</span><a class="inline-link" href="#practice">Offline missions ${icon('messages')}</a></div>
-    <div class="grid-2 section-gap"><section class="card" id="ai-setup" aria-live="polite"></section><section class="card" id="ai-start"></section></div>
+     <div class="practice-toolbar"><span class="pill green">Push to talk · 60 seconds · send only when you choose</span><a class="inline-link" href="#practice">Offline missions ${icon('messages')}</a></div>
+     <p id="ai-setup-status" class="sr-only" aria-live="polite"></p><div class="grid-2 section-gap"><section class="card" id="ai-setup"></section><section class="card" id="ai-start"></section></div>
     <div id="ai-conversations"></div>
     <section class="card section-gap" id="ai-companion"></section>`;
 
@@ -94,7 +94,8 @@ export async function renderLobby(el, ctx) {
       host.innerHTML = `<p class="eyebrow">PRIVATE CONNECTION</p><h2>${loading ? 'Checking the gateway…' : 'AI gateway unavailable'}</h2>
         ${setupError ? `<p class="small section-gap" role="alert">${esc(setupError)}</p>` : ''}
         <p class="fine section-gap">Start <code>npm run ai:gateway</code> in a second terminal, then check again. German device voices and Gemini Companion need no gateway.</p>
-        <button class="btn secondary" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
+         <button class="btn secondary" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
+      el.querySelector('#ai-setup-status').textContent = loading ? 'Checking the AI connection.' : 'AI connection unavailable.';
       safeAction(host.querySelector('#ai-retry'), refresh, ctx.error);
       return;
     }
@@ -111,7 +112,8 @@ export async function renderLobby(el, ctx) {
       <p class="fine section-gap">${status.naturalVoiceConfigured ? 'ElevenLabs is configured; its Free tier and remaining credits are checked before each new synthesis.' : 'German device speech needs no TTS API key. Add a German voice in your device settings if needed.'} <a href="#settings">Voice settings</a></p>
       ${status.authenticated ? usageCard(usage, status) : ''}
       ${missingSetup ? '<p class="fine">Gemini Companion below needs no gateway at all.</p>' : ''}
-      <button class="text-button" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
+       <button class="text-button" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
+    el.querySelector('#ai-setup-status').textContent = status?.authenticated ? 'AI connection unlocked.' : status ? 'AI connection setup is incomplete.' : loading ? 'Checking the AI connection.' : 'AI connection unavailable.';
     safeAction(host.querySelector('#ai-retry'), refresh, ctx.error);
     host.querySelector('#ai-unlock')?.addEventListener('submit', async event => {
       event.preventDefault();
@@ -232,7 +234,8 @@ export async function renderSession(el, ctx, id) {
   const aiSpeech = createAISpeech(ctx, client);
 
   el.innerHTML = `<a class="inline-link" href="#ai">${icon('back')}AI Talk</a>
-    ${assessed ? `${pageHeading('GRADED ROLEPLAY', session.context.title, definition.scenario.learnerTask)}<p class="fine">${checkpoint ? 'Checkpoint: answer models and English question translations are hidden.' : 'Practice: answer help and English question meanings are recorded.'} Aim for 5–8 short replies, then choose End &amp; grade. This grade is based on submitted text/transcripts, not pronunciation.</p>` : ''}
+     ${pageHeading(assessed ? 'GRADED ROLEPLAY' : 'AI TALK', assessed ? session.context.title : session.context.title, assessed ? definition.scenario.learnerTask : session.context.goal)}
+     ${assessed ? `<p class="fine">${checkpoint ? 'Checkpoint: answer models and English question translations are hidden.' : 'Practice: answer help and English question meanings are recorded.'} Aim for 5–8 short replies, then choose End &amp; grade. This grade is based on submitted text/transcripts, not pronunciation.</p>` : ''}
     <div id="ai-session"></div>`;
 
   function transcriptCard() {

@@ -8,7 +8,8 @@ import { mountGeminiExport } from './gemini-export.js';
 import { starterGeminiSource } from './gemini-pack.js';
 import { courseError, wordCard, bindWordActions, pathPicker, bindPathPicker, startStarterClock, mountCompanionReflection,
   lessonCard, lessonMeta, levelPill, languageFocus, prepLine, supportButtons, bindSupportButtons } from './starter-ui.js';
-import { esc, icon, pageHeading, safeAction, duration, progressBar } from './ui.js';
+import { esc, icon, pageHeading, safeAction, duration, progressBar, provenance, howLink, blockMeter, minutes } from './ui.js';
+import { rewards } from './rewards.js';
 import { dateKey } from './model.js';
 
 export async function render(el, ctx) {
@@ -25,30 +26,39 @@ export async function render(el, ctx) {
   const nextMeta = lessonMeta(next.lesson);
   let view = 'path';
   el.innerHTML = `${pageHeading('YOUR PATH', 'Small lessons, in a useful order.', `${course.lessons.length} lessons from first words to work conversations. Every lesson stays open — the path only suggests what comes next.`)}
-    <div class="practice-toolbar"><div class="btn-row" role="tablist" aria-label="Lesson view"><button class="btn" id="view-path" role="tab" aria-selected="true">My path</button><button class="btn secondary" id="view-all" role="tab" aria-selected="false">All lessons</button></div>
+    <div class="practice-toolbar"><div class="btn-row segmented" role="tablist" aria-label="Lesson view"><button class="btn secondary" id="view-path" role="tab" aria-selected="true" aria-controls="path-view">My path</button><button class="btn secondary" id="view-all" role="tab" aria-selected="false" aria-controls="all-view" tabindex="-1">All lessons</button></div>
       <div class="btn-row"><a class="btn secondary" href="#assessments">Checks &amp; grades</a><a class="btn secondary" href="#words">Vocabulary ${icon('book')}</a><a class="inline-link" href="#practice">Workplace missions · A2–B1</a></div></div>
-    <section id="path-view">
+    <section id="path-view" role="tabpanel" aria-labelledby="view-path">
       <section class="card section-gap next-lesson"><div class="card-title"><div><p class="eyebrow">RECOMMENDED NEXT · STAGE ${stageIndex + 1} OF ${stages.length}</p><h2>${esc(nextMeta.title)}</h2></div>${levelPill(nextMeta.level)}</div>
         <p lang="de" class="starter-model">${esc(nextMeta.titleDe)}</p><p>${esc(next.lesson.goal)}</p>
         <p class="fine">${esc(next.reason)}</p>
-        ${next.prep.length ? `<p class="fine prep-line">Useful first: ${next.prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>` : ''}
+        ${next.prep.length ? `<p class="small prep-line">Useful first: ${next.prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>` : ''}
         ${next.session ? `<div class="btn-row"><a class="btn" href="#learn/${esc(next.session.id)}">Continue lesson ${icon('arrow')}</a><a class="text-button" href="#lesson/${esc(next.lesson.id)}">See the lesson first</a></div>` : supportButtons(next.lesson.id)}</section>
-      <div class="stage-list section-gap">${stages.map((item, index) => `<section class="card stage-card ${item.stage.id === stage.stage.id ? 'current-stage' : ''}"><div class="card-title"><div><p class="eyebrow">STAGE ${index + 1} · ${esc(item.stage.title)}</p><h3>${esc(item.stage.lede)}</h3></div><span class="pill ${item.done === item.total ? 'green' : ''}">${item.done} / ${item.total}</span></div>
-        ${progressBar(item.total ? item.done / item.total * 100 : 0, `${item.stage.title} progress`)}
+      <div class="stage-list section-gap">${stages.map((item, index) => { const current = item.stage.id === stage.stage.id;
+    return `<details class="card stage-card ${current ? 'current-stage' : ''}" ${current ? 'open' : ''}><summary><div class="card-title"><div><p class="eyebrow">STAGE ${index + 1} · ${esc(item.stage.title)}</p><h3>${esc(item.stage.lede)}</h3></div><span class="pill ${item.done === item.total ? 'green' : ''}">${item.done} / ${item.total}</span></div>
+        ${progressBar(item.total ? item.done / item.total * 100 : 0, `${item.stage.title} progress`)}</summary>
         <ol class="stage-lessons">${item.lessons.map(lesson => { const meta = lessonMeta(lesson); const status = lessonStatus(starter, lesson.id);
-          return `<li class="${status}"><a href="#lesson/${esc(lesson.id)}"><span>${status === 'practised' ? icon('check') : status === 'active' ? icon('clock') : `<em>${meta.number}</em>`}</span><span><strong>${esc(meta.title)}</strong><small>${esc(meta.level === 'starter' ? 'Starter' : meta.level)} · ${esc(moduleById(meta.module).title)}</small></span></a></li>`;
-        }).join('')}</ol></section>`).join('')}</div></section>
-    <section id="all-view" hidden><section class="card section-gap"><div class="form-grid">
+      return `<li class="${status}"><a class="text-button" href="#lesson/${esc(lesson.id)}"><span>${status === 'practised' ? icon('check') : status === 'active' ? icon('clock') : `<em>${meta.number}</em>`}</span><span><strong>${esc(meta.title)}</strong><small>${esc(meta.level === 'starter' ? 'Starter' : meta.level)} · ${esc(moduleById(meta.module).title)}</small></span></a></li>`;
+    }).join('')}</ol></details>`; }).join('')}</div></section>
+    <section id="all-view" hidden role="tabpanel" aria-labelledby="view-all"><section class="card section-gap"><details class="lesson-filters"><summary>Filter lessons</summary><div class="form-grid section-gap">
       <label>Search lessons<input type="text" id="lesson-search" placeholder="Situation, German phrase, or goal…"></label>
       <label>Level<select id="lesson-level"><option value="all">All levels</option>${COURSE_LEVELS.map(level => `<option value="${level.id}">${esc(level.short)} · ${esc(level.label)}</option>`).join('')}</select></label>
       <label>Topic<select id="lesson-topic"><option value="all">All topics</option>${COURSE_TOPICS.map(topic => `<option value="${topic.id}">${esc(topic.label)}</option>`).join('')}</select></label>
       <label>Speaking skill<select id="lesson-skill"><option value="all">All skills</option>${COURSE_SKILLS.map(skill => `<option value="${skill.id}">${esc(skill.label)}</option>`).join('')}</select></label>
       <label>Status<select id="lesson-status"><option value="all">Any status</option><option value="new">Not practised yet</option><option value="active">In progress</option><option value="practised">Practised</option></select></label>
-      </div><p class="fine section-gap" id="lesson-count" aria-live="polite"></p></section>
-      <div class="starter-grid" id="lesson-cards">${pathLessons(course).map(lesson => lessonCard(course, starter, lesson)).join('')}</div>
-      <p class="card section-gap" id="lesson-empty" hidden>No lesson matches these filters. Clear the search or choose another level.</p></section>`;
+      </div></details><p class="fine section-gap" id="lesson-count" aria-live="polite"></p></section>
+      <div class="starter-grid" id="lesson-cards"></div>
+      <p class="card section-gap" id="lesson-empty" hidden>No lesson matches these filters. Clear the search or choose another level.</p></section>
+    <div class="status-foot">${provenance('self-rated')} ${howLink()}</div>`;
   bindSupportButtons(el, ctx);
-  const cards = [...el.querySelectorAll('#lesson-cards [data-lesson]')];
+  // The library is 48 cards; it is only built when the learner opens that tab.
+  let cards = [];
+  const buildLibrary = () => {
+    if (cards.length) return;
+    el.querySelector('#lesson-cards').innerHTML = pathLessons(course).map(lesson => lessonCard(course, starter, lesson)).join('');
+    cards = [...el.querySelectorAll('#lesson-cards [data-lesson]')];
+    bindSupportButtons(el.querySelector('#lesson-cards'), ctx);
+  };
   const filter = () => {
     const query = el.querySelector('#lesson-search').value.trim().toLocaleLowerCase('de');
     const level = el.querySelector('#lesson-level').value;
@@ -66,20 +76,26 @@ export async function render(el, ctx) {
     el.querySelector('#lesson-count').textContent = `${shown} of ${cards.length} lessons · ${practised.size} practised`;
     el.querySelector('#lesson-empty').hidden = shown > 0;
   };
-  filter();
   ['#lesson-search', '#lesson-level', '#lesson-topic', '#lesson-skill', '#lesson-status']
     .forEach(selector => el.querySelector(selector).addEventListener('input', filter));
   const show = next => {
     view = next;
+    if (view === 'all') { buildLibrary(); filter(); }
     el.querySelector('#path-view').hidden = view !== 'path';
     el.querySelector('#all-view').hidden = view !== 'all';
-    el.querySelector('#view-path').className = `btn ${view === 'path' ? '' : 'secondary'}`;
-    el.querySelector('#view-all').className = `btn ${view === 'all' ? '' : 'secondary'}`;
     el.querySelector('#view-path').setAttribute('aria-selected', String(view === 'path'));
     el.querySelector('#view-all').setAttribute('aria-selected', String(view === 'all'));
+    el.querySelector('#view-path').tabIndex = view === 'path' ? 0 : -1;
+    el.querySelector('#view-all').tabIndex = view === 'all' ? 0 : -1;
   };
   el.querySelector('#view-path').addEventListener('click', () => show('path'));
   el.querySelector('#view-all').addEventListener('click', () => show('all'));
+  el.querySelector('[role="tablist"]').addEventListener('keydown', event => {
+    if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+    event.preventDefault();
+    show(event.key === 'Home' ? 'path' : event.key === 'End' ? 'all' : view === 'path' ? 'all' : 'path');
+    el.querySelector(`#view-${view}`).focus();
+  });
 }
 
 export async function renderOverview(el, ctx, id) {
@@ -125,21 +141,43 @@ export async function renderToday(el, ctx) {
   const due = dueWords(course, starter);
   const stage = currentStage(course, starter);
   const practised = practisedLessons(starter);
-  el.innerHTML = `${pageHeading('ONE SMALL CONVERSATION', state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.', 'Say a useful sentence, try it with less help, then keep talking with Gemini.')}
-    ${pathPicker(state)}
-    <section class="hero starter-hero section-gap"><div class="hero-main"><p class="eyebrow">TODAY’S LESSON · ${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p>
-      <h2>${esc(meta.title)}</h2><div class="pills">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span></div>
-      <p>${esc(chosen.goal)}</p><p class="starter-hero-words" lang="de">${esc(chosen.warmup.de)}</p><p>${esc(chosen.warmup.en)}</p>
+  const reward = rewards(state);
+  el.innerHTML = `${pageHeading('ONE SMALL CONVERSATION', state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.', 'One lesson at a time. Say a useful sentence out loud, then keep the conversation going.')}
+    <section class="card next-lesson section-gap"><p class="eyebrow">${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p>
+      <h2>${esc(meta.title)}</h2>
+      <div class="pills section-gap">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span>${done ? '<span class="pill green">Done today</span>' : ''}</div>
+      <p class="starter-model" lang="de">${esc(chosen.warmup.de)}</p><p>${esc(chosen.warmup.en)}</p>
+      <p class="small">${esc(chosen.goal)}</p>
       ${chosen.id === next.lesson.id ? `<p class="fine">${esc(next.reason)}</p>` : ''}
-      ${active ? `<div class="btn-row"><a class="btn hero-cta" href="#learn/${esc(active.id)}">Resume lesson ${icon('arrow')}</a><a class="hero-more" href="#lessons">Your path</a></div>`
-      : `<div class="btn-row"><button class="btn hero-cta" data-start-lesson="${esc(chosen.id)}" data-support="guided">${done ? 'Practise another variation' : 'Start guided'} ${icon('arrow')}</button><button class="btn secondary" data-start-lesson="${esc(chosen.id)}" data-support="light">Less help</button><a class="hero-more" href="#lessons">Your path</a></div>`}</div></section>
-    <section class="card section-gap"><div class="card-title"><h2>Your speaking routine</h2><span class="pill">${practised.size} / ${course.lessons.length} lessons practised</span></div>
-      <ol class="starter-routine"><li><strong>Review a few words</strong><p class="fine">${due.length ? `${due.length} words are due for spoken recall.` : 'Start with up to five words from today’s lesson.'}</p><button class="btn secondary" id="today-words">${due.length ? 'Review due words' : 'Learn five words'}</button></li>
-      <li><strong>Say short answers</strong><p class="fine">Hear a model, change a detail, and answer with less help. About ${meta.minutes} minutes, at your pace.</p><a href="#lesson/${esc(chosen.id)}">See the lesson</a></li>
-      <li><strong>Keep talking on your phone</strong><p class="fine">Copy the lesson pack to Gemini and try a few natural exchanges.</p><a href="#gemini/${esc(chosen.id)}">Export this lesson for Gemini</a></li></ol>
-      <label>Choose today’s lesson<select id="starter-focus" aria-label="Choose today’s lesson">${pathLessons(course).map(item => { const entry = lessonMeta(item); return `<option value="${esc(item.id)}" ${item.id === chosen.id ? 'selected' : ''}>${esc(entry.level === 'starter' ? 'Starter' : entry.level)} · ${esc(entry.title)}</option>`; }).join('')}</select></label>
-      <p class="fine section-gap">This assignment stays in place today. Repeat it or choose another lesson whenever you want. Viewing a word or exporting a pack does not count as spoken practice.</p></section>
-    <section class="card section-gap"><h2>One sentence to keep</h2><form id="starter-reflection"><label class="section-gap">Today’s takeaway<textarea aria-label="Today’s takeaway" maxlength="2000" required>${esc(plan.reflection)}</textarea></label><button class="btn secondary" type="submit">Save today’s takeaway</button><p class="fine" role="status" data-reflection-status>${plan.reflection ? 'Takeaway saved.' : ''}</p></form></section>`;
+      ${active ? `<div class="btn-row section-gap"><a class="btn" href="#learn/${esc(active.id)}">Resume lesson ${icon('arrow')}</a></div>`
+      : `<div class="btn-row section-gap"><button class="btn" data-start-lesson="${esc(chosen.id)}" data-support="guided">${done ? 'Practise again' : 'Start'} · ${meta.minutes} min ${icon('arrow')}</button>
+        <button class="text-button" data-start-lesson="${esc(chosen.id)}" data-support="light">Try with less help</button></div>`}
+      <div class="btn-row section-gap"><button class="btn secondary small-btn" id="today-words">${due.length ? `Review ${Math.min(due.length, 10)} words` : 'Learn five words'}</button>
+        <a class="btn secondary small-btn" href="#gemini/${esc(chosen.id)}">${icon('external')}Export for Gemini</a>
+        <a class="text-button" href="#lessons">Your path · ${practised.size} of ${course.lessons.length}</a></div>
+      <details class="today-swap section-gap"><summary>Change today’s lesson</summary>
+        <label>Choose today’s lesson<select id="starter-focus" aria-label="Choose today’s lesson">${pathLessons(course).map(item => { const entry = lessonMeta(item); return `<option value="${esc(item.id)}" ${item.id === chosen.id ? 'selected' : ''}>${esc(entry.level === 'starter' ? 'Starter' : entry.level)} · ${esc(entry.title)}</option>`; }).join('')}</select></label>
+        </details></section>
+
+    <section class="card today-status section-gap"><div class="status-row">
+        <div class="status-ring"><strong>${minutes(reward.ring.ms)}</strong><span>of ${reward.ring.goalMs / 60_000} min today</span>
+          ${progressBar(reward.ring.pct, `Today's goal: ${reward.ring.pct} per cent`)}</div>
+        <div class="status-streak"><strong>${reward.streak.streak} ${reward.streak.streak === 1 ? 'day' : 'days'}</strong><span>Practice streak</span>
+          <span>${reward.streak.restLeft} rest ${reward.streak.restLeft === 1 ? 'day' : 'days'} left</span></div>
+        <div class="status-week">${blockMeter(reward.week.map(day => day.qualifies), `Practice on the last seven days: ${reward.week.filter(day => day.qualifies).length} of 7 reached fifteen minutes`)}
+          <span>Last 7 days</span></div>
+      </div>
+      <div class="status-foot">${provenance('measured')} ${howLink()}</div></section>
+
+    ${reward.next ? `<section class="card section-gap milestone-next"><p class="eyebrow">NEXT MILESTONE</p>
+      <div class="card-title"><h2>${esc(reward.next.label)}</h2><span class="pill">${reward.next.value} / ${reward.next.target} ${esc(reward.next.unit)}</span></div>
+      ${progressBar(reward.next.value / reward.next.target * 100, `${reward.next.label}: ${reward.next.display} of ${reward.next.goal}`)}
+      <div class="status-foot">${provenance(reward.next.prov)}</div></section>` : ''}
+
+    <section class="card section-gap"><h2>One sentence to keep</h2><form id="starter-reflection"><label class="section-gap">Today’s takeaway<textarea aria-label="Today’s takeaway" maxlength="2000" required>${esc(plan.reflection)}</textarea></label>
+      <div class="btn-row section-gap"><button class="btn secondary" type="submit">Save today’s takeaway</button>${provenance('reported')}</div>
+      <p class="fine" role="status" data-reflection-status>${plan.reflection ? 'Takeaway saved.' : ''}</p></form></section>
+    <div class="section-gap">${pathPicker(state)}</div>`;
   bindPathPicker(el, ctx);
   bindSupportButtons(el, ctx);
   safeAction(el.querySelector('#today-words'), () => ctx.startWordPractice(due.length ? due.slice(0, 10).map(word => word.id) : plan.wordIds, 'recall'), ctx.error);
@@ -168,7 +206,8 @@ export async function renderSession(el, ctx, id) {
   el.innerHTML = `<a class="inline-link" href="#lessons">${icon('back')}Your path</a>${pageHeading(`${esc(meta.moduleTitle ?? 'LESSON')} · LESSON ${meta.number}`, lesson.title, lesson.goal)}
     <div class="starter-session-meta"><span data-starter-step></span><div class="pills">${levelPill(meta.level)}<span class="pill">${light ? 'Less help' : 'Guided'}</span></div><span class="fine" data-starter-time></span></div>
     <div data-starter-meter></div><section class="card section-gap" id="starter-task"></section>
-    <div class="btn-row section-gap"><button class="btn secondary" id="starter-back">${icon('back')}Previous step</button><button class="btn" id="starter-next">Next step ${icon('arrow')}</button></div><div class="section-gap" id="lesson-export"></div>`;
+    <div class="btn-row section-gap step-actions"><button class="btn secondary" id="starter-back">${icon('back')}Previous step</button><button class="btn" id="starter-next">Next step ${icon('arrow')}</button></div><div class="section-gap" id="lesson-export"></div>
+    <div class="status-foot">${howLink()}</div>`;
   const clock = startStarterClock(ctx, id, el);
   const persist = () => {
     if (!draft || session.completedAt || session.responses.some(response => response.taskId === task.id)) return pendingSave;
@@ -198,9 +237,11 @@ export async function renderSession(el, ctx, id) {
     el.querySelectorAll('[data-starter-grade]').forEach(button => {
       const grade = button.dataset.starterGrade;
       button.disabled = unavailable || saved || (grade !== 'again' && !spoken) || (grade === 'independent' && draft.hintUsed);
+      button.classList.toggle('secondary', grade !== (task.kind === 'warmup' ? 'unscored' : draft.hintUsed ? 'helped' : 'independent'));
     });
     el.querySelectorAll('#starter-task [data-say]').forEach(button => { button.disabled = unavailable; });
     el.querySelector('#starter-next').disabled = busy || (['warmup', 'speak'].includes(task.kind) && !saved);
+    el.querySelector('#starter-next').classList.toggle('secondary', ['warmup', 'speak'].includes(task.kind) && !saved);
     el.querySelector('#starter-back').disabled = busy || session.cursor === 0;
   }
   async function draw() {
@@ -211,20 +252,20 @@ export async function renderSession(el, ctx, id) {
     const saved = session.responses.find(response => response.taskId === task.id);
     draft = { ...starterDraft(), ...session.drafts[task.id], ...(saved ? { text: saved.text, aloud: saved.spoken, recordingMs: saved.recordingMs, recordingKey: saved.recordingKey, hintUsed: saved.hintUsed } : {}) };
     el.querySelector('[data-starter-step]').textContent = `Step ${session.cursor + 1} of ${steps.length}`;
-    el.querySelector('[data-starter-meter]').innerHTML = progressBar((session.cursor + 1) / steps.length * 100, 'Lesson progress');
+    el.querySelector('[data-starter-meter]').innerHTML = `${blockMeter(steps.map((_, index) => index <= session.cursor), `Step ${session.cursor + 1} of ${steps.length}`)}${progressBar((session.cursor + 1) / steps.length * 100, 'Lesson progress')}`;
     const body = el.querySelector('#starter-task');
-    if (task.kind === 'warmup') body.innerHTML = `<p class="eyebrow">SAY SOMETHING RIGHT AWAY</p><h2>Start with these words.</h2><p class="starter-model" lang="de">${esc(lesson.warmup.de)}</p><p lang="en">${esc(lesson.warmup.en)}</p><button class="btn secondary" data-say="${esc(lesson.warmup.de)}">${icon('volume')}Hear and repeat</button><p class="fine section-gap">Repeat the model once. This is supported practice, with no grade.</p><div data-starter-recorder></div>${saved ? '<p class="callout" role="status">Warm-up saved. You made a start.</p>' : '<button class="btn" data-starter-grade="unscored">Save warm-up &amp; continue</button>'}`;
+    if (task.kind === 'warmup') body.innerHTML = `<p class="eyebrow">SAY SOMETHING RIGHT AWAY</p><h2>Start with these words.</h2><p class="starter-model" lang="de">${esc(lesson.warmup.de)}</p><p lang="en">${esc(lesson.warmup.en)}</p><button class="btn secondary" data-say="${esc(lesson.warmup.de)}">${icon('volume')}Hear and repeat</button><p class="fine section-gap">Repeat the model once.</p><div data-starter-recorder></div>${saved ? '<p class="callout" role="status">Warm-up saved. You made a start.</p>' : '<button class="btn" data-starter-grade="unscored">Save warm-up &amp; continue</button>'}`;
     if (task.kind === 'words') body.innerHTML = `<p class="eyebrow">A FEW USEFUL WORDS</p><h2>Hear them. Say them. Notice the meaning.</h2><p class="fine section-gap">You will use these words in the conversation. They also have their own recall practice in Vocabulary.</p><div class="starter-grid">${session.content.words.map(word => wordCard(word, { actions: false })).join('')}</div>`;
     if (task.kind === 'patterns') body.innerHTML = `<p class="eyebrow">BUILD ONE SHORT SENTENCE</p><h2>Put your own detail in the gap.</h2>${lesson.patterns.map(pattern => `<div class="starter-pattern"><h3 lang="de">${esc(pattern.de)}</h3><p lang="en">${esc(pattern.en)}</p><p class="fine">${esc(pattern.note)}</p><button class="text-button" data-say="${esc(pattern.de)}">${icon('volume')}Hear pattern</button></div>`).join('')}${languageFocus(lesson)}`;
     if (task.kind === 'dialogue') body.innerHTML = `<p class="eyebrow">HEAR THE SITUATION</p><h2>A short model conversation.</h2><p class="fine section-gap">Listen to a line, then say it yourself.${task.alternates > 1 ? ' Practising this lesson again uses the other conversation.' : ''}</p><div class="starter-dialogue">${task.dialogue.map(line => `<div><span class="eyebrow">${esc(line.speaker)}</span><p lang="de">${esc(line.de)}</p><p class="fine" lang="en">${esc(line.en)}</p><button class="text-button" data-say="${esc(line.de)}">${icon('volume')}Hear line</button></div>`).join('')}</div>`;
     if (task.kind === 'speak') body.innerHTML = `<p class="eyebrow">${task.id === 'variation' ? 'A SMALL CHANGE' : 'YOUR TURN'}</p><h2>${esc(task.cue)}</h2>
       <div class="starter-question"><p lang="de">${esc(task.promptDe)}</p>${light ? `<details class="meaning"><summary>Meaning</summary><p lang="en">${esc(task.promptEn)}</p></details>` : `<p lang="en">${esc(task.promptEn)}</p>`}<button class="btn secondary" data-say="${esc(task.promptDe)}">${icon('volume')}Hear question</button></div>
       ${!saved ? `<button class="text-button" id="starter-hint" ${draft.hintUsed ? 'hidden' : ''}>${light ? 'I need the model answer' : 'Show model answer'}</button>` : ''}<div class="starter-pattern" id="starter-model" ${draft.hintUsed ? '' : 'hidden'}><p lang="de">${esc(task.modelDe)}</p><p lang="en">${esc(task.modelEn)}</p><p class="fine">Change the model to fit you. This attempt counts as supported.</p><button class="text-button" data-say="${esc(task.modelDe)}">Hear model</button></div><div data-starter-recorder></div>
-      ${saved ? `<p class="callout" role="status">Response saved · ${saved.outcome === 'independent' ? 'said on your own, self-reported' : saved.outcome === 'helped' ? 'practised with help' : 'marked to practise again'}.</p>` : `<p class="fine">One honest reflection is enough. English question meanings do not count as an answer hint.</p><div class="btn-row"><button class="btn secondary" data-starter-grade="again">Try again later</button><button class="btn secondary" data-starter-grade="helped">Needed help</button><button class="btn" data-starter-grade="independent">Said it on my own</button></div>`}`;
+      ${saved ? `<p class="callout" role="status">Response saved · ${saved.outcome === 'independent' ? 'said on your own' : saved.outcome === 'helped' ? 'practised with help' : 'marked to practise again'}.</p>` : `<div class="btn-row section-gap"><button class="btn secondary" data-starter-grade="again">Try again later</button><button class="btn secondary" data-starter-grade="helped">Needed help</button><button class="btn" data-starter-grade="independent">Said it on my own</button></div>`}<div class="status-foot">${provenance('self-rated')}</div>`;
     if (task.kind === 'finish') {
       const spoken = session.responses.filter(response => response.spoken).length;
       const recorded = session.responses.reduce((total, response) => total + response.recordingMs, 0);
-      body.innerHTML = `<p class="eyebrow">A SMALL CONVERSATION PRACTISED</p><h2>You made room for your voice.</h2><p class="section-gap">${spoken} spoken tasks practised · ${duration(recorded)} recorded. Support and self-ratings stay attached to each answer.</p><div class="btn-row">${session.completedAt ? `<span class="pill green">Lesson finished</span><a class="btn" href="#lessons">Continue the path ${icon('arrow')}</a><button class="btn secondary" data-start-lesson="${esc(lesson.id)}" data-support="light">Practise again with less help</button>` : '<button class="btn" id="finish-starter">Finish lesson</button>'}<button class="btn secondary" id="show-lesson-pack">Export for Gemini</button></div><p class="fine section-gap">Try the same situation in Gemini. Your lesson pack is below. Finishing this sequence is practice, not a proficiency score.</p><div id="lesson-takeaway"></div>`;
+      body.innerHTML = `<p class="eyebrow">A SMALL CONVERSATION PRACTISED</p><h2>You made room for your voice.</h2><div class="status-foot"><span>${spoken} spoken tasks practised</span>${provenance('self-rated')}<span>${duration(recorded)} recorded</span>${provenance('measured')}</div><div class="btn-row section-gap">${session.completedAt ? `<span class="pill green">Lesson finished</span><a class="btn" href="#lessons">Continue the path ${icon('arrow')}</a><button class="btn secondary" data-start-lesson="${esc(lesson.id)}" data-support="light">Practise again with less help</button>` : '<button class="btn" id="finish-starter">Finish lesson</button>'}<button class="btn secondary" id="show-lesson-pack">Export for Gemini</button></div><p class="fine section-gap">Try the same situation in Gemini with your lesson pack below.</p><div id="lesson-takeaway"></div>`;
       mountCompanionReflection(body.querySelector('#lesson-takeaway'), ctx, lesson.id);
       bindSupportButtons(body, ctx);
       body.querySelector('#finish-starter')?.addEventListener('click', act(async () => { await clock.flush(); await ctx.store.finishStarterSession(id); await draw(); }));
@@ -245,6 +286,7 @@ export async function renderSession(el, ctx, id) {
     })));
     updateControls();
     body.querySelector('h2')?.setAttribute('tabindex', '-1');
+    if (alive && !ctx.signal.aborted) body.querySelector('h2')?.focus();
   }
   el.querySelector('#starter-back').addEventListener('click', act(() => move(-1)));
   el.querySelector('#starter-next').addEventListener('click', act(() => move(1)));

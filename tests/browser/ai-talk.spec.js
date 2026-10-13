@@ -21,11 +21,19 @@ async function startConversation(page) {
   await expect(page.locator('.transcript-line.assistant').first()).toBeVisible();
 }
 
+/** The More menu is a flat sidebar list on desktop and a pop-up on mobile. */
+async function openMore(page) {
+  const summary = page.locator('.nav-more > summary');
+  if (await summary.isVisible()) await summary.click();
+}
+
 test('AI Talk unlocks, sends one pushed clip, and shows the partner reply', async ({ page }, testInfo) => {
   const errors = [];
   page.on('pageerror', error => errors.push(error.message));
   await unlock(page);
-  await expect(page.getByRole('link', { name: 'AI Talk' })).toHaveAttribute('aria-current', 'page');
+  // AI Talk lives in the More menu, which marks itself when one of its screens is current.
+  await expect(page.locator('.nav-more')).toHaveAttribute('data-active', 'true');
+  await expect(page.locator('.nav-more-panel .nav-link[href="#ai"]')).toHaveAttribute('aria-current', 'page');
   await startConversation(page);
 
   await page.getByRole('button', { name: 'Hold a short answer' }).click();
@@ -63,7 +71,8 @@ test('a typed answer still works, and the review never returns a score', async (
   await expect(page.getByText('Nothing here awards mastery or a pronunciation grade.')).toBeVisible();
   await page.screenshot({ path: testInfo.outputPath('ai-review.png'), fullPage: true });
 
-  await page.locator('.nav-link[href="#ai"]').click();
+  await openMore(page);
+  await page.locator('.nav-more-panel .nav-link[href="#ai"]').click();
   await expect(page.getByText(/exchanges · .* · reviewed/)).toBeVisible();
   expect(errors).toEqual([]);
 });

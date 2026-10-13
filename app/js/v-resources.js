@@ -34,7 +34,7 @@ export function render(el, ctx) {
       <label>Practice time<select id="resource-time" aria-label="Practice time"><option value="0">Any length</option><option value="10">Up to 10 minutes</option><option value="15">Up to 15 minutes</option><option value="20">Up to 20 minutes</option></select></label></div>
       <div class="resource-checks"><label class="check-label"><input id="resource-no-account" type="checkbox">No registration required</label><label class="check-label"><input id="resource-text" type="checkbox">Text or captions available</label><label class="check-label"><input id="resource-saved" type="checkbox">Saved resources only</label></div></section>
     <p id="resource-count" class="fine section-gap" aria-live="polite"></p><div id="resource-grid" class="resource-catalog-grid"></div>
-    <p class="fine section-gap">* Suggested placement by Sprich where the publisher does not assign a CEFR level. Practice times include the follow-up task; they are not video lengths. External resources require internet.</p>`;
+    <p class="fine section-gap">* Level suggested by Sprich. Times include the follow-up task. External sources need internet.</p>`;
   function draw() {
     const resources = filterResources(ctx.store.state, filters);
     el.querySelector('#resource-count').textContent = `${resources.length} ${resources.length === 1 ? 'resource matches' : 'resources match'} your filters`;
@@ -47,7 +47,7 @@ export function render(el, ctx) {
     const button = event.target.closest('[data-bookmark]');
     if (!button || button.disabled) return;
     button.disabled = true;
-    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); draw(); }
+    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); const id = button.dataset.bookmark; draw(); [...el.querySelectorAll('[data-bookmark]')].find(item => item.dataset.bookmark === id)?.focus(); }
     catch (error) { ctx.error(error.message); button.disabled = false; }
   });
   draw();
@@ -172,12 +172,12 @@ export async function renderActivity(el, ctx, sessionId) {
       <div id="resource-recorder"></div><p class="fine" id="resource-draft-status" aria-live="polite">Draft saved on this device</p>
       ${locked ? `<div class="callout"><strong>Practice response saved.</strong><p>This is unscored practice. ${draft.recordingMs ? `${duration(draft.recordingMs)} of recording was saved.` : 'Your written response is saved.'}</p></div>
         <div class="btn-row section-gap"><button class="btn" id="continue-mission">Practise the matching mission ${icon('arrow')}</button><a class="btn secondary" href="#today">Back to Today</a></div>` : `
-        <label class="outside-time">Minutes studied on the publisher’s site (optional)<input type="number" id="outside-minutes" min="0" max="120" step="1" value="${draft.externalMinutes}" aria-describedby="outside-time-error"><span class="field-hint">Self-reported outside study, kept separate from the measured timer.</span></label>
-        <p class="callout error small" id="outside-time-error" role="status" hidden>Use a whole number from 0 to 120 minutes.</p>
-        <p class="fine">Save a recording or write a response in Optional notes or transcript. Confirming that you spoke aloud alone does not save an artifact.</p>
+        <label class="outside-time">Minutes studied on the publisher’s site (optional)<input type="number" id="outside-minutes" min="0" max="120" step="1" value="${draft.externalMinutes}" aria-describedby="outside-time-error"><span class="field-hint">Self-reported, kept out of the measured timer.</span></label>
+         <p class="callout error small" id="outside-time-error" role="alert" hidden>Use a whole number from 0 to 120 minutes.</p>
+        <p class="fine">Save a recording or a written response to finish.</p>
         <button class="btn" id="finish-resource">Save response &amp; complete activity ${icon('check')}</button>`}</section>
       <aside class="stack"><section class="card"><p class="eyebrow">A SHORT WORKFLOW</p><ol class="guided-steps" lang="de">${resource.stepsDe.map(step => `<li>${esc(step)}</li>`).join('')}</ol>${englishMeaning(resource.stepsEn.join('\n'), { always })}
-        <p class="fine">The timer pauses while you are on another tab. Returning here and saving a response provides your practice evidence.</p></section>
+        <p class="fine">The timer pauses while you are on another tab.</p></section>
       <section class="card"><p class="eyebrow">CARRY A PHRASE FORWARD</p><h2>Keep something you can use.</h2><p class="fine">Save a short phrase and your own example. It becomes available for spoken recall.</p><details><summary>Add a personal phrase</summary>${phraseForm(resource)}</details></section></aside></div>`;
   if (!locked) {
     clock = createPracticeClock({ sessionId: session.id, timeZone: ctx.store.state.preferences.timeZone,

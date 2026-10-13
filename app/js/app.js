@@ -6,16 +6,25 @@ import { resourceById } from '../data/resources.js';
 import { createResourceSession } from './resources.js';
 import { createSpeechService } from './tts.js';
 import { esc, icon } from './ui.js';
-import * as Today from './v-dash.js';
-import * as Practice from './v-practice.js';
-import * as Phrases from './v-vocab.js';
-import * as Progress from './v-progress.js';
-import * as Settings from './v-settings.js';
-import * as Session from './v-train1.js';
-import * as Resources from './v-resources.js';
 import * as Lessons from './v-lessons.js';
 import * as Words from './v-words.js';
-import * as Gemini from './v-gemini.js';
+
+// Only the beginner path is in the core bundle. Every other screen is a
+// separate chunk, so the default route never downloads the workplace course UI.
+const views = {
+  today: () => import('./v-dash.js'),
+  practice: () => import('./v-practice.js'),
+  phrases: () => import('./v-vocab.js'),
+  progress: () => import('./v-progress.js'),
+  settings: () => import('./v-settings.js'),
+  resources: () => import('./v-resources.js'),
+  session: () => import('./v-train1.js'),
+  gemini: () => import('./v-gemini.js'),
+  ai: () => import('./v-ai.js'),
+  assessments: () => import('./v-assessments.js'),
+  how: () => import('./v-how.js'),
+};
+const SIMPLE_ROUTES = new Set(['today', 'lessons', 'words', 'practice', 'phrases', 'resources', 'progress', 'settings', 'how']);
 import { loadCourse, starterSnapshot } from './starter-content.js';
 import { createStarterSession, createWordSession } from './starter-state.js';
 import { warmAssessmentShell } from './assessment-offline.js';
@@ -45,16 +54,47 @@ function notify(message, error = false) {
   toastTimer = setTimeout(() => { toast.hidden = true; }, error ? 12_000 : 6500);
 }
 const showError = message => notify(message, true);
+export const LIGHT_PALETTES = ['paper', 'contrast'];
+/** The light palette is per-device, so one browser can stay high-contrast without changing the other. */
+function readPalette() {
+  try { return LIGHT_PALETTES.includes(localStorage.getItem('sprich.palette')) ? localStorage.getItem('sprich.palette') : 'paper'; }
+  catch { return 'paper'; }
+}
 function applyTheme() {
-  const theme = store?.state.preferences.theme ?? 'system';
-  document.documentElement.dataset.theme = theme === 'system' ? (themeQuery.matches ? 'dark' : 'light') : theme;
+  const mode = store?.state.preferences.theme ?? 'system';
+  const dark = mode === 'dark' || (mode === 'system' && themeQuery.matches);
+  const root = document.documentElement;
+  root.dataset.theme = dark ? 'dark' : 'light';
+  root.dataset.palette = dark ? 'night' : readPalette();
+  // Mirrored for the pre-paint script in index.html, which cannot read IndexedDB.
+  try { localStorage.setItem('sprich.mode', mode); } catch { /* Appearance still applies this session. */ }
 }
 themeQuery.addEventListener('change', applyTheme);
 
-document.querySelector('#navigation').innerHTML = [
-  ['today', 'home', 'Today'], ['lessons', 'messages', 'Lessons'], ['words', 'book', 'Words'], ['ai', 'mic', 'AI Talk'], ['progress', 'chart', 'Progress'],
-].map(([route, symbol, label]) => `<a class="nav-link" href="#${route}" data-nav="${route}">${icon(symbol)}<span>${label}</span></a>`).join('');
+const PRIMARY_NAV = [['today', 'home', 'Today'], ['lessons', 'messages', 'Lessons'], ['words', 'book', 'Words'], ['progress', 'chart', 'Progress']];
+const MORE_NAV = [['ai', 'mic', 'AI Talk'], ['assessments', 'check', 'Checks'], ['practice', 'briefcase', 'Workplace'], ['settings', 'settings', 'Settings'], ['how', 'eye', 'How progress works']];
+const navLink = ([route, symbol, label]) => `<a class="nav-link" href="#${route}" data-nav="${route}">${icon(symbol)}<span>${label}</span></a>`;
+document.querySelector('#navigation').innerHTML = `${PRIMARY_NAV.map(navLink).join('')}
+  <details class="nav-more"><summary class="nav-link">${icon('layers')}<span>More</span></summary>
+    <div class="nav-more-panel">${MORE_NAV.map(navLink).join('')}</div></details>`;
+// Settings is in the menu now, so the sidebar footer link is desktop decoration only.
 document.querySelector('#settings-link').insertAdjacentHTML('afterbegin', icon('settings'));
+const moreMenu = document.querySelector('.nav-more');
+// The sidebar shows every entry at once; the bottom bar needs a real menu.
+const wideNav = matchMedia('(min-width: 761px)');
+const syncMoreMenu = () => {
+  if (!wideNav.matches) { moreMenu.open = false; return; }
+  const route = location.hash.slice(1).split('/')[0];
+  moreMenu.open = MORE_NAV.some(([entry]) => entry === route);
+};
+wideNav.addEventListener('change', syncMoreMenu);
+syncMoreMenu();
+document.addEventListener('click', event => {
+  if (!wideNav.matches && moreMenu.open && !moreMenu.contains(event.target)) moreMenu.open = false;
+});
+moreMenu.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && !wideNav.matches && moreMenu.open) { moreMenu.open = false; moreMenu.querySelector('summary').focus(); }
+});
 
 window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; });
 function updateConnection() {
@@ -152,43 +192,56 @@ async function boot() {
       applyTheme();
       const route = location.hash.slice(1) || 'today';
       const nav = route === 'ai' || route.startsWith('ai/session/') ? 'ai'
-        : route === 'words' || route.startsWith('word-session/') || route === 'phrases' ? 'words'
-          : route === 'practice' || route.startsWith('assessment') || route.startsWith('session/') || route.startsWith('resource') || route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
+        : route.startsWith('assessment') ? 'assessments'
+          : route === 'words' || route.startsWith('word-session/') || route === 'phrases' ? 'words'
+            : route === 'practice' || route.startsWith('session/') || route.startsWith('resource') ? 'practice'
+              : route.startsWith('lesson') || route.startsWith('learn/') || route.startsWith('gemini/') ? 'lessons' : route;
       document.querySelectorAll('[data-nav]').forEach(link => {
         if (link.dataset.nav === nav) link.setAttribute('aria-current', 'page');
         else link.removeAttribute('aria-current');
       });
+      // Mark the menu itself when one of its entries is the current screen.
+      moreMenu.dataset.active = String(MORE_NAV.some(([entry]) => entry === nav));
+      syncMoreMenu();
       const viewContext = { ...context, signal: routeController.signal };
       try {
         if (route.startsWith('session/')) {
           const id = route.slice(8);
           cleanup = store.state.sessions.find(session => session.id === id)?.kind === 'resource'
-            ? await Resources.renderActivity(main, viewContext, id) : await Session.render(main, viewContext, id);
+            ? await (await views.resources()).renderActivity(main, viewContext, id)
+            : await (await views.session()).render(main, viewContext, id);
         }
-        else if (route.startsWith('resource/')) cleanup = await Resources.renderDetail(main, viewContext, route.slice(9));
-        else if (route.startsWith('ai/session/')) cleanup = await (await import('./v-ai.js')).renderSession(main, viewContext, route.slice(11));
-        else if (route === 'ai') cleanup = await (await import('./v-ai.js')).render(main, viewContext);
+        else if (route.startsWith('resource/')) cleanup = await (await views.resources()).renderDetail(main, viewContext, route.slice(9));
+        else if (route.startsWith('ai/session/')) cleanup = await (await views.ai()).renderSession(main, viewContext, route.slice(11));
+        else if (route === 'ai') cleanup = await (await views.ai()).render(main, viewContext);
         else if (route.startsWith('lesson/')) cleanup = await Lessons.renderOverview(main, viewContext, route.slice('lesson/'.length));
         else if (route.startsWith('learn/')) cleanup = await Lessons.renderSession(main, viewContext, route.slice('learn/'.length));
         else if (route.startsWith('word-session/')) cleanup = await Words.renderSession(main, viewContext, route.slice('word-session/'.length));
-        else if (route.startsWith('gemini/')) cleanup = await Gemini.render(main, viewContext, route.slice('gemini/'.length));
+        else if (route.startsWith('gemini/')) cleanup = await (await views.gemini()).render(main, viewContext, route.slice('gemini/'.length));
         else if (route === 'assessments' || route.startsWith('assessments/lesson/')) {
-          const views = await import('./v-assessments.js');
-          cleanup = await views.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));
+          const module = await views.assessments();
+          cleanup = await module.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));
         }
-        else if (route.startsWith('assessment-result/')) cleanup = await (await import('./v-assessments.js')).renderResult(main, viewContext, route.slice('assessment-result/'.length));
-        else if (route.startsWith('assessment/')) cleanup = await (await import('./v-assessments.js')).renderRun(main, viewContext, route.slice('assessment/'.length));
+        else if (route.startsWith('assessment-result/')) cleanup = await (await views.assessments()).renderResult(main, viewContext, route.slice('assessment-result/'.length));
+        else if (route.startsWith('assessment/')) cleanup = await (await views.assessments()).renderRun(main, viewContext, route.slice('assessment/'.length));
+        else if (route === 'lessons') cleanup = await Lessons.render(main, viewContext);
+        else if (route === 'words') cleanup = await Words.render(main, viewContext);
         else {
-          const view = { today: Today, lessons: Lessons, words: Words, practice: Practice, phrases: Phrases, resources: Resources, progress: Progress, settings: Settings }[route] ?? Today;
-          cleanup = await view.render(main, viewContext);
+          const name = SIMPLE_ROUTES.has(route) ? route : 'today';
+          // The beginner path owns Today, so the workplace dashboard stays out of the default load.
+          cleanup = name === 'today' && store.state.preferences.learningPath === 'starter'
+            ? await Lessons.renderToday(main, viewContext)
+            : await (await views[name]()).render(main, viewContext);
         }
         document.title = `${main.querySelector('h1')?.textContent ?? 'German practice'} · Sprich`;
-        if (route.startsWith('assessment') || route === 'ai' || route.startsWith('ai/session/')) void warmAssessmentShell().then(ready => { document.body.dataset.assessmentOfflineReady = String(ready); });
+        // Every screen beyond the beginner path is an optional chunk. Warm them after the
+        // first render so an installed app still opens them offline, unvisited.
+        void warmAssessmentShell().then(ready => { document.body.dataset.assessmentOfflineReady = String(ready); });
         if (!firstRender) main.querySelector('h1')?.focus({ preventScroll: true });
         window.scrollTo({ top: 0, behavior: 'instant' });
         firstRender = false;
       } catch (error) {
-        main.innerHTML = `<section class="card"><h1>Let’s get your practice back.</h1><p class="section-gap">${esc(error.message)}</p><a class="btn" href="#practice">Choose a mission</a></section>`;
+        main.innerHTML = `<section class="card"><h1 tabindex="-1">Let’s get your practice back.</h1><p class="section-gap">${esc(error.message)}</p><a class="btn" href="#practice">Choose a mission</a></section>`;
         console.error(error);
       }
     }
@@ -204,7 +257,7 @@ async function boot() {
     await requestRender();
     void registerOffline(context);
   } catch (error) {
-    main.innerHTML = `<section class="card"><p class="eyebrow">LOCAL PROGRESS</p><h1>Your browser storage isn’t ready.</h1><p class="section-gap">${esc(error.message)}</p><p>Allow this site to store data, then reload. Existing stored data has not been reset.</p><button class="btn" id="retry-boot">Try again</button></section>`;
+    main.innerHTML = `<section class="card"><p class="eyebrow">LOCAL PROGRESS</p><h1 tabindex="-1">Your browser storage isn’t ready.</h1><p class="section-gap">${esc(error.message)}</p><p>Allow this site to store data, then reload. Existing stored data has not been reset.</p><button class="btn" id="retry-boot">Try again</button></section>`;
     document.querySelector('#retry-boot').addEventListener('click', () => location.reload());
     console.error(error);
   }
