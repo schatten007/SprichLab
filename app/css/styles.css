@@ -53,6 +53,8 @@
   --focus: #a8631a;
   --accent: #a8631a;
   --texture: 1;
+  --texture-image: repeating-linear-gradient(45deg, color-mix(in srgb, var(--ink) 4%, transparent) 0 1px, transparent 1px 4px);
+  --meter-line: #65746b;
   --shadow: none;
 }
 
@@ -77,6 +79,8 @@ html[data-theme='light'][data-palette='contrast'] {
   --focus: #7a3c00;
   --accent: #7a3c00;
   --texture: 0;
+  --texture-image: none;
+  --meter-line: #0b0f0d;
   --border: 3px;
 }
 
@@ -101,12 +105,15 @@ html[data-theme='dark'] {
   --focus: #e0a24a;
   --accent: #e0a24a;
   --texture: 1;
+  --texture-image: repeating-linear-gradient(45deg, color-mix(in srgb, var(--ink) 5%, transparent) 0 1px, transparent 1px 4px);
+  --meter-line: #718075;
 }
 
 * { box-sizing: border-box; }
 /* The fixed mobile nav must never cover a scrolled-to target. */
 html { scroll-padding-bottom: 96px; }
 body { margin: 0; background: var(--bg); color: var(--ink); line-height: 1.6; font-family: var(--font-ui); }
+body { background-image: var(--texture-image); background-blend-mode: multiply; }
 button, input, textarea, select { font: inherit; }
 button, a, input, textarea, select { -webkit-tap-highlight-color: transparent; }
 button { cursor: pointer; }
@@ -114,6 +121,7 @@ button:disabled { cursor: not-allowed; opacity: .55; }
 a { color: var(--brand); text-underline-offset: 3px; }
 p { margin: 0 0 1rem; }
 h1, h2, h3, h4 { line-height: 1.25; letter-spacing: 0; margin: 0; font-weight: 650; font-family: var(--font-pixel); }
+h1[lang='de'], h2[lang='de'], h3[lang='de'], h4[lang='de'] { font-family: var(--font-ui); letter-spacing: 0; }
 h1 { font-size: var(--text-2xl); }
 h2 { font-size: var(--text-xl); }
 h3 { font-size: var(--text-lg); }
@@ -159,7 +167,6 @@ strong { font-weight: 650; }
 .lede { max-width: 65ch; font-size: var(--text-base); margin: 0; }
 .app-footer { max-width: 1250px; margin: 0 auto; padding: 12px 42px 32px; color: var(--muted); font-size: .71rem; }
 .app-footer a { margin-left: 5px; }
-.texture { background-image: repeating-linear-gradient(45deg, color-mix(in srgb, var(--ink) 4%, transparent) 0 1px, transparent 1px 4px); background-blend-mode: multiply; opacity: calc(.35 * var(--texture)); }
 .card { border: var(--border) solid var(--line); background: var(--surface); border-radius: var(--radius-lg); padding: var(--space-5); box-shadow: var(--shadow); min-width: 0; }
 .card-title { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-4); }
 .card-title h2 { font-size: var(--text-base); }
@@ -169,7 +176,7 @@ strong { font-weight: 650; }
 .section-gap { margin-top: var(--space-5); }
 .panel { background: var(--surface-soft); border: var(--border) solid var(--line); border-radius: var(--radius-md); padding: var(--space-4); }
 .block-meter { display: flex; gap: var(--space-1); flex-wrap: wrap; }
-.block-meter > i { width: var(--space-3); height: var(--space-4); border: var(--border) solid var(--line); background: transparent; border-radius: var(--radius-sm); }
+.block-meter > i { width: var(--space-3); height: var(--space-4); border: var(--border) solid var(--meter-line); background: transparent; border-radius: var(--radius-sm); }
 .block-meter > i[data-on='true'] { background: var(--brand); border-color: var(--brand); }
 .block-meter > i[data-on='rest'] { background: var(--amber); border-color: var(--amber-ink); }
 .btn { border: var(--border) solid transparent; border-radius: var(--radius-md); background: var(--brand); color: var(--brand-ink); padding: 11px 18px; min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; font-size: var(--text-sm); font-weight: 600; text-decoration: none; line-height: 1.4; font-family: var(--font-pixel); }
@@ -274,9 +281,8 @@ audio { width: 100%; max-width: 100%; height: 44px; }
 .nav-more > summary::-webkit-details-marker { display: none; }
 .nav-more[data-active='true'] > summary { background: var(--tint); color: var(--tint-ink); font-weight: 650; }
 @media (min-width: 761px) {
-  .nav-more { display: contents; }
-  .nav-more > summary { display: none; }
-  .nav-more-panel { display: grid; gap: var(--space-2); }
+  .nav-more { display: block; }
+  .nav-more-panel { display: grid; gap: var(--space-2); margin-top: var(--space-2); }
 }
 @media (max-width: 760px) {
   .nav-more { position: relative; flex: 1; display: flex; }

@@ -183,7 +183,8 @@ test('the Gemini companion changes lesson context and saves its takeaway under t
   await page.getByRole('button', { name: 'Save Gemini takeaway' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Gemini takeaway saved.' })).toBeVisible();
   await page.getByRole('link', { name: 'Progress', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Gemini practice & beginner takeaways' })).toBeVisible();
+  await page.getByText('Details and saved practice', { exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Saved takeaways' })).toBeVisible();
   await expect(page.getByText('Order a drink · 5 min self-reported', { exact: true })).toBeVisible();
   const state = await new PracticePage(page).readState();
   expect(state.companionNotes[0].missionId).toBe('starter-coffee');

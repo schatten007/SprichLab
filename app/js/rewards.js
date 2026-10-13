@@ -71,15 +71,18 @@ const STEPS = {
 export function milestones(state, stats) {
   const starter = state.starter ?? { sessions: [], reviews: [], wordSessions: [], wordMarks: [], plans: [] };
   const words = wordProgressSummary(starter);
-  const spokenStarter = (stats.starterResponses ?? []).filter(response => response.spoken).length;
-  // progressStats returns the matching attempts, not a count.
-  const spokenMissions = (stats.speaking ?? []).length;
+  const spokenKeys = new Set((stats.speaking ?? []).map(attempt => `mission:${attempt.missionId}:${attempt.taskId}`));
+  for (const session of starter.sessions) {
+    for (const response of session.responses) {
+      if (response.spoken) spokenKeys.add(`starter:${session.lessonId}:${response.taskId}`);
+    }
+  }
   const practiceMs = [...stats.days.values()].reduce((total, ms) => total + ms, 0);
   const raw = [
     ['lessons', 'Lessons practised', practisedLessons(starter).size, 'self-rated', 'lessons'],
     ['recalled', 'German said from memory', words.recalled, 'self-rated', 'words'],
     ['recognised', 'Meanings recalled', words.recognition, 'self-rated', 'words'],
-    ['spoken', 'Spoken answers', spokenMissions + spokenStarter, 'self-rated', 'answers'],
+    ['spoken', 'Spoken answers', spokenKeys.size, 'self-rated', 'answers'],
     ['recordedMinutes', 'Speaking recorded', Math.floor(stats.recordingMs / 60_000), 'measured', 'min'],
     ['practiceHours', 'Practice time', Math.floor(practiceMs / 3_600_000), 'measured', 'h'],
   ];
