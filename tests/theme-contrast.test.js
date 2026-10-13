@@ -66,6 +66,13 @@ for (const [name, minimum] of [['paper', 4.5], ['contrast', 7], ['night', 4.5]])
   });
 }
 
+for (const name of ['paper', 'contrast', 'night']) {
+  test(`${name} keeps empty progress cells visible (>= 3:1)`, () => {
+    const measured = ratio(token(name, '--meter-line'), token(name, '--surface'));
+    assert.ok(measured >= 3, `${name}: --meter-line on --surface is ${measured.toFixed(2)}:1, needs 3:1.`);
+  });
+}
+
 test('every theme defines a complete palette', () => {
   const names = Object.keys(THEMES.paper).filter(name => !name.startsWith('--space')
     && !name.startsWith('--text') && !name.startsWith('--radius') && !name.startsWith('--z-')

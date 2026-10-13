@@ -143,16 +143,6 @@ export async function renderToday(el, ctx) {
   const practised = practisedLessons(starter);
   const reward = rewards(state);
   el.innerHTML = `${pageHeading('ONE SMALL CONVERSATION', state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.', 'One lesson at a time. Say a useful sentence out loud, then keep the conversation going.')}
-    <section class="card today-status section-gap"><div class="status-row">
-        <div class="status-ring"><strong>${minutes(reward.ring.ms)}</strong><span>of ${reward.ring.goalMs / 60_000} min today</span>
-          ${progressBar(reward.ring.pct, `Today's goal: ${reward.ring.pct} per cent`)}</div>
-        <div class="status-streak"><strong>${reward.streak.streak} ${reward.streak.streak === 1 ? 'day' : 'days'}</strong><span>Practice streak</span>
-          <span>${reward.streak.restLeft} rest ${reward.streak.restLeft === 1 ? 'day' : 'days'} left</span></div>
-        <div class="status-week">${blockMeter(reward.week.map(day => day.qualifies), `Practice on the last seven days: ${reward.week.filter(day => day.qualifies).length} of 7 reached fifteen minutes`)}
-          <span>Last 7 days</span></div>
-      </div>
-      <div class="status-foot">${provenance('measured')} ${howLink()}</div></section>
-
     <section class="card next-lesson section-gap"><p class="eyebrow">${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p>
       <h2>${esc(meta.title)}</h2>
       <div class="pills section-gap">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span>${done ? '<span class="pill green">Done today</span>' : ''}</div>
@@ -168,6 +158,16 @@ export async function renderToday(el, ctx) {
       <details class="today-swap section-gap"><summary>Change today’s lesson</summary>
         <label>Choose today’s lesson<select id="starter-focus" aria-label="Choose today’s lesson">${pathLessons(course).map(item => { const entry = lessonMeta(item); return `<option value="${esc(item.id)}" ${item.id === chosen.id ? 'selected' : ''}>${esc(entry.level === 'starter' ? 'Starter' : entry.level)} · ${esc(entry.title)}</option>`; }).join('')}</select></label>
         </details></section>
+
+    <section class="card today-status section-gap"><div class="status-row">
+        <div class="status-ring"><strong>${minutes(reward.ring.ms)}</strong><span>of ${reward.ring.goalMs / 60_000} min today</span>
+          ${progressBar(reward.ring.pct, `Today's goal: ${reward.ring.pct} per cent`)}</div>
+        <div class="status-streak"><strong>${reward.streak.streak} ${reward.streak.streak === 1 ? 'day' : 'days'}</strong><span>Practice streak</span>
+          <span>${reward.streak.restLeft} rest ${reward.streak.restLeft === 1 ? 'day' : 'days'} left</span></div>
+        <div class="status-week">${blockMeter(reward.week.map(day => day.qualifies), `Practice on the last seven days: ${reward.week.filter(day => day.qualifies).length} of 7 reached fifteen minutes`)}
+          <span>Last 7 days</span></div>
+      </div>
+      <div class="status-foot">${provenance('measured')} ${howLink()}</div></section>
 
     ${reward.next ? `<section class="card section-gap milestone-next"><p class="eyebrow">NEXT MILESTONE</p>
       <div class="card-title"><h2>${esc(reward.next.label)}</h2><span class="pill">${reward.next.value} / ${reward.next.target} ${esc(reward.next.unit)}</span></div>

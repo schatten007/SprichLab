@@ -9,16 +9,43 @@
     <link rel="icon" href="./icon.svg" type="image/svg+xml">
     <link rel="manifest" href="./manifest.webmanifest">
     <script>
-      // Appearance is applied before the first paint so a saved dark theme never flashes light.
+      // Apply the mirrored preference before paint. Older installs only have the
+      // preference in IndexedDB, so recover that value once before falling back to OS.
       (function () {
-        try {
-          var mode = localStorage.getItem('sprich.mode') || 'system';
+        var root = document.documentElement;
+        var revealed = false;
+        var reveal = function () { if (!revealed) { revealed = true; root.style.visibility = ''; } };
+        var paint = function (mode) {
           var palette = localStorage.getItem('sprich.palette') || 'paper';
           var dark = mode === 'dark' || (mode === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
-          var root = document.documentElement;
           root.dataset.theme = dark ? 'dark' : 'light';
           root.dataset.palette = dark ? 'night' : palette;
-        } catch (error) { /* The stylesheet defaults cover a blocked storage API. */ }
+        };
+        try {
+          var mirrored = localStorage.getItem('sprich.mode');
+          if (mirrored) { paint(mirrored); reveal(); return; }
+          paint('system');
+          root.style.visibility = 'hidden';
+          var timeout = setTimeout(reveal, 250);
+          var request = indexedDB.open('sprich-german-v2');
+          request.onerror = reveal;
+          request.onupgradeneeded = function () { /* New installs have no saved appearance. */ };
+          request.onsuccess = function () {
+            var database = request.result;
+            if (!database.objectStoreNames.contains('meta')) { database.close(); reveal(); return; }
+            var transaction = database.transaction('meta', 'readonly');
+            var read = transaction.objectStore('meta').get('state');
+            read.onerror = reveal;
+            read.onsuccess = function () {
+              try {
+                var saved = read.result?.preferences?.theme;
+                if (saved) { localStorage.setItem('sprich.mode', saved); paint(saved); }
+              } catch (error) { /* The normal boot path still applies the stored theme. */ }
+              clearTimeout(timeout); database.close(); reveal();
+            };
+            transaction.onerror = reveal;
+          };
+        } catch (error) { reveal(); }
       })();
     </script>
     <link rel="stylesheet" href="./css/styles.css">

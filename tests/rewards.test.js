@@ -102,11 +102,26 @@ test('milestones read de-duplicated sources, so repeating a lesson cannot inflat
 test('a beginner-path learner with no legacy attempts still earns milestones', () => {
   const state = newState(NOW);
   state.starter.sessions.push(starterSession('one', 'starter-hello',
-    [{ spoken: true, recordingMs: 0 }, { spoken: true, recordingMs: 0 }]));
+    [{ taskId: 'reply-1', spoken: true, recordingMs: 0 }, { taskId: 'reply-1', spoken: true, recordingMs: 0 }]));
   assert.deepEqual(state.attempts, [], 'the beginner path writes no legacy attempts');
   const result = rewards(state, NOW);
   assert.equal(result.milestones.find(item => item.id === 'lessons').value, 1);
-  assert.equal(result.milestones.find(item => item.id === 'spoken').value, 2);
+  assert.equal(result.milestones.find(item => item.id === 'spoken').value, 1, 'repeating one lesson task counts once');
+});
+
+test('spoken milestones deduplicate repeated legacy tasks as well as starter tasks', () => {
+  const state = newState(NOW);
+  state.starter.sessions.push(starterSession('one', 'starter-hello', [{ taskId: 'reply-1', spoken: true, recordingMs: 0 }]));
+  const result = milestones(state, {
+    days: new Map(),
+    speaking: [
+      { missionId: 'cafe-a', taskId: 'speak-1' },
+      { missionId: 'cafe-a', taskId: 'speak-1' },
+    ],
+    recordingMs: 0,
+    starterResponses: [],
+  });
+  assert.equal(result.find(item => item.id === 'spoken').value, 2);
 });
 
 test('no milestone reads an assessment score or a repeat-counting total', () => {

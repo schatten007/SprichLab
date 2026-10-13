@@ -6,11 +6,11 @@ import { assessmentRubric } from '../../shared/assessment-rubrics.js';
 import { runAssessmentJob } from './assessment-jobs.js';
 import { mountAssessmentGemini } from './assessment-gemini-ui.js';
 import { aiClient, isCancelled } from './ai-gateway.js';
-import { esc, icon, pageHeading, safeAction } from './ui.js';
+import { esc, icon, pageHeading, safeAction, PROVENANCE } from './ui.js';
 
 export { renderRun };
-const labels = { objective: 'Locally checked', writing: 'Writing · AI estimate', roleplay: 'Roleplay · AI estimate' };
-const sourceLabel = evaluation => evaluation.testMode ? 'Test grader · fixture result' : { 'local-key': 'Checked locally', 'gateway-ai': 'AI estimate · in-app', 'gemini-import': 'Imported Gemini assessment' }[evaluation.source];
+const labels = { objective: PROVENANCE.checked, writing: `${PROVENANCE.ai} · writing`, roleplay: `${PROVENANCE.ai} · roleplay` };
+const sourceLabel = evaluation => evaluation.testMode ? 'Test grader · fixture result' : { 'local-key': PROVENANCE.checked, 'gateway-ai': `${PROVENANCE.ai} · in-app`, 'gemini-import': PROVENANCE.external }[evaluation.source];
 const conditionLabel = value => ({ 'no-answer-help-recorded': 'No answer help recorded', 'answer-help-recorded': 'Answer help recorded', 'external-claim': 'Externally reported conditions' }[value] ?? value);
 
 export async function startAssessment(ctx, definition, { mode = 'practice', execution = 'in_app', parentAttemptId = null } = {}) {

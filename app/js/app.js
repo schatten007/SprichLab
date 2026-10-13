@@ -82,7 +82,11 @@ document.querySelector('#settings-link').insertAdjacentHTML('afterbegin', icon('
 const moreMenu = document.querySelector('.nav-more');
 // The sidebar shows every entry at once; the bottom bar needs a real menu.
 const wideNav = matchMedia('(min-width: 761px)');
-const syncMoreMenu = () => { moreMenu.open = wideNav.matches; };
+const syncMoreMenu = () => {
+  if (!wideNav.matches) { moreMenu.open = false; return; }
+  const route = location.hash.slice(1).split('/')[0];
+  moreMenu.open = MORE_NAV.some(([entry]) => entry === route);
+};
 wideNav.addEventListener('change', syncMoreMenu);
 syncMoreMenu();
 document.addEventListener('click', event => {
