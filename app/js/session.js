@@ -14,7 +14,7 @@ export function createSession(state, missionId, { id = crypto.randomUUID(), now 
     short: state.preferences.dailyMinutes === 15,
     profile: structuredClone(state.profile), drafts: {},
   };
-  const tasks = buildTasks(session, mission);
+  const tasks = buildTasks(session, mission, state);
   const needed = new Set([...session.phraseIds, ...tasks.flatMap(task => task.phraseIds ?? [])]);
   session.content = structuredClone({
     version: CONTENT_VERSION,
@@ -25,9 +25,24 @@ export function createSession(state, missionId, { id = crypto.randomUUID(), now 
   return session;
 }
 
-function buildTasks(session, mission) {
+function buildTasks(session, mission, state) {
   const recall = session.phraseIds.map(id => ({ id: `recall-${id}`, kind: 'recall', phraseId: id }));
-  if (session.kind === 'review') return [...recall, { id: 'wrap', kind: 'wrap' }];
+  if (session.kind === 'review') {
+    const phrase = phraseById(session.phraseIds[0], state);
+    const reuse = phrase ? {
+      id: 'reuse', kind: 'speak', prompt: `Benutze „${phrase.de}“ in einem eigenen Satz.`,
+      promptEn: `Use “${phrase.de}” in a sentence about your own situation.`,
+      rephrase: `Benutze „${phrase.de}“ in einem eigenen Satz.`,
+      rephraseEn: `Use “${phrase.de}” in a sentence about your own situation.`,
+      goal: 'Use one phrase in a new sentence about your own situation.',
+      goalDe: 'Benutze eine Wendung in einem neuen Satz über deine eigene Situation.',
+      model: phrase.example || phrase.de, modelEn: phrase.en,
+      criteria: ['I used the target phrase or frame.', 'I added my own detail.', 'I could understand my answer on replay.'],
+      criteriaDe: ['Ich habe die Wendung oder den Satzrahmen benutzt.', 'Ich habe ein eigenes Detail ergänzt.', 'Ich konnte meine Antwort beim Anhören verstehen.'],
+      phraseIds: [phrase.id],
+    } : null;
+    return [...recall, ...(reuse ? [reuse] : []), { id: 'wrap', kind: 'wrap' }];
+  }
   const turns = session.short ? mission.turns.filter(turn => turn.essential) : mission.turns;
   const result = [
     { id: 'brief', kind: 'brief' },

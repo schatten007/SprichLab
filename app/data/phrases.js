@@ -145,6 +145,7 @@ export function allPhrases(state) {
     const core = corePhrase(saved.de, saved.en);
     if (core) merged.set(core.id, { ...core, example: saved.example || core.example,
       sourceUrl: saved.sourceUrl, sourceId: saved.sourceId, sourceTitle: saved.sourceTitle,
+      exampleSourceUrl: saved.exampleSourceUrl, exampleSourceTitle: saved.exampleSourceTitle,
       personalId: saved.id, tags: [...new Set([...core.tags, 'personal'])] });
     else merged.set(saved.id, saved);
   }
