@@ -81,6 +81,7 @@ export async function createPersonalPhrase(values, now = Date.now()) {
     cueDe: 'Wie sagst du das auf Deutsch?', cue: 'Say this meaning in German, then use it in your own situation.',
     example: String(values.example ?? '').trim().slice(0, 1500), note: 'Your own saved phrase. Check its wording against the source or with a speaker.',
     noteDe: 'Deine eigene Wendung. Prüfe die Formulierung anhand der Quelle oder mit einer anderen Person.',
-    tags: ['personal'], sourceUrl, sourceId: String(values.sourceId ?? '').slice(0, 200), sourceTitle: String(values.sourceTitle ?? '').slice(0, 500), createdAt: now,
+    tags: ['personal'], sourceUrl, sourceId: String(values.sourceId ?? '').slice(0, 200), sourceTitle: String(values.sourceTitle ?? '').slice(0, 500),
+    exampleSourceUrl: '', exampleSourceTitle: '', createdAt: now,
   }, true);
 }
