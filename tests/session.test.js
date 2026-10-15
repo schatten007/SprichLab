@@ -31,6 +31,17 @@ test('sessions have independent cursors and snapshot the learner profile', () =>
   assert.equal(second.profile.studies, 'Informatik');
 });
 
+test('phrase review adds one spoken reuse task for the recalled phrase', () => {
+  const session = createSession(newState(), 'first-interview', { id: 'review', phraseIds: ['repeat'] });
+  const tasks = tasksFor(session);
+  const reuse = tasks.find(task => task.id === 'reuse');
+  assert.equal(session.kind, 'review');
+  assert.deepEqual(tasks.map(task => task.kind), ['recall', 'speak', 'wrap']);
+  assert.equal(reuse.phraseIds[0], 'repeat');
+  assert.match(reuse.prompt, new RegExp(PHRASES.find(phrase => phrase.id === 'repeat').de));
+  assert.equal(reuse.criteria.length, 3);
+});
+
 test('the availability response changes the next question coherently', () => {
   const session = createSession(newState(), 'first-interview');
   session.drafts.availability = { intent: 'asked-hours' };

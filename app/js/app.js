@@ -6,6 +6,7 @@ import { resourceById } from '../data/resources.js';
 import { createResourceSession } from './resources.js';
 import { createSpeechService } from './tts.js';
 import { esc, icon } from './ui.js';
+import { hasSharedCaptureIntent, sharedCapture } from './phrase-form.js';
 import * as Lessons from './v-lessons.js';
 import * as Words from './v-words.js';
 
@@ -100,6 +101,21 @@ window.addEventListener('beforeinstallprompt', event => { event.preventDefault()
 function updateConnection() {
   document.querySelector('#connection').textContent = navigator.onLine ? 'Saved on this device' : 'Offline · on this device';
 }
+
+function captureSharedIntent() {
+  const href = location.href;
+  const params = new globalThis.URLSearchParams(location.search);
+  const hasKnownParams = ['title', 'text', 'url'].some(key => params.has(key));
+  if (!hasKnownParams) return null;
+  const capture = hasSharedCaptureIntent(href) ? sharedCapture(href) : null;
+  const clean = new URL(href);
+  ['title', 'text', 'url'].forEach(key => clean.searchParams.delete(key));
+  const requestedRoute = clean.hash.slice(1);
+  if (capture && (!requestedRoute || requestedRoute === 'today')) clean.hash = '#phrases';
+  globalThis.history.replaceState(null, document.title, `${clean.pathname}${clean.search}${clean.hash}`);
+  return capture;
+}
+const bootSharedCapture = captureSharedIntent();
 window.addEventListener('online', updateConnection);
 window.addEventListener('offline', updateConnection);
 updateConnection();
@@ -125,6 +141,8 @@ async function boot() {
     }
     const context = {
       store, speech, play, notify, error: showError, applyTheme,
+      sharedCapture: bootSharedCapture,
+      clearSharedCapture() { context.sharedCapture = null; },
       go(route) {
         if (location.hash === `#${route}`) return requestRender();
         location.hash = route;

@@ -95,10 +95,11 @@ export function safeSourceURL(value) {
 export function validatePhrase(phrase, personal = false) {
   assert(object(phrase) && identifier(phrase.id) && text(phrase.de, 500) && phrase.de.trim() && text(phrase.en, 1000) && phrase.en.trim(), 'Invalid phrase or meaning.');
   assert(text(phrase.cue) && text(phrase.example, 1500) && text(phrase.note) && stringList(phrase.tags, 20), 'Invalid phrase example or context.');
-  for (const field of ['cueDe', 'noteDe', 'sourceId', 'sourceTitle']) assert(phrase[field] === undefined || text(phrase[field], 1500), 'Invalid phrase metadata.');
+  for (const field of ['cueDe', 'noteDe', 'sourceId', 'sourceTitle', 'exampleSourceTitle']) assert(phrase[field] === undefined || text(phrase[field], 1500), 'Invalid phrase metadata.');
   if (personal) {
     assert(phrase.id.startsWith('personal-') && timestamp(phrase.createdAt), 'Invalid personal phrase ID or date.');
     assert(phrase.sourceUrl === '' || safeSourceURL(phrase.sourceUrl), 'Use an HTTPS source link for a personal phrase.');
+    assert(phrase.exampleSourceUrl === undefined || phrase.exampleSourceUrl === '' || safeSourceURL(phrase.exampleSourceUrl), 'Use an HTTPS example source link.');
   }
   return phrase;
 }

@@ -57,3 +57,38 @@ test('the explainer page documents each kind of evidence once', async ({ page })
   await expect(page.getByText('15 minutes of measured practice')).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
+
+test('shared text opens the phrase form and saves after the learner confirms its meaning', async ({ page }) => {
+  await page.goto('/?text=Guten%20Tag%21&url=https%3A%2F%2Fexample.org%2Flesson');
+  await expect(page.getByRole('heading', { name: 'Your conversation toolkit.' })).toBeVisible();
+  await expect(page.getByLabel('German phrase', { exact: true })).toHaveValue('Guten Tag!');
+  await expect(page.getByLabel('Source link (optional)')).toHaveValue('https://example.org/lesson');
+  await page.getByLabel('English meaning', { exact: true }).fill('Hello!');
+  await page.getByRole('button', { name: 'Save phrase to my collection', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Guten Tag!', exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/#phrases$/);
+});
+
+test('a saved phrase can choose an attributed Tatoeba example', async ({ page }) => {
+  await page.route('https://api.tatoeba.org/v1/sentences**', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: [{ id: 123, text: 'Guten Tag.', lang: 'deu', license: 'CC BY 2.0 FR', owner: 'example-user', is_unapproved: false, is_orphan: false, translations: [{ id: 456, text: 'Hello!', lang: 'eng', license: 'CC BY 2.0 FR', owner: 'translator', is_unapproved: false, is_orphan: false, is_direct: true }] }] }),
+  }));
+  await page.goto('/#phrases');
+  await page.getByText('Add a personal phrase', { exact: true }).click();
+  await page.getByLabel('German phrase', { exact: true }).fill('Guten Tag!');
+  await page.getByLabel('English meaning', { exact: true }).fill('Hello!');
+  await page.getByRole('button', { name: 'Save phrase to my collection', exact: true }).click();
+  const card = page.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Guten Tag!', exact: true }) });
+  await card.getByRole('button', { name: 'Find a free example', exact: true }).click();
+  await expect(card.getByText('Guten Tag.', { exact: true })).toBeVisible();
+  await expect(card.getByRole('button', { name: 'Use this example', exact: true })).toBeVisible();
+  await card.getByRole('button', { name: 'Use this example', exact: true }).click();
+  await expect(card.getByText('Guten Tag.', { exact: true })).toBeVisible();
+  expect((await page.evaluate(async () => {
+    const db = await new Promise((resolve, reject) => { const request = indexedDB.open('sprich-german-v2'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+    const result = await new Promise((resolve, reject) => { const request = db.transaction('meta').objectStore('meta').get('state'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+    db.close(); return result;
+  })).personalPhrases[0].exampleSourceTitle).toContain('CC BY 2.0 FR');
+});
