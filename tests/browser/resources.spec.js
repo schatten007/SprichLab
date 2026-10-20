@@ -217,6 +217,7 @@ test('daily reflections persist and original lessons remain available offline', 
   await expect(page.getByText('Reflection saved', { exact: true })).toBeVisible();
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
   await page.reload();
+  await expect.poll(() => page.locator('body').getAttribute('data-assessment-offline-ready'), { timeout: 20_000 }).toBe('true');
   await context.setOffline(true);
   await page.goto('/#resource/dw-phone');
   await page.reload();

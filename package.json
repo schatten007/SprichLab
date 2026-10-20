@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "vite --host localhost --port 8080 --strictPort",
     "build": "vite build",
+    "start": "npm run build && npm run preview",
     "preview": "vite preview --host 127.0.0.1",
+    "verify": "npm test && npm run lint && npm run build && npm run test:e2e && npm run check:openapi && npm run deploy:check",
     "lint": "eslint .",
     "test": "node --test \"tests/*.test.js\"",
     "test:e2e": "playwright test",
@@ -22,6 +24,7 @@
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "@redocly/cli": "2.57.0",
+    "@rolldown/binding-wasm32-wasi": "1.2.12",
     "eslint": "10.11.0",
     "fake-indexeddb": "6.2.5",
     "vite": "8.3.2",
