@@ -12,7 +12,7 @@ test('the four primary destinations are always one tap away', async ({ page }) =
 test('Settings is reachable on a phone, where the sidebar footer is hidden', async ({ page }) => {
   await page.goto('/');
   const summary = page.locator('.nav-more > summary');
-  if (await summary.isVisible()) await summary.click();
+  if (await summary.isVisible() && !(await page.locator('.nav-more').evaluate(menu => menu.open))) await summary.click();
 
   const settings = page.locator('.nav-more-panel .nav-link[href="#settings"]');
   await expect(settings).toBeVisible();
@@ -31,7 +31,7 @@ test('the More menu reaches every secondary screen and marks the current one', a
   for (const [href, heading] of destinations) {
     await page.goto('/');
     const summary = page.locator('.nav-more > summary');
-    if (await summary.isVisible()) await summary.click();
+    if (await summary.isVisible() && !(await page.locator('.nav-more').evaluate(menu => menu.open))) await summary.click();
     await page.locator(`.nav-more-panel .nav-link[href="${href}"]`).click();
     await expect(page.getByRole('heading', { name: heading })).toBeVisible();
     await expect(page.locator(`.nav-more-panel .nav-link[href="${href}"]`)).toHaveAttribute('aria-current', 'page');

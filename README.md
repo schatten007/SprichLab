@@ -21,6 +21,23 @@ Then open **http://localhost:8080/** and you're in.
 
 > **Tip:** open it through the server, don't double-click `app/index.html`. The app uses browser modules and storage, which need a real server to work.
 
+If Windows reports **“Cannot find native binding”** while Vite is building, refresh the install from the lockfile:
+
+```powershell
+npm ci --include=optional
+npm start
+```
+
+Do not delete `package-lock.json`. The project includes a portable Rolldown fallback for machines where npm skips the platform-specific binding; `npm ci` restores the complete cross-platform install.
+
+For the production build and a local launch in one command, use:
+
+```powershell
+npm start
+```
+
+This rebuilds `dist/` and serves it at **http://127.0.0.1:4173/**. Use `npm run dev` while editing; use `npm start` to check the same production output that you can upload to a static host. Stop either server with **Ctrl+C**.
+
 ---
 
 ## Try a lesson in 60 seconds
@@ -150,6 +167,12 @@ Old data from version 2.0 (`deutsch-trainer-v1`) is picked up automatically if i
 ## For contributors
 
 Every check in one go:
+
+```powershell
+npm run verify       # tests, lint, build, browser tests, API and Worker checks
+```
+
+Or run the checks individually when you are narrowing down a failure:
 
 ```powershell
 npm test             # unit tests
