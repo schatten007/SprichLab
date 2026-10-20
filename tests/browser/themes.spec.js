@@ -18,7 +18,8 @@ for (const [name, mode, palette, scheme] of THEMES) {
     const seen = [];
     await page.goto('/#lessons');
     seen.push(await page.evaluate(() => document.documentElement.dataset.theme));
-    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Small lessons, in a useful order.' })).toBeVisible();
+    await expect(page.locator('.next-lesson')).toBeVisible();
 
     const root = page.locator('html');
     await expect(root).toHaveAttribute('data-theme', name === 'night' ? 'dark' : 'light');
@@ -28,7 +29,7 @@ for (const [name, mode, palette, scheme] of THEMES) {
 
     const paint = await page.evaluate(() => {
       const styles = getComputedStyle(document.documentElement);
-      const card = document.querySelector('.card');
+      const card = document.querySelector('.next-lesson');
       return {
         bg: styles.getPropertyValue('--bg').trim(),
         texture: styles.getPropertyValue('--texture').trim(),

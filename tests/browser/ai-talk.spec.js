@@ -24,7 +24,7 @@ async function startConversation(page) {
 /** The More menu is a flat sidebar list on desktop and a pop-up on mobile. */
 async function openMore(page) {
   const summary = page.locator('.nav-more > summary');
-  if (await summary.isVisible()) await summary.click();
+  if (await summary.isVisible() && !(await page.locator('.nav-more').evaluate(menu => menu.open))) await summary.click();
 }
 
 test('AI Talk unlocks, sends one pushed clip, and shows the partner reply', async ({ page }, testInfo) => {

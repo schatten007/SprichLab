@@ -150,6 +150,7 @@ test('a model hint prevents an independent spoken grade', async ({ page }) => {
   await app.markSpokenAndReflect();
   await expect(page.getByRole('button', { name: 'Answered independently', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: 'Needed help', exact: true }).click();
+  await expect.poll(async () => (await app.readState()).attempts.length).toBe(1);
   const state = await app.readState();
   expect(state.attempts[0].hintUsed).toBe(true);
   expect(state.attempts[0].outcome).toBe('helped');
@@ -250,9 +251,11 @@ test('progress download merges safely, including a fresh device and invalid impo
   await app.seedTask();
   await app.markSpokenAndReflect();
   await page.getByRole('button', { name: 'Answered independently', exact: true }).click();
+  await expect.poll(async () => (await app.readState()).attempts.length).toBe(1);
   await page.goto('/#settings');
   await page.getByLabel('What should we call you?').fill('Sam');
   await page.getByRole('button', { name: 'Save my profile' }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Your profile is saved.' })).toBeVisible();
   await expect.poll(async () => (await app.readState()).profile.name).toBe('Sam');
   const downloadEvent = page.waitForEvent('download');
   await page.getByRole('button', { name: 'Export progress' }).click();
@@ -291,6 +294,7 @@ test('the built application reloads with core exercises offline', async ({ page,
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
   await page.reload();
   await expect(page.getByRole('heading', { name: 'A little more confident, every day.' })).toBeVisible();
+  await expect.poll(() => page.locator('body').getAttribute('data-assessment-offline-ready'), { timeout: 20_000 }).toBe('true');
   await context.setOffline(true);
   await page.goto('/#practice');
   await page.reload();
