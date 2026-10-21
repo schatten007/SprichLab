@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>Sprich</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#121316;color:#e3e2e6;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "label-badge": ["Space Grotesk"], "german-prompt-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "german-prompt-lg-mobile": ["Plus Jakarta Sans"], "label-mono": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-md": ["Plus Jakarta Sans"], "display-hero": ["Space Grotesk"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }], "german-prompt-lg": ["24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }], "german-prompt-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "700" }], "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-sm min-w-0"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm font-bold text-text-primary tracking-tight leading-none">Sprich</span><div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-surface-container-high"><span class="w-1.5 h-1.5 rounded-full bg-status-online"></span><span class="font-label-mono text-label-mono text-on-surface-variant font-medium">Offline/local</span></div></div><div class="flex items-center gap-1.5"><span class="font-label-badge text-label-badge text-electric-lime font-bold uppercase tracking-wider truncate">Today</span></div></div></div><div class="flex items-center gap-space-xs shrink-0"><button class="h-9 px-2.5 rounded-full bg-surface-raised active:scale-95 transition-transform flex items-center gap-1 min-h-[44px] touch-manipulation" type="button"><span class="material-symbols-outlined text-electric-lime text-[18px]">record_voice_over</span><span class="font-label-mono text-label-mono text-text-primary whitespace-nowrap">Speaking path</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="px-gutter-mobile pb-space-xs"><div class="h-8 px-space-sm rounded-lg bg-surface-card flex items-center justify-between text-text-muted active:bg-surface-raised transition-colors"><div class="flex items-center gap-space-xs min-w-0"><span class="material-symbols-outlined text-punch-orange text-[16px] animate-pulse">resume</span><span class="font-label-mono text-label-mono text-on-surface truncate">In progress: B1 Ordering at Bakery (0:42)</span></div><span class="font-label-mono text-label-mono text-electric-lime font-bold shrink-0">Resume ›</span></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-gutter-mobile gap-space-md">
+<!-- PATH SWITCHER & TACTILE CONTEXT -->
+<section class="flex flex-col gap-space-xs mt-space-xs">
+<div class="flex items-center justify-between p-1 bg-surface-card rounded-full">
+<button class="flex-1 py-2 px-3 rounded-full bg-electric-lime text-surface-base font-label-mono text-label-mono font-bold flex items-center justify-center gap-1.5 transition-all shadow-sm" id="path-start" type="button">
+<span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+<span>Start speaking</span>
+</button>
+<button class="flex-1 py-2 px-3 rounded-full text-text-muted hover:text-text-primary font-label-mono text-label-mono font-medium flex items-center justify-center gap-1.5 transition-all" id="path-work" type="button">
+<span class="material-symbols-outlined text-[16px]">business_center</span>
+<span>Workplace</span>
+</button>
+</div>
+</section>
+<!-- MAIN RECOMMENDATION HERO CARD -->
+<section class="relative overflow-hidden rounded-xl bg-surface-card p-space-md flex flex-col gap-space-sm shadow-md">
+<!-- Ambient glowing backdrop accent -->
+<div class="absolute -right-8 -top-8 w-36 h-36 bg-electric-lime/10 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between z-10">
+<span class="px-2.5 py-1 rounded-full bg-punch-orange/20 text-punch-orange font-label-badge text-label-badge flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">history</span>
+        Resume step 2 of 7
+      </span>
+<div class="flex items-center gap-1 text-on-surface-variant font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>3 mins</span>
+<span class="mx-0.5">•</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-raised font-label-mono text-label-mono text-on-surface">A1 Beginner</span>
+</div>
+</div>
+<!-- Lesson Context & Target Phrase -->
+<div class="flex flex-col gap-1.5 z-10">
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm font-bold text-text-primary tracking-tight">
+          Beim Bäcker in Berlin
+        </h2>
+<span class="px-2 py-0.5 rounded bg-surface-raised font-label-mono text-label-mono text-text-muted">
+          Self-rated
+        </span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+        Warm-up verbal response: Order fresh bakery rolls comfortably.
+      </p>
+<!-- Target Speech Callout Box -->
+<div class="mt-1 p-space-sm rounded-lg bg-surface-raised flex flex-col gap-1">
+<span class="font-label-mono text-label-mono text-electric-lime flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">volume_up</span> Target Utterance
+        </span>
+<p class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary font-bold">
+          »Ich hätte gern zwei Brötchen und ein Croissant, bitte.«
+        </p>
+</div>
+</div>
+<!-- Resume Primary Thumb-Friendly CTA -->
+<a class="w-full mt-2 min-h-[52px] py-3 px-4 rounded-xl bg-electric-lime active:scale-[0.98] text-surface-base font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-2 transition-all shadow-[0_8px_20px_-4px_rgba(212,255,0,0.35)] touch-manipulation" href="#speaking-flow">
+<span class="material-symbols-outlined text-[24px]">mic</span>
+<span>Resume Speaking (Step 2/7)</span>
+</a>
+</section>
+<!-- FORGIVING DAILY EFFORT & 15-MIN GOAL MODULE -->
+<section class="rounded-xl bg-surface-card p-space-md flex flex-col gap-space-sm shadow-sm">
+<!-- Header with Daily Time Count -->
+<div class="flex items-start justify-between">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-electric-lime text-[18px]">timelapse</span>
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">11 / 15 min spoken today</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+          4 mins needed to qualify today's active practice.
+        </p>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-raised text-text-muted font-label-mono text-label-mono">
+        Measured
+      </span>
+</div>
+<!-- Progress Track Bar -->
+<div class="w-full h-3 rounded-full bg-surface-raised overflow-hidden flex">
+<div class="h-full bg-electric-lime rounded-full transition-all duration-500" style="width: 73.3%;"></div>
+</div>
+<!-- Forgiving Cadence Shield & No-Shame Philosophy -->
+<div class="flex items-center justify-between p-2.5 rounded-lg bg-surface-raised">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-8 h-8 rounded-full bg-status-rest-day/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-status-rest-day text-[18px]">verified_user</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary">6 Days</span>
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-status-rest-day">1 Rest Day Banked</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted truncate">Zero shame — missed days never erase earned evidence.</span>
+</div>
+</div>
+</div>
+<!-- 7-Day Effort Rhythm Strip Bar Chart -->
+<div class="flex flex-col gap-2 mt-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-on-surface-variant font-bold uppercase tracking-wider">Weekly Speaking Cadence</span>
+<span class="font-label-mono text-label-mono text-text-muted">Goal: 15 min / session</span>
+</div>
+<div class="grid grid-cols-7 gap-1.5 pt-4 pb-1 items-end h-28 bg-surface-raised/60 rounded-lg px-2">
+<!-- Mon: 18m -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-text-muted">18m</span>
+<div class="w-full bg-status-online rounded-t-md transition-all" style="height: 60%;"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">M</span>
+</div>
+<!-- Tue: 22m -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-text-muted">22m</span>
+<div class="w-full bg-status-online rounded-t-md transition-all" style="height: 73%;"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">T</span>
+</div>
+<!-- Wed: 15m -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-text-muted">15m</span>
+<div class="w-full bg-status-online rounded-t-md transition-all" style="height: 50%;"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">W</span>
+</div>
+<!-- Thu: Rest -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="material-symbols-outlined text-[12px] text-status-rest-day">shield</span>
+<div class="w-full bg-status-rest-day/30 rounded-t-md flex items-center justify-center" style="height: 25%;">
+<span class="w-1.5 h-1.5 rounded-full bg-status-rest-day"></span>
+</div>
+<span class="font-label-mono text-label-mono text-status-rest-day font-bold">T</span>
+</div>
+<!-- Fri: 30m -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-electric-lime">30m</span>
+<div class="w-full bg-electric-lime rounded-t-md transition-all" style="height: 100%;"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">F</span>
+</div>
+<!-- Sat: 14m -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-text-muted">14m</span>
+<div class="w-full bg-surface-variant rounded-t-md transition-all" style="height: 46%;"></div>
+<span class="font-label-mono text-label-mono text-on-surface-variant">S</span>
+</div>
+<!-- Today: 11m (In Progress) -->
+<div class="flex flex-col items-center h-full justify-end gap-1">
+<span class="font-label-mono text-[9px] text-cyan-spark font-bold">11m</span>
+<div class="w-full bg-cyan-spark rounded-t-md animate-pulse" style="height: 38%;"></div>
+<span class="font-label-mono text-label-mono text-cyan-spark font-bold">Today</span>
+</div>
+</div>
+</div>
+</section>
+<!-- NEXT EFFORT MILESTONE -->
+<section class="rounded-xl bg-surface-card p-space-md flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-lg bg-vivid-purple/20 flex items-center justify-center">
+<span class="material-symbols-outlined text-vivid-purple text-[16px]">military_tech</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary">Next Milestone: 10 Spoken Attempts</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-raised font-label-mono text-label-mono text-text-muted">
+        Measured
+      </span>
+</div>
+<div class="flex items-center justify-between mt-1">
+<p class="font-body-sm text-body-sm text-text-muted">
+        8 of 10 attempts logged this week. Only 2 voice utterances left to clear milestone.
+      </p>
+<span class="font-label-badge text-label-badge font-bold text-vivid-purple shrink-0 ml-2">80%</span>
+</div>
+<!-- Segmented Tracker -->
+<div class="grid grid-cols-10 gap-1 mt-1">
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-vivid-purple"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+</div>
+</section>
+<!-- QUICK SPOKEN PRACTICE ACTIONS -->
+<section class="flex flex-col gap-space-xs">
+<span class="font-label-mono text-label-mono text-on-surface-variant font-bold uppercase tracking-wider px-1">
+      Quick Spoken Actions
+    </span>
+<div class="grid grid-cols-1 gap-space-xs">
+<!-- Review Due Words -->
+<a class="p-space-sm rounded-xl bg-surface-card active:bg-surface-raised flex items-center justify-between gap-space-sm transition-all min-h-[48px] touch-manipulation" href="#review-words">
+<div class="flex items-center gap-3 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-punch-orange/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-punch-orange text-[20px]">psychology</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-body-lg text-body-lg font-bold text-text-primary truncate">Review Due Words</span>
+<span class="px-1.5 py-0.5 rounded-full bg-punch-orange/20 text-punch-orange font-label-mono text-label-mono font-bold">5 due</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted truncate">Self-rated confidence recall</span>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0">
+<span class="font-label-mono text-label-mono text-text-muted">Self-rated</span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">chevron_right</span>
+</div>
+</a>
+<!-- Today's Takeaway Highlight -->
+<div class="p-space-sm rounded-xl bg-surface-card flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded bg-cyan-spark/20 text-cyan-spark font-label-badge text-label-badge font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">lightbulb</span>
+            Today's Takeaway
+          </span>
+<span class="font-label-mono text-label-mono text-text-muted">Checked locally</span>
+</div>
+<div class="flex flex-col">
+<p class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile font-bold text-text-primary">
+            »hätte gern«
+          </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">
+            The gentle polite lever. Replaces blunt »Ich will« instantly across German cafés, stores, and tickets.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECONDARY PATH PREVIEW: WORKPLACE BITE -->
+<section class="rounded-xl bg-surface-card p-space-md flex flex-col gap-space-xs shadow-sm mb-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">work</span>
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary">Workplace Track Bite</span>
+</div>
+<button class="font-label-mono text-label-mono text-electric-lime font-bold hover:underline flex items-center gap-0.5 touch-manipulation" id="switch-workplace-btn" type="button">
+<span>Switch path</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+      Jump into your corporate 15-minute daily focus:
+    </p>
+<div class="p-2.5 rounded-lg bg-surface-raised flex items-center justify-between gap-2">
+<div class="flex flex-col min-w-0">
+<span class="font-body-md text-body-md font-bold text-text-primary truncate">Saying "I disagree respectfully" in Standup</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">»Da bin ich etwas anderer Meinung, weil...«</span>
+</div>
+<a class="h-9 px-3 rounded-lg bg-surface-variant text-text-primary hover:bg-surface-bright font-label-mono text-label-mono font-bold flex items-center justify-center shrink-0 touch-manipulation" href="#workplace-session">
+        Preview
+      </a>
+</div>
+</section>
+</div>
+<script>
+  // Simple path switcher toggle interaction
+  const btnStart = document.getElementById('path-start');
+  const btnWork = document.getElementById('path-work');
+  const switchWorkBtn = document.getElementById('switch-workplace-btn');
+
+  function setPath(activeBtn, inactiveBtn) {
+    activeBtn.classList.remove('text-text-muted', 'hover:text-text-primary');
+    activeBtn.classList.add('bg-electric-lime', 'text-surface-base', 'font-bold', 'shadow-sm');
+    
+    inactiveBtn.classList.remove('bg-electric-lime', 'text-surface-base', 'font-bold', 'shadow-sm');
+    inactiveBtn.classList.add('text-text-muted', 'hover:text-text-primary', 'font-medium');
+  }
+
+  if (btnStart && btnWork) {
+    btnStart.addEventListener('click', () => setPath(btnStart, btnWork));
+    btnWork.addEventListener('click', () => setPath(btnWork, btnStart));
+  }
+  if (switchWorkBtn && btnWork && btnStart) {
+    switchWorkBtn.addEventListener('click', () => setPath(btnWork, btnStart));
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.35)]" data-active-classes="text-electric-lime font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a aria-current="page" class="flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all active:scale-95 touch-manipulation text-electric-lime font-bold" data-path="today" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-mono text-label-mono mt-0.5">Today</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="lessons" href="#"><span class="material-symbols-outlined text-[22px]">school</span><span class="font-label-mono text-label-mono mt-0.5">Lessons</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="words" href="#"><span class="material-symbols-outlined text-[22px]">translate</span><span class="font-label-mono text-label-mono mt-0.5">Words</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">insights</span><span class="font-label-mono text-label-mono mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-mono text-label-mono mt-0.5">More</span></a></div></nav></body></html>

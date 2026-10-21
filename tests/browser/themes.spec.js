@@ -38,28 +38,23 @@ for (const [name, mode, palette, scheme] of THEMES) {
       };
     });
     expect(paint.bg).toMatch(/^#[0-9a-f]{3,6}$/i);
-    expect(paint.texture).toBe(name === 'contrast' ? '0' : '1');
-    expect(paint.border).toBe(name === 'contrast' ? '3px' : '2px');
-    // Pixel language: corners stay hard rather than the previous 20px pill.
-    expect(parseFloat(paint.cardRadius)).toBeLessThanOrEqual(6);
+    expect(paint.texture).toBe('0');
+    expect(paint.border).toBe(name === 'contrast' ? '3px' : '1px');
+    // Electric Slate uses tactile cards while keeping the radius bounded.
+    expect(parseFloat(paint.cardRadius)).toBeLessThanOrEqual(24);
 
     expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
     await page.screenshot({ path: info.outputPath(`theme-${name}.png`), fullPage: true });
   });
 }
 
-test('switching the light theme in settings persists per device and leaves progress untouched', async ({ page }) => {
+test('legacy light palettes stay supported but are no longer exposed in settings', async ({ page }) => {
   await page.goto('/#settings');
-  await expect(page.getByLabel('Light theme')).toHaveValue('paper');
+  await expect(page.getByLabel('Light theme')).toHaveCount(0);
 
-  await page.getByLabel('Light theme').selectOption('contrast');
-  await page.getByRole('button', { name: 'Save preferences' }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Preferences saved.' })).toBeVisible();
-  await expect(page.locator('html')).toHaveAttribute('data-palette', 'contrast');
-
+  await page.evaluate(() => { localStorage.setItem('sprich.palette', 'contrast'); localStorage.setItem('sprich.mode', 'light'); });
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-palette', 'contrast');
-  expect(await page.evaluate(() => localStorage.getItem('sprich.palette'))).toBe('contrast');
 
   // A device-local choice must never be written into exportable progress.
   const exported = await page.evaluate(async () => {
@@ -73,4 +68,12 @@ test('switching the light theme in settings persists per device and leaves progr
     return JSON.stringify(state);
   });
   expect(exported).not.toContain('palette');
+});
+
+test('new installs start in the Electric Slate night theme', async ({ page }) => {
+  await page.emulateMedia({ colorScheme: 'light' });
+  await page.goto('/#settings');
+  await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
+  await expect(page.locator('html')).toHaveAttribute('data-palette', 'night');
+  await expect(page.getByLabel('Appearance')).toHaveValue('dark');
 });

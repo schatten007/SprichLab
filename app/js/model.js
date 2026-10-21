@@ -56,7 +56,7 @@ export function newState(now = Date.now(), timeZone = 'Europe/Berlin') {
     createdAt: now,
     updatedAt: now,
     profile: Object.fromEntries(PROFILE_FIELDS.map(field => [field, ''])),
-    preferences: { dailyMinutes: 90, timeZone, voiceURI: '', speechRate: 0.9, theme: 'system', englishSupport: 'on-demand', aiVoice: 'device', aiLevel: 'A2', learningPath: 'starter' },
+    preferences: { dailyMinutes: 90, timeZone, voiceURI: '', speechRate: 0.9, theme: 'dark', englishSupport: 'on-demand', aiVoice: 'device', aiLevel: 'A2', learningPath: 'starter' },
     sessions: [], attempts: [], activity: [], personalPhrases: [], resourceStates: [], dailyPlans: [], aiSessions: [], companionNotes: [], starter: emptyStarter(), assessments: emptyAssessments(), legacy: null,
   };
 }

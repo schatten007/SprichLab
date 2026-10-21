@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary":"#ffffff","status-online":"#22c55e","text-primary":"#f8fafc","cyan-spark":"#38bdf8","on-secondary-fixed":"#2c0051","on-primary":"#2a3400","secondary-fixed-dim":"#ddb7ff","surface-card":"#1c1d22","on-error":"#690005","on-error-container":"#ffdad6","surface-tint":"#b0d500","on-secondary":"#490080","surface-bright":"#38393c","on-primary-fixed-variant":"#3e4c00","text-muted":"#94a3b8","primary":"#ffffff","inverse-surface":"#e3e2e6","surface-variant":"#343538","surface-raised":"#25262c","on-tertiary":"#4e2600","secondary":"#ddb7ff","primary-fixed":"#caf300","surface-container-low":"#1b1b1f","inverse-on-surface":"#2f3034","tertiary-fixed-dim":"#ffb781","outline-variant":"#444932","surface-container-highest":"#343538","surface":"#121316","tertiary-fixed":"#ffdcc4","on-tertiary-container":"#9b5100","primary-container":"#caf300","surface-base":"#121316","error":"#ffb4ab","on-background":"#e3e2e6","inverse-primary":"#536600","surface-container":"#1f1f23","on-tertiary-fixed-variant":"#6f3800","surface-dim":"#121316","tertiary-container":"#ffdcc4","secondary-container":"#6f00be","error-container":"#93000a","on-surface-variant":"#c5c9ac","status-rest-day":"#64748b","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7","on-primary-fixed":"#171e00","surface-stroke":"#33353e","on-secondary-container":"#d6a9ff","punch-orange":"#ff8800","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","outline":"#8f9378","secondary-fixed":"#f0dbff","on-primary-container":"#596c00","electric-lime":"#d4ff00","surface-container-high":"#292a2d","background":"#121316","on-tertiary-fixed":"#2f1400","surface-container-lowest":"#0d0e11"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-xl":"2rem","margin-mobile":"1rem","gutter":"1.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"0.75rem","space-2xl":"3rem"},fontFamily:{"headline-lg":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-badge":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"headline-sm":["Space Grotesk"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"display-hero":["Space Grotesk"]},fontSize:{"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"german-prompt-lg":["24px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"german-prompt-lg-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-badge":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-mono":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col pt-space-lg pb-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="px-space-lg mb-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-2.5 h-2.5 rounded-full bg-primary-fixed"></div><span class="font-label-mono text-label-mono uppercase text-on-surface-variant">A2 / B1 Fluency</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">ADHD Mode</span></div><div class="flex-1 overflow-y-auto px-space-md space-y-space-lg"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Daily Practice</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">bolt</span><span class="font-body-md text-body-md">Today</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">record_voice_over</span><span class="font-body-md text-body-md">Lessons</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md">Words</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-body-md text-body-md">Progress</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Modules &amp; Coach</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">business_center</span><span class="font-body-md text-body-md">Workplace</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">mic</span><span class="font-body-md text-body-md">AI Talk</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-high font-label-mono text-label-mono text-primary-fixed">MIC</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">auto_stories</span><span class="font-body-md text-body-md">Resources</span></a></nav></div></div><div class="px-space-md pt-space-md border-t border-surface-stroke/40 space-y-space-xs"><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-card"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-cyan-spark">database</span><span class="font-label-mono text-label-mono text-on-surface">Storage: Local DB Ready</span></div><span class="w-2 h-2 rounded-full bg-status-online"></span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-text-primary">Sprich</span><span class="font-label-mono text-label-mono text-text-muted hidden xl:inline">German for your next step</span></div></div><div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-status-online"></span><span>OFFLINE / LOCAL</span></div><nav class="flex items-center bg-surface-card p-1 rounded-full" data-active-classes="bg-surface-bright text-text-primary font-bold"><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="today" href="#">Start speaking</a><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="workplace" href="#">Workplace</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised text-primary-fixed hover:bg-surface-variant hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[16px]">play_circle</span><span class="font-label-mono text-label-mono">Resume: Beim Bäcker (2/7)</span></a><div class="flex items-center gap-space-xs text-text-muted"><span class="material-symbols-outlined text-[18px] text-primary-fixed-dim">sync</span><span class="font-label-mono text-label-mono hidden sm:inline">Local JSON Synced</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative w-full pt-16 bg-surface px-space-lg py-space-xl"><div class="flex flex-col w-full">
+<!-- Asset Board Header Bar -->
+<section class="relative w-full rounded-lg bg-surface-card p-space-lg mb-space-lg shadow-xl overflow-hidden">
+<div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-electric-lime/5 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-primary-fixed uppercase tracking-wider">Design System Spec</span>
+<span class="font-label-mono text-label-mono text-text-muted">DOC // SP-17-PWA-SHEET</span>
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span>
+<span class="font-label-mono text-label-mono text-status-online">Air-Gap Ready</span>
+</div>
+<h1 class="font-display-hero text-headline-lg lg:text-display-hero text-text-primary tracking-tight">Brand &amp; PWA Asset Architecture</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">Production specifications, vector geometry manifests, self-hosted WOFF2 offline typography cascades, and Web App Manifest assets for Sprich (Electric Slate edition).</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-sm">
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-electric-lime text-on-primary font-label-mono text-label-mono uppercase font-bold hover:brightness-110 active:scale-95 transition-all shadow-[0_0_20px_rgba(212,255,0,0.25)]" id="copyManifestBtn">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+<span>Copy Manifest JSON</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-2.5 rounded-full bg-surface-raised text-text-primary font-label-mono text-label-mono uppercase hover:bg-surface-variant transition-all" id="downloadBundleBtn">
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+<span>Export Asset Manifest (.zip)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 1: Brand Identity Mark & Geometry Breakdown -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<!-- Left: Hero Mark Breakdown with strict full-bleed specification -->
+<div class="xl:col-span-7 flex flex-col justify-between rounded-lg bg-surface-card p-space-lg shadow-xl relative overflow-hidden">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Spec 01 // Master Vector Geometry</span>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-cyan-spark">A2/B1 Ergonomic Wave</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg items-center mt-space-md">
+<!-- The Mark Viewport -->
+<div class="relative flex flex-col items-center">
+<!-- Full Bleed Square Canvas Demo -->
+<div class="relative w-64 h-64 bg-surface-base shadow-[0_0_40px_rgba(0,0,0,0.8)] flex items-center justify-center overflow-hidden">
+<!-- Coordinate Grid Overlay (Blueprint style) -->
+<div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: linear-gradient(to right, #33353e 1px, transparent 1px), linear-gradient(to bottom, #33353e 1px, transparent 1px); background-size: 16px 16px;"></div>
+<!-- Master SVG Geometry: Full-Bleed S-Speechwave -->
+<svg class="w-48 h-48 relative z-10 drop-shadow-[0_0_16px_rgba(212,255,0,0.35)]" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Outer Speech Crest -->
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="11"></path>
+<!-- Acoustic Waveform Spoke 1 (Vocal Crest) -->
+<rect fill="#d4ff00" height="16" rx="3.5" width="7" x="42" y="30"></rect>
+<rect fill="#d4ff00" height="32" rx="3.5" width="7" x="55" y="22"></rect>
+<rect fill="#d4ff00" height="22" rx="3.5" width="7" x="68" y="27"></rect>
+<!-- Acoustic Waveform Spoke 2 (Lower Response) -->
+<rect fill="#d4ff00" height="18" rx="3.5" width="7" x="42" y="82"></rect>
+<rect fill="#d4ff00" height="34" rx="3.5" width="7" x="55" y="74"></rect>
+<rect fill="#d4ff00" height="22" rx="3.5" width="7" x="68" y="80"></rect>
+</svg>
+<!-- Bleed Anchor Notches -->
+<div class="absolute top-1 left-1 font-label-mono text-[9px] text-electric-lime/40">P(0,0)</div>
+<div class="absolute top-1 right-1 font-label-mono text-[9px] text-electric-lime/40">P(512,0)</div>
+<div class="absolute bottom-1 left-1 font-label-mono text-[9px] text-electric-lime/40">P(0,512)</div>
+<div class="absolute bottom-1 right-1 font-label-mono text-[9px] text-electric-lime/40">P(512,512)</div>
+</div>
+<div class="mt-space-sm flex items-center gap-space-xs text-center">
+<span class="w-1.5 h-1.5 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono text-text-muted">Edge-to-Edge Obsidian Vector (#121316)</span>
+</div>
+</div>
+<!-- Strict Construction Rules -->
+<div class="space-y-space-sm">
+<div class="p-space-sm rounded-lg bg-surface-raised space-y-1">
+<div class="flex items-center gap-space-xs text-error">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+<span class="font-label-mono text-label-mono uppercase font-bold">Strict Prohibition</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">NEVER enclose in white borders, artificial rounded squircle boxes, outer card shadows, or faux canvas containers. Bleed directly to physical bounding box.</p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-raised space-y-1">
+<div class="flex items-center gap-space-xs text-status-online">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span class="font-label-mono text-label-mono uppercase font-bold">Geometric Foundation</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">1:1 Aspect Ratio canvas. Dual continuous soundwave loops intersecting standard DIN-4172 acoustic wave bars. 11% stroke-weight baseline.</p>
+</div>
+<div class="p-space-sm rounded-lg bg-surface-raised space-y-1">
+<div class="flex items-center gap-space-xs text-cyan-spark">
+<span class="material-symbols-outlined text-[16px]">psychology</span>
+<span class="font-label-mono text-label-mono uppercase font-bold">ADHD Visual Rationale</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Zero ornamental micro-lines. High contrast eliminates optic fatigue and triggers instantaneous recognition on dense OS launcher surfaces.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Color Token Ribbons -->
+<div class="mt-space-lg pt-space-md bg-surface-card space-y-space-xs">
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Color Palette Tokens // Brand Registry</span>
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-space-xs">
+<!-- Token 1 -->
+<div class="p-space-xs rounded bg-surface-raised flex flex-col gap-1">
+<div class="w-full h-8 rounded bg-electric-lime"></div>
+<span class="font-label-mono text-[10px] text-text-primary font-bold">PRIMARY LIME</span>
+<span class="font-label-mono text-[10px] text-text-muted">#d4ff00</span>
+</div>
+<!-- Token 2 -->
+<div class="p-space-xs rounded bg-surface-raised flex flex-col gap-1">
+<div class="w-full h-8 rounded bg-surface-base"></div>
+<span class="font-label-mono text-[10px] text-text-primary font-bold">DEEP OBSIDIAN</span>
+<span class="font-label-mono text-[10px] text-text-muted">#121316</span>
+</div>
+<!-- Token 3 -->
+<div class="p-space-xs rounded bg-surface-raised flex flex-col gap-1">
+<div class="w-full h-8 rounded bg-vivid-purple"></div>
+<span class="font-label-mono text-[10px] text-text-primary font-bold">VIOLET SEMANTIC</span>
+<span class="font-label-mono text-[10px] text-text-muted">#a855f7</span>
+</div>
+<!-- Token 4 -->
+<div class="p-space-xs rounded bg-surface-raised flex flex-col gap-1">
+<div class="w-full h-8 rounded bg-cyan-spark"></div>
+<span class="font-label-mono text-[10px] text-text-primary font-bold">CYAN AUDIO</span>
+<span class="font-label-mono text-[10px] text-text-muted">#38bdf8</span>
+</div>
+<!-- Token 5 -->
+<div class="p-space-xs rounded bg-surface-raised flex flex-col gap-1">
+<div class="w-full h-8 rounded bg-punch-orange"></div>
+<span class="font-label-mono text-[10px] text-text-primary font-bold">ALERT ORANGE</span>
+<span class="font-label-mono text-[10px] text-text-muted">#ff8800</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Light-Background Artifact Inspection Strip & Maskable Safe Zone -->
+<div class="xl:col-span-5 flex flex-col gap-space-lg">
+<!-- Light Background Test Card -->
+<div class="rounded-lg bg-surface-card p-space-lg shadow-xl space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-spark"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Bleed Edge Verification</span>
+</div>
+<span class="font-label-mono text-label-mono text-status-online uppercase">Zero Alpha Artifacts</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Testing full-bleed Obsidian canvas on stark high-key backgrounds (e.g. iOS Light Wallpaper, white Android home-screens) to confirm zero anti-aliasing white fringe.</p>
+<!-- White Surface Preview Track -->
+<div class="w-full p-space-md rounded-lg bg-[#ffffff] flex items-center justify-around">
+<!-- Light preview 1 -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-16 h-16 bg-surface-base flex items-center justify-center shadow-lg">
+<svg class="w-10 h-10" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+<rect fill="#d4ff00" height="30" rx="3.5" width="7" x="55" y="76"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-[9px] text-[#121316] font-bold">Square (Air-Drop)</span>
+</div>
+<!-- Light preview 2 (Simulated iOS Apple Touch Icon Corner Radius via OS Mask) -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-16 h-16 bg-surface-base rounded-[14px] flex items-center justify-center shadow-lg">
+<svg class="w-10 h-10" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+<rect fill="#d4ff00" height="30" rx="3.5" width="7" x="55" y="76"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-[9px] text-[#121316] font-bold">iOS Home Mask</span>
+</div>
+<!-- Light preview 3 (Simulated Circular Adaptive Mask) -->
+<div class="flex flex-col items-center gap-1">
+<div class="w-16 h-16 bg-surface-base rounded-full flex items-center justify-center shadow-lg">
+<svg class="w-9 h-9" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+<rect fill="#d4ff00" height="30" rx="3.5" width="7" x="55" y="76"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-[9px] text-[#121316] font-bold">Android Circle</span>
+</div>
+</div>
+</div>
+<!-- Maskable Safe Zone Diagram -->
+<div class="rounded-lg bg-surface-card p-space-lg shadow-xl space-y-space-sm flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-vivid-purple"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Android Safe Zone Calibration</span>
+</div>
+<span class="font-label-mono text-label-mono text-electric-lime">Ø 80% Center Core</span>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="relative w-28 h-28 bg-surface-base flex items-center justify-center shrink-0">
+<!-- 80% Safe Zone Ring overlay -->
+<div class="w-[80%] h-[80%] rounded-full bg-surface-raised/60 flex items-center justify-center">
+<svg class="w-12 h-12" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="14"></path>
+</svg>
+</div>
+</div>
+<div class="space-y-1">
+<span class="font-label-mono text-label-mono uppercase text-primary-fixed">icon-maskable-512x512.png</span>
+<p class="font-body-sm text-body-sm text-text-muted">Key elements sit within a 410px inner circle. The outer 102px buffer is solid #121316 obsidian bleed, accommodating teardrop, squircle, or pebble vendor cutouts.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Production PWA Icon Specifications Grid -->
+<section class="rounded-lg bg-surface-card p-space-lg shadow-xl mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md gap-space-sm">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Spec 02 // Asset Pipeline Matrix</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary">10-Point Manifest Deliverables</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-status-online">All Assets Generated</span>
+<span class="font-label-mono text-label-mono text-text-muted">PNG-8 / PNG-24 / SVG</span>
+</div>
+</div>
+<!-- Grid of 10 deliverables -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-space-md pt-space-sm">
+<!-- 1. icon.svg -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-primary-fixed uppercase font-bold">Vector SVG</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">Scalable</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<svg class="w-10 h-10" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">icon.svg</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Browser tab mark &amp; fluid responsive head asset.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>mime: svg+xml</span>
+<span class="text-status-online">3.2 KB</span>
+</div>
+</div>
+<!-- 2. favicon-32.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-text-primary uppercase font-bold">Favicon Standard</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">32x32</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<div class="w-8 h-8 bg-surface-base flex items-center justify-center">
+<div class="w-4 h-4 bg-electric-lime rounded-sm"></div>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">favicon-32.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Pixel-aligned sub-sampled desktop browser tabs.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>mime: png</span>
+<span class="text-status-online">0.9 KB</span>
+</div>
+</div>
+<!-- 3. favicon-48.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-text-primary uppercase font-bold">Favicon Retina</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">48x48</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<div class="w-12 h-12 bg-surface-base flex items-center justify-center">
+<svg class="w-7 h-7" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90" stroke="#d4ff00" stroke-linecap="round" stroke-width="14"></path>
+</svg>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">favicon-48.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">High-DPI desktop and taskbar notification trays.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>mime: png</span>
+<span class="text-status-online">1.4 KB</span>
+</div>
+</div>
+<!-- 4. apple-touch-icon.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-cyan-spark uppercase font-bold">iOS Home Touch</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">180x180</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<svg class="w-10 h-10" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">apple-touch-icon.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">iOS Safari Springboard icon with non-transparent obsidian base.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>mime: png</span>
+<span class="text-status-online">8.6 KB</span>
+</div>
+</div>
+<!-- 5. icon-192x192.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-vivid-purple uppercase font-bold">Android Base</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">192x192</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<svg class="w-11 h-11" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="11"></path>
+</svg>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">icon-192x192.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Standard PWA home-screen shortcut on mobile devices.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>purpose: any</span>
+<span class="text-status-online">9.8 KB</span>
+</div>
+</div>
+<!-- 6. icon-512x512.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-primary-fixed uppercase font-bold">Splash PWA</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">512x512</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<svg class="w-12 h-12" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90C18 104.359 29.6406 116 44 116H74" stroke="#d4ff00" stroke-linecap="round" stroke-width="11"></path>
+<rect fill="#d4ff00" height="28" rx="3.5" width="7" x="55" y="24"></rect>
+<rect fill="#d4ff00" height="30" rx="3.5" width="7" x="55" y="76"></rect>
+</svg>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">icon-512x512.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">PWA cold boot splash screen &amp; high-res store listings.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>purpose: any</span>
+<span class="text-status-online">22.4 KB</span>
+</div>
+</div>
+<!-- 7. icon-maskable-512x512.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-cyan-spark uppercase font-bold">Maskable Core</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">512x512</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md relative">
+<div class="w-12 h-12 rounded-full bg-surface-raised flex items-center justify-center">
+<svg class="w-8 h-8" fill="none" viewbox="0 0 120 120">
+<path d="M24 38C24 23.6406 35.6406 12 50 12H76C90.3594 12 102 23.6406 102 38C102 52.3594 90.3594 64 76 64H44C29.6406 64 18 75.6406 18 90" stroke="#d4ff00" stroke-linecap="round" stroke-width="12"></path>
+</svg>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">icon-maskable.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Full 80% safe zone padding for adaptive system UI.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>purpose: maskable</span>
+<span class="text-status-online">24.1 KB</span>
+</div>
+</div>
+<!-- 8. shortcut-today.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-punch-orange uppercase font-bold">Shortcut</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">96x96</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[28px] text-electric-lime">bolt</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">shortcut-today.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Direct jump trigger for Today's Speaking Bite routine.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>action: /today</span>
+<span class="text-status-online">4.2 KB</span>
+</div>
+</div>
+<!-- 9. shortcut-words.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-punch-orange uppercase font-bold">Shortcut</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">96x96</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[28px] text-cyan-spark">translate</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">shortcut-words.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Quick launcher for the Offline Vocabulary Vault.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>action: /words</span>
+<span class="text-status-online">4.1 KB</span>
+</div>
+</div>
+<!-- 10. shortcut-workplace.png -->
+<div class="p-space-md rounded-lg bg-surface-raised flex flex-col justify-between group hover:bg-surface-variant transition-all">
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-[10px] text-punch-orange uppercase font-bold">Shortcut</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-card font-label-mono text-[9px] text-text-muted">96x96</span>
+</div>
+<div class="w-16 h-16 bg-surface-base mx-auto my-space-sm flex items-center justify-center shadow-md">
+<span class="material-symbols-outlined text-[28px] text-vivid-purple">business_center</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary block truncate font-bold">shortcut-workplace.png</span>
+<p class="font-body-sm text-[11px] text-text-muted leading-relaxed">Direct jump to German Workplace scenario drills.</p>
+</div>
+<div class="mt-space-sm pt-space-xs font-label-mono text-[10px] text-text-muted flex justify-between">
+<span>action: /workplace</span>
+<span class="text-status-online">4.5 KB</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Production Web App Manifest Implementation -->
+<section class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg mb-space-xl">
+<div class="xl:col-span-8 rounded-lg bg-surface-card p-space-lg shadow-xl space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Spec 03 // Manifest Deliverable</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted">Path:</span>
+<span class="font-label-mono text-label-mono text-cyan-spark">app/public/manifest.webmanifest</span>
+</div>
+</div>
+<!-- Code Inspector Container -->
+<div class="relative rounded-lg bg-surface-container-lowest p-space-md overflow-x-auto text-[12px] font-label-mono leading-relaxed text-text-muted">
+<pre><code class="text-text-primary"><span class="text-vivid-purple">{</span>
+  <span class="text-cyan-spark">"name"</span>: <span class="text-electric-lime">"Sprich — German Speaking Trainer"</span>,
+  <span class="text-cyan-spark">"short_name"</span>: <span class="text-electric-lime">"Sprich"</span>,
+  <span class="text-cyan-spark">"description"</span>: <span class="text-text-muted">"ADHD-friendly German speaking practice for A2/B1 fluency without overwhelm."</span>,
+  <span class="text-cyan-spark">"start_url"</span>: <span class="text-electric-lime">"/?source=pwa"</span>,
+  <span class="text-cyan-spark">"display"</span>: <span class="text-electric-lime">"standalone"</span>,
+  <span class="text-cyan-spark">"orientation"</span>: <span class="text-electric-lime">"portrait-primary"</span>,
+  <span class="text-cyan-spark">"background_color"</span>: <span class="text-electric-lime">"#121316"</span>,
+  <span class="text-cyan-spark">"theme_color"</span>: <span class="text-electric-lime">"#121316"</span>,
+  <span class="text-cyan-spark">"lang"</span>: <span class="text-electric-lime">"de"</span>,
+  <span class="text-cyan-spark">"scope"</span>: <span class="text-electric-lime">"/"</span>,
+  <span class="text-cyan-spark">"icons"</span>: [
+    {
+      <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/icon.svg"</span>,
+      <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"any"</span>,
+      <span class="text-cyan-spark">"type"</span>: <span class="text-text-muted">"image/svg+xml"</span>
+    },
+    {
+      <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/icon-192x192.png"</span>,
+      <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"192x192"</span>,
+      <span class="text-cyan-spark">"type"</span>: <span class="text-text-muted">"image/png"</span>,
+      <span class="text-cyan-spark">"purpose"</span>: <span class="text-text-muted">"any"</span>
+    },
+    {
+      <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/icon-512x512.png"</span>,
+      <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"512x512"</span>,
+      <span class="text-cyan-spark">"type"</span>: <span class="text-text-muted">"image/png"</span>,
+      <span class="text-cyan-spark">"purpose"</span>: <span class="text-text-muted">"any"</span>
+    },
+    {
+      <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/icon-maskable-512x512.png"</span>,
+      <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"512x512"</span>,
+      <span class="text-cyan-spark">"type"</span>: <span class="text-text-muted">"image/png"</span>,
+      <span class="text-cyan-spark">"purpose"</span>: <span class="text-text-muted">"maskable"</span>
+    }
+  ],
+  <span class="text-cyan-spark">"shortcuts"</span>: [
+    {
+      <span class="text-cyan-spark">"name"</span>: <span class="text-electric-lime">"Today's Speaking Bite"</span>,
+      <span class="text-cyan-spark">"short_name"</span>: <span class="text-electric-lime">"Today"</span>,
+      <span class="text-cyan-spark">"url"</span>: <span class="text-electric-lime">"/today"</span>,
+      <span class="text-cyan-spark">"icons"</span>: [{ <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/shortcut-today.png"</span>, <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"96x96"</span> }]
+    },
+    {
+      <span class="text-cyan-spark">"name"</span>: <span class="text-electric-lime">"Vocabulary Vault"</span>,
+      <span class="text-cyan-spark">"short_name"</span>: <span class="text-electric-lime">"Words"</span>,
+      <span class="text-cyan-spark">"url"</span>: <span class="text-electric-lime">"/words"</span>,
+      <span class="text-cyan-spark">"icons"</span>: [{ <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/shortcut-words.png"</span>, <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"96x96"</span> }]
+    },
+    {
+      <span class="text-cyan-spark">"name"</span>: <span class="text-electric-lime">"Workplace Missions"</span>,
+      <span class="text-cyan-spark">"short_name"</span>: <span class="text-electric-lime">"Workplace"</span>,
+      <span class="text-cyan-spark">"url"</span>: <span class="text-electric-lime">"/workplace"</span>,
+      <span class="text-cyan-spark">"icons"</span>: [{ <span class="text-cyan-spark">"src"</span>: <span class="text-electric-lime">"/icons/shortcut-workplace.png"</span>, <span class="text-cyan-spark">"sizes"</span>: <span class="text-text-muted">"96x96"</span> }]
+    }
+  ],
+  <span class="text-cyan-spark">"categories"</span>: [<span class="text-electric-lime">"education"</span>, <span class="text-electric-lime">"productivity"</span>]
+<span class="text-vivid-purple">}</span></code></pre>
+</div>
+</div>
+<!-- PWA Install Experience Card -->
+<div class="xl:col-span-4 rounded-lg bg-surface-card p-space-lg shadow-xl flex flex-col justify-between">
+<div class="space-y-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-status-online"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">PWA Installation Status</span>
+</div>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-electric-lime">100% Valid</span>
+</div>
+<div class="p-space-md rounded-lg bg-surface-base space-y-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-10 h-10 bg-surface-card flex items-center justify-center">
+<span class="material-symbols-outlined text-electric-lime">install_mobile</span>
+</div>
+<div>
+<span class="font-body-lg text-body-lg text-text-primary block font-bold">Android &amp; Desktop PWA</span>
+<span class="font-label-mono text-[10px] text-text-muted">Full Standalone Display</span>
+</div>
+</div>
+<div class="space-y-space-xs pt-space-xs">
+<div class="flex items-center justify-between font-label-mono text-[11px]">
+<span class="text-text-muted">Theme Color</span>
+<span class="text-text-primary">#121316 (Match System Bar)</span>
+</div>
+<div class="flex items-center justify-between font-label-mono text-[11px]">
+<span class="text-text-muted">Background Color</span>
+<span class="text-text-primary">#121316 (Zero Flash Splash)</span>
+</div>
+<div class="flex items-center justify-between font-label-mono text-[11px]">
+<span class="text-text-muted">Service Worker Cache</span>
+<span class="text-status-online">Active CacheStorage</span>
+</div>
+</div>
+</div>
+<!-- Simulated Homescreen Banner -->
+<div class="p-space-sm rounded-lg bg-surface-raised flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<div class="w-7 h-7 bg-surface-base flex items-center justify-center">
+<span class="font-label-mono text-[10px] text-electric-lime font-bold">S</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-primary">Add Sprich to Home screen</span>
+</div>
+<span class="px-space-xs py-1 rounded bg-electric-lime text-on-primary font-label-mono text-[10px] font-bold uppercase">Install</span>
+</div>
+</div>
+<!-- Provenance badge for audit -->
+<div class="mt-space-md pt-space-md flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-[10px] text-text-muted">measured // Lighthouse PWA 100</span>
+<span class="font-label-mono text-[10px] text-status-online">Validated locally</span>
+</div>
+</div>
+</section>
+<!-- Section 4: Offline Typography & Icon Plan -->
+<section class="rounded-lg bg-surface-card p-space-lg shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-space-md gap-space-sm">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-cyan-spark"></span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Spec 04 // Self-Hosted Asset Cascade</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary">Offline Typography &amp; Inline SVG Plan</h2>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-cyan-spark">Zero External CDN Dependency</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-space-lg pt-space-sm">
+<!-- Self-Hosted Font Bundle Cascade -->
+<div class="p-space-md rounded-lg bg-surface-raised space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-electric-lime font-bold">WOFF2 Typography Cache Plan</span>
+<span class="font-label-mono text-label-mono text-text-muted">Preload: 39 KB Total</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Eliminates reliance on Google Fonts CDN for subway commutes and zero-connectivity environments. Files reside locally inside <code class="text-cyan-spark">/fonts/*</code>.</p>
+<div class="space-y-space-xs font-label-mono text-[11px]">
+<div class="p-space-xs rounded bg-surface-card flex items-center justify-between">
+<div>
+<span class="text-text-primary font-bold">SpaceGrotesk-Bold.woff2</span>
+<span class="text-text-muted block text-[10px]">Headlines, Metrics &amp; Provenance Tags</span>
+</div>
+<span class="text-cyan-spark">14.2 KB</span>
+</div>
+<div class="p-space-xs rounded bg-surface-card flex items-center justify-between">
+<div>
+<span class="text-text-primary font-bold">PlusJakartaSans-Regular.woff2</span>
+<span class="text-text-muted block text-[10px]">German Prompts, Body Reading &amp; Phonetics</span>
+</div>
+<span class="text-cyan-spark">12.1 KB</span>
+</div>
+<div class="p-space-xs rounded bg-surface-card flex items-center justify-between">
+<div>
+<span class="text-text-primary font-bold">PlusJakartaSans-Bold.woff2</span>
+<span class="text-text-muted block text-[10px]">Active German Repetitions &amp; Buttons</span>
+</div>
+<span class="text-cyan-spark">12.8 KB</span>
+</div>
+</div>
+<div class="p-space-xs rounded bg-surface-base text-[11px] font-label-mono text-text-muted">
+<code>@font-face { font-family: 'Space Grotesk'; src: url('/fonts/SpaceGrotesk-Bold.woff2') format('woff2'); font-display: swap; }</code>
+</div>
+</div>
+<!-- Air-gapped Inline SVG Icon Fallback Plan -->
+<div class="p-space-md rounded-lg bg-surface-raised space-y-space-md">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-cyan-spark font-bold">Inline SVG Offline Fallback Suite</span>
+<span class="font-label-mono text-label-mono text-status-online">100% Network Autonomous</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">When Material Symbols web fonts are unprimed or blocked by restrictive corporate proxies, Sprich switches to bundled vector glyphs:</p>
+<div class="grid grid-cols-4 gap-space-xs">
+<!-- Inline Glyph 1 -->
+<div class="p-space-sm rounded bg-surface-card flex flex-col items-center gap-1">
+<svg class="w-6 h-6 text-electric-lime" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"></path>
+<path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+<line x1="12" x2="12" y1="19" y2="23"></line>
+<line x1="8" x2="16" y1="23" y2="23"></line>
+</svg>
+<span class="font-label-mono text-[9px] text-text-muted">mic.svg</span>
+</div>
+<!-- Inline Glyph 2 -->
+<div class="p-space-sm rounded bg-surface-card flex flex-col items-center gap-1">
+<svg class="w-6 h-6 text-cyan-spark" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+</svg>
+<span class="font-label-mono text-[9px] text-text-muted">bolt.svg</span>
+</div>
+<!-- Inline Glyph 3 -->
+<div class="p-space-sm rounded bg-surface-card flex flex-col items-center gap-1">
+<svg class="w-6 h-6 text-vivid-purple" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
+<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+</svg>
+<span class="font-label-mono text-[9px] text-text-muted">briefcase.svg</span>
+</div>
+<!-- Inline Glyph 4 -->
+<div class="p-space-sm rounded bg-surface-card flex flex-col items-center gap-1">
+<svg class="w-6 h-6 text-status-online" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+<polyline points="22 4 12 14.01 9 11.01"></polyline>
+</svg>
+<span class="font-label-mono text-[9px] text-text-muted">check.svg</span>
+</div>
+</div>
+<div class="flex items-center justify-between text-text-muted font-label-mono text-[10px]">
+<span>Fallback trigger: document.fonts.check()</span>
+<span class="text-status-online">Cached via IndexedDB / CacheStorage</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive notification toast -->
+<div class="fixed bottom-6 right-6 px-space-md py-space-sm rounded-lg bg-surface-raised text-text-primary shadow-2xl flex items-center gap-space-sm translate-y-24 opacity-0 transition-all duration-300 z-50" id="toastNotification">
+<span class="material-symbols-outlined text-electric-lime text-[20px]">task_alt</span>
+<span class="font-label-mono text-label-mono" id="toastMessage">Manifest copied to clipboard</span>
+</div>
+</div>
+<script>
+  (function initAssetSheet() {
+    const manifestJsonString = JSON.stringify({
+      name: "Sprich — German Speaking Trainer",
+      short_name: "Sprich",
+      description: "ADHD-friendly German speaking practice for A2/B1 fluency without overwhelm.",
+      start_url: "/?source=pwa",
+      display: "standalone",
+      orientation: "portrait-primary",
+      background_color: "#121316",
+      theme_color: "#121316",
+      lang: "de",
+      scope: "/",
+      icons: [
+        { src: "/icons/icon.svg", sizes: "any", type: "image/svg+xml" },
+        { src: "/icons/icon-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+        { src: "/icons/icon-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+        { src: "/icons/icon-maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" }
+      ],
+      shortcuts: [
+        { name: "Today's Speaking Bite", short_name: "Today", url: "/today", icons: [{ src: "/icons/shortcut-today.png", sizes: "96x96" }] },
+        { name: "Vocabulary Vault", short_name: "Words", url: "/words", icons: [{ src: "/icons/shortcut-words.png", sizes: "96x96" }] },
+        { name: "Workplace Missions", short_name: "Workplace", url: "/workplace", icons: [{ src: "/icons/shortcut-workplace.png", sizes: "96x96" }] }
+      ],
+      categories: ["education", "productivity"]
+    }, null, 2);
+
+    const toast = document.getElementById('toastNotification');
+    const toastMsg = document.getElementById('toastMessage');
+
+    function triggerToast(text) {
+      if (!toast) return;
+      toastMsg.textContent = text;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3000);
+    }
+
+    const copyBtn = document.getElementById('copyManifestBtn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(manifestJsonString).then(() => {
+          triggerToast('Manifest JSON successfully copied to clipboard');
+        }).catch(() => {
+          triggerToast('Copy ready: JSON manifest generated');
+        });
+      });
+    }
+
+    const bundleBtn = document.getElementById('downloadBundleBtn');
+    if (bundleBtn) {
+      bundleBtn.addEventListener('click', () => {
+        triggerToast('Packaging 10-asset bundle & WOFF2 manifest');
+      });
+    }
+  })();
+</script></main></div></body></html>

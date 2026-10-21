@@ -148,6 +148,55 @@ test('Today recommends a path step and the library classifies and filters the wh
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
 
+test('Electric Slate Today groups the next action, measured effort, and milestone without fixture metrics', async ({ page }) => {
+  await page.goto('/#today');
+  await expect(page.getByRole('region', { name: 'Today recommendation' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Measured daily effort' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Next milestone' })).toBeVisible();
+  await expect(page.getByText('Measured', { exact: true })).toBeVisible();
+  await expect(page.getByText('Last 7 days', { exact: true })).toBeVisible();
+  await expect(page.getByText('11 / 15 min spoken today', { exact: true })).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Lessons exposes the recommendation and lesson overview without locking advisory prerequisites', async ({ page }) => {
+  await page.goto('/#lessons');
+  await expect(page.getByRole('region', { name: 'Recommended next lesson' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Buy a ticket/ })).not.toBeVisible();
+  await page.locator('.stage-card > summary').filter({ hasText: 'Handle everyday situations' }).click();
+  await expect(page.getByRole('link', { name: /Buy a ticket/ })).toBeVisible();
+  await page.getByRole('link', { name: /Buy a ticket/ }).click();
+  await expect(page.getByRole('heading', { name: 'Buy a ticket' })).toBeVisible();
+  await expect(page.getByText('Words you will use', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Checks & graded roleplays/ })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Words vault and beginner sessions expose the tactile practice shell without changing evidence rules', async ({ page }) => {
+  await page.goto('/#words');
+  await expect(page.getByRole('region', { name: 'Vocabulary vault' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Word practice' })).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Say the German word' })).toBeVisible();
+  await expect(page.getByText(/250 beginner-friendly words/)).toBeVisible();
+
+  await page.goto('/#lesson/starter-hello');
+  await page.getByRole('button', { name: 'Start guided', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Lesson session' })).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Lesson steps' })).toBeVisible();
+  await expect(page.getByText('Saved on this device', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Phrase collection makes capture and its offline boundary visible', async ({ page }) => {
+  await page.goto('/#phrases');
+  await expect(page.getByRole('region', { name: 'Phrase collection' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Capture phrase' })).toBeVisible();
+  await expect(page.getByText(/Curated phrase audio works offline/)).toBeVisible();
+  await page.getByRole('button', { name: 'Capture phrase' }).click();
+  await expect(page.getByText('Add a personal phrase', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
 test('a lighter-support lesson hides the meaning and model until asked', async ({ page }) => {
   await page.goto('/#lesson/starter-hello');
   await page.getByRole('button', { name: 'Try with less help', exact: true }).click();

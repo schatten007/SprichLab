@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "label-badge": [ "Space Grotesk" ], "german-prompt-lg": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "german-prompt-lg-mobile": [ "Plus Jakarta Sans" ], "label-mono": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-md": [ "Plus Jakarta Sans" ], "display-hero": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-badge": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "german-prompt-lg": [ "24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "german-prompt-lg-mobile": [ "20px", { "lineHeight": "28px", "fontWeight": "700" } ], "label-mono": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold leading-none">Sprich</span><span class="font-body-sm text-body-sm text-text-muted hidden sm:inline leading-tight">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-raised px-space-sm py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Offline / local</span></div></div><div class="hidden lg:flex items-center gap-space-md flex-1 justify-center max-w-2xl"><div class="flex items-center bg-surface-container-high p-space-xs rounded-full"><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(212,255,0,0.25)] transition-all" type="button">Start speaking</button><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface hover:bg-surface-raised transition-all" type="button">Workplace</button></div><a class="flex items-center gap-space-xs bg-surface-card hover:bg-surface-raised px-space-md py-space-xs rounded-full text-text-primary transition-all group" data-path="practice-session" href="#"><span class="material-symbols-outlined text-electric-lime text-[18px] group-hover:scale-110 transition-transform">play_circle</span><span class="font-body-sm text-body-sm text-text-muted">Resume:</span><span class="font-body-sm text-body-sm text-primary font-semibold truncate max-w-[170px]">Beim Bäcker (2/7)</span></a></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs bg-surface-card px-space-sm py-space-xs rounded-full text-on-surface-variant" title="Local-first database with JSON backup"><span class="material-symbols-outlined text-[16px] text-electric-lime">database</span><span class="font-label-mono text-label-mono text-text-muted">JSON synced</span></div><button aria-label="Data Backup Settings" class="p-space-xs rounded-full hover:bg-surface-raised text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">cloud_done</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low/95 backdrop-blur-lg z-40 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col gap-space-md px-space-sm"><div class="px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Daily Practice</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">today</span><span class="font-body-md text-body-md font-medium">Today</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md font-medium">Lessons</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md font-medium">Words</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span class="font-body-md text-body-md font-medium">Progress</span></a></nav><div class="pt-space-sm px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Modules &amp; Coach</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-md text-body-md font-medium">Workplace</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-cyan-spark">graphic_eq</span><span class="font-body-md text-body-md font-medium">AI Talk</span></div><span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-cyan-spark/20 text-cyan-spark font-bold">MIC</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md font-medium">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span class="font-body-md text-body-md font-medium">Resources</span></a></nav></div><div class="flex flex-col gap-space-xs px-space-sm pt-space-md bg-surface-container-lowest/40 rounded-xl mx-space-xs p-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm pt-space-xs text-text-muted"><span class="font-label-mono text-label-mono">Storage: Local DB</span><span class="font-label-mono text-label-mono text-status-online">Ready</span></div></div></aside><div class="pl-64"><main class="relative pt-16 min-h-screen w-full px-space-xl py-space-lg bg-surface"><div class="flex flex-col w-full">
+<!-- Top Ambient Glow & Overline Evidence Tracker -->
+<div class="relative w-full mb-space-xl">
+<div class="absolute -top-12 -left-12 w-96 h-48 bg-primary-container/10 blur-3xl pointer-events-none rounded-full"></div>
+<div class="absolute -top-12 right-20 w-80 h-40 bg-vivid-purple/10 blur-3xl pointer-events-none rounded-full"></div>
+<div class="relative flex flex-col md:flex-row md:items-end justify-between gap-space-md">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-primary-fixed">Audit &amp; Telemetry Hub</span>
+<span class="w-1.5 h-1.5 rounded-full bg-surface-stroke"></span>
+<span class="font-label-mono text-label-mono text-text-muted">Local-first verifiable record</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Progress &amp; Real Evidence</h1>
+<p class="font-body-md text-body-md text-text-muted max-w-2xl">
+          Honest data built purely on verifiable acoustic repetitions and deliberate focus. No inflated vanity XP, no algorithmic shaming, and zero arbitrary fluency scores.
+        </p>
+</div>
+<!-- JSON Export Action Strip -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-sm bg-surface-card p-space-sm rounded-lg shadow-sm">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-primary font-semibold flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[15px] text-electric-lime">lock</span>
+            Encrypted Device Storage
+          </span>
+<span class="font-body-sm text-body-sm text-text-muted text-[11px] leading-tight">Audio files stay on your browser</span>
+</div>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs bg-surface-raised hover:bg-surface-bright text-primary text-label-badge font-label-badge rounded-full transition-all group active:scale-95" id="export-json-btn" type="button">
+<span class="material-symbols-outlined text-electric-lime text-[16px] group-hover:rotate-12 transition-transform">download</span>
+          Export Evidence (JSON)
+        </button>
+</div>
+</div>
+</div>
+<!-- Milestone Hero Callout: The Single Real North Star -->
+<section class="w-full mb-space-xl">
+<div class="relative bg-surface-card rounded-lg p-space-lg overflow-hidden shadow-md">
+<div class="absolute top-0 left-0 bottom-0 w-2 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-raised flex items-center justify-center flex-shrink-0 text-electric-lime shadow-[0_0_16px_rgba(212,255,0,0.15)]">
+<span class="material-symbols-outlined text-[26px]">mic</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-badge text-label-badge text-primary-fixed uppercase tracking-wider">Next Concrete Milestone</span>
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-surface-container-high text-on-surface-variant uppercase">Measured</span>
+</div>
+<div class="font-headline-md text-headline-md text-primary font-bold">
+              50 Spoken Answers Under Time
+            </div>
+<p class="font-body-md text-body-md text-text-muted">
+              42/50 logged responses recorded on microphone · <span class="text-primary font-medium">8 answers remaining</span> to close this acoustic cycle.
+            </p>
+</div>
+</div>
+<div class="flex flex-col gap-space-xs min-w-[240px] lg:w-72">
+<div class="flex justify-between items-center text-label-mono font-label-mono">
+<span class="text-text-muted">Acoustic volume</span>
+<span class="text-electric-lime font-bold">84%</span>
+</div>
+<div class="w-full h-3 bg-surface-container-high rounded-full overflow-hidden p-0.5">
+<div class="h-full bg-gradient-to-r from-electric-lime via-cyan-spark to-primary-container rounded-full" style="width: 84%"></div>
+</div>
+<div class="flex justify-between text-body-sm font-body-sm text-text-muted text-[11px]">
+<span>42 attempts verified</span>
+<span>Target: 50</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bento Grid: The 6 Formal Evidence Categories -->
+<section class="w-full mb-space-2xl">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-electric-lime text-[20px]">verified_user</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Verifiable Telemetry Pillars</h2>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Strict Provenance Classification</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md">
+<!-- 1. MEASURED PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-electric-lime/5 rounded-full pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-primary-container/20 text-electric-lime font-bold tracking-wider uppercase">
+              Measured
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">timer</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Active Spoken Production</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Hardware-clocked audio capture and active browser session duration.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Weekly active time</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">94 mins</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Raw spoken mic audio</span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold text-[14px]">18.5 mins</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Spoken answers logged</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">42 phrases</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span>
+          Timestamped from local WebAudio events
+        </div>
+</div>
+<!-- 2. SELF-RATED PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-vivid-purple/5 rounded-full pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-vivid-purple/20 text-secondary font-bold tracking-wider uppercase">
+              Self-Rated
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Cognitive Recall (SRS)</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Subjective ease ratings logged after immediate oral recall trials.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Active vocabulary deck</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">84 / 250 words</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Foundations completed</span>
+<span class="font-label-mono text-label-mono text-secondary font-bold text-[14px]">12 / 48 units</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Workplace roleplay units</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">5 / 12 missions</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          User-disclosed confidence ratings
+        </div>
+</div>
+<!-- 3. CHECKED LOCALLY PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-cyan-spark/5 rounded-full pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-cyan-spark/20 text-cyan-spark font-bold tracking-wider uppercase">
+              Checked Locally
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">rule</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Grammar &amp; Syntax Proofs</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Deterministic rule-based word-order and inflected ending verifications.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Check questions answered</span>
+<span class="font-label-mono text-label-mono text-cyan-spark font-bold text-[14px]">60 / 60 proofs</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Word ordering slots filled</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">138 segments</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Case inflection trials</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">44 checks</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-spark"></span>
+          Regex &amp; token-matcher in browser thread
+        </div>
+</div>
+<!-- 4. SELF-REPORTED PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-punch-orange/5 rounded-full pointer-events-none"></div>
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-punch-orange/20 text-tertiary-fixed-dim font-bold tracking-wider uppercase">
+              Self-Reported
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">headphones</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">External Immersion</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Unmonitored listening &amp; reading logged from the resource repository.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Slow German podcasts</span>
+<span class="font-label-mono text-label-mono text-tertiary-fixed-dim font-bold text-[14px]">45 mins</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Tagesschau in 100 Sek.</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">3 episodes</span>
+</div>
+<div class="flex justify-between items-baseline bg-surface-container-high/60 px-space-sm py-space-xs rounded">
+<span class="font-body-sm text-body-sm text-on-surface">Leichte Sprache news</span>
+<span class="font-label-mono text-label-mono text-primary font-bold text-[14px]">2 articles</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-punch-orange"></span>
+          User-declared external exposure
+        </div>
+</div>
+<!-- 5. AI ESTIMATE PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-surface-raised text-on-surface-variant font-bold tracking-wider uppercase">
+              AI Estimate
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">auto_awesome</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">Coherence &amp; Flow Insight</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Algorithmic observation of semantic continuity. Never converted to CEFR grade.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="p-space-sm bg-surface-container-high/50 rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Acoustic pause distribution</span>
+<span class="font-label-mono text-label-mono text-primary">Normal A2</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted text-[11px]">
+                Natural hesitation around modal auxiliary inversions. Phrasing latency reduced by ~0.8s across last 4 sessions.
+              </p>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+          Stateless LLM prompt estimation
+        </div>
+</div>
+<!-- 6. IMPORTED GEMINI ASSESSMENT PILLAR -->
+<div class="bg-surface-card rounded-lg p-space-lg flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-raised transition-colors">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-secondary-container/30 text-secondary font-bold tracking-wider uppercase">
+              Imported Gemini Assessment
+            </span>
+<span class="material-symbols-outlined text-text-muted text-[18px]">verified</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-primary mb-space-xs">External Expert Feedback</h3>
+<p class="font-body-sm text-body-sm text-text-muted mb-space-md">
+            Batched review from asynchronous Gemini conversation reviews.
+          </p>
+<div class="space-y-space-sm pt-space-xs">
+<div class="p-space-sm bg-surface-container-high/50 rounded flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-secondary">Review Pack #04</span>
+<span class="font-label-mono text-label-mono text-text-muted">3 days ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted text-[11px]">
+                "Strong use of 'Guten Morgen, ich wollte fragen...' structure. Next focus: separating separable prefixes (z.B. anfangen → fange an)."
+              </p>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs text-text-muted text-label-mono font-label-mono text-[10px] flex items-center gap-space-xs">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+          Asynchronous external model pack
+        </div>
+</div>
+</div>
+</section>
+<!-- Effort Cadence & 7-Day Rhythm Strip Section -->
+<section class="w-full mb-space-2xl">
+<div class="bg-surface-card rounded-lg p-space-lg shadow-sm">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md pb-space-lg border-b border-surface-stroke/30">
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-online text-[20px]">calendar_month</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Forgiving Cadence &amp; Rest Bank</h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted max-w-xl">
+            A single missed day draws from your banked rest buffer without shame or resets. You never forfeit logged practice evidence.
+          </p>
+</div>
+<!-- Daily Goal Selector Pill Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-sm">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Daily Target:</span>
+<div class="inline-flex bg-surface-container-high p-1 rounded-full" id="daily-goal-pills">
+<button class="px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-on-primary-container bg-primary-container font-bold shadow-sm" data-mins="15">15m</button>
+<button class="px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-on-surface" data-mins="30">30m</button>
+<button class="px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-on-surface" data-mins="60">60m</button>
+<button class="px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-on-surface" data-mins="90">90m</button>
+<button class="px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-on-surface" data-mins="120">120m</button>
+</div>
+</div>
+</div>
+<!-- Rest Day Cushion Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md my-space-lg">
+<div class="bg-surface-raised p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-status-online/20 text-status-online flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">check_circle</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">6 Qualifying Days</span>
+<span class="font-label-mono text-label-mono text-text-muted">15+ mins target achieved</span>
+</div>
+</div>
+<div class="bg-surface-raised p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-status-rest-day/20 text-on-surface flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">1 Banked Rest Day</span>
+<span class="font-label-mono text-label-mono text-text-muted">Used on Thursday to protect streak</span>
+</div>
+</div>
+<div class="bg-surface-raised p-space-md rounded-lg flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-container text-text-muted flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">savings</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-primary">0 / 2 Buffer Slots</span>
+<span class="font-label-mono text-label-mono text-text-muted">Next rest day earns in 6 active days</span>
+</div>
+</div>
+</div>
+<!-- 7-Day Actual Minutes Practice Strip (NO decibels or pitch graphs) -->
+<div class="mt-space-md">
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono text-text-muted uppercase tracking-wider">7-Day Practice Minutes Strip (Measured Active Time)</span>
+<span class="font-label-mono text-label-mono text-electric-lime">Week Total: 130 min</span>
+</div>
+<div class="grid grid-cols-7 gap-space-xs sm:gap-space-sm">
+<!-- Monday -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36">
+<span class="font-label-mono text-label-mono text-text-muted">Mon</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-electric-lime rounded-t-sm" style="height: 60%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-primary font-bold">18m</span>
+<span class="block text-[9px] text-status-online font-label-mono">✓ Met</span>
+</div>
+</div>
+<!-- Tuesday -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36">
+<span class="font-label-mono text-label-mono text-text-muted">Tue</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-electric-lime rounded-t-sm" style="height: 73%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-primary font-bold">22m</span>
+<span class="block text-[9px] text-status-online font-label-mono">✓ Met</span>
+</div>
+</div>
+<!-- Wednesday -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36">
+<span class="font-label-mono text-label-mono text-text-muted">Wed</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-electric-lime rounded-t-sm" style="height: 50%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-primary font-bold">15m</span>
+<span class="block text-[9px] text-status-online font-label-mono">✓ Met</span>
+</div>
+</div>
+<!-- Thursday (Rest Banked) -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36 ring-1 ring-status-rest-day/30">
+<span class="font-label-mono text-label-mono text-status-rest-day">Thu</span>
+<div class="w-full flex flex-col items-center justify-center h-20 gap-1">
+<span class="material-symbols-outlined text-status-rest-day text-[22px]">shield</span>
+<span class="font-label-mono text-[9px] text-status-rest-day uppercase tracking-tighter">Banked</span>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-text-muted font-bold">Rest</span>
+<span class="block text-[9px] text-status-rest-day font-label-mono">Protected</span>
+</div>
+</div>
+<!-- Friday -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36">
+<span class="font-label-mono text-label-mono text-text-muted">Fri</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-electric-lime rounded-t-sm" style="height: 100%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-primary font-bold">30m</span>
+<span class="block text-[9px] text-status-online font-label-mono">✓ Met</span>
+</div>
+</div>
+<!-- Saturday -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col items-center justify-between h-36">
+<span class="font-label-mono text-label-mono text-text-muted">Sat</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-electric-lime/80 rounded-t-sm" style="height: 46%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-primary font-bold">14m</span>
+<span class="block text-[9px] text-on-surface-variant font-label-mono">Near-target</span>
+</div>
+</div>
+<!-- Sunday (Today) -->
+<div class="bg-surface-raised p-space-sm rounded-lg flex flex-col items-center justify-between h-36 shadow-[0_0_12px_rgba(212,255,0,0.1)]">
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">Today</span>
+<div class="w-full flex items-end justify-center h-20">
+<div class="w-full max-w-[28px] bg-gradient-to-t from-electric-lime to-cyan-spark rounded-t-sm" style="height: 38%"></div>
+</div>
+<div class="text-center">
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">11m</span>
+<span class="block text-[9px] text-text-muted font-label-mono">4m left</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Cadence Affirmation Footnote -->
+<div class="mt-space-md p-space-sm bg-surface-container-lowest/60 rounded flex items-center gap-space-sm text-text-muted">
+<span class="material-symbols-outlined text-[18px] text-primary-fixed">info</span>
+<span class="font-body-sm text-body-sm text-[12px]">
+          Missed days never delete earned learning evidence. When real life happens, Sprich absorbs disruptions instead of penalizing your cognitive momentum.
+        </span>
+</div>
+</div>
+</section>
+<!-- Acoustic Evolution: First vs Most Recent Recording Comparison -->
+<section class="w-full mb-space-2xl">
+<div class="flex items-center justify-between mb-space-md">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-vivid-purple text-[20px]">record_voice_over</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Acoustic Evolution (Real Voice Proof)</h2>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">
+          Compare your initial hesitation with current autonomy. No algorithmic echo-matching or pretend decibel grades.
+        </span>
+</div>
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-surface-raised text-on-surface-variant">
+        Self-Comparison Only
+      </span>
+</div>
+<div class="bg-surface-card rounded-lg p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-lg bg-surface-raised p-space-md rounded-lg">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Archived Phrase</span>
+<span class="font-german-prompt-lg text-german-prompt-lg text-primary tracking-tight">"Ich hätte gern zwei Brötchen, bitte."</span>
+<span class="font-body-sm text-body-sm text-text-muted">Workplace &amp; Bakery Daily Interaction #02</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-badge text-label-badge bg-surface-container-high px-space-sm py-1 rounded-full text-on-surface">
+            Acoustic Delta: -1.6s hesitation
+          </span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-lg">
+<!-- Day 1 First Attempt -->
+<div class="bg-surface-container-high/60 p-space-md rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-surface-raised text-text-muted uppercase">Day 1 · First Take</span>
+<span class="font-label-mono text-label-mono text-text-muted">Recorded Oct 14, 2024</span>
+</div>
+<!-- Waveform Representation (Zero AI Scores, Audio Player Only) -->
+<div class="my-space-md bg-surface-container-lowest p-space-md rounded flex items-center gap-space-md">
+<button aria-label="Play Day 1 recording" class="w-10 h-10 rounded-full bg-surface-bright hover:bg-surface-raised text-primary flex items-center justify-center flex-shrink-0 transition-transform active:scale-95" type="button">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</button>
+<div class="flex-1 flex items-center gap-1 h-8">
+<!-- Static discrete waveform bars -->
+<div class="w-1 bg-text-muted/40 h-2 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-5 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-7 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-3 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-2 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-6 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-8 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-4 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-2 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-6 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-3 rounded-full"></div>
+<div class="w-1 bg-text-muted/40 h-1 rounded-full"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">3.4s</span>
+</div>
+<div class="space-y-space-xs">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Self-rated outcome:</span>
+<span class="text-on-surface font-medium">Needed help / read transcript</span>
+</div>
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Audio capture duration:</span>
+<span class="text-on-surface font-label-mono">3.4 seconds</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-stroke/30 font-label-mono text-label-mono text-[11px] text-text-muted">
+            Raw WebAudio export · Unaltered local microphone
+          </div>
+</div>
+<!-- Day 18 Recent Attempt -->
+<div class="bg-surface-raised p-space-md rounded-lg flex flex-col justify-between shadow-[0_0_16px_rgba(212,255,0,0.05)]">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-primary-container/20 text-electric-lime font-bold uppercase">Day 18 · Most Recent</span>
+<span class="font-label-mono text-label-mono text-text-muted">Recorded Yesterday</span>
+</div>
+<!-- Waveform Representation (Zero AI Scores, Audio Player Only) -->
+<div class="my-space-md bg-surface-container-lowest p-space-md rounded flex items-center gap-space-md">
+<button aria-label="Play Day 18 recording" class="w-10 h-10 rounded-full bg-electric-lime text-surface-base flex items-center justify-center flex-shrink-0 transition-transform active:scale-95 shadow-[0_0_12px_rgba(212,255,0,0.3)]" type="button">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</button>
+<div class="flex-1 flex items-center gap-1 h-8">
+<!-- Dense compact waveform bars -->
+<div class="w-1 bg-electric-lime h-4 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-7 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-8 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-6 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-7 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-5 rounded-full"></div>
+<div class="w-1 bg-electric-lime h-2 rounded-full"></div>
+</div>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">1.8s</span>
+</div>
+<div class="space-y-space-xs">
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Self-rated outcome:</span>
+<span class="text-electric-lime font-bold">Autonomous (no prompt glance)</span>
+</div>
+<div class="flex justify-between text-body-sm font-body-sm">
+<span class="text-text-muted">Audio capture duration:</span>
+<span class="text-electric-lime font-label-mono font-bold">1.8 seconds</span>
+</div>
+</div>
+</div>
+<div class="mt-space-md pt-space-xs border-t border-surface-stroke/30 font-label-mono text-label-mono text-[11px] text-text-muted">
+            Noticeable cadence stability · Zero visual aids required
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Split Grid: Recent Sessions & Daily Takeaways -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl mb-space-2xl">
+<!-- Left Column: Recent Completed & Unfinished Sessions (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-cyan-spark text-[20px]">history</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Session Ledger</h2>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Unfinished &amp; Completed</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Unfinished Session (Direct Resume) -->
+<div class="bg-surface-card p-space-md rounded-lg flex items-center justify-between gap-space-md hover:bg-surface-raised transition-colors group">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-cyan-spark/20 text-cyan-spark flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-[16px] text-primary font-bold truncate">Beim Bäcker: Nachfragen &amp; Wechselgeld</span>
+<span class="font-label-mono text-[10px] px-space-xs py-0.5 rounded bg-primary-container/20 text-electric-lime font-bold">Active 2/7</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Workplace &amp; Daily Life · 5 phrases remaining</span>
+</div>
+</div>
+<button class="px-space-md py-space-xs rounded-full bg-primary-container text-on-primary-container font-label-badge text-label-badge font-bold hover:shadow-[0_0_12px_rgba(212,255,0,0.3)] transition-all flex-shrink-0 flex items-center gap-1" type="button">
+<span>Resume</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- Completed Session 1 -->
+<div class="bg-surface-card p-space-md rounded-lg flex items-center justify-between gap-space-md hover:bg-surface-raised transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-status-online/20 text-status-online flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-[16px] text-primary font-bold truncate">Standup-Meeting: Was ich gestern gemacht habe</span>
+<span class="font-label-mono text-[10px] px-space-xs py-0.5 rounded bg-surface-container-high text-text-muted">7/7 Complete</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Workplace Mission · 14.2 mins clocked</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted flex-shrink-0">Yesterday</span>
+</div>
+<!-- Completed Session 2 -->
+<div class="bg-surface-card p-space-md rounded-lg flex items-center justify-between gap-space-md hover:bg-surface-raised transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-status-online/20 text-status-online flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-[16px] text-primary font-bold truncate">Im Zug: Sitzplatz reservieren &amp; Verspätung</span>
+<span class="font-label-mono text-[10px] px-space-xs py-0.5 rounded bg-surface-container-high text-text-muted">6/6 Complete</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Travel &amp; Transit · 11.5 mins clocked</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted flex-shrink-0">3 days ago</span>
+</div>
+<!-- Completed Session 3 -->
+<div class="bg-surface-card p-space-md rounded-lg flex items-center justify-between gap-space-md hover:bg-surface-raised transition-colors">
+<div class="flex items-start gap-space-sm min-w-0">
+<div class="w-9 h-9 rounded-full bg-status-online/20 text-status-online flex items-center justify-center flex-shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-[16px] text-primary font-bold truncate">Kaffeeautomat: Smalltalk mit Kollegen</span>
+<span class="font-label-mono text-[10px] px-space-xs py-0.5 rounded bg-surface-container-high text-text-muted">8/8 Complete</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Social Foundations · 16.0 mins clocked</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted flex-shrink-0">5 days ago</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Saved Daily Takeaways & Gemini Pack Reviews (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-[20px]">bookmark</span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Saved Takeaways &amp; Reviews</h2>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Cognitive Logs</span>
+</div>
+<div class="flex flex-col gap-space-sm">
+<!-- Takeaway 1 -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-electric-lime uppercase">Takeaway #28</span>
+<span class="font-label-mono text-label-mono text-text-muted">Recorded Today</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-bold">
+            "Könnten Sie das bitte wiederholen?"
+          </span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            Saved as your default escape phrase when an office colleague talks at native Berlin speed. Eliminates freeze response.
+          </p>
+</div>
+<!-- Takeaway 2 (Gemini Pack Summary) -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-xs shadow-sm ring-1 ring-secondary/20">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-secondary uppercase font-bold">Imported Gemini Pack #04</span>
+<span class="font-label-mono text-label-mono text-text-muted">3 days ago</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-bold">
+            Dative Prepositions Muscle Memory
+          </span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            Pattern detected: Consistent self-correction with "aus, bei, mit, nach, von, zu". 90% accurate when spoken aloud without hesitation.
+          </p>
+</div>
+<!-- Takeaway 3 -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-cyan-spark uppercase">Takeaway #25</span>
+<span class="font-label-mono text-label-mono text-text-muted">Last Week</span>
+</div>
+<span class="font-body-md text-body-md text-primary font-bold">
+            "Ich melde mich gleich dazu"
+          </span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            Great for postponing synchronous Slack/Teams voice requests while you gather vocabulary notes.
+          </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Client-Side Vanilla Micro-Interactions -->
+<script>
+    // Daily goal pills selector
+    const goalButtons = document.querySelectorAll('#daily-goal-pills button');
+    goalButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        goalButtons.forEach(b => {
+          b.className = 'px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-on-surface';
+        });
+        btn.className = 'px-space-sm py-0.5 rounded-full font-label-mono text-label-mono text-on-primary-container bg-primary-container font-bold shadow-sm';
+      });
+    });
+
+    // One-click JSON evidence export feedback
+    const exportBtn = document.getElementById('export-json-btn');
+    if (exportBtn) {
+      exportBtn.addEventListener('click', () => {
+        const payload = {
+          app: "Sprich",
+          schema: "progress-and-evidence-v1",
+          exported_at: new Date().toISOString(),
+          provenance_summary: {
+            measured: { active_in_app_minutes: 94, spoken_audio_minutes: 18.5, responses_logged: 42 },
+            self_rated: { vocabulary_active: 84, vocabulary_deck_size: 250, lessons_completed: 12, total_lessons: 48, workplace_missions: 5 },
+            checked_locally: { checks_answered: 60, slots_filled: 138 },
+            self_reported: { podcast_minutes: 45, news_items: 5 },
+            ai_estimate: { cadence_trend: "A2 normal flow, -0.8s latency" },
+            imported_gemini: { latest_pack: "Pack #04", status: "Imported" }
+          },
+          privacy_notice: "Audio recordings remain strictly on client device and are omitted from this export."
+        };
+
+        const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = `sprich-progress-evidence-${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        const originalText = exportBtn.innerHTML;
+        exportBtn.innerHTML = '<span class="material-symbols-outlined text-status-online text-[16px]">check</span> Exported!';
+        setTimeout(() => {
+          exportBtn.innerHTML = originalText;
+        }, 2200);
+      });
+    }
+  </script>
+</div></main></div></body></html>

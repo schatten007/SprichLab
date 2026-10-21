@@ -6,7 +6,7 @@ import { mountRecording } from './recording-ui.js';
 import { journalDraft, clearJournal } from './draft-journal.js';
 import { mountGeminiExport } from './gemini-export.js';
 import { missionGeminiSource } from './gemini-pack.js';
-import { esc, icon, duration, minutes, progressBar, outcomeLabel, dueLabel, lessonCopy, englishMeaning } from './ui.js';
+import { esc, icon, duration, minutes, progressBar, outcomeLabel, dueLabel, lessonCopy, englishMeaning, provenance } from './ui.js';
 
 const FOCUS_OPTIONS = [
   ['', 'Choose one useful focus…'], ['finding words', 'Finding the words more easily'],
@@ -14,6 +14,7 @@ const FOCUS_OPTIONS = [
   ['understanding the question', 'Understanding the question'], ['a calmer speaking pace', 'Speaking at a calmer pace'],
 ];
 const TASK_LABELS = { brief: 'Your mission', listen: 'Listen & understand', recall: 'Recall aloud', shadow: 'Find the rhythm', speak: 'Your turn to speak', wrap: 'Take something with you' };
+const STAGE_LABELS = { brief: 'Brief', listen: 'Listen', recall: 'Recall', shadow: 'Shadow', speak: 'Speak', retry: 'Retry', wrap: 'Reflect' };
 
 export async function render(el, ctx, sessionId) {
   const session = ctx.store.state.sessions.find(item => item.id === sessionId);
@@ -21,6 +22,9 @@ export async function render(el, ctx, sessionId) {
   const mission = missionForSession(session);
   const tasks = tasksFor(session);
   const task = tasks[Math.min(session.cursor, tasks.length - 1)];
+  const stageKey = task => task.retry ? 'retry' : task.kind;
+  const stages = [...new Set(tasks.map(stageKey))];
+  const currentStage = stages.indexOf(stageKey(task));
   const attempts = taskAttempts(ctx.store.state, session.id, task.id);
   const locked = attempts.length > 0;
   const draft = draftFor(session, task.id);
@@ -68,20 +72,23 @@ export async function render(el, ctx, sessionId) {
     finally { busy = false; updateControls(); }
   }
 
-  el.innerHTML = `
-    <div class="session-top"><a href="#today" class="inline-link">${icon('back')}Back to Today</a>
+  el.innerHTML = `<div class="workplace-session">
+    <div class="session-top"><div class="btn-row"><a href="#today" class="inline-link">${icon('back')}Back to Today</a><a href="#practice" class="inline-link">Workplace library</a></div>
       <div class="session-time"><span id="session-clock">${duration(activeMs())}</span><span class="fine" id="clock-label">active practice</span>
       ${!session.completedAt ? `<button class="text-button" id="pause-session" aria-label="${session.paused ? 'Resume practice timer' : 'Pause practice timer'}">${icon(session.paused ? 'play' : 'pause')}</button>` : ''}</div></div>
-    <div class="session-progress"><div><span>${session.kind === 'review' ? 'Phrase recall' : esc(mission.shortTitle)}</span><span>Step ${session.cursor + 1} of ${tasks.length}</span></div>
+    <section class="session-deck" aria-label="Session overview"><div class="session-deck-heading"><span class="mission-icon">${icon(session.kind === 'review' ? 'refresh' : mission.icon)}</span><div><p class="eyebrow">${session.kind === 'review' ? 'PHRASE REVIEW' : session.short ? 'SHORT WORKPLACE MISSION' : 'WORKPLACE MISSION'}</p><p class="session-deck-title">${esc(mission.titleDe || mission.shortTitle)}</p></div><span class="pill">${session.completedAt ? 'Session saved' : 'Saved on this device'}</span></div>
+      <div class="session-progress"><div><span>${session.kind === 'review' ? 'Phrase recall' : esc(mission.shortTitle)}</span><span>Step ${Math.min(session.cursor + 1, tasks.length)} of ${tasks.length}</span></div>
       ${progressBar(session.completedAt ? 100 : session.cursor / tasks.length * 100, 'Session progress')}</div>
-    <div class="lesson-layout"><div class="lesson-main"><header class="lesson-heading"><p class="eyebrow">${task.retry ? 'TRY IT AGAIN · WITH LESS HELP' : TASK_LABELS[task.kind]}</p>
-      <h1 tabindex="-1">${titleFor(task, mission)}</h1></header><div id="task-body"></div></div><aside id="lesson-side" class="lesson-side"></aside></div>`;
+      <ol class="mission-stepper" aria-label="Session stages">${stages.map((stage, index) => `<li ${index === currentStage ? 'aria-current="step"' : ''} data-past="${index < currentStage}"><span>${String(index + 1).padStart(2, '0')}</span><strong>${STAGE_LABELS[stage]}</strong>${index === currentStage ? '<small>Current</small>' : ''}</li>`).join('')}</ol></section>
+    <div class="lesson-layout"><div class="lesson-main"><header class="lesson-heading"><div class="workspace-task-meta"><p class="eyebrow">${task.retry ? 'TRY IT AGAIN · WITH LESS HELP' : TASK_LABELS[task.kind]}</p>${task.kind === 'listen' ? provenance('checked') : ['recall', 'speak'].includes(task.kind) ? provenance('self-rated') : task.kind === 'shadow' ? '<span class="pill">Unscored practice</span>' : ''}</div>
+      <h1 tabindex="-1">${titleFor(task, mission)}</h1></header><div id="task-body"></div></div><aside id="lesson-side" class="lesson-side" aria-label="Mission context"></aside></div></div>`;
   const body = el.querySelector('#task-body');
   const side = el.querySelector('#lesson-side');
   side.innerHTML = `<section class="side-note"><span class="circle-icon">${icon(mission.icon)}</span><p class="eyebrow">THE REAL-WORLD GOAL</p>
     <h2>${esc(mission.titleDe || mission.shortTitle)}</h2>${copy(mission.goalDe, mission.goal)}<span class="pill">${esc(mission.register)}</span></section>
     <section class="side-note quiet"><h3>One idea, then a detail.</h3><p lang="de">Sprich eine klare Idee aus. Atme kurz durch. Ergänze ein Detail oder stelle eine Frage.</p>
-    <p class="fine">Replay, then rate yourself honestly.</p></section>`;
+    <p class="fine">Replay, then rate yourself honestly.</p></section>
+    <section class="side-note session-local"><p class="eyebrow">YOUR PRACTICE, ON THIS DEVICE</p>${provenance('measured', 'active time')}<p>Recording is optional. Typed notes alone are not speaking evidence.</p><p class="fine">${session.kind === 'review' ? 'This phrase review does not complete a workplace mission.' : 'Your place, draft and recordings stay saved when you leave.'}</p></section>`;
 
   if (!session.completedAt) {
     clock = createPracticeClock({

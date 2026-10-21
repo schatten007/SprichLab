@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary":"#ffffff","status-online":"#22c55e","text-primary":"#f8fafc","cyan-spark":"#38bdf8","on-secondary-fixed":"#2c0051","on-primary":"#2a3400","secondary-fixed-dim":"#ddb7ff","surface-card":"#1c1d22","on-error":"#690005","on-error-container":"#ffdad6","surface-tint":"#b0d500","on-secondary":"#490080","surface-bright":"#38393c","on-primary-fixed-variant":"#3e4c00","text-muted":"#94a3b8","primary":"#ffffff","inverse-surface":"#e3e2e6","surface-variant":"#343538","surface-raised":"#25262c","on-tertiary":"#4e2600","secondary":"#ddb7ff","primary-fixed":"#caf300","surface-container-low":"#1b1b1f","inverse-on-surface":"#2f3034","tertiary-fixed-dim":"#ffb781","outline-variant":"#444932","surface-container-highest":"#343538","surface":"#121316","tertiary-fixed":"#ffdcc4","on-tertiary-container":"#9b5100","primary-container":"#caf300","surface-base":"#121316","error":"#ffb4ab","on-background":"#e3e2e6","inverse-primary":"#536600","surface-container":"#1f1f23","on-tertiary-fixed-variant":"#6f3800","surface-dim":"#121316","tertiary-container":"#ffdcc4","secondary-container":"#6f00be","error-container":"#93000a","on-surface-variant":"#c5c9ac","status-rest-day":"#64748b","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7","on-primary-fixed":"#171e00","surface-stroke":"#33353e","on-secondary-container":"#d6a9ff","punch-orange":"#ff8800","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","outline":"#8f9378","secondary-fixed":"#f0dbff","on-primary-container":"#596c00","electric-lime":"#d4ff00","surface-container-high":"#292a2d","background":"#121316","on-tertiary-fixed":"#2f1400","surface-container-lowest":"#0d0e11"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-xl":"2rem","margin-mobile":"1rem","gutter":"1.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"0.75rem","space-2xl":"3rem"},fontFamily:{"headline-lg":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-badge":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"headline-sm":["Space Grotesk"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"display-hero":["Space Grotesk"]},fontSize:{"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"german-prompt-lg":["24px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"german-prompt-lg-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-badge":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-mono":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col pt-space-lg pb-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="px-space-lg mb-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-2.5 h-2.5 rounded-full bg-primary-fixed"></div><span class="font-label-mono text-label-mono uppercase text-on-surface-variant">A2 / B1 Fluency</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">ADHD Mode</span></div><div class="flex-1 overflow-y-auto px-space-md space-y-space-lg"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Daily Practice</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">bolt</span><span class="font-body-md text-body-md">Today</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">record_voice_over</span><span class="font-body-md text-body-md">Lessons</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md">Words</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-body-md text-body-md">Progress</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Modules &amp; Coach</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">business_center</span><span class="font-body-md text-body-md">Workplace</span></a><a aria-current="page" class="flex items-center justify-between px-space-sm py-2 rounded transition-colors bg-surface-raised text-primary-fixed font-bold" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">mic</span><span class="font-body-md text-body-md">AI Talk</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-high font-label-mono text-label-mono text-primary-fixed">MIC</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">auto_stories</span><span class="font-body-md text-body-md">Resources</span></a></nav></div></div><div class="px-space-md pt-space-md border-t border-surface-stroke/40 space-y-space-xs"><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-card"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-cyan-spark">database</span><span class="font-label-mono text-label-mono text-on-surface">Storage: Local DB Ready</span></div><span class="w-2 h-2 rounded-full bg-status-online"></span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-text-primary">Sprich</span><span class="font-label-mono text-label-mono text-text-muted hidden xl:inline">German for your next step</span></div></div><div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-status-online"></span><span>OFFLINE / LOCAL</span></div><nav class="flex items-center bg-surface-card p-1 rounded-full" data-active-classes="bg-surface-bright text-text-primary font-bold"><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="today" href="#">Start speaking</a><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="workplace" href="#">Workplace</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised text-primary-fixed hover:bg-surface-variant hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[16px]">play_circle</span><span class="font-label-mono text-label-mono">Resume: Beim Bäcker (2/7)</span></a><div class="flex items-center gap-space-xs text-text-muted"><span class="material-symbols-outlined text-[18px] text-primary-fixed-dim">sync</span><span class="font-label-mono text-label-mono hidden sm:inline">Local JSON Synced</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative w-full pt-16 bg-surface px-space-lg py-space-xl"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Level Controller: Navigation Tabs & Status Halo -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md bg-surface-card p-space-md rounded-lg shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-raised flex items-center justify-center text-primary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[28px]">graphic_eq</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary tracking-tight">AI Talk &amp; Gemini Handoff</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-container-high font-label-mono text-label-mono text-cyan-spark">A2/B1 Bridge</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">High-agency conversational roleplays or friction-free offline prompts.</span>
+</div>
+</div>
+<!-- Mode Selector Tabs -->
+<div class="flex items-center bg-surface-container-lowest p-1 rounded-full self-start md:self-center">
+<button class="px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all bg-primary-fixed text-on-primary-fixed shadow-sm flex items-center gap-1.5" id="tab-btn-lobby" onclick="switchView('lobby')">
+<span class="material-symbols-outlined text-[16px]">settings_ethernet</span>
+<span>1. Gateway &amp; Setup</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-1.5" id="tab-btn-studio" onclick="switchView('studio')">
+<span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+<span>2. Live Studio</span>
+<span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span>
+</button>
+<button class="px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-1.5" id="tab-btn-companion" onclick="switchView('companion')">
+<span class="material-symbols-outlined text-[16px]">qr_code_2</span>
+<span>3. Offline Gemini Pack</span>
+</button>
+</div>
+</div>
+<!-- SECTION 1: AI TALK LOBBY & GATEWAY SETUP -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg" id="view-lobby">
+<!-- Left Column: Gateway Telemetry & Health (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Connection Status Card -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-status-online"></span>
+<span class="font-label-mono text-label-mono uppercase text-status-online tracking-wider">Gateway Connected</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-text-muted">Self-Hosted</span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Endpoint Target</span>
+<div class="p-space-sm bg-surface-container-lowest rounded flex items-center justify-between">
+<code class="font-label-mono text-label-mono text-cyan-spark truncate">https://api.sprich.local/v1</code>
+<span class="material-symbols-outlined text-[18px] text-text-muted cursor-pointer hover:text-text-primary">lock</span>
+</div>
+</div>
+<!-- Telemetry Details Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Model Provider</span>
+<span class="font-body-md text-body-md text-text-primary font-semibold mt-0.5">Gemini 1.5 Flash</span>
+<span class="font-label-mono text-label-mono text-text-muted mt-1">Stateless context</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Ping Latency</span>
+<div class="flex items-baseline gap-1 mt-0.5">
+<span class="font-headline-sm text-headline-sm text-status-online">142</span>
+<span class="font-label-mono text-label-mono text-status-online">ms</span>
+</div>
+<span class="font-label-mono text-label-mono text-status-online">Healthy &amp; Responsive</span>
+</div>
+</div>
+<!-- Security & Usage Bounds -->
+<div class="bg-surface-raised p-space-md rounded flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Owner Access Key</span>
+<span class="font-label-mono text-label-mono text-primary-fixed">UNLOCKED</span>
+</div>
+<div class="font-label-mono text-label-mono text-text-primary tracking-widest bg-surface-card px-space-sm py-1 rounded">
+            ••••-••••-9821
+          </div>
+<div class="flex flex-col gap-1 mt-space-xs">
+<div class="flex justify-between font-label-mono text-label-mono text-text-muted">
+<span>Daily Rate Cap</span>
+<span class="text-text-primary font-bold">4 / 15 conversations</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-fixed h-full rounded-full" style="width: 26.6%;"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 rounded bg-surface-raised hover:bg-surface-bright text-text-primary font-label-badge text-label-badge transition-colors flex items-center justify-center gap-space-xs" onclick="testConnection()">
+<span class="material-symbols-outlined text-[16px] text-cyan-spark">network_check</span>
+<span>Re-verify Connection Ping</span>
+</button>
+</div>
+<!-- Dignified Recovery Notice (ADHD & Cognitive Safety) -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-primary-fixed shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-body-md text-body-md font-semibold text-text-primary">100% Optional Simulation</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            The core Sprich syllabus remains fully unlocked without an AI gateway. AI Talk is an un-graded interactive speaking sandbox. If offline, use the Gemini Companion handoff tab.
+          </p>
+</div>
+</div>
+</div>
+<!-- Right Column: Scenario Configurator & Consent (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-lg shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary">Configure Workplace Simulation</span>
+<span class="font-body-sm text-body-sm text-text-muted">Select high-frequency professional contexts.</span>
+</div>
+<span class="px-space-sm py-1 rounded bg-secondary-container text-on-secondary-container font-label-mono text-label-mono font-bold">
+            Workplace B1
+          </span>
+</div>
+<!-- Scenario Pills Grid -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-mono text-label-mono uppercase text-text-muted">Select Workplace Scenario</label>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<button class="scenario-card p-space-md rounded bg-surface-raised text-left transition-all flex flex-col justify-between gap-space-md shadow-sm" onclick="selectScenario(this, 'standup')">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-primary-fixed">
+<span class="material-symbols-outlined text-[20px]">groups</span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-text-primary block">Sprint Standup Blocker</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1 block">Explain API sync block &amp; hand over DB migration.</span>
+</div>
+</button>
+<button class="scenario-card p-space-md rounded bg-surface-container text-left transition-all flex flex-col justify-between gap-space-md opacity-80 hover:opacity-100" onclick="selectScenario(this, 'handover')">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-cyan-spark">
+<span class="material-symbols-outlined text-[20px]">event_repeat</span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-text-primary block">Vacation Handover</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1 block">Clarify emergency ticket escalation before leaves.</span>
+</div>
+</button>
+<button class="scenario-card p-space-md rounded bg-surface-container text-left transition-all flex flex-col justify-between gap-space-md opacity-80 hover:opacity-100" onclick="selectScenario(this, 'arch')">
+<div class="w-8 h-8 rounded bg-surface-container flex items-center justify-center text-punch-orange">
+<span class="material-symbols-outlined text-[20px]">architecture</span>
+</div>
+<div>
+<span class="font-body-md text-body-md font-bold text-text-primary block">API Architecture</span>
+<span class="font-body-sm text-body-sm text-text-muted mt-1 block">Defend asynchronous queue choices to Senior Lead.</span>
+</div>
+</button>
+</div>
+</div>
+<!-- Linguistic Parameters: Register & Target Proficiency -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Register Switch -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-mono text-label-mono uppercase text-text-muted">Social Register (Höflichkeitsform)</label>
+<div class="grid grid-cols-2 bg-surface-container p-1 rounded">
+<button class="py-1.5 rounded font-label-badge text-label-badge bg-surface-bright text-text-primary text-center">Colleague (Du / Ihr)</button>
+<button class="py-1.5 rounded font-label-badge text-label-badge text-text-muted hover:text-text-primary text-center">Formal (Sie / Ihnen)</button>
+</div>
+</div>
+<!-- Difficulty Target -->
+<div class="flex flex-col gap-space-xs">
+<label class="font-label-mono text-label-mono uppercase text-text-muted">Target Threshold</label>
+<div class="grid grid-cols-2 bg-surface-container p-1 rounded">
+<button class="py-1.5 rounded font-label-badge text-label-badge text-text-muted hover:text-text-primary text-center">A2 Bridge</button>
+<button class="py-1.5 rounded font-label-badge text-label-badge bg-primary-fixed text-on-primary-fixed font-bold text-center">B1 Spoken</button>
+</div>
+</div>
+</div>
+<!-- Explicit Opt-in Privacy Consent -->
+<div class="p-space-md rounded bg-surface-container flex items-start gap-space-sm">
+<input checked="" class="mt-1 w-4 h-4 rounded bg-surface-card text-primary-fixed accent-electric-lime cursor-pointer" id="profile-consent" type="checkbox"/>
+<label class="flex flex-col cursor-pointer" for="profile-consent">
+<span class="font-body-md text-body-md font-semibold text-text-primary">Inject verified profile attributes</span>
+<span class="font-body-sm text-body-sm text-text-muted">
+              Sends <code class="font-label-mono text-label-mono text-primary-fixed bg-surface-card px-1 rounded">Software Engineer (Backend)</code> to seed authentic workplace idioms into AI prompts. Never persists to external databases.
+            </span>
+</label>
+</div>
+<!-- Launch Trigger -->
+<div class="flex items-center justify-between pt-space-xs">
+<div class="flex items-center gap-space-xs text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim">shield</span>
+<span class="font-label-mono text-label-mono">Prov: checked locally · stateless</span>
+</div>
+<button class="px-space-lg py-3 rounded-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-badge text-label-badge transition-all flex items-center gap-space-sm shadow-md" onclick="switchView('studio')">
+<span>Enter Live Studio Session</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: LIVE AI CONVERSATION SESSION -->
+<section class="hidden flex-col gap-space-lg" id="view-studio">
+<!-- Studio Header & Session Context Banner -->
+<div class="bg-surface-card px-space-lg py-space-md rounded-lg flex flex-wrap items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="relative">
+<div class="w-12 h-12 rounded-full bg-surface-raised flex items-center justify-center font-headline-sm text-headline-sm text-cyan-spark">
+            JS
+          </div>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-status-online"></span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary">Julian Schäfer</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-mono text-label-mono text-text-muted">Scrum Master</span>
+</div>
+<span class="font-body-sm text-body-sm text-text-muted">Scenario: Daily Standup Blocker · Colleague (Du) · B1 Focus</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-space-xs px-space-sm py-1 rounded bg-surface-container font-label-mono text-label-mono text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-cyan-spark">timer</span>
+<span>Turn 3 / 6</span>
+</div>
+<button class="px-space-sm py-1 rounded bg-surface-raised hover:bg-surface-bright text-text-primary font-label-mono text-label-mono transition-colors" onclick="toggleAudioSpeed(this)">
+          Speed: 1.0x
+        </button>
+<button class="px-space-sm py-1 rounded bg-surface-raised hover:bg-surface-bright text-text-muted hover:text-text-primary font-label-mono text-label-mono" onclick="switchView('lobby')">
+          Exit Roleplay
+        </button>
+</div>
+</div>
+<!-- Active Conversation Canvas (Two-Way Interactive Exchange) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Exchange Feed & Spoken Staging (8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- AI Turn Card (Partner Voice) -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-cyan-spark">volume_up</span>
+<span class="font-label-mono text-label-mono uppercase text-cyan-spark">Incoming Audio Prompt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-text-muted">Julian · 0:04</span>
+</div>
+<div class="p-space-md bg-surface-container rounded-lg">
+<p class="font-german-prompt-lg text-german-prompt-lg text-text-primary leading-relaxed">
+              „Guten Morgen Alex. Wie sieht es mit dem API-Ticket aus? Können wir das heute vor dem Release mergen?“
+            </p>
+</div>
+<!-- Micro Audio Playback Bar -->
+<div class="flex items-center gap-space-md pt-space-xs">
+<button class="w-10 h-10 rounded-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed flex items-center justify-center shrink-0 transition-transform active:scale-95 shadow-sm" onclick="simulateAudioPlay()">
+<span class="material-symbols-outlined text-[24px]">play_arrow</span>
+</button>
+<div class="flex-1 flex items-center gap-1.5 h-6">
+<!-- Waveform graphic representation -->
+<span class="w-1 bg-cyan-spark h-2 rounded-full"></span>
+<span class="w-1 bg-cyan-spark h-5 rounded-full"></span>
+<span class="w-1 bg-cyan-spark h-3 rounded-full"></span>
+<span class="w-1 bg-cyan-spark h-6 rounded-full"></span>
+<span class="w-1 bg-cyan-spark h-4 rounded-full"></span>
+<span class="w-1 bg-cyan-spark h-2 rounded-full"></span>
+<span class="w-1 bg-surface-variant h-2 rounded-full"></span>
+<span class="w-1 bg-surface-variant h-4 rounded-full"></span>
+<span class="w-1 bg-surface-variant h-3 rounded-full"></span>
+<span class="w-1 bg-surface-variant h-5 rounded-full"></span>
+<span class="w-1 bg-surface-variant h-2 rounded-full"></span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-raised hover:bg-surface-bright text-text-muted hover:text-text-primary font-label-mono text-label-mono transition-colors flex items-center gap-1" onclick="requestHint()">
+<span class="material-symbols-outlined text-[16px] text-punch-orange">lightbulb</span>
+<span>Ask Hint</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-surface-raised hover:bg-surface-bright text-text-muted hover:text-text-primary font-label-mono text-label-mono transition-colors" onclick="simplifyPrompt()">
+                Rephrase Simpler
+              </button>
+</div>
+</div>
+</div>
+<!-- Learner Staging: Active Microphone Stage -->
+<div class="bg-surface-raised p-space-lg rounded-lg flex flex-col gap-space-md shadow-xl relative overflow-hidden">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-electric-lime animate-pulse"></span>
+<span class="font-label-mono text-label-mono uppercase text-primary-fixed tracking-wider">Local Recording Active</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">00:14 / 00:60 Max</span>
+</div>
+<!-- Live Acoustic Waveform Sandbox -->
+<div class="h-20 bg-surface-card rounded flex items-center justify-center px-space-md gap-1 overflow-hidden">
+<div class="w-1.5 bg-primary-fixed h-4 rounded-full animate-bounce"></div>
+<div class="w-1.5 bg-primary-fixed h-8 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+<div class="w-1.5 bg-primary-fixed h-14 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+<div class="w-1.5 bg-primary-fixed h-6 rounded-full animate-bounce" style="animation-delay: 0.15s"></div>
+<div class="w-1.5 bg-primary-fixed h-16 rounded-full animate-bounce" style="animation-delay: 0.3s"></div>
+<div class="w-1.5 bg-cyan-spark h-12 rounded-full animate-bounce" style="animation-delay: 0.25s"></div>
+<div class="w-1.5 bg-cyan-spark h-16 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+<div class="w-1.5 bg-primary-fixed h-10 rounded-full animate-bounce" style="animation-delay: 0.35s"></div>
+<div class="w-1.5 bg-primary-fixed h-5 rounded-full animate-bounce" style="animation-delay: 0.05s"></div>
+<div class="w-1.5 bg-primary-fixed h-12 rounded-full animate-bounce" style="animation-delay: 0.18s"></div>
+<div class="w-1.5 bg-cyan-spark h-7 rounded-full animate-bounce" style="animation-delay: 0.28s"></div>
+<div class="w-1.5 bg-primary-fixed h-4 rounded-full animate-bounce"></div>
+</div>
+<!-- Staged Audio Transcript Ready for Dispatch -->
+<div class="flex flex-col gap-1">
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Spoken Line Staged</span>
+<div class="p-space-md bg-surface-container rounded-lg">
+<p class="font-german-prompt-lg text-german-prompt-lg text-primary-fixed">
+                »Ich habe das Ticket abgeschlossen, aber die Datenbank-Migration hängt noch.«
+              </p>
+</div>
+</div>
+<!-- Primary Confirmation Action & Explicit Transmission -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-space-md pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px] text-text-muted">memory</span>
+<span class="font-label-mono text-label-mono text-text-muted">Local buffer · Zero network leak until sent</span>
+</div>
+<div class="flex items-center gap-space-sm w-full sm:w-auto">
+<button class="flex-1 sm:flex-none px-space-md py-2.5 rounded bg-surface-container hover:bg-surface-bright text-text-muted hover:text-text-primary font-label-badge text-label-badge transition-colors" onclick="discardRecording()">
+                Retake
+              </button>
+<button class="flex-1 sm:flex-none px-space-lg py-2.5 rounded-full bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-badge text-label-badge transition-all flex items-center justify-center gap-space-xs shadow-md" onclick="dispatchAudioResponse()">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Send to Partner</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Fallback: Typed Alternative (No-Grade Boundary Alert) -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-punch-orange">keyboard</span>
+<span class="font-body-md text-body-md font-semibold text-text-primary">Text Fallback Mode</span>
+</div>
+<!-- Crucial provenance badge required by spec -->
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-punch-orange font-bold">
+              Typed — not speaking evidence
+            </span>
+</div>
+<div class="flex gap-space-xs">
+<input class="flex-1 bg-surface-container rounded px-space-md py-2 text-text-primary font-body-md placeholder:text-text-muted outline-none focus:bg-surface-bright transition-colors" placeholder="Antwort eintippen (e.g. Ich brauche Hilfe von Sarah...)" type="text"/>
+<button class="px-space-md py-2 rounded bg-surface-raised hover:bg-surface-bright text-text-primary font-label-badge text-label-badge transition-colors">
+              Send Text
+            </button>
+</div>
+</div>
+</div>
+<!-- Right Column: Live Context & Coherence Review (4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Dynamic Hint / Vocabulary Staging Card -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Target Vocabulary (B1)</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-mono text-label-mono text-status-online">3/4 Active</span>
+</div>
+<div class="flex flex-col gap-space-xs">
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-primary-fixed font-bold">abschließen</span>
+<span class="font-body-sm text-body-sm text-text-muted">to finalize / complete</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-status-online">check_circle</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-primary-fixed font-bold">die Verzögerung</span>
+<span class="font-body-sm text-body-sm text-text-muted">the delay</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-status-online">check_circle</span>
+</div>
+<div class="p-space-sm rounded bg-surface-container flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-text-primary font-bold">zuständig sein für</span>
+<span class="font-body-sm text-body-sm text-text-muted">to be responsible for</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">radio_button_unchecked</span>
+</div>
+</div>
+</div>
+<!-- Live Coherence Review Box (Cognitive Safety Enforced) -->
+<div class="bg-surface-card p-space-md rounded-lg flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center gap-space-xs text-secondary-fixed-dim">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="font-headline-sm text-headline-sm">Session Review</span>
+</div>
+<!-- Clear boundary badge mandated by prompt -->
+<div class="p-space-sm rounded bg-surface-container font-label-mono text-label-mono text-text-muted">
+<strong class="text-text-primary">Scope: Conversational Coherence</strong><br/>
+            (Not a formal grade or CEFR score)
+          </div>
+<div class="flex flex-col gap-space-xs mt-space-xs">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-text-muted">Acoustic Intelligibility</span>
+<span class="text-status-online font-bold">Clear (High)</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-text-muted">Workplace Pragmatics</span>
+<span class="text-primary-fixed font-bold">Natural Colleague Tone</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-text-muted">Response Latency</span>
+<span class="text-text-primary">4.2s (Fluid)</span>
+</div>
+</div>
+<div class="p-space-sm rounded bg-surface-raised mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Coach Tip</span>
+<p class="font-body-sm text-body-sm text-text-primary mt-1">
+              Next turn, try connecting the blocker with <span class="text-cyan-spark font-bold">„deshalb“</span> or <span class="text-cyan-spark font-bold">„weil“</span> to practice subordinate word order.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: GEMINI LESSON-PACK COMPANION (NO GATEWAY REQUIRED!) -->
+<section class="hidden flex-col gap-space-lg" id="view-companion">
+<!-- Companion Hero Banner: Zero Gateway Philosophy -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md shadow-md">
+<div class="flex items-start gap-space-md">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[28px]">smart_toy</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary">Offline Gemini Companion</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-mono text-label-mono text-primary-fixed">Zero Setup Required</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">
+            No API keys, endpoints, or self-hosted servers needed. Generate tailored conversational context bundles to speak directly in the official Gemini mobile app or Gemini Live voice mode.
+          </p>
+</div>
+</div>
+<div class="px-space-md py-1.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark shrink-0">
+        Local IndexedDB Synced
+      </div>
+</div>
+<!-- Active Bundle Configuration & Code Generation -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left: Generated Pack Text & Handoff Controls (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-md shadow-md">
+<div class="flex flex-wrap items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[18px] text-text-muted">package_2</span>
+<span class="font-label-mono text-label-mono uppercase text-text-muted">Context Bundle Payload</span>
+</div>
+<span class="px-space-sm py-0.5 rounded bg-surface-container-high font-label-mono text-label-mono text-text-primary">
+              Stage 2 Workplace Standup · Target: B1 Focus · Mode: Guided
+            </span>
+</div>
+<!-- Prompt Payload Preview Textarea -->
+<div class="relative">
+<textarea class="w-full bg-surface-container-lowest p-space-md rounded font-label-mono text-label-mono text-cyan-spark outline-none resize-none leading-relaxed selection:bg-cyan-spark selection:text-surface" id="gemini-payload" readonly="" rows="11">Du bist Julian, ein hilfsbereiter Scrum Master in einem Berliner Software-Team. 
+Dein Gesprächspartner ist Alex, ein Backend-Entwickler mit Deutsch auf Niveau B1.
+
+AUFGABE:
+1. Führe ein kurzes Standup-Gespräch (max. 4-5 Runden).
+2. Frage Alex nach dem Stand des API-Tickets.
+3. Wenn Alex von Blockern oder Datenbank-Problemen spricht, reagiere verständnisvoll und frage, ob Sarah unterstützen soll.
+4. Korrigiere Grammatikfehler sanft am Ende deiner Antwort in Klammern (z.B. "[Tipp: ...]").
+5. Halte deine Antworten kurz (1-2 Sätze), damit Alex viel Sprechzeit hat.
+
+Beginne jetzt mit der Begrüßung:
+"Guten Morgen Alex! Wie sieht es mit dem API-Ticket aus?"</textarea>
+<button class="absolute top-space-sm right-space-sm px-space-sm py-1.5 rounded bg-surface-raised hover:bg-surface-bright text-text-primary font-label-mono text-label-mono flex items-center gap-1 transition-all shadow-sm" id="copy-btn" onclick="copyPayload()">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+<span id="copy-text">Copy Context</span>
+</button>
+</div>
+<!-- Export Actions -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-2 rounded bg-surface-container hover:bg-surface-bright text-text-primary font-label-badge text-label-badge transition-colors flex items-center gap-1.5" onclick="downloadPayload()">
+<span class="material-symbols-outlined text-[16px]">download</span>
+<span>Download .txt Pack</span>
+</button>
+<a class="px-space-md py-2 rounded bg-surface-raised hover:bg-surface-bright text-cyan-spark font-label-badge text-label-badge transition-colors flex items-center gap-1.5" href="https://gemini.google.com" rel="noopener noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[16px]">open_in_new</span>
+<span>Open Gemini Web</span>
+</a>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">
+              Ready for Gemini Live voice chat
+            </span>
+</div>
+</div>
+<!-- Handoff Safety Boundary Warning -->
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-[20px] text-punch-orange shrink-0">info</span>
+<span class="font-body-sm text-body-sm text-text-muted">
+<strong class="text-text-primary">Evaluation note:</strong> Exporting or downloading a context prompt does not automatically mark lessons complete. Progress logs must be explicitly submitted below.
+          </span>
+</div>
+</div>
+<!-- Right: Desktop-to-Phone Handoff & Self-Report Form (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md">
+<!-- Desktop-to-Phone QR Handoff -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-text-primary">Phone Handoff</span>
+<span class="material-symbols-outlined text-text-muted text-[20px]">phone_iphone</span>
+</div>
+<div class="flex items-center gap-space-md bg-surface-container p-space-md rounded">
+<!-- Tactical Mock QR Code Graphic -->
+<div class="w-24 h-24 bg-surface-container-lowest rounded p-1.5 flex flex-col justify-between shrink-0">
+<div class="flex justify-between">
+<div class="w-6 h-6 bg-primary-fixed rounded-sm flex items-center justify-center"><div class="w-2 h-2 bg-surface"></div></div>
+<div class="w-6 h-6 bg-cyan-spark rounded-sm flex items-center justify-center"><div class="w-2 h-2 bg-surface"></div></div>
+</div>
+<div class="flex justify-center gap-1">
+<div class="w-2 h-2 bg-primary-fixed"></div>
+<div class="w-3 h-2 bg-cyan-spark"></div>
+<div class="w-1 h-2 bg-primary-fixed"></div>
+</div>
+<div class="flex justify-between">
+<div class="w-6 h-6 bg-cyan-spark rounded-sm flex items-center justify-center"><div class="w-2 h-2 bg-surface"></div></div>
+<div class="w-2 h-2 bg-primary-fixed self-end"></div>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-body-md text-body-md font-bold text-text-primary">Scan with Gemini App</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+                Transfer this prompt directly to Gemini Live on your phone to practice speaking hands-free on walks.
+              </p>
+</div>
+</div>
+</div>
+<!-- Post-Practice Takeaway & Self-Reporting (IndexedDB Synced) -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col gap-space-md shadow-md">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-text-primary">Log Gemini Practice</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-container font-label-mono text-label-mono text-text-muted">Provenance: self-reported</span>
+</div>
+<form class="flex flex-col gap-space-md" onsubmit="saveCompanionSession(event)">
+<div class="flex flex-col gap-1">
+<label class="font-label-mono text-label-mono text-text-muted uppercase" for="practice-minutes">Spoken Conversation Duration</label>
+<div class="flex items-center gap-space-sm">
+<input class="w-24 bg-surface-container rounded px-space-md py-2 font-headline-sm text-headline-sm text-text-primary outline-none focus:bg-surface-bright" id="practice-minutes" max="60" min="1" required="" type="number" value="10"/>
+<span class="font-body-md text-body-md text-text-muted">Minutes spoken in Gemini Live</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-mono text-label-mono text-text-muted uppercase" for="practice-takeaway">Key Takeaway or Phrasing Learnt</label>
+<input class="bg-surface-container rounded px-space-md py-2 font-body-md text-body-md text-text-primary placeholder:text-text-muted outline-none focus:bg-surface-bright" id="practice-takeaway" placeholder="e.g. Ich konnte den Blocker flüssig erklären..." required="" type="text"/>
+</div>
+<button class="w-full py-2.5 rounded bg-primary-fixed hover:bg-primary-fixed-dim text-on-primary-fixed font-label-badge text-label-badge transition-all flex items-center justify-center gap-space-xs shadow-md" id="save-log-btn" type="submit">
+<span class="material-symbols-outlined text-[18px]">save</span>
+<span>Save Takeaway to IndexedDB</span>
+</button>
+</form>
+<div class="hidden p-space-sm rounded bg-surface-container text-status-online font-label-mono text-label-mono flex items-center gap-1.5" id="save-success-msg">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span>Recorded in local DB. Counts toward weekly speaking effort!</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<script>
+  function switchView(viewName) {
+    const views = ['lobby', 'studio', 'companion'];
+    views.forEach(v => {
+      const el = document.getElementById('view-' + v);
+      const btn = document.getElementById('tab-btn-' + v);
+      if (v === viewName) {
+        el.classList.remove('hidden');
+        el.classList.add('flex');
+        btn.className = "px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all bg-primary-fixed text-on-primary-fixed shadow-sm flex items-center gap-1.5";
+      } else {
+        el.classList.add('hidden');
+        el.classList.remove('flex');
+        btn.className = "px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-1.5";
+      }
+    });
+  }
+
+  function selectScenario(element, scenarioType) {
+    document.querySelectorAll('.scenario-card').forEach(card => {
+      card.classList.remove('bg-surface-raised', 'shadow-sm');
+      card.classList.add('bg-surface-container', 'opacity-80');
+    });
+    element.classList.add('bg-surface-raised', 'shadow-sm');
+    element.classList.remove('bg-surface-container', 'opacity-80');
+  }
+
+  function testConnection() {
+    alert("Checked connection to https://api.sprich.local/v1 — Health: OK (138ms ping, Gemini 1.5 Flash endpoint active).");
+  }
+
+  function toggleAudioSpeed(btn) {
+    if (btn.innerText.includes('1.0x')) {
+      btn.innerText = 'Speed: 0.8x';
+    } else {
+      btn.innerText = 'Speed: 1.0x';
+    }
+  }
+
+  function simulateAudioPlay() {
+    alert("Audio sample playing: Julian (Scrum Master).");
+  }
+
+  function requestHint() {
+    alert("Coach Hint: In standups, state what is finished first, then introduce blockers with 'jedoch' or 'aber'.");
+  }
+
+  function simplifyPrompt() {
+    alert("Simplified prompt requested. Julian will ask a simpler yes/no question next turn.");
+  }
+
+  function discardRecording() {
+    alert("Recording cleared. Microphone buffer reset.");
+  }
+
+  function dispatchAudioResponse() {
+    alert("Response transmitted to local Gemini engine! Turn processed.");
+  }
+
+  function copyPayload() {
+    const copyText = document.getElementById("gemini-payload");
+    copyText.select();
+    navigator.clipboard.writeText(copyText.value);
+    const label = document.getElementById("copy-text");
+    label.innerText = "Copied!";
+    setTimeout(() => { label.innerText = "Copy Context"; }, 2000);
+  }
+
+  function downloadPayload() {
+    const text = document.getElementById("gemini-payload").value;
+    const blob = new Blob([text], { type: "text/plain" });
+    const anchor = document.createElement("a");
+    anchor.download = "sprich-gemini-standup-pack.txt";
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.target = "_blank";
+    anchor.style.display = "none";
+    document.body.appendChild(anchor);
+    anchor.click();
+    document.body.removeChild(anchor);
+  }
+
+  function saveCompanionSession(e) {
+    e.preventDefault();
+    const btn = document.getElementById("save-log-btn");
+    const msg = document.getElementById("save-success-msg");
+    btn.disabled = true;
+    btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span><span>Saving...</span>`;
+    setTimeout(() => {
+      btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">done</span><span>Saved to IndexedDB</span>`;
+      msg.classList.remove('hidden');
+    }, 600);
+  }
+</script></main></div></body></html>

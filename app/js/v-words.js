@@ -14,14 +14,21 @@ export async function render(el, ctx) {
   try { course = await loadStarterCourse(ctx.store, { signal: ctx.signal }); } catch (error) { courseError(el, ctx, error); return; }
   if (ctx.signal.aborted) return;
   let query = ''; let unit = 'all'; let pos = 'all'; let savedOnly = false; let limit = 12; let mode = 'recall';
-  el.innerHTML = `${pageHeading('UNDERSTAND IT. SAY IT. USE IT.', 'Vocabulary you can use.', `${course.words.length} beginner-friendly words with English meanings, useful forms, and examples. Start with five words, then bring them into a conversation.`)}
-    <div class="practice-toolbar"><a class="btn secondary" href="#lessons">Learn words in lessons ${icon('arrow')}</a><a class="inline-link" href="#phrases">Useful phrases &amp; your own collection</a></div>
-    <section class="card section-gap"><div class="card-title"><h2>A small word practice</h2>${provenance('self-rated')}</div>
-      <div class="btn-row segmented" role="radiogroup" aria-label="Practice mode">${Object.entries(modeLabels).map(([value, label]) => `<button class="btn secondary" role="radio" data-word-mode="${value}" aria-checked="${mode === value}" tabindex="${mode === value ? 0 : -1}">${label}</button>`).join('')}</div>
-      <select id="word-mode" aria-label="Practice mode" hidden>${Object.entries(modeLabels).map(([value, label]) => `<option value="${value}" ${mode === value ? 'selected' : ''}>${label}</option>`).join('')}</select>
-      <p class="fine section-gap" id="word-review-count" role="status"></p><div class="btn-row"><button class="btn" id="learn-words">Learn five words</button><button class="btn secondary" id="review-words">Review due words</button></div><div id="resume-words"></div><div class="status-foot">${howLink()}</div></section>
-    <section class="card section-gap"><details class="word-filters"><summary>Filter</summary><div class="form-grid section-gap"><label>Search words<input type="text" id="word-search" placeholder="German, English, or an example…"></label><label>Topic<select id="word-unit"><option value="all">All topics</option>${STARTER_UNITS.map((name, index) => `<option value="${index + 1}">${esc(name)}</option>`).join('')}</select></label><label>Word type<select id="word-pos"><option value="all">All word types</option>${['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'number', 'preposition', 'conjunction', 'expression', 'language'].map(type => `<option value="${type}">${type}</option>`).join('')}</select></label><label class="check-label"><input type="checkbox" id="saved-words">My saved words only</label></div></details></section>
-    <p id="word-count" class="fine section-gap" aria-live="polite"></p><div class="starter-grid" id="word-cards"></div><button class="btn secondary section-gap" id="more-words">Show more words</button>`;
+  el.innerHTML = `<section class="words-vault" role="region" aria-label="Vocabulary vault">
+    ${pageHeading('WORTSCHATZ-ZENTRALE', 'Vocabulary you can use.', `${course.words.length} beginner-friendly words with English meanings, useful forms, and examples. Start with five words, then bring them into a conversation.`)}
+    <section class="words-vault-hero card"><div><div class="pills"><span class="pill">ACTIVE DECK · ${course.words.length} WORDS</span>${provenance('self-rated')}</div><h2>Targeted verbal retrieval without overload.</h2><p class="fine">Recall first, then reveal the model. Your ratings schedule the next small practice without pretending to measure pronunciation.</p></div><div class="btn-row"><button class="btn" id="learn-words-hero">Learn 5 new words ${icon('arrow')}</button><button class="btn secondary" id="review-words-hero">Review due words</button></div></section>
+    <div class="words-workspace section-gap">
+      <section class="words-library" aria-label="Word library">
+        <div class="practice-toolbar"><a class="btn secondary" href="#lessons">Learn words in lessons ${icon('arrow')}</a><a class="inline-link" href="#phrases">Useful phrases &amp; your own collection</a></div>
+        <section class="card words-filter-panel"><div class="words-search-row"><label class="search-field"><span class="sr-only">Search words</span><input type="text" id="word-search" placeholder="Search German, English, or an example sentence…"></label><span class="pill">⌘K</span></div><details class="word-filters"><summary>Filter</summary><div class="form-grid section-gap"><label>Topic<select id="word-unit"><option value="all">All topics</option>${STARTER_UNITS.map((name, index) => `<option value="${index + 1}">${esc(name)}</option>`).join('')}</select></label><label>Word type<select id="word-pos"><option value="all">All word types</option>${['noun', 'verb', 'adjective', 'adverb', 'pronoun', 'number', 'preposition', 'conjunction', 'expression', 'language'].map(type => `<option value="${type}">${type}</option>`).join('')}</select></label><label class="check-label"><input type="checkbox" id="saved-words">My saved words only</label></div></details></section>
+        <p id="word-count" class="fine section-gap" aria-live="polite"></p><div class="starter-grid" id="word-cards"></div><button class="btn secondary section-gap" id="more-words">Show more words</button>
+      </section>
+      <section class="card words-practice-panel" role="region" aria-label="Word practice"><div class="card-title"><div><p class="eyebrow">SPOKEN RETRIEVAL</p><h2>A small word practice</h2></div>${provenance('self-rated')}</div><div class="word-practice-progress"><span class="pill" id="word-review-count" role="status"></span></div>
+        <div class="btn-row segmented" role="radiogroup" aria-label="Practice mode">${Object.entries(modeLabels).map(([value, label]) => `<button class="btn secondary" role="radio" data-word-mode="${value}" aria-checked="${mode === value}" tabindex="${mode === value ? 0 : -1}">${label}</button>`).join('')}</div>
+        <select id="word-mode" aria-label="Practice mode" hidden>${Object.entries(modeLabels).map(([value, label]) => `<option value="${value}" ${mode === value ? 'selected' : ''}>${label}</option>`).join('')}</select>
+        <div class="word-practice-note"><strong>Try before you reveal.</strong><p class="fine">A spoken attempt is valid evidence. An optional recording is only a saved artifact, not a pronunciation score.</p></div>
+        <div class="btn-row"><button class="btn" id="learn-words">Learn five words ${icon('arrow')}</button><button class="btn secondary" id="review-words">Review due words</button></div><div id="resume-words"></div><div class="status-foot">${howLink()}</div></section>
+    </div></section>`;
   function matches() {
     const saved = new Set(ctx.store.state.starter.wordMarks.filter(mark => mark.saved).map(mark => mark.id));
     return course.words.filter(word => (unit === 'all' || word.unit === Number(unit)) && (pos === 'all' || word.pos === pos)
@@ -68,21 +75,25 @@ export async function render(el, ctx) {
     const heading = el.querySelectorAll('#word-cards h3')[firstNew];
     heading?.setAttribute('tabindex', '-1'); heading?.focus();
   });
-  safeAction(el.querySelector('#learn-words'), () => {
+  const startLearning = () => {
     const known = wordMemories(ctx.store.state.starter, mode);
     const words = matches();
     const fresh = words.filter(word => !known.has(word.id));
     return ctx.startWordPractice((fresh.length ? fresh : words).slice(0, 5).map(word => word.id), mode);
-  }, ctx.error);
-  safeAction(el.querySelector('#review-words'), () => ctx.startWordPractice(dueWords(course, ctx.store.state.starter, mode).slice(0, 10).map(word => word.id), mode), ctx.error);
+  };
+  const startReview = () => ctx.startWordPractice(dueWords(course, ctx.store.state.starter, mode).slice(0, 10).map(word => word.id), mode);
+  safeAction(el.querySelector('#learn-words'), startLearning, ctx.error);
+  safeAction(el.querySelector('#learn-words-hero'), startLearning, ctx.error);
+  safeAction(el.querySelector('#review-words'), startReview, ctx.error);
+  safeAction(el.querySelector('#review-words-hero'), startReview, ctx.error);
 }
 
 export async function renderSession(el, ctx, id) {
   let session = ctx.store.state.starter.wordSessions.find(item => item.id === id);
   if (!session) throw new Error('This word practice is not saved here. Open Vocabulary to start.');
   let draft; let word; let busy = false; let alive = true; let pendingSave = Promise.resolve();
-  el.innerHTML = `<a class="inline-link" href="#words">${icon('back')}Vocabulary</a>${pageHeading('A FEW WORDS, OFTEN', modeLabels[session.mode], 'Try first. Compare with the model. Choose an honest self-rating.')}
-    <div class="starter-session-meta"><span id="word-position"></span><span class="fine" data-starter-time></span></div><section class="card section-gap" id="word-task"></section><div class="status-foot">${provenance('self-rated')} ${howLink()}</div>`;
+  el.innerHTML = `<a class="inline-link" href="#words">${icon('back')}Vocabulary</a><section class="word-session-shell" role="region" aria-label="Word practice">${pageHeading('A FEW WORDS, OFTEN', modeLabels[session.mode], 'Try first. Compare with the model. Choose an honest self-rating.')}
+    <div class="starter-session-meta"><span id="word-position"></span><span class="fine" data-starter-time></span></div><section class="card section-gap" id="word-task"></section><div class="status-foot">${provenance('self-rated')} ${howLink()}</div></section>`;
   const clock = startStarterClock(ctx, id, el);
   function persist() {
     if (!word || !draft || session.completedAt) return pendingSave;

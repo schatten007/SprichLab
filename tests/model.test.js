@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import { newState, migrateLegacy, dateKey, splitActivity, progressStats, parseBackup, mergeActivity, DAY } from '../app/js/model.js';
 import { dailyPlan } from '../app/js/adaptive.js';
 
+test('new installs default to the Electric Slate night theme', () => {
+  assert.equal(newState().preferences.theme, 'dark');
+});
+
 test('legacy scores are preserved without becoming new learning evidence', () => {
   const raw = JSON.stringify({ profile: { recall: null, streak: 999 }, assess: [{ total: 100 }], planMin: 120 });
   const state = migrateLegacy(raw, 1000);

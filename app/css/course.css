@@ -132,3 +132,77 @@
   .resource-progress { gap: 16px; }
   .personal-phrase-form .btn { width: 100%; }
 }
+
+/* Resource catalog and guided studio. All publisher media remains external. */
+.resource-page { min-width: 0; }
+.resource-page .page-heading { margin-top: var(--space-4); }
+.resource-page .resource-filters { padding: var(--space-5); background: var(--surface-soft); }
+.resource-page .resource-checks { padding-top: var(--space-3); border-top: 1px solid var(--line); align-items: center; }
+.resource-page .resource-checks .check-label { margin: 0; }
+.resource-page .resource-checks .text-button { margin-left: auto; }
+.resource-library-layout, .resource-detail-layout { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: var(--space-5); align-items: start; }
+.resource-library-layout > *, .resource-detail-layout > * { min-width: 0; }
+.resource-page .resource-catalog-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
+.catalog-heading { display: flex; flex-wrap: wrap; gap: var(--space-2); justify-content: space-between; align-items: center; margin-bottom: var(--space-4); }
+.catalog-heading h2 { font-size: var(--text-lg); }
+.catalog-heading p { margin: 0; }
+.resource-page .catalog-card { padding: var(--space-5); border-left: 3px solid var(--focus); }
+.catalog-provider { display: flex; align-items: center; gap: var(--space-3); }
+.resource-page .catalog-provider .eyebrow { font-size: var(--text-xs); }
+.resource-page .catalog-card h2 { margin: var(--space-4) 0 var(--space-2); }
+.resource-page .catalog-card > p { font-size: var(--text-base); }
+.resource-page .resource-meta { flex-direction: row; flex-wrap: wrap; gap: var(--space-2) var(--space-4); margin: var(--space-4) 0; }
+.catalog-footer { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; justify-content: space-between; padding-top: var(--space-4); margin-top: auto; border-top: 1px solid var(--line); }
+.resource-page .catalog-footer .btn { margin: 0; }
+.resource-practice-rail { position: sticky; top: var(--space-5); }
+.resource-practice-rail h2 { margin: var(--space-3) 0; }
+.resource-practice-rail .circle-icon { margin-bottom: var(--space-4); }
+.resource-workflow { counter-reset: resource-step; list-style: none; padding: 0; margin: var(--space-5) 0; }
+.resource-workflow li { counter-increment: resource-step; position: relative; padding: 0 0 var(--space-4) 38px; }
+.resource-workflow li::before { content: counter(resource-step, decimal-leading-zero); position: absolute; left: 0; top: 0; color: var(--brand); font: 700 var(--text-sm)/1.6 var(--font-pixel); }
+.resource-workflow p { font-size: var(--text-sm); color: var(--muted); margin: var(--space-1) 0 0; }
+.resource-page .resource-local { background: var(--surface-soft); box-shadow: none; }
+.resource-page .resource-resume { border-color: var(--brand); }
+.resource-panel-heading { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-5); }
+.resource-panel-heading .eyebrow { margin-bottom: var(--space-1); }
+.resource-panel-heading h2 { font-size: var(--text-lg); margin: 0; }
+.resource-page .resource-source > .btn-row { align-items: stretch; }
+.resource-page .resource-source .btn { flex: 1 1 190px; }
+.resource-page .resource-source .btn.soft { flex: 0 1 auto; }
+.resource-page .resource-rating label { min-width: 0; width: 100%; }
+.resource-page .resource-rating .text-button { text-align: left; }
+.resource-page .resource-access { gap: var(--space-2); }
+.resource-page .resource-access > span { background: var(--surface-soft); padding: var(--space-1) var(--space-2); border-radius: var(--radius-sm); }
+.resource-page .source-notes { background: var(--surface-soft); }
+.resource-followup > .lesson-copy > p { font-size: var(--text-lg); }
+.resource-phrase-bench { padding-top: var(--space-5); margin-top: var(--space-5); border-top: 1px solid var(--line); }
+.resource-page .resource-phrase { border: 0; border-left: 2px solid var(--focus); padding: var(--space-3); border-radius: 0 var(--radius-sm) var(--radius-sm) 0; margin: var(--space-3) 0; background: var(--surface-soft); }
+.resource-page .resource-workspace { grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr); gap: var(--space-5); }
+.resource-page .resource-workspace > aside { grid-template-columns: minmax(0, 1fr); min-width: 0; }
+.resource-page .resource-response { border-top: 3px solid var(--brand); padding: var(--space-6); }
+.resource-response-prompt { background: var(--surface-soft); border-radius: var(--radius-md); padding: var(--space-5); margin: var(--space-5) 0; }
+.resource-response-prompt .lesson-copy { margin: 0; }
+.resource-response-prompt .lesson-copy > p { font-size: var(--text-lg); line-height: 1.7; }
+.resource-page .record-panel { background: var(--surface-soft); box-shadow: none; }
+.resource-outside { background: var(--surface-soft); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-4); margin: var(--space-5) 0; }
+.resource-outside > p { font-size: var(--text-sm); margin: var(--space-2) 0 0; }
+.resource-outside .outside-time { margin: var(--space-3) 0 0; font-size: var(--text-sm); }
+.resource-page .resource-capture { border-top: 3px solid var(--focus); }
+.resource-page .resource-capture summary { color: var(--brand); }
+.resource-page .alternative-list > div { flex-direction: column; align-items: stretch; }
+.resource-page :is(.catalog-card, .resource-response, .resource-source, .resource-followup) { overflow-wrap: anywhere; }
+
+@media (max-width: 1100px) {
+  .resource-library-layout, .resource-detail-layout, .resource-page .resource-workspace { grid-template-columns: minmax(0, 1fr); }
+  .resource-practice-rail { position: static; }
+}
+@media (max-width: 760px) {
+  .resource-page .resource-filters, .resource-page .resource-response, .resource-page .catalog-card { padding: var(--space-4); }
+  .resource-page .resource-checks { display: flex; flex-direction: column; align-items: flex-start; }
+  .resource-page .resource-checks .text-button { margin-left: 0; }
+  .resource-page .resource-filter-grid { gap: var(--space-3); }
+  .resource-page .catalog-footer { align-items: stretch; flex-direction: column; }
+  .resource-page .catalog-footer .btn { align-self: stretch; }
+  .resource-response-prompt { padding: var(--space-4); }
+  .resource-page .resource-source .btn.soft { flex: 1 1 auto; }
+}

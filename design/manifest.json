@@ -1,0 +1,66 @@
+{
+  "name": "Sprich — German Speaking Trainer",
+  "short_name": "Sprich",
+  "description": "Local-first, ADHD-friendly German speaking practice for everyday, university, and workplace situations.",
+  "start_url": "/",
+  "id": "/?source=pwa",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#121316",
+  "theme_color": "#121316",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Speaking Bite",
+      "short_name": "Today",
+      "description": "Jump directly into your daily speaking practice",
+      "url": "/today",
+      "icons": [{ "src": "/icons/shortcut-today.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Vocabulary Vault",
+      "short_name": "Vault",
+      "description": "Rapid 5-word spoken recall sprint",
+      "url": "/words",
+      "icons": [{ "src": "/icons/shortcut-words.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Workplace Missions",
+      "short_name": "Workplace",
+      "description": "Job interview and standup speaking simulations",
+      "url": "/workplace",
+      "icons": [{ "src": "/icons/shortcut-workplace.png", "sizes": "96x96" }]
+    }
+  ],
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "dir": "ltr",
+  "lang": "de-DE",
+  "prefer_related_applications": false
+}

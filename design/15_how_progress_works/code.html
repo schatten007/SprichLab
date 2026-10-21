@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary":"#ffffff","status-online":"#22c55e","text-primary":"#f8fafc","cyan-spark":"#38bdf8","on-secondary-fixed":"#2c0051","on-primary":"#2a3400","secondary-fixed-dim":"#ddb7ff","surface-card":"#1c1d22","on-error":"#690005","on-error-container":"#ffdad6","surface-tint":"#b0d500","on-secondary":"#490080","surface-bright":"#38393c","on-primary-fixed-variant":"#3e4c00","text-muted":"#94a3b8","primary":"#ffffff","inverse-surface":"#e3e2e6","surface-variant":"#343538","surface-raised":"#25262c","on-tertiary":"#4e2600","secondary":"#ddb7ff","primary-fixed":"#caf300","surface-container-low":"#1b1b1f","inverse-on-surface":"#2f3034","tertiary-fixed-dim":"#ffb781","outline-variant":"#444932","surface-container-highest":"#343538","surface":"#121316","tertiary-fixed":"#ffdcc4","on-tertiary-container":"#9b5100","primary-container":"#caf300","surface-base":"#121316","error":"#ffb4ab","on-background":"#e3e2e6","inverse-primary":"#536600","surface-container":"#1f1f23","on-tertiary-fixed-variant":"#6f3800","surface-dim":"#121316","tertiary-container":"#ffdcc4","secondary-container":"#6f00be","error-container":"#93000a","on-surface-variant":"#c5c9ac","status-rest-day":"#64748b","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7","on-primary-fixed":"#171e00","surface-stroke":"#33353e","on-secondary-container":"#d6a9ff","punch-orange":"#ff8800","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","outline":"#8f9378","secondary-fixed":"#f0dbff","on-primary-container":"#596c00","electric-lime":"#d4ff00","surface-container-high":"#292a2d","background":"#121316","on-tertiary-fixed":"#2f1400","surface-container-lowest":"#0d0e11"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-xl":"2rem","margin-mobile":"1rem","gutter":"1.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"0.75rem","space-2xl":"3rem"},fontFamily:{"headline-lg":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-badge":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"headline-sm":["Space Grotesk"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"display-hero":["Space Grotesk"]},fontSize:{"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"german-prompt-lg":["24px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"german-prompt-lg-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-badge":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-mono":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col pt-space-lg pb-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="px-space-lg mb-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-2.5 h-2.5 rounded-full bg-primary-fixed"></div><span class="font-label-mono text-label-mono uppercase text-on-surface-variant">A2 / B1 Fluency</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">ADHD Mode</span></div><div class="flex-1 overflow-y-auto px-space-md space-y-space-lg"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Daily Practice</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">bolt</span><span class="font-body-md text-body-md">Today</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">record_voice_over</span><span class="font-body-md text-body-md">Lessons</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md">Words</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-body-md text-body-md">Progress</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Modules &amp; Coach</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">business_center</span><span class="font-body-md text-body-md">Workplace</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">mic</span><span class="font-body-md text-body-md">AI Talk</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-high font-label-mono text-label-mono text-primary-fixed">MIC</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">auto_stories</span><span class="font-body-md text-body-md">Resources</span></a></nav></div></div><div class="px-space-md pt-space-md border-t border-surface-stroke/40 space-y-space-xs"><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a aria-current="page" class="flex items-center gap-space-sm px-space-sm py-1.5 rounded transition-colors bg-surface-raised text-primary-fixed font-bold" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-card"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-cyan-spark">database</span><span class="font-label-mono text-label-mono text-on-surface">Storage: Local DB Ready</span></div><span class="w-2 h-2 rounded-full bg-status-online"></span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-text-primary">Sprich</span><span class="font-label-mono text-label-mono text-text-muted hidden xl:inline">German for your next step</span></div></div><div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-status-online"></span><span>OFFLINE / LOCAL</span></div><nav class="flex items-center bg-surface-card p-1 rounded-full" data-active-classes="bg-surface-bright text-text-primary font-bold"><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="today" href="#">Start speaking</a><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="workplace" href="#">Workplace</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised text-primary-fixed hover:bg-surface-variant hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[16px]">play_circle</span><span class="font-label-mono text-label-mono">Resume: Beim Bäcker (2/7)</span></a><div class="flex items-center gap-space-xs text-text-muted"><span class="material-symbols-outlined text-[18px] text-primary-fixed-dim">sync</span><span class="font-label-mono text-label-mono hidden sm:inline">Local JSON Synced</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative w-full pt-16 bg-surface px-space-lg py-space-xl"><div class="flex flex-col w-full">
+<!-- Subtle Ambient Glow Orbs -->
+<div class="relative w-full">
+<div class="absolute -top-12 right-1/4 w-96 h-96 bg-primary-fixed/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-96 left-10 w-80 h-80 bg-vivid-purple/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Editorial Header: Zero H1 Duplication, Pure Cognitive Clarity -->
+<header class="relative mb-space-2xl max-w-4xl">
+<div class="inline-flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark mb-space-md">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>ACADEMIC INTEGRITY &amp; COGNITIVE SAFETY PROTOCOL</span>
+</div>
+<h1 class="font-display-hero text-display-hero text-text-primary tracking-tight mb-space-sm">
+        How Progress Works in Sprich
+      </h1>
+<p class="font-body-lg text-body-lg text-text-muted leading-relaxed max-w-3xl">
+        A transparent guide to how we track your learning. Honest evidence, zero fake fluency percentages, zero shame algorithms, and complete local agency over your data.
+      </p>
+<!-- Quick Trust Indicators -->
+<div class="mt-space-lg flex flex-wrap gap-space-md items-center text-on-surface-variant font-label-mono text-label-mono">
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-card">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span>
+<span>100% EXPLAINABLE TELEMETRY</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-card">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-spark"></span>
+<span>ZERO ENGAGEMENT PUNISHMENT</span>
+</div>
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-card">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed"></span>
+<span>LOCAL DEVICE FIRST</span>
+</div>
+</div>
+</header>
+<!-- SECTION 1: The Six Truthful Evidence Classifications -->
+<section class="mb-space-2xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-space-lg gap-space-sm">
+<div>
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-primary-fixed block mb-1">Foundational Contract</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary">
+            The Six Truthful Evidence Classifications
+          </h2>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted max-w-md">
+          Language platforms routinely blend guesswork with genuine effort. Sprich tags every millisecond and action with its exact origin stamp.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- 1. Measured -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-primary-container text-on-primary-container font-bold">
+                MEASURED
+              </span>
+<span class="material-symbols-outlined text-primary-fixed text-[24px]">timer</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              Microphone Telemetry
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Hardware-clocked time captured strictly during active audio recording and phonation. Measured directly via unaltered browser WebAudio APIs on your machine.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Verification Rule:</span>
+<span class="font-body-sm text-body-sm text-text-muted">Zero interpolation. Silence beyond 4.5 seconds is automatically culled from talk-time totals.</span>
+</div>
+</article>
+<!-- 2. Checked locally -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-cyan-spark/20 text-cyan-spark font-bold">
+                CHECKED LOCALLY
+              </span>
+<span class="material-symbols-outlined text-cyan-spark text-[24px]">terminal</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              Deterministic Device Logic
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Strict syntax trees, word ordering slots, case agreement, and token regex evaluated client-side in instant JavaScript without network calls or server lag.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Verification Rule:</span>
+<span class="font-body-sm text-body-sm text-text-muted">100% reproducible. Rules are transparent, repeatable, and completely auditable offline.</span>
+</div>
+</article>
+<!-- 3. Self-rated -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-vivid-purple/20 text-secondary font-bold">
+                SELF-RATED
+              </span>
+<span class="material-symbols-outlined text-vivid-purple text-[24px]">psychology_alt</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              Metacognitive Reflection
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Your self-evaluation after speaking: <em>“Clean recall”</em>, <em>“Needed hesitation pause”</em>, or <em>“Needed model assist”</em>. Fluency starts with honest internal calibration.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Verification Rule:</span>
+<span class="font-body-sm text-body-sm text-text-muted">Treated with high pedagogical weight. Metacognitive awareness predicts real-life retention.</span>
+</div>
+</article>
+<!-- 4. Self-reported -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-punch-orange/20 text-punch-orange font-bold">
+                SELF-REPORTED
+              </span>
+<span class="material-symbols-outlined text-punch-orange text-[24px]">earbuds</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              External Real-World Immersion
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Listening to Tagesschau in 100 Sekunden, Easy German podcasts, Deutsche Welle episodes, or workplace German lunch chats recorded manually in your diary.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Isolation Guarantee:</span>
+<span class="font-body-sm text-body-sm text-text-muted">Never polluted into active in-app speech telemetry. Displays in separate contextual panels.</span>
+</div>
+</article>
+<!-- 5. AI estimate -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-surface-container-high text-on-surface-variant font-bold">
+                AI ESTIMATE
+              </span>
+<span class="material-symbols-outlined text-text-muted text-[24px]">robot_2</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              Contextual LLM Feedback
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Stateless linguistic critique regarding workplace naturalness, register, and idiom choice via your opted-in API key. Helpful suggestions, never canonical truth.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Demarcation:</span>
+<span class="font-body-sm text-body-sm text-text-muted">Never converted into a permanent numeric score or punitive ranking.</span>
+</div>
+</article>
+<!-- 6. Imported Gemini assessment -->
+<article class="bg-surface-card hover:bg-surface-raised transition-all p-space-lg rounded-lg shadow-sm flex flex-col justify-between group">
+<div>
+<div class="flex items-center justify-between mb-space-md">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-surface-container-high text-cyan-spark font-bold">
+                IMPORTED GEMINI ASSESSMENT
+              </span>
+<span class="material-symbols-outlined text-cyan-spark text-[24px]">cloud_sync</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary mb-space-xs">
+              External Conversational Audit
+            </h3>
+<p class="font-body-md text-body-md text-text-muted">
+              Session transcripts or verbal roleplays imported from deep Gemini Live sessions. Parsed and verified for chronological cohesion, tagged as external export.
+            </p>
+</div>
+<div class="mt-space-lg pt-space-sm bg-surface-container-low p-space-sm rounded">
+<span class="font-label-mono text-label-mono text-text-primary block font-semibold mb-0.5">Data Portability:</span>
+<span class="font-body-sm text-body-sm text-text-muted">Stored strictly inside your local IndexedDB schema with full manual JSON export rights.</span>
+</div>
+</article>
+</div>
+</section>
+<!-- SECTION 2: Why Typed Notes are NOT Speaking Evidence -->
+<section class="mb-space-2xl">
+<div class="bg-surface-card p-space-lg md:p-space-xl rounded-lg shadow-md relative overflow-hidden">
+<div class="absolute -right-16 -bottom-16 w-64 h-64 bg-punch-orange/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center gap-space-xs text-punch-orange font-label-mono text-label-mono uppercase mb-space-xs">
+<span class="material-symbols-outlined text-[16px]">record_voice_over</span>
+<span>NEUROMUSCULAR REALITY CHECK</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-space-md">
+              Why Typed Notes Are NOT Speaking Evidence
+            </h2>
+<p class="font-body-md text-body-md text-text-muted mb-space-md leading-relaxed">
+              When you type a German sentence, your fingers navigate mechanical keys while your visual cortex corrects misspellings on screen. You have ample time to ponder grammar rules in your working memory.
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-space-md leading-relaxed">
+              Spoken fluency is an entirely distinct physical event. It demands instantaneous breath control, rapid tongue placement against the palate for the German <em>‘ch’</em> and <em>‘r’</em>, active vowel duration adjustments, and latency tolerance under social stress.
+            </p>
+<div class="bg-surface-container-low p-space-md rounded-lg flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-primary-fixed text-[20px] mt-0.5">info</span>
+<p class="font-body-sm text-body-sm text-text-primary">
+                Typing is exceptional for grammar drills, orthography, and vocab indexing. But inside Sprich, <strong>only actual phonation through the vocal tract unlocks active speaking milestones</strong>.
+              </p>
+</div>
+</div>
+<!-- Comparative Neuromuscular Flow Chart -->
+<div class="lg:col-span-5 bg-surface-container-lowest p-space-md md:p-space-lg rounded-lg">
+<span class="font-label-mono text-label-mono uppercase text-text-muted block mb-space-sm">Pathway Comparison</span>
+<!-- Path A: Typing -->
+<div class="mb-space-md p-space-sm rounded bg-surface-card">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono text-label-mono text-text-muted">KEYBOARD INPUT</span>
+<span class="font-label-mono text-label-mono text-status-rest-day">Passive Cognitive Loop</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] font-label-mono text-text-muted">
+<span class="px-1.5 py-0.5 bg-surface-container rounded">Brain Planning</span>
+<span>→</span>
+<span class="px-1.5 py-0.5 bg-surface-container rounded">Finger Motor</span>
+<span>→</span>
+<span class="px-1.5 py-0.5 bg-surface-container rounded text-punch-orange">Visual Edit</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-2">Bypasses speech tract. Zero articulatory speed training.</p>
+</div>
+<!-- Path B: Vocal -->
+<div class="p-space-sm rounded bg-surface-raised">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-mono text-label-mono text-primary-fixed">SPOKEN OUTPUT</span>
+<span class="font-label-mono text-label-mono text-primary-fixed font-bold">Real Neural Latency</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] font-label-mono text-text-primary">
+<span class="px-1.5 py-0.5 bg-primary-container text-on-primary-container rounded font-bold">Lexical Retrieval</span>
+<span class="text-primary-fixed">→</span>
+<span class="px-1.5 py-0.5 bg-primary-container text-on-primary-container rounded font-bold">Laryngeal Phonation</span>
+<span class="text-primary-fixed">→</span>
+<span class="px-1.5 py-0.5 bg-primary-container text-on-primary-container rounded font-bold">Auditory Loop</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-primary mt-2">Builds true neurological speech fluency required in meetings and bakeries.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Attempt Conditions & Model Reveals -->
+<section class="mb-space-2xl">
+<div class="mb-space-lg">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-cyan-spark block mb-1">Cognitive Friction &amp; Integrity</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary">
+          Attempt Conditions: Autonomous vs Assisted
+        </h2>
+<p class="font-body-md text-body-md text-text-muted mt-1 max-w-2xl">
+          Language mastery is not reading aloud off a cheat sheet. It is the spontaneous neurological retrieval of German phrases under mild ambiguity.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Autonomous State Card -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm mb-space-md">
+<div class="w-8 h-8 rounded-full bg-status-online/20 flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-text-primary block">Autonomous Attempt</span>
+<span class="font-label-mono text-label-mono text-status-online font-bold">100% RETRIEVAL VALUE</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-text-muted mb-space-md">
+              You view the prompt situation (e.g. <em>“Ask the IT admin to reset your credentials”</em>) and produce the German phrase into the microphone <strong>without tapping ‘Show German Model’ or ‘Listen First’</strong>.
+            </p>
+<ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-online text-[16px]">check_circle</span>
+<span>Builds synaptic myelination and workplace reaction speed</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-status-online text-[16px]">check_circle</span>
+<span>Qualifies for mastery consolidation telemetry</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-lg p-space-sm bg-surface-container-lowest rounded flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">UI Badge Status</span>
+<span class="px-2 py-0.5 rounded font-label-mono text-label-mono bg-status-online/10 text-status-online font-bold">AUTONOMOUS</span>
+</div>
+</div>
+<!-- Assisted State Card -->
+<div class="bg-surface-card p-space-lg rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-space-sm mb-space-md">
+<div class="w-8 h-8 rounded-full bg-cyan-spark/20 flex items-center justify-center text-cyan-spark">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</div>
+<div>
+<span class="font-headline-sm text-headline-sm text-text-primary block">Assisted Attempt</span>
+<span class="font-label-mono text-label-mono text-cyan-spark font-bold">READ-ALOUD / GUIDED SCAFFOLD</span>
+</div>
+</div>
+<p class="font-body-md text-body-md text-text-muted mb-space-md">
+              If executive dysfunction or cognitive block strikes, you tap to reveal the German transcript or listen to native pronunciation before recording. <strong>This is completely valid learning</strong>, but it is logged as supported practice.
+            </p>
+<ul class="space-y-space-xs font-body-sm text-body-sm text-on-surface-variant">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cyan-spark text-[16px]">help</span>
+<span>Zero penalty, zero shame, zero lost points</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-cyan-spark text-[16px]">help</span>
+<span>Item will simply reappear later for an autonomous recall trial</span>
+</li>
+</ul>
+</div>
+<div class="mt-space-lg p-space-sm bg-surface-container-lowest rounded flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">UI Badge Status</span>
+<span class="px-2 py-0.5 rounded font-label-mono text-label-mono bg-cyan-spark/10 text-cyan-spark font-bold">ASSISTED</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: The Forgiving Rest-Day System & Zero-Shame Streak -->
+<section class="mb-space-2xl">
+<div class="bg-surface-card p-space-lg md:p-space-xl rounded-lg shadow-sm">
+<div class="max-w-3xl mb-space-xl">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-primary-fixed block mb-1">ADHD-Protective Architecture</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-space-xs">
+            The Forgiving Rest-Day System &amp; Zero-Shame Rhythm
+          </h2>
+<p class="font-body-md text-body-md text-text-muted leading-relaxed">
+            Standard gamification apps weaponize streak counters to trigger anxiety, punishing neurodivergent learners with cold zeroes when life or burnout intervenes. Sprich replaces streak anxiety with sustainable weekly cadence and banked recovery.
+          </p>
+</div>
+<!-- 7-Day Rhythm Interactive Visualizer -->
+<div class="bg-surface-container-lowest p-space-lg rounded-lg mb-space-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm mb-space-lg">
+<div>
+<span class="font-label-mono text-label-mono text-text-primary uppercase font-bold block">Current 7-Day Cycle Cadence</span>
+<span class="font-body-sm text-body-sm text-text-muted">Daily target: 15 qualifying phonation minutes</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 px-space-sm py-1 rounded bg-surface-card font-label-mono text-label-mono text-status-rest-day">
+<span class="material-symbols-outlined text-[16px] text-status-rest-day">shield</span>
+<span>Banked Rest Shields: <strong>2/2</strong></span>
+</div>
+</div>
+</div>
+<!-- The Rhythm Pill Strip -->
+<div class="grid grid-cols-7 gap-space-xs sm:gap-space-sm">
+<!-- Day 1: Done -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">MON</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-mono text-[10px] text-primary-fixed">18 min</span>
+</div>
+<!-- Day 2: Done -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">TUE</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-mono text-[10px] text-primary-fixed">15 min</span>
+</div>
+<!-- Day 3: Rest Day Consumed -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">WED</span>
+<div class="w-8 h-8 rounded-full bg-surface-bright text-status-rest-day flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+</div>
+<span class="font-label-mono text-[10px] text-status-rest-day">Protected</span>
+</div>
+<!-- Day 4: Done -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">THU</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-mono text-[10px] text-primary-fixed">22 min</span>
+</div>
+<!-- Day 5: Done -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">FRI</span>
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+<span class="font-label-mono text-[10px] text-primary-fixed">16 min</span>
+</div>
+<!-- Day 6: Rest Day Active -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-card text-center">
+<span class="font-label-mono text-label-mono text-text-muted">SAT</span>
+<div class="w-8 h-8 rounded-full bg-surface-bright text-status-rest-day flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">bedtime</span>
+</div>
+<span class="font-label-mono text-[10px] text-status-rest-day">Rest</span>
+</div>
+<!-- Day 7: Today -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs sm:p-space-sm rounded bg-surface-raised text-center ring-1 ring-primary-fixed/40">
+<span class="font-label-mono text-label-mono text-primary-fixed font-bold">TODAY</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high text-primary-fixed flex items-center justify-center animate-pulse">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</div>
+<span class="font-label-mono text-[10px] text-text-muted">0/15m</span>
+</div>
+</div>
+</div>
+<!-- 3 Core Tenets of the Rest-Day Protocol -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-surface-container-low p-space-md rounded">
+<span class="font-label-mono text-label-mono text-primary-fixed block mb-1">01 / EARNABLE REST</span>
+<h4 class="font-headline-sm text-headline-sm text-text-primary mb-1">6 Qualifying Days = 1 Shield</h4>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Every 6 days you commit 15+ minutes of active speech, Sprich banks 1 rest day shield (maximum 2 stored).
+            </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded">
+<span class="font-label-mono text-label-mono text-status-rest-day block mb-1">02 / AUTOMATIC PROTECTION</span>
+<h4 class="font-headline-sm text-headline-sm text-text-primary mb-1">No Negative Friction</h4>
+<p class="font-body-sm text-body-sm text-text-muted">
+              If life, illness, or travel interrupts your routine, a banked shield steps in automatically. Zero nagging notifications.
+            </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded">
+<span class="font-label-mono text-label-mono text-cyan-spark block mb-1">03 / PERMANENT RECORD</span>
+<h4 class="font-headline-sm text-headline-sm text-text-primary mb-1">Knowledge Never Resets</h4>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Even if both shields are exhausted, <strong>your recorded audio, mastered phrases, and word mastery counts stay 100% intact</strong>.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Why We Do Not Award CEFR Certificates or Fluency Scores -->
+<section class="mb-space-2xl">
+<div class="bg-surface-card p-space-lg md:p-space-xl rounded-lg shadow-sm">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-space-xs text-text-muted font-label-mono text-label-mono uppercase mb-space-xs">
+<span class="material-symbols-outlined text-[16px]">gavel</span>
+<span>ETHICAL PEDAGOGY MANIFESTO</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary mb-space-md">
+            Why We Do Not Award CEFR Certificates or Fake Fluency Scores
+          </h2>
+<p class="font-body-md text-body-md text-text-muted mb-space-md leading-relaxed">
+            You will never see a popup claiming: <em>“Congratulations! You are now 83.4% fluent in German!”</em> in Sprich. These figures are marketing fiction designed to exploit learner insecurity.
+          </p>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md my-space-lg">
+<div class="bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-center gap-2 text-error mb-2">
+<span class="material-symbols-outlined text-[18px]">cancel</span>
+<span class="font-headline-sm text-headline-sm">What Browser Apps Cannot Do</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+                Legitimate CEFR (Common European Framework of Reference) certification requires calibrated, in-person human examiners (such as the Goethe-Institut or telc) evaluating live conversational stress, interactive repair tactics, and sociolinguistic subtlety under unscripted conditions.
+              </p>
+</div>
+<div class="bg-surface-container-low p-space-md rounded-lg">
+<div class="flex items-center gap-2 text-primary-fixed mb-2">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-headline-sm text-headline-sm">What Sprich Actually Builds</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+                Communicative workplace agency. The calm confidence to introduce yourself in a sprint planning meeting, negotiate a visa query at the Bürgeramt, and ask the baker for <em>“zwei Roggenbrötchen, bitte”</em> without freezing.
+              </p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+            We provide evidence of your real vocal repetitions, your active phonation hours, and your demonstrated ability to recall phrases without visual assistance. That is the only progress metric that matters.
+          </p>
+</div>
+</div>
+</section>
+<!-- Interactive Navigation / Action Strip -->
+<section class="bg-surface-raised p-space-lg rounded-lg flex flex-col md:flex-row items-center justify-between gap-space-md shadow-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[24px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Ready to add authentic speech evidence?</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Your browser microphone session is ready to clock honest speaking minutes.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm w-full md:w-auto">
+<a class="flex-1 md:flex-none px-space-md py-2.5 rounded-full bg-surface-card hover:bg-surface-bright text-text-primary text-center font-body-sm font-semibold transition-colors" data-path="progress" href="#">
+          View Your Evidence Logs
+        </a>
+<a class="flex-1 md:flex-none px-space-lg py-2.5 rounded-full bg-primary-container text-on-primary-container hover:bg-primary-fixed-dim font-body-sm font-bold flex items-center justify-center gap-1.5 transition-colors" data-path="today" href="#">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+<span>Start Daily Practice</span>
+</a>
+</div>
+</section>
+</div>
+</div></main></div></body></html>
