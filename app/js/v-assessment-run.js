@@ -106,9 +106,9 @@ export async function render(el, ctx, attemptId) {
     <p class="assessment-instructions" id="assessment-instructions" lang="en">${esc(definition.instructions)}</p>
     <div class="assessment-save"><p class="fine" data-assessment-save-status role="status">Draft saved on this device</p><button type="button" class="text-button" data-assessment-save-retry hidden>Retry draft save</button></div>
     <p class="callout error" data-assessment-error role="alert" hidden></p>
-    <form data-assessment-form aria-label="Assessment answers" aria-describedby="assessment-conditions assessment-instructions"><fieldset class="assessment-fields" data-assessment-fields><legend class="sr-only">Your assessment responses</legend>
+    <form class="assessment-workspace" data-assessment-form aria-label="Assessment answers" aria-describedby="assessment-conditions assessment-instructions"><fieldset class="assessment-fields" data-assessment-fields><legend class="sr-only">Your assessment responses</legend>
     ${writing ? writingHTML(definition, practice) : objectiveHTML(definition, draft, practice)}</fieldset>
-    <section class="card assessment-submit"><h2>When you’re ready</h2><p class="fine" data-assessment-progress></p>
+    <section class="card assessment-submit"><div class="assessment-submit-heading"><div><p class="eyebrow">READY WHEN YOU ARE</p><h2>Submit this attempt</h2></div><span class="assessment-icon">${icon('check')}</span></div><div class="assessment-progress-summary">${writing ? '<p class="fine">Your word count is advisory. The sealed text is the evidence used for grading.</p>' : `<progress class="assessment-progress-meter" max="${definition.items.length}" value="0" aria-label="Items filled">0 of ${definition.items.length} items filled</progress><p class="fine" data-assessment-progress></p>`}</div>
     <p id="assessment-submit-note" data-assessment-submit-note>${writing ? 'Save for grading seals this response. Its content will be evaluated from the result page; word count is only a guide.' : 'Unanswered items and empty gaps score 0. An incomplete token order scores 0. Submitting seals your answers and checks them locally.'}</p>
     <button class="btn" type="submit" data-assessment-submit aria-describedby="assessment-submit-note">${writing ? 'Save for grading' : 'Submit answers'} ${icon('arrow')}</button></section></form></div>`;
 
@@ -153,7 +153,9 @@ export async function render(el, ctx, attemptId) {
       if (item.type === 'order') return Array.isArray(answer) && answer.length === item.tokens.length;
       return typeof answer === 'string' && answer.trim();
     }).length;
-    setText(root.querySelector('[data-assessment-progress]'), `${filled} of ${definition.items.length} items filled`);
+     const progress = root.querySelector('.assessment-progress-meter');
+     if (progress) { progress.value = filled; progress.textContent = `${filled} of ${definition.items.length} items filled`; }
+     setText(root.querySelector('[data-assessment-progress]'), `${filled} of ${definition.items.length} items filled`);
   }
 
   // Every edit is journalled synchronously. Only immutable snapshots enter the save queue.

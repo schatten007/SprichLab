@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#2c0051","on-primary-fixed-variant":"#3e4c00","tertiary":"#ffffff","background":"#121316","secondary":"#ddb7ff","status-online":"#22c55e","on-primary":"#2a3400","inverse-primary":"#536600","outline-variant":"#444932","surface-dim":"#121316","surface-bright":"#38393c","primary-container":"#caf300","outline":"#8f9378","surface-container":"#1f1f23","cyan-spark":"#38bdf8","surface-tint":"#b0d500","text-muted":"#94a3b8","primary":"#ffffff","surface":"#121316","on-tertiary-fixed-variant":"#6f3800","surface-stroke":"#33353e","error":"#ffb4ab","surface-card":"#1c1d22","on-tertiary":"#4e2600","electric-lime":"#d4ff00","surface-variant":"#343538","primary-fixed":"#caf300","on-secondary-container":"#d6a9ff","surface-container-high":"#292a2d","status-rest-day":"#64748b","secondary-fixed-dim":"#ddb7ff","tertiary-fixed":"#ffdcc4","secondary-fixed":"#f0dbff","surface-raised":"#25262c","surface-base":"#121316","on-error":"#690005","inverse-surface":"#e3e2e6","punch-orange":"#ff8800","error-container":"#93000a","inverse-on-surface":"#2f3034","on-error-container":"#ffdad6","on-background":"#e3e2e6","surface-container-lowest":"#0d0e11","tertiary-container":"#ffdcc4","surface-container-low":"#1b1b1f","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","on-secondary":"#490080","text-primary":"#f8fafc","secondary-container":"#6f00be","on-primary-fixed":"#171e00","tertiary-fixed-dim":"#ffb781","surface-container-highest":"#343538","on-tertiary-container":"#9b5100","on-primary-container":"#596c00","on-tertiary-fixed":"#2f1400","on-surface-variant":"#c5c9ac","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-md":"1rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","space-xl":"2rem","margin-mobile":"1rem","space-xs":"0.25rem","space-2xl":"3rem","margin":"2rem","gutter":"1.25rem"},fontFamily:{"headline-sm":["Space Grotesk"],"body-md":["Plus Jakarta Sans"],"display-hero":["Space Grotesk"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"headline-lg":["Space Grotesk"],"label-badge":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"]},fontSize:{"headline-sm":["18px",{lineHeight:"24px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display-hero":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"700"}],"german-prompt-lg-mobile":["20px",{lineHeight:"28px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"label-mono":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"label-badge":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"600"}],"german-prompt-lg":["24px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.4)]"><div class="h-20 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="Sprich Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WqPQfp992ARq-5bvRGJWXZJsyLcCbQfVjqqv9edcLcdjy2atKrHoFKJgSB_sXpNM-wmIQVi9NKQT2CZAHqlm5UfhIEhZCBNBRHL0DZYplbZrWbgMexCM7z3XHTH6odzaqhfwLLMqNsJm9zpjJaCfrOJxjCmR_9E_3fU5ZKVAEyzNpWgGWkeY335K--2FIumG5YwTzNTpL3EX9Xgo9Yx5b9X7rLolHWa8AYIKivsNxYpPDVOG0iMOer8A"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Sprich</span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface">Local-First / Offline Ready</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised"><span class="font-label-badge text-label-badge text-secondary">Beginner Track</span><span class="text-on-surface-variant font-label-mono text-label-mono">•</span><span class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors">Switch</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 rounded-full bg-surface-container" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today-practice" href="#">Today</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="situations-catalog" href="#">Lessons</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="vocabulary-vault" href="#">Words</a><a aria-current="page" class="px-space-md py-1.5 rounded-full transition-all bg-primary-container text-on-primary-container font-bold" data-path="workplace-missions" href="#">Workplace</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#">Checks &amp; Roleplays</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress-analytics" href="#">Progress</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-raised"><span class="material-symbols-outlined text-punch-orange text-lg">local_fire_department</span><span class="font-label-badge text-label-badge text-on-surface">6 Days</span><span class="text-on-surface-variant font-label-mono text-label-mono">•</span><span class="font-label-mono text-label-mono text-status-rest-day flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">shield</span>1 Rest Banked</span></div><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container"><span class="material-symbols-outlined text-cyan-spark text-lg">timer</span><span class="font-label-mono text-label-mono text-on-surface">12 / 15m</span></div><button class="hidden md:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-primary-container text-on-primary-container hover:bg-electric-lime font-label-badge text-label-badge transition-all shadow-[0_0_12px_rgba(202,243,0,0.2)]"><span class="material-symbols-outlined text-base">play_arrow</span><span>Resume: Bakery</span></button><div class="flex items-center gap-space-xs pl-space-xs py-1 pr-space-sm rounded-full bg-surface-raised"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1qCbDK_-SwPxUA_cou0YW06E64VZFtniURdun45fCr5qcFbJfspMO4dvSP53X5-zH7C1H9GJ6VPhAHlW0kLcP_oXPz3s3a-MILVIqjs5dyiBV7nCF-8sR-o-nO5hKJVSjiJmCgbNS7hzgwAxPrMKecj9g77HEczT4BAoi1VF9cmgdWF7FB-oDiOpqoYvMwHtaaYpJCidTxM80wNS1Pdw3Rd6zqyJs3d7cJ0eBdqyDitzZbvQF2xm-"/><div class="hidden xl:flex flex-col text-left pr-1"><span class="font-label-badge text-label-badge text-primary leading-tight">Felix K.</span><span class="font-label-mono text-label-mono text-secondary leading-none">A1 Spoken</span></div></div></div></div></header><aside class="fixed left-0 top-20 bottom-0 w-64 bg-surface-container-lowest z-40 flex flex-col justify-between py-space-lg px-space-md"><div class="flex flex-col gap-space-md"><div class="px-space-sm"><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Active Session</span><p class="font-headline-sm text-headline-sm text-primary mt-1">A1.2 Bakery Desk</p></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today-practice" href="#"><span class="material-symbols-outlined text-lg">mic</span>Daily Practice</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="situations-catalog" href="#"><span class="material-symbols-outlined text-lg">auto_stories</span>48 Situations</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="vocabulary-vault" href="#"><span class="material-symbols-outlined text-lg">style</span>250 Vocab</a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl transition-all bg-primary-container text-on-primary-container font-bold" data-path="workplace-missions" href="#"><span class="material-symbols-outlined text-lg">badge</span>12 Workplace</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-lg">forum</span>Roleplays</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress-analytics" href="#"><span class="material-symbols-outlined text-lg">insights</span>Effort &amp; Mastery</a></nav></div><div class="p-space-md rounded-2xl bg-surface-card flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono text-label-mono text-on-surface-variant">Forgiving Streak</span><span class="font-label-badge text-label-badge text-status-online">Healthy</span></div><p class="font-body-sm text-body-sm text-text-muted">Next rest day auto-banks after 7 daily completions.</p></div></aside><div class="pl-64"><main class="relative pt-20 w-full min-h-screen bg-surface px-gutter py-space-xl"><div class="flex flex-col w-full">
+<div class="relative w-full overflow-hidden rounded-lg bg-surface-container-low p-space-xl mb-space-2xl shadow-xl">
+<div class="absolute -right-24 -top-24 w-96 h-96 rounded-full bg-electric-lime/10 blur-[100px] pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-vivid-purple/10 blur-[90px] pointer-events-none"></div>
+<div class="relative z-10 flex flex-col xl:flex-row items-start xl:items-center justify-between gap-space-xl">
+<div class="flex flex-col max-w-2xl">
+<div class="flex items-center gap-space-sm mb-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-electric-lime text-on-primary-container font-label-mono text-label-mono uppercase tracking-wider">Tactical Sprint</span>
+<span class="font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-spark animate-ping"></span>
+            Simulated B1 Readiness
+          </span>
+</div>
+<p class="font-headline-lg text-headline-lg text-primary tracking-tight">Workplace Missions &amp; Empirical Progress</p>
+<p class="font-body-lg text-body-lg text-text-muted mt-space-xs">
+          Overcome high-stakes German job meetings and daily standups through unpunished vocal repetition, local audio evidence, and ADHD-friendly pacing.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-space-md w-full xl:w-auto">
+<button class="flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-full bg-surface-raised hover:bg-surface-bright text-primary font-label-badge text-label-badge transition-all shadow-md group">
+<span class="material-symbols-outlined text-secondary text-lg group-hover:rotate-12 transition-transform">bolt</span>
+<span>Generate Gemini Roleplay Pack (B1 Formal)</span>
+</button>
+<button class="flex items-center justify-center gap-space-xs px-space-md py-3 rounded-full bg-surface-container-high hover:bg-surface-bright text-text-muted hover:text-primary font-label-mono text-label-mono transition-all" id="downloadBackupBtn">
+<span class="material-symbols-outlined text-base">download</span>
+<span>Download Local JSON Backup (100% on device)</span>
+</button>
+</div>
+</div>
+<div class="relative z-10 mt-space-xl pt-space-lg bg-surface-container/60 rounded-DEFAULT p-space-md flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-electric-lime/20 flex items-center justify-center text-electric-lime font-headline-sm text-headline-sm shadow-inner">
+          2
+        </div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Active Trajectory</span>
+<p class="font-headline-sm text-headline-sm text-primary">Stage 2 of 6: Office Communications &amp; Meetings</p>
+</div>
+</div>
+<div class="w-full md:w-72 flex flex-col gap-1.5">
+<div class="flex justify-between items-center font-label-mono text-label-mono">
+<span class="text-text-muted">Stage Completion</span>
+<span class="text-electric-lime font-bold">45%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-lowest overflow-hidden p-0.5">
+<div class="h-full bg-gradient-to-r from-cyan-spark to-electric-lime rounded-full w-[45%] transition-all duration-500"></div>
+</div>
+</div>
+</div>
+</div>
+<section class="flex flex-col w-full mb-space-2xl">
+<div class="flex items-center justify-between mb-space-lg">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-electric-lime text-2xl">target</span>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Assigned Workplace Missions</h2>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">3 Curated Missions This Sprint</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-space-lg items-stretch">
+<div class="relative flex flex-col justify-between p-space-xl rounded-lg bg-surface-card hover:bg-surface-raised transition-all duration-300 shadow-xl group">
+<div class="absolute top-0 left-0 right-0 h-1 bg-electric-lime rounded-t-lg"></div>
+<div>
+<div class="flex items-center justify-between gap-space-xs mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-primary-container text-on-primary-container font-label-badge text-label-badge uppercase">B1 Spoken</span>
+<span class="flex items-center gap-1 font-label-mono text-label-mono text-electric-lime bg-electric-lime/10 px-2 py-0.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-electric-lime animate-pulse"></span>
+              In Progress
+            </span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">
+            Calling about a Job Vacancy
+          </p>
+<p class="font-body-md text-body-md text-secondary mt-1 italic">
+            Anruf wegen Stellenanzeige
+          </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-md">
+            Overcome cold-call dread: Introduce yourself professionally, ask for the hiring contact, and query the open position requirements smoothly.
+          </p>
+<div class="grid grid-cols-2 gap-space-sm my-space-lg p-space-sm rounded-DEFAULT bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Cadence</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-0.5">6 Steps</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Key Anchors</span>
+<span class="font-headline-sm text-headline-sm text-cyan-spark mt-0.5">12 Phrases</span>
+</div>
+</div>
+<div class="flex flex-col gap-1.5 mb-space-lg">
+<div class="flex justify-between font-label-mono text-label-mono">
+<span class="text-text-muted">Current Step: Shadowing</span>
+<span class="text-primary font-bold">Step 3 of 6</span>
+</div>
+<div class="flex gap-1 h-1.5">
+<div class="flex-1 rounded-full bg-electric-lime"></div>
+<div class="flex-1 rounded-full bg-electric-lime"></div>
+<div class="flex-1 rounded-full bg-electric-lime animate-pulse"></div>
+<div class="flex-1 rounded-full bg-surface-stroke"></div>
+<div class="flex-1 rounded-full bg-surface-stroke"></div>
+<div class="flex-1 rounded-full bg-surface-stroke"></div>
+</div>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-space-xs py-3 rounded-full bg-primary-container hover:bg-electric-lime text-on-primary-container font-label-badge text-label-badge transition-all shadow-[0_0_16px_rgba(202,243,0,0.25)]">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+<span>Resume Mission</span>
+</button>
+</div>
+<div class="flex flex-col justify-between p-space-xl rounded-lg bg-surface-card hover:bg-surface-raised transition-all duration-300 shadow-xl group">
+<div>
+<div class="flex items-center justify-between gap-space-xs mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-surface-container-high text-cyan-spark font-label-badge text-label-badge uppercase">A2 / B1 Bridge</span>
+<span class="font-label-mono text-label-mono text-status-online bg-status-online/10 px-2 py-0.5 rounded-full">New Slot</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary group-hover:text-cyan-spark transition-colors">
+            Explaining a Problem &amp; Asking for Help
+          </p>
+<p class="font-body-md text-body-md text-secondary mt-1 italic">
+            Ein Problem schildern &amp; um Hilfe bitten
+          </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-md">
+            Articulate blocking technical issues clearly without feeling defensive. Frame the situation cleanly and ask a colleague for a 5-minute sync.
+          </p>
+<div class="grid grid-cols-2 gap-space-sm my-space-lg p-space-sm rounded-DEFAULT bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Target Time</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-0.5">8 Mins</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Key Anchors</span>
+<span class="font-headline-sm text-headline-sm text-cyan-spark mt-0.5">9 Phrases</span>
+</div>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container mb-space-lg flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-punch-orange text-lg">psychology</span>
+<p class="font-body-sm text-body-sm text-text-muted">ADHD Guardrail: Pre-structured modal verbs ready.</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-space-xs py-3 rounded-full bg-surface-raised hover:bg-surface-bright text-primary font-label-badge text-label-badge transition-all">
+<span class="material-symbols-outlined text-lg">add_task</span>
+<span>Start Mission</span>
+</button>
+</div>
+<div class="flex flex-col justify-between p-space-xl rounded-lg bg-surface-card hover:bg-surface-raised transition-all duration-300 shadow-xl group">
+<div>
+<div class="flex items-center justify-between gap-space-xs mb-space-md">
+<span class="px-space-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-badge text-label-badge uppercase">B1 Core</span>
+<span class="font-label-mono text-label-mono text-secondary bg-secondary-container/30 px-2 py-0.5 rounded-full">Practised 2x</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors">
+            Participating in Team Daily Standup
+          </p>
+<p class="font-body-md text-body-md text-secondary mt-1 italic">
+            Teilnahme am täglichen Team-Standup
+          </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-md">
+            Master the standard 3-beat rhythm: What you completed yesterday, what you are tackling today, and where you need quick unblocking.
+          </p>
+<div class="grid grid-cols-2 gap-space-sm my-space-lg p-space-sm rounded-DEFAULT bg-surface-container-low">
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Dialogue Types</span>
+<span class="font-headline-sm text-headline-sm text-primary mt-0.5">3 Variations</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted">Best Attempt</span>
+<span class="font-headline-sm text-headline-sm text-status-online mt-0.5">92% Echo</span>
+</div>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container mb-space-lg flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Next review interval</span>
+<span class="font-label-badge text-label-badge text-electric-lime">Tomorrow</span>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-space-xs py-3 rounded-full bg-surface-raised hover:bg-surface-bright text-primary font-label-badge text-label-badge transition-all">
+<span class="material-symbols-outlined text-lg">replay</span>
+<span>Review &amp; Refine</span>
+</button>
+</div>
+</div>
+</section>
+<section class="flex flex-col w-full mb-space-2xl">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-space-md mb-space-lg">
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-cyan-spark font-label-mono text-label-mono uppercase">Unvarnished Reality</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">Honest Progress &amp; Evidence Dashboard</h2>
+<p class="font-body-md text-body-md text-text-muted mt-1">Direct vocal telemetry strictly isolated from vanity algorithms. Zero shame, purely tangible output.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs bg-surface-container-lowest p-1.5 rounded-full">
+<span class="px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-cyan-spark"></span>
+          Measured Locally
+        </span>
+<span class="px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-vivid-purple"></span>
+          Self-Rated
+        </span>
+<span class="px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-punch-orange"></span>
+          Imported Gemini Report
+        </span>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-space-md mb-space-xl">
+<div class="p-space-lg rounded-DEFAULT bg-surface-card flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Active Practice</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">Measured Locally</span>
+</div>
+<div class="my-space-md">
+<p class="font-display-hero text-display-hero text-primary tracking-tight leading-none">48<span class="text-headline-md text-text-muted ml-1">min</span></p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">Logged session time this week</p>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-cyan-spark rounded-full w-[80%]"></div>
+</div>
+</div>
+<div class="p-space-lg rounded-DEFAULT bg-surface-card flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Recorded Speaking</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">Self-recorded audio</span>
+</div>
+<div class="my-space-md">
+<p class="font-display-hero text-display-hero text-electric-lime tracking-tight leading-none">14.5<span class="text-headline-md text-text-muted ml-1">min</span></p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">Raw acoustic time captured via mic</p>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-electric-lime rounded-full w-[65%]"></div>
+</div>
+</div>
+<div class="p-space-lg rounded-DEFAULT bg-surface-card flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Words Recalled</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-vivid-purple">Self-Rated</span>
+</div>
+<div class="my-space-md">
+<p class="font-display-hero text-display-hero text-primary tracking-tight leading-none">84<span class="text-headline-md text-text-muted ml-1">/ 250</span></p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">Spoken from active memory recall</p>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-vivid-purple rounded-full w-[33.6%]"></div>
+</div>
+</div>
+<div class="p-space-lg rounded-DEFAULT bg-surface-card flex flex-col justify-between shadow-lg relative overflow-hidden">
+<div class="flex justify-between items-start">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Situations Mastered</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-punch-orange">Imported Gemini Report</span>
+</div>
+<div class="my-space-md">
+<p class="font-display-hero text-display-hero text-primary tracking-tight leading-none">12<span class="text-headline-md text-text-muted ml-1">/ 48</span></p>
+<p class="font-body-sm text-body-sm text-text-muted mt-space-xs">Scored ≥80% in communicative roleplay</p>
+</div>
+<div class="w-full bg-surface-container-lowest h-1.5 rounded-full overflow-hidden">
+<div class="h-full bg-punch-orange rounded-full w-[25%]"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<div class="lg:col-span-7 flex flex-col justify-between p-space-xl rounded-lg bg-surface-card shadow-xl">
+<div class="flex flex-col mb-space-lg">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-headline-sm text-headline-sm text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-cyan-spark">graphic_eq</span>
+              Acoustic Evidence: First vs. Latest
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">Measured Locally</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">Real captured waveforms demonstrating prosody and latency shifts.</p>
+</div>
+<div class="space-y-space-md">
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-text-muted"></span>
+<span class="font-label-badge text-label-badge text-primary">Day 1 Attempt</span>
+<span class="font-label-mono text-label-mono text-text-muted">(Baseline)</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Latency: 2.8s</span>
+</div>
+<p class="font-german-prompt-lg text-german-prompt-lg text-text-muted italic">“Hallo, mein Name ist... Felix.”</p>
+<div class="flex items-center gap-space-md pt-space-xs">
+<button class="w-10 h-10 rounded-full bg-surface-raised hover:bg-surface-bright flex items-center justify-center text-primary transition-all flex-shrink-0">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+</button>
+<div class="flex-1 flex items-end gap-1 h-8">
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-3 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-6 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-7 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-4 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-5 bg-surface-stroke rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-stroke rounded-full"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">0:04</span>
+</div>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-electric-lime animate-pulse"></span>
+<span class="font-label-badge text-label-badge text-electric-lime">Day 14 Attempt</span>
+<span class="font-label-mono text-label-mono text-status-online">(Fluent Cadence)</span>
+</div>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">Latency: 0.4s (-85%)</span>
+</div>
+<p class="font-german-prompt-lg text-german-prompt-lg text-primary">“Guten Tag, ich rufe bezüglich der ausgeschriebenen Stelle an.”</p>
+<div class="flex items-center gap-space-md pt-space-xs">
+<button class="w-10 h-10 rounded-full bg-electric-lime text-on-primary flex items-center justify-center hover:scale-105 transition-all shadow-md flex-shrink-0">
+<span class="material-symbols-outlined text-lg">play_arrow</span>
+</button>
+<div class="flex-1 flex items-end gap-1 h-8">
+<div class="w-1.5 h-4 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-7 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-8 bg-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-6 bg-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-7 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-5 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-8 bg-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-6 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-7 bg-electric-lime rounded-full"></div>
+<div class="w-1.5 h-4 bg-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-2 bg-electric-lime rounded-full"></div>
+</div>
+<span class="font-label-mono text-label-mono text-primary font-bold">0:03</span>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 flex flex-col justify-between p-space-xl rounded-lg bg-surface-card shadow-xl">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<span class="font-headline-sm text-headline-sm text-primary flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-online">shield_with_heart</span>
+              Forgiving Streak Cadence
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-status-online">Active Grace</span>
+</div>
+<div class="p-space-md rounded-DEFAULT bg-surface-container-low mb-space-lg">
+<div class="flex items-center gap-space-sm mb-1">
+<span class="font-display-hero text-display-hero text-primary leading-none">6</span>
+<div class="flex flex-col">
+<span class="font-label-badge text-label-badge text-punch-orange uppercase">Days Active</span>
+<span class="font-label-mono text-label-mono text-text-muted">Target: 15 min / day</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-space-xs">
+              Streak is 6. You have 1 Rest Day banked. No shame if you take a break.
+            </p>
+</div>
+<div class="flex items-center justify-between gap-1 mb-space-xl">
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">M</span>
+<div class="w-10 h-12 rounded-full bg-status-online flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">T</span>
+<div class="w-10 h-12 rounded-full bg-status-online flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">W</span>
+<div class="w-10 h-12 rounded-full bg-status-online flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">T</span>
+<div class="w-10 h-12 rounded-full bg-status-online flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">F</span>
+<div class="w-10 h-12 rounded-full bg-status-online flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-base font-bold">check</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">S</span>
+<div class="w-10 h-12 rounded-full bg-electric-lime flex items-center justify-center text-on-primary animate-pulse">
+<span class="material-symbols-outlined text-base font-bold">mic</span>
+</div>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">S</span>
+<div class="w-10 h-12 rounded-full bg-surface-raised flex items-center justify-center text-status-rest-day">
+<span class="material-symbols-outlined text-base">shield</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-space-sm rounded-DEFAULT bg-surface-container flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-status-rest-day text-xl">verified_user</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            Banked rest prevents streak dropouts during travel or burnout episodes.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<div class="fixed bottom-8 right-8 z-50 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none p-space-md rounded-DEFAULT bg-surface-bright text-primary font-body-md text-body-md flex items-center gap-space-sm shadow-2xl" id="toastNotification">
+<span class="material-symbols-outlined text-electric-lime">check_circle</span>
+<span id="toastMessage">JSON Snapshot Exported</span>
+</div>
+<script>
+    (function() {
+      const backupBtn = document.getElementById('downloadBackupBtn');
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+
+      function showToast(text) {
+        if (!toast) return;
+        toastMsg.textContent = text;
+        toast.classList.remove('translate-y-24', 'opacity-0', 'pointer-events-none');
+        toast.classList.add('translate-y-0', 'opacity-100');
+        setTimeout(() => {
+          toast.classList.remove('translate-y-0', 'opacity-100');
+          toast.classList.add('translate-y-24', 'opacity-0', 'pointer-events-none');
+        }, 3200);
+      }
+
+      if (backupBtn) {
+        backupBtn.addEventListener('click', () => {
+          const payload = {
+            app: "Sprich",
+            user: "Felix K.",
+            export_timestamp: new Date().toISOString(),
+            metrics: {
+              active_practice_mins: 48,
+              recorded_audio_mins: 14.5,
+              words_recalled: 84,
+              situations_completed: 12,
+              streak_days: 6,
+              banked_rest_days: 1
+            },
+            evidence_provenance: {
+              active_practice_time: "measured locally",
+              recorded_speaking: "self-recorded audio",
+              words_recalled: "self-rated",
+              situations: "imported gemini report"
+            }
+          };
+
+          const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(payload, null, 2));
+          const dlAnchorElem = document.createElement('a');
+          dlAnchorElem.setAttribute("href", dataStr);
+          dlAnchorElem.setAttribute("download", `sprich_evidence_backup_${Date.now()}.json`);
+          dlAnchorElem.click();
+          dlAnchorElem.remove();
+
+          showToast("Local JSON Backup downloaded cleanly!");
+        });
+      }
+    })();
+  </script>
+</div></main></div></body></html>

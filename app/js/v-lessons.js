@@ -26,20 +26,25 @@ export async function render(el, ctx) {
   const nextMeta = lessonMeta(next.lesson);
   let view = 'path';
   el.innerHTML = `${pageHeading('YOUR PATH', 'Small lessons, in a useful order.', `${course.lessons.length} lessons from first words to work conversations. Every lesson stays open — the path only suggests what comes next.`)}
-    <div class="practice-toolbar"><div class="btn-row segmented" role="tablist" aria-label="Lesson view"><button class="btn secondary" id="view-path" role="tab" aria-selected="true" aria-controls="path-view">My path</button><button class="btn secondary" id="view-all" role="tab" aria-selected="false" aria-controls="all-view" tabindex="-1">All lessons</button></div>
-      <div class="btn-row"><a class="btn secondary" href="#assessments">Checks &amp; grades</a><a class="btn secondary" href="#words">Vocabulary ${icon('book')}</a><a class="inline-link" href="#practice">Workplace missions · A2–B1</a></div></div>
+    <div class="starter-path-header"><div class="practice-toolbar"><div class="btn-row segmented" role="tablist" aria-label="Lesson view"><button class="btn secondary" id="view-path" role="tab" aria-selected="true" aria-controls="path-view">My path</button><button class="btn secondary" id="view-all" role="tab" aria-selected="false" aria-controls="all-view" tabindex="-1">All lessons</button></div>
+      <div class="btn-row"><a class="btn secondary" href="#assessments">Checks &amp; grades</a><a class="btn secondary" href="#words">Vocabulary ${icon('book')}</a><a class="inline-link" href="#practice">Workplace missions · A2–B1</a></div></div></div>
     <section id="path-view" role="tabpanel" aria-labelledby="view-path">
-      <section class="card section-gap next-lesson"><div class="card-title"><div><p class="eyebrow">RECOMMENDED NEXT · STAGE ${stageIndex + 1} OF ${stages.length}</p><h2>${esc(nextMeta.title)}</h2></div>${levelPill(nextMeta.level)}</div>
-        <p lang="de" class="starter-model">${esc(nextMeta.titleDe)}</p><p>${esc(next.lesson.goal)}</p>
-        <p class="fine">${esc(next.reason)}</p>
-        ${next.prep.length ? `<p class="small prep-line">Useful first: ${next.prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>` : ''}
-        ${next.session ? `<div class="btn-row"><a class="btn" href="#learn/${esc(next.session.id)}">Continue lesson ${icon('arrow')}</a><a class="text-button" href="#lesson/${esc(next.lesson.id)}">See the lesson first</a></div>` : supportButtons(next.lesson.id)}</section>
-      <div class="stage-list section-gap">${stages.map((item, index) => { const current = item.stage.id === stage.stage.id;
-    return `<details class="card stage-card ${current ? 'current-stage' : ''}" ${current ? 'open' : ''}><summary><div class="card-title"><div><p class="eyebrow">STAGE ${index + 1} · ${esc(item.stage.title)}</p><h3>${esc(item.stage.lede)}</h3></div><span class="pill ${item.done === item.total ? 'green' : ''}">${item.done} / ${item.total}</span></div>
-        ${progressBar(item.total ? item.done / item.total * 100 : 0, `${item.stage.title} progress`)}</summary>
-        <ol class="stage-lessons">${item.lessons.map(lesson => { const meta = lessonMeta(lesson); const status = lessonStatus(starter, lesson.id);
-      return `<li class="${status}"><a class="text-button" href="#lesson/${esc(lesson.id)}"><span>${status === 'practised' ? icon('check') : status === 'active' ? icon('clock') : `<em>${meta.number}</em>`}</span><span><strong>${esc(meta.title)}</strong><small>${esc(meta.level === 'starter' ? 'Starter' : meta.level)} · ${esc(moduleById(meta.module).title)}</small></span></a></li>`;
-    }).join('')}</ol></details>`; }).join('')}</div></section>
+      <div class="lesson-workspace section-gap">
+        <div class="lesson-path-stream">
+          <section class="card next-lesson" role="region" aria-label="Recommended next lesson"><div class="card-title"><div><p class="eyebrow">RECOMMENDED NEXT · STAGE ${stageIndex + 1} OF ${stages.length}</p><h2>${esc(nextMeta.title)}</h2></div>${levelPill(nextMeta.level)}</div>
+            <p lang="de" class="starter-model">${esc(nextMeta.titleDe)}</p><p>${esc(next.lesson.goal)}</p>
+            <p class="fine">${esc(next.reason)}</p>
+            ${next.prep.length ? `<p class="small prep-line">Useful first: ${next.prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>` : ''}
+            ${next.session ? `<div class="btn-row"><a class="btn" href="#learn/${esc(next.session.id)}">Continue lesson ${icon('arrow')}</a><a class="text-button" href="#lesson/${esc(next.lesson.id)}">See the lesson first</a></div>` : supportButtons(next.lesson.id)}</section>
+          <div class="stage-list">${stages.map((item, index) => { const current = item.stage.id === stage.stage.id;
+      return `<details class="card stage-card ${current ? 'current-stage' : ''}" ${current ? 'open' : ''}><summary><div class="card-title"><div><p class="eyebrow">STAGE ${index + 1} · ${esc(item.stage.title)}</p><h3>${esc(item.stage.lede)}</h3></div><span class="pill ${item.done === item.total ? 'green' : ''}">${item.done} / ${item.total}</span></div>
+          ${progressBar(item.total ? item.done / item.total * 100 : 0, `${item.stage.title} progress`)}</summary>
+          <ol class="stage-lessons">${item.lessons.map(lesson => { const meta = lessonMeta(lesson); const status = lessonStatus(starter, lesson.id);
+        return `<li class="${status}"><a class="text-button" href="#lesson/${esc(lesson.id)}"><span>${status === 'practised' ? icon('check') : status === 'active' ? icon('clock') : `<em>${meta.number}</em>`}</span><span><strong>${esc(meta.title)}</strong><small>${esc(meta.level === 'starter' ? 'Starter' : meta.level)} · ${esc(moduleById(meta.module).title)}</small></span></a></li>`;
+      }).join('')}</ol></details>`; }).join('')}</div>
+        </div>
+        <aside class="lesson-path-preview" aria-label="Selected lesson preview"><section class="card"><p class="eyebrow">SELECTED LESSON</p><h2 lang="de">${esc(nextMeta.titleDe)}</h2><p>${esc(next.lesson.goal)}</p><div class="pills section-gap">${levelPill(nextMeta.level)}<span class="pill">${nextMeta.minutes} min</span><span class="pill">${esc(nextMeta.register === 'Sie' ? 'Sie · polite' : 'du · informal')}</span></div><div class="language-focus"><p class="eyebrow">NEXT SMALL ACTION</p><strong>Say one useful sentence out loud.</strong><p class="fine">Your recording is optional. The path stays open if today is not the day for this lesson.</p></div><a class="btn secondary" href="#lesson/${esc(next.lesson.id)}">Open lesson overview ${icon('arrow')}</a></section></aside>
+      </div></section>
     <section id="all-view" hidden role="tabpanel" aria-labelledby="view-all"><section class="card section-gap"><details class="lesson-filters"><summary>Filter lessons</summary><div class="form-grid section-gap">
       <label>Search lessons<input type="text" id="lesson-search" placeholder="Situation, German phrase, or goal…"></label>
       <label>Level<select id="lesson-level"><option value="all">All levels</option>${COURSE_LEVELS.map(level => `<option value="${level.id}">${esc(level.short)} · ${esc(level.label)}</option>`).join('')}</select></label>
@@ -108,7 +113,7 @@ export async function renderOverview(el, ctx, id) {
   const lesson = content.lesson;
   const meta = lessonMeta(lesson);
   const done = starter.sessions.filter(session => session.lessonId === id && session.completedAt).length;
-  el.innerHTML = `<a class="inline-link" href="#lessons">${icon('back')}Your path</a>${pageHeading(`${esc(meta.moduleTitle ?? '')} · LESSON ${meta.number}`, lesson.title, lesson.goal)}
+  el.innerHTML = `<a class="inline-link" href="#lessons">${icon('back')}Your path</a><section class="lesson-overview" role="region" aria-label="Lesson overview">${pageHeading(`${esc(meta.moduleTitle ?? '')} · LESSON ${meta.number}`, lesson.title, lesson.goal)}
     <div class="pills section-gap">${levelPill(meta.level)}<span class="pill">${esc(meta.register === 'Sie' ? 'Sie · polite' : 'du · informal')}</span><span class="pill">${meta.minutes} min</span>${done ? `<span class="pill green">Practised ${done}×</span>` : ''}${lessonDialogues(lesson).length > 1 ? `<span class="pill">${lessonDialogues(lesson).length} model conversations</span>` : ''}</div>
     ${prepLine(course, starter, id)}
     <section class="card starter-first section-gap"><p class="eyebrow">YOUR FIRST WORDS</p><h2 lang="de">${esc(lesson.warmup.de)}</h2><p lang="en">${esc(lesson.warmup.en)}</p>
@@ -118,7 +123,7 @@ export async function renderOverview(el, ctx, id) {
     <section class="card section-gap"><h2>Check what you can do</h2><p class="fine section-gap">Try a graded conversation for this lesson. Checkpoints hide answer help; supported practice records it.</p><a class="btn secondary" href="#assessments/lesson/${esc(id)}">Checks &amp; graded roleplays ${icon('arrow')}</a></section>
     <div class="section-gap" id="starter-export"></div>
     <section class="section-gap"><h2>Words you will use</h2><div class="starter-grid section-gap">${content.words.map(word => wordCard(word, { saved: starter.wordMarks.some(mark => mark.id === word.id && mark.saved) })).join('')}</div></section>
-    <div class="section-gap" id="starter-takeaway"></div>`;
+     <div class="section-gap" id="starter-takeaway"></div></section>`;
   bindSupportButtons(el, ctx);
   bindWordActions(el, ctx);
   mountGeminiExport(el.querySelector('#starter-export'), ctx, starterGeminiSource(content));
@@ -142,45 +147,33 @@ export async function renderToday(el, ctx) {
   const stage = currentStage(course, starter);
   const practised = practisedLessons(starter);
   const reward = rewards(state);
+  const weekMax = Math.max(reward.ring.goalMs, ...reward.week.map(day => day.ms), 1);
+  const weekday = day => new Intl.DateTimeFormat(undefined, { weekday: 'short', timeZone: state.preferences.timeZone }).format(Date.parse(`${day.day}T12:00:00Z`));
   el.innerHTML = `${pageHeading('ONE SMALL CONVERSATION', state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.', 'One lesson at a time. Say a useful sentence out loud, then keep the conversation going.')}
-    <section class="card next-lesson section-gap"><p class="eyebrow">${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p>
-      <h2>${esc(meta.title)}</h2>
-      <div class="pills section-gap">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span>${done ? '<span class="pill green">Done today</span>' : ''}</div>
-      <p class="starter-model" lang="de">${esc(chosen.warmup.de)}</p><p>${esc(chosen.warmup.en)}</p>
-      <p class="small">${esc(chosen.goal)}</p>
-      ${chosen.id === next.lesson.id ? `<p class="fine">${esc(next.reason)}</p>` : ''}
-      ${active ? `<div class="btn-row section-gap"><a class="btn" href="#learn/${esc(active.id)}">Resume lesson ${icon('arrow')}</a></div>`
-      : `<div class="btn-row section-gap"><button class="btn" data-start-lesson="${esc(chosen.id)}" data-support="guided">${done ? 'Practise again' : 'Start'} · ${meta.minutes} min ${icon('arrow')}</button>
-        <button class="text-button" data-start-lesson="${esc(chosen.id)}" data-support="light">Try with less help</button></div>`}
-      <div class="btn-row section-gap"><button class="btn secondary small-btn" id="today-words">${due.length ? `Review ${Math.min(due.length, 10)} words` : 'Learn five words'}</button>
-        <a class="btn secondary small-btn" href="#gemini/${esc(chosen.id)}">${icon('external')}Export for Gemini</a>
-        <a class="text-button" href="#lessons">Your path · ${practised.size} of ${course.lessons.length}</a></div>
-      <details class="today-swap section-gap"><summary>Change today’s lesson</summary>
-        <label>Choose today’s lesson<select id="starter-focus" aria-label="Choose today’s lesson">${pathLessons(course).map(item => { const entry = lessonMeta(item); return `<option value="${esc(item.id)}" ${item.id === chosen.id ? 'selected' : ''}>${esc(entry.level === 'starter' ? 'Starter' : entry.level)} · ${esc(entry.title)}</option>`; }).join('')}</select></label>
-        </details></section>
-
-    <section class="card today-status section-gap"><div class="status-row">
-        <div class="status-ring"><strong>${minutes(reward.ring.ms)}</strong><span>of ${reward.ring.goalMs / 60_000} min today</span>
-          ${progressBar(reward.ring.pct, `Today's goal: ${reward.ring.pct} per cent`)}</div>
-        <div class="status-streak"><strong>${reward.streak.streak} ${reward.streak.streak === 1 ? 'day' : 'days'}</strong><span>Practice streak</span>
-          <span>${reward.streak.restLeft} rest ${reward.streak.restLeft === 1 ? 'day' : 'days'} left</span></div>
-        <div class="status-week">${blockMeter(reward.week.map(day => day.qualifies), `Practice on the last seven days: ${reward.week.filter(day => day.qualifies).length} of 7 reached fifteen minutes`)}
-          <span>Last 7 days</span></div>
+    <div class="starter-today-path">${pathPicker(state)}</div>
+    <div class="starter-today-grid">
+      <section class="card next-lesson starter-today-hero" role="region" aria-label="Today recommendation"><div class="starter-today-hero-head"><div><p class="eyebrow">${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p><h2>${esc(meta.title)}</h2></div><div class="pills">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span>${done ? '<span class="pill green">Done today</span>' : ''}</div></div>
+        <p class="starter-model" lang="de">${esc(chosen.warmup.de)}</p><p>${esc(chosen.warmup.en)}</p><p class="small">${esc(chosen.goal)}</p>
+        ${chosen.id === next.lesson.id ? `<p class="fine">${esc(next.reason)}</p>` : ''}
+        <div class="starter-today-speech"><span class="eyebrow">TARGET UTTERANCE</span><p lang="de">${esc(chosen.warmup.de)}</p><button class="btn secondary small-btn" data-say="${esc(chosen.warmup.de)}">${icon('volume')}Hear and repeat</button></div>
+        ${active ? `<div class="btn-row section-gap"><a class="btn" href="#learn/${esc(active.id)}">Resume lesson ${icon('arrow')}</a></div>`
+        : `<div class="btn-row section-gap"><button class="btn" data-start-lesson="${esc(chosen.id)}" data-support="guided">${done ? 'Practise again' : 'Start'} · ${meta.minutes} min ${icon('arrow')}</button><button class="btn secondary" data-start-lesson="${esc(chosen.id)}" data-support="light">Try with less help</button></div>`}
+        <div class="btn-row section-gap"><button class="btn secondary small-btn" id="today-words">${due.length ? `Review ${Math.min(due.length, 10)} words` : 'Learn five words'}</button><a class="btn secondary small-btn" href="#gemini/${esc(chosen.id)}">${icon('external')}Export for Gemini</a><a class="text-button" href="#lessons">Your path · ${practised.size} of ${course.lessons.length}</a></div>
+        <details class="today-swap section-gap"><summary>Change today’s lesson</summary><label>Choose today’s lesson<select id="starter-focus" aria-label="Choose today’s lesson">${pathLessons(course).map(item => { const entry = lessonMeta(item); return `<option value="${esc(item.id)}" ${item.id === chosen.id ? 'selected' : ''}>${esc(entry.level === 'starter' ? 'Starter' : entry.level)} · ${esc(entry.title)}</option>`; }).join('')}</select></label></details></section>
+      <div class="starter-today-rail">
+        <section class="card today-status" role="region" aria-label="Measured daily effort"><div class="card-title"><div><p class="eyebrow">DAILY EFFORT</p><h2>Daily goal progress</h2></div>${provenance('measured')}</div><div class="today-goal-readout"><div class="today-goal-ring" style="--goal-pct:${reward.ring.pct}%"><strong>${minutes(reward.ring.ms)}</strong><span>/ ${reward.ring.goalMs / 60_000} min</span></div><div><strong>${reward.ring.met ? 'Goal reached for today.' : `${Math.max(0, Math.ceil((reward.ring.goalMs - reward.ring.ms) / 60_000))} min to reach your goal`}</strong><p class="fine">Measured active practice. Your chosen goal can be 15, 30, 60, 90, or 120 minutes.</p></div></div>${progressBar(reward.ring.pct, `Today's goal: ${reward.ring.pct} per cent`)}<div class="today-cadence"><div><strong>${reward.streak.streak} ${reward.streak.streak === 1 ? 'day' : 'days'}</strong><span>Practice streak</span></div><div><strong>${reward.streak.restLeft}</strong><span>Rest days banked</span></div><div>${blockMeter(reward.week.map(day => day.qualifies), `Practice on the last seven days: ${reward.week.filter(day => day.qualifies).length} of 7 reached fifteen minutes`)}<span>Last 7 days</span></div></div><div class="today-week-chart" aria-label="Measured minutes over the last seven days">${reward.week.map(day => `<div class="today-week-day" title="${esc(day.day)} · ${minutes(day.ms)} minutes"><span>${esc(weekday(day))}</span><i style="height:${Math.max(day.ms ? 8 : 3, Math.min(100, day.ms / weekMax * 100))}%"></i><small>${minutes(day.ms)}m</small></div>`).join('')}</div><p class="fine">Missed days never delete earned learning evidence.</p></section>
       </div>
-      <div class="status-foot">${provenance('measured')} ${howLink()}</div></section>
-
-    ${reward.next ? `<section class="card section-gap milestone-next"><p class="eyebrow">NEXT MILESTONE</p>
-      <div class="card-title"><h2>${esc(reward.next.label)}</h2><span class="pill">${reward.next.value} / ${reward.next.target} ${esc(reward.next.unit)}</span></div>
-      ${progressBar(reward.next.value / reward.next.target * 100, `${reward.next.label}: ${reward.next.display} of ${reward.next.goal}`)}
-      <div class="status-foot">${provenance(reward.next.prov)}</div></section>` : ''}
-
-    <section class="card section-gap"><h2>One sentence to keep</h2><form id="starter-reflection"><label class="section-gap">Today’s takeaway<textarea aria-label="Today’s takeaway" maxlength="2000" required>${esc(plan.reflection)}</textarea></label>
-      <div class="btn-row section-gap"><button class="btn secondary" type="submit">Save today’s takeaway</button>${provenance('reported')}</div>
-      <p class="fine" role="status" data-reflection-status>${plan.reflection ? 'Takeaway saved.' : ''}</p></form></section>
-    <div class="section-gap">${pathPicker(state)}</div>`;
+    </div>
+    <div class="starter-today-secondary">
+      <section class="card milestone-next" role="region" aria-label="Next milestone"><div class="card-title"><div><p class="eyebrow">NEXT MILESTONE</p><h2>${reward.next ? esc(reward.next.label) : 'Keep the next step small'}</h2></div>${reward.next ? `<span class="pill">${reward.next.value} / ${reward.next.target} ${esc(reward.next.unit)}</span>` : ''}</div>${reward.next ? progressBar(reward.next.value / reward.next.target * 100, `${reward.next.label}: ${reward.next.display} of ${reward.next.goal}`) : '<p class="fine">Your next effort milestone will appear after your first saved practice.</p>'}<div class="status-foot">${provenance(reward.next?.prov ?? 'measured')}</div></section>
+      <section class="card today-quick-action"><div class="card-title"><div><p class="eyebrow">SPOKEN RECALL</p><h2>Words to bring back</h2></div>${provenance('self-rated')}</div><p class="small muted">${due.length ? `${due.length} words are due. Try first, then reveal and compare.` : 'Your first due words will appear here after a little practice.'}</p><button class="btn secondary" id="today-words-secondary">${due.length ? `Review ${Math.min(due.length, 10)} words` : 'Learn five words'} ${icon('arrow')}</button></section>
+      <section class="card today-takeaway"><h2>One sentence to keep</h2><form id="starter-reflection"><label class="section-gap">Today’s takeaway<textarea aria-label="Today’s takeaway" maxlength="2000" required>${esc(plan.reflection)}</textarea></label><div class="btn-row section-gap"><button class="btn secondary" type="submit">Save today’s takeaway</button>${provenance('reported')}</div><p class="fine" role="status" data-reflection-status>${plan.reflection ? 'Takeaway saved.' : ''}</p></form></section>
+    </div>`;
   bindPathPicker(el, ctx);
   bindSupportButtons(el, ctx);
+  el.querySelectorAll('[data-say]').forEach(button => button.addEventListener('click', () => { void ctx.play(button.dataset.say, button); }));
   safeAction(el.querySelector('#today-words'), () => ctx.startWordPractice(due.length ? due.slice(0, 10).map(word => word.id) : plan.wordIds, 'recall'), ctx.error);
+  safeAction(el.querySelector('#today-words-secondary'), () => ctx.startWordPractice(due.length ? due.slice(0, 10).map(word => word.id) : plan.wordIds, 'recall'), ctx.error);
   el.querySelector('#starter-focus').addEventListener('change', async event => {
     try { const lesson = course.lessons.find(item => item.id === event.target.value); await ctx.store.setStarterFocus(plan.id, lesson.id, lesson.wordIds); await ctx.refresh(); }
     catch (error) { ctx.error(error.message); }
@@ -203,11 +196,11 @@ export async function renderSession(el, ctx, id) {
   const lesson = session.content.lesson;
   const meta = lessonMeta(lesson);
   const light = supportOf(session) === 'light';
-  el.innerHTML = `<a class="inline-link" href="#lessons">${icon('back')}Your path</a>${pageHeading(`${esc(meta.moduleTitle ?? 'LESSON')} · LESSON ${meta.number}`, lesson.title, lesson.goal)}
-    <div class="starter-session-meta"><span data-starter-step></span><div class="pills">${levelPill(meta.level)}<span class="pill">${light ? 'Less help' : 'Guided'}</span></div><span class="fine" data-starter-time></span></div>
-    <div data-starter-meter></div><section class="card section-gap" id="starter-task"></section>
+  el.innerHTML = `<a class="inline-link" href="#lessons">${icon('back')}Your path</a><section class="starter-session-shell" role="region" aria-label="Lesson session">${pageHeading(`${esc(meta.moduleTitle ?? 'LESSON')} · LESSON ${meta.number}`, lesson.title, lesson.goal)}
+    <div class="starter-session-meta"><span data-starter-step></span><div class="pills">${levelPill(meta.level)}<span class="pill">${light ? 'Less help' : 'Guided'}</span><span class="pill starter-save-state">Saved on this device</span></div><span class="fine" data-starter-time></span></div>
+    <ol class="starter-step-strip" id="starter-steps" aria-label="Lesson steps"></ol><div data-starter-meter></div><section class="card section-gap" id="starter-task"></section>
     <div class="btn-row section-gap step-actions"><button class="btn secondary" id="starter-back">${icon('back')}Previous step</button><button class="btn" id="starter-next">Next step ${icon('arrow')}</button></div><div class="section-gap" id="lesson-export"></div>
-    <div class="status-foot">${howLink()}</div>`;
+    <div class="status-foot">${howLink()}</div></section>`;
   const clock = startStarterClock(ctx, id, el);
   const persist = () => {
     if (!draft || session.completedAt || session.responses.some(response => response.taskId === task.id)) return pendingSave;
@@ -252,6 +245,8 @@ export async function renderSession(el, ctx, id) {
     const saved = session.responses.find(response => response.taskId === task.id);
     draft = { ...starterDraft(), ...session.drafts[task.id], ...(saved ? { text: saved.text, aloud: saved.spoken, recordingMs: saved.recordingMs, recordingKey: saved.recordingKey, hintUsed: saved.hintUsed } : {}) };
     el.querySelector('[data-starter-step]').textContent = `Step ${session.cursor + 1} of ${steps.length}`;
+    const labels = { warmup: 'Start', words: 'Words', patterns: 'Pattern', dialogue: 'Dialogue', speak: 'Speak', finish: 'Finish' };
+    el.querySelector('#starter-steps').innerHTML = steps.map((step, index) => `<li class="${index === session.cursor ? 'active' : index < session.cursor ? 'complete' : ''}" ${index === session.cursor ? 'aria-current="step"' : ''}><span class="starter-step-number">${String(index + 1).padStart(2, '0')}</span><strong>${esc(labels[step.kind] ?? 'Practice')}</strong><small>${index < session.cursor ? 'Visited' : index === session.cursor ? 'In focus' : 'Up next'}</small></li>`).join('');
     el.querySelector('[data-starter-meter]').innerHTML = `${blockMeter(steps.map((_, index) => index <= session.cursor), `Step ${session.cursor + 1} of ${steps.length}`)}${progressBar((session.cursor + 1) / steps.length * 100, 'Lesson progress')}`;
     const body = el.querySelector('#starter-task');
     if (task.kind === 'warmup') body.innerHTML = `<p class="eyebrow">SAY SOMETHING RIGHT AWAY</p><h2>Start with these words.</h2><p class="starter-model" lang="de">${esc(lesson.warmup.de)}</p><p lang="en">${esc(lesson.warmup.en)}</p><button class="btn secondary" data-say="${esc(lesson.warmup.de)}">${icon('volume')}Hear and repeat</button><p class="fine section-gap">Repeat the model once.</p><div data-starter-recorder></div>${saved ? '<p class="callout" role="status">Warm-up saved. You made a start.</p>' : '<button class="btn" data-starter-grade="unscored">Save warm-up &amp; continue</button>'}`;

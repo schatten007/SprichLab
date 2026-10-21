@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>Sprich</title><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#121316;color:#e3e2e6;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": ["Space Grotesk"], "headline-md": ["Space Grotesk"], "label-badge": ["Space Grotesk"], "german-prompt-lg": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"], "german-prompt-lg-mobile": ["Plus Jakarta Sans"], "label-mono": ["Space Grotesk"], "headline-sm": ["Space Grotesk"], "headline-lg": ["Space Grotesk"], "body-md": ["Plus Jakarta Sans"], "display-hero": ["Space Grotesk"], "body-sm": ["Plus Jakarta Sans"] }, "fontSize": { "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }], "german-prompt-lg": ["24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }], "german-prompt-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "700" }], "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.25)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-sm min-w-0"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm font-bold text-text-primary tracking-tight leading-none">Sprich</span><div class="flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-surface-container-high"><span class="w-1.5 h-1.5 rounded-full bg-status-online"></span><span class="font-label-mono text-label-mono text-on-surface-variant font-medium">Offline/local</span></div></div><div class="flex items-center gap-1.5"><span class="font-label-badge text-label-badge text-electric-lime font-bold uppercase tracking-wider truncate">Lessons</span></div></div></div><div class="flex items-center gap-space-xs shrink-0"><button class="h-9 px-2.5 rounded-full bg-surface-raised active:scale-95 transition-transform flex items-center gap-1 min-h-[44px] touch-manipulation" type="button"><span class="material-symbols-outlined text-electric-lime text-[18px]">record_voice_over</span><span class="font-label-mono text-label-mono text-text-primary whitespace-nowrap">Speaking path</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div><div class="px-gutter-mobile pb-space-xs"><div class="h-8 px-space-sm rounded-lg bg-surface-card flex items-center justify-between text-text-muted active:bg-surface-raised transition-colors"><div class="flex items-center gap-space-xs min-w-0"><span class="material-symbols-outlined text-punch-orange text-[16px] animate-pulse">resume</span><span class="font-label-mono text-label-mono text-on-surface truncate">In progress: B1 Ordering at Bakery (0:42)</span></div><span class="font-label-mono text-label-mono text-electric-lime font-bold shrink-0">Resume ›</span></div></div></header><main class="flex flex-col relative w-full pt-16 pb-28 bg-surface"><div class="flex flex-col w-full px-gutter-mobile gap-space-md text-on-surface select-none pb-6">
+<!-- View Toggle Pill & Offline Provenance Tag -->
+<div class="flex items-center justify-between gap-space-xs mt-1">
+<div aria-label="Lesson View Mode" class="inline-flex p-1 rounded-full bg-surface-card" role="tablist">
+<button class="px-4 py-2 rounded-full font-label-badge text-label-badge uppercase tracking-wider bg-electric-lime text-surface-container-lowest font-bold transition-all shadow-sm min-h-[44px] flex items-center justify-center touch-manipulation" id="tab-path" type="button">
+        My Path
+      </button>
+<button class="px-4 py-2 rounded-full font-label-badge text-label-badge uppercase tracking-wider text-text-muted hover:text-text-primary transition-all min-h-[44px] flex items-center justify-center touch-manipulation" id="tab-catalog" type="button">
+        All 48 Lessons
+      </button>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-surface-card text-text-muted">
+<span class="w-2 h-2 rounded-full bg-status-online shrink-0"></span>
+<span class="font-label-mono text-label-mono text-on-surface-variant font-medium">Checked locally</span>
+</div>
+</div>
+<!-- Stage Tracker: Stage 1 of 5 "Everyday Situations" -->
+<section aria-label="Current Stage Progress" class="rounded-DEFAULT bg-surface-card p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-label-badge text-label-badge text-electric-lime uppercase tracking-widest font-bold">Stage 1 of 5</span>
+<span class="w-1 h-1 rounded-full bg-surface-stroke"></span>
+<span class="font-label-mono text-label-mono text-text-muted">3 of 10 completed</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-text-primary font-bold mt-0.5">Everyday Situations</h2>
+</div>
+<div class="px-2.5 py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-cyan-spark font-bold shrink-0">
+        Active Zone
+      </div>
+</div>
+<!-- Stepper Indicator Pills -->
+<div aria-hidden="true" class="grid grid-cols-10 gap-1.5 w-full pt-1">
+<div class="h-2 rounded-full bg-electric-lime"></div>
+<div class="h-2 rounded-full bg-electric-lime"></div>
+<div class="h-2 rounded-full bg-electric-lime"></div>
+<div class="h-2 rounded-full bg-punch-orange animate-pulse"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+<div class="h-2 rounded-full bg-surface-raised"></div>
+</div>
+<div class="flex justify-between items-center text-text-muted pt-0.5">
+<span class="font-body-sm text-body-sm">Next up: Ordering bread &amp; morning groceries</span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">7 ready</span>
+</div>
+</section>
+<!-- Filter & Search Chips Strip (Zero Lock, All Playable) -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-gutter-mobile px-gutter-mobile">
+<button class="px-3.5 py-2 rounded-full bg-surface-raised text-text-primary font-label-badge text-label-badge font-bold whitespace-nowrap min-h-[44px] flex items-center gap-1.5 touch-manipulation">
+<span class="material-symbols-outlined text-[16px] text-electric-lime">tune</span>
+<span>All Topics</span>
+</button>
+<button class="px-3.5 py-2 rounded-full bg-punch-orange/15 text-punch-orange font-label-badge text-label-badge font-bold whitespace-nowrap min-h-[44px] flex items-center gap-1.5 touch-manipulation">
+<span class="w-2 h-2 rounded-full bg-punch-orange"></span>
+<span>A1 Level</span>
+</button>
+<button class="px-3.5 py-2 rounded-full bg-surface-card text-on-surface-variant font-label-badge text-label-badge font-medium whitespace-nowrap min-h-[44px] flex items-center gap-1.5 touch-manipulation">
+<span class="material-symbols-outlined text-[16px]">bakery_dining</span>
+<span>Food &amp; Café</span>
+</button>
+<button class="px-3.5 py-2 rounded-full bg-surface-card text-on-surface-variant font-label-badge text-label-badge font-medium whitespace-nowrap min-h-[44px] flex items-center gap-1.5 touch-manipulation">
+<span class="material-symbols-outlined text-[16px]">directions_subway</span>
+<span>City</span>
+</button>
+<button class="px-3.5 py-2 rounded-full bg-surface-card text-on-surface-variant font-label-badge text-label-badge font-medium whitespace-nowrap min-h-[44px] flex items-center gap-1.5 touch-manipulation">
+<span class="material-symbols-outlined text-[16px]">apartment</span>
+<span>Work</span>
+</button>
+</div>
+<!-- Hero Highlight / Unfinished Resume Card -->
+<section aria-label="Resume Recommended Speaking Session" class="rounded-DEFAULT bg-surface-card p-space-md shadow-xl flex flex-col gap-space-sm relative overflow-hidden">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-punch-orange text-surface-container-lowest font-label-badge text-label-badge font-bold uppercase">
+          Stage 1 · A1
+        </span>
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">timer</span> 3 mins
+        </span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-electric-lime font-bold">
+        Step 2 of 7 saved locally
+      </span>
+</div>
+<!-- Title & Location Preview -->
+<div class="flex gap-space-sm items-center mt-1">
+<img class="w-16 h-16 rounded-xl object-cover shrink-0 bg-surface-raised shadow-inner" data-alt="A warm artisan Berlin bakery storefront counter early in the morning with crusty Roggenmischbrot sourdough breads and golden Brötchen rolls, bathed in dramatic neon ambient lighting from a modern street window, cozy cinematic atmosphere" src="https://lh3.googleusercontent.com/aida-public/AB6AXuADbYfSxOMQROjXqmXiReiypOB4sbkUJHP3g8jA2tLXPiXbxRMvnWLFV1qutcE6X_06x8vLz96JT_9JnIwyhiVr6pXHBITg8T4qtHDgJuMwpf-cbrFbB8iKh_SySZ2cG_qeWUaVqBxRXRNpnqmLdJaiDDBpEIffy2sPK6CcYg83inVZD36ZBusluviVJ6bs8oVAlmAgPwBpFklHCpxnCbKPp0y30G9uJElDcsvluHm3r5sazaJ83UYc"/>
+<div class="flex flex-col min-w-0">
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold truncate">Beim Bäcker in Berlin</h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5 line-clamp-1">Ordering bread rolls and coffee politely using everyday vernacular.</p>
+<span class="font-label-mono text-label-mono text-punch-orange font-medium mt-1">Spoken rehearsal in progress</span>
+</div>
+</div>
+<!-- Micro Waveform Preview (Tactile audio cue) -->
+<div class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between gap-2 mt-1">
+<div class="flex items-center gap-2">
+<button aria-label="Play previous speaking attempt" class="w-8 h-8 rounded-full bg-surface-card flex items-center justify-center text-electric-lime hover:scale-105 active:scale-95 transition-transform shrink-0" type="button">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</button>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-primary font-bold">Your Take 1 (0:14)</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Self-rated clear cadence</span>
+</div>
+</div>
+<div aria-hidden="true" class="flex items-end gap-1 h-6 shrink-0">
+<div class="w-1 h-3 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-5 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-2 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-6 rounded-full bg-vivid-purple"></div>
+<div class="w-1 h-4 rounded-full bg-vivid-purple"></div>
+<div class="w-1 h-2 rounded-full bg-surface-stroke"></div>
+<div class="w-1 h-1 rounded-full bg-surface-stroke"></div>
+</div>
+</div>
+<!-- Big Ergonomic Touch-friendly Resume Trigger -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-full h-13 py-3.5 px-space-md rounded-xl bg-electric-lime text-surface-container-lowest font-headline-sm text-headline-sm font-bold flex items-center justify-center gap-2 shadow-lg active:scale-[0.98] transition-transform min-h-[48px] touch-manipulation" id="open-overview-btn" type="button">
+<span class="material-symbols-outlined text-[24px]">mic</span>
+<span>Resume Speaking</span>
+<span class="material-symbols-outlined text-[20px] ml-auto">arrow_forward</span>
+</button>
+<div class="flex items-center justify-between px-1">
+<span class="font-label-mono text-label-mono text-text-muted">Zero penalty · Pick up anytime</span>
+<button class="font-label-mono text-label-mono text-cyan-spark font-bold flex items-center gap-0.5 active:opacity-75" type="button">
+<span>Restart fresh</span>
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Advisory Prerequisite Pattern: "Im Supermarkt" -->
+<section aria-label="Upcoming Speaking Lesson" class="rounded-DEFAULT bg-surface-card p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-2 py-0.5 rounded-full bg-surface-raised text-on-surface-variant font-label-badge text-label-badge font-bold uppercase">
+            Stage 1 · A1
+          </span>
+<!-- Advisory Prerequisite Tag (Never punitive, explicitly unlocked) -->
+<div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-vivid-purple/20 text-secondary font-label-mono text-label-mono font-bold">
+<span class="material-symbols-outlined text-[13px]">lightbulb</span>
+<span>Useful first: Beim Bäcker</span>
+</div>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold mt-1">Im Supermarkt</h3>
+</div>
+<span class="font-label-mono text-label-mono text-status-online px-2.5 py-1 rounded-full bg-status-online/15 font-bold whitespace-nowrap">
+        Unlocked · Learn anytime
+      </span>
+</div>
+<p class="font-body-md text-body-md text-text-muted">
+      Asking grocery staff where items are located and requesting weight at the deli counter without stuttering.
+    </p>
+<!-- Visual snippet of supermarket scenario -->
+<div class="flex items-center justify-between p-3 rounded-xl bg-surface-raised gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-lg bg-surface-card flex items-center justify-center text-punch-orange shrink-0">
+<span class="material-symbols-outlined text-[22px]">shopping_basket</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary truncate">»Entschuldigung, wo finde ich Hafermilch?«</span>
+<span class="font-label-mono text-label-mono text-text-muted">8 target phrases · 4 conversational branches</span>
+</div>
+</div>
+<button class="h-10 px-3.5 rounded-xl bg-surface-card text-electric-lime font-label-badge text-label-badge font-bold active:scale-95 transition-transform shrink-0 flex items-center justify-center min-h-[44px]" type="button">
+        Start
+      </button>
+</div>
+</section>
+<!-- Additional Next Lesson Card in Path (Full unlock dignity) -->
+<section aria-label="Alternative Unlocked Lesson" class="rounded-DEFAULT bg-surface-card p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-surface-raised text-on-surface-variant font-label-badge text-label-badge font-bold uppercase">
+        Stage 1 · A1 · 4 mins
+      </span>
+<span class="font-label-mono text-label-mono text-text-muted">Self-paced catalog</span>
+</div>
+<div class="flex gap-space-sm items-center">
+<div class="w-12 h-12 rounded-xl bg-surface-raised flex items-center justify-center text-cyan-spark shrink-0">
+<span class="material-symbols-outlined text-[26px]">local_cafe</span>
+</div>
+<div class="flex flex-col min-w-0">
+<h4 class="font-headline-sm text-headline-sm text-text-primary font-bold truncate">Im Café bestellen</h4>
+<span class="font-body-sm text-body-sm text-text-muted">Table reservations, asking for the bill &amp; split payment</span>
+</div>
+</div>
+</section>
+<!-- Detailed Lesson Overview Sheet / Expanded Card -->
+<!-- Always cleanly framed, fully accessible without modal blocking -->
+<section aria-label="Detailed Lesson Overview: Beim Bäcker in Berlin" class="rounded-DEFAULT bg-surface-card p-space-md shadow-2xl flex flex-col gap-space-md transition-all duration-300" id="lesson-overview-sheet">
+<!-- Header of Sheet -->
+<div class="flex items-start justify-between gap-space-xs">
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-punch-orange text-surface-container-lowest font-label-badge text-label-badge font-bold uppercase">
+            A1 Practical Speaking
+          </span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">Offline ready</span>
+</div>
+<h3 class="font-headline-lg text-headline-lg text-text-primary font-bold mt-1">Beim Bäcker in Berlin</h3>
+<p class="font-body-md text-body-md text-text-muted">Master German bakery customs, grain names, and casual polite cadence.</p>
+</div>
+<button aria-label="Collapse overview" class="w-9 h-9 rounded-full bg-surface-raised flex items-center justify-center text-text-muted active:scale-95" id="close-overview-btn" type="button">
+<span class="material-symbols-outlined text-[20px]">expand_less</span>
+</button>
+</div>
+<!-- Language Focus Callout -->
+<div class="p-space-sm rounded-xl bg-surface-raised flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined text-[18px]">psychology_alt</span>
+<span class="font-label-badge text-label-badge uppercase font-bold tracking-wide">Language Focus</span>
+</div>
+<p class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary font-bold">
+        Polite requests with »Ich hätte gern...«
+      </p>
+<p class="font-body-sm text-body-sm text-text-muted">
+        Avoid clumsy direct translations. In German bakeries, the Konjunktiv II form sounds natural and instantly friendly.
+      </p>
+</div>
+<!-- Audio Sample with Listen Button & Decibel Bars -->
+<div class="p-space-sm rounded-xl bg-surface-raised flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Native Cadence Sample</span>
+<span class="font-label-mono text-label-mono text-on-surface-variant">Measured · 0.75x available</span>
+</div>
+<div class="flex items-center justify-between gap-space-sm">
+<button aria-label="Listen to audio model" class="w-12 h-12 rounded-full bg-surface-card flex items-center justify-center text-electric-lime hover:scale-105 active:scale-95 transition-all shrink-0 min-h-[48px] min-w-[48px] touch-manipulation" id="play-native-audio" type="button">
+<span class="material-symbols-outlined text-[26px]">volume_up</span>
+</button>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary truncate">»Ich hätte gern zwei Vollkornbrötchen, bitte.«</span>
+<span class="font-body-sm text-body-sm text-text-muted">"I would like two whole-grain rolls, please."</span>
+</div>
+</div>
+<!-- Mini Visualizer Track -->
+<div aria-hidden="true" class="flex items-center gap-1 w-full h-3 pt-1 px-1">
+<span class="flex-1 h-1.5 rounded-full bg-electric-lime"></span>
+<span class="flex-1 h-2.5 rounded-full bg-electric-lime"></span>
+<span class="flex-1 h-2 rounded-full bg-electric-lime"></span>
+<span class="flex-1 h-3 rounded-full bg-vivid-purple"></span>
+<span class="flex-1 h-1.5 rounded-full bg-surface-stroke"></span>
+<span class="flex-1 h-2 rounded-full bg-surface-stroke"></span>
+<span class="flex-1 h-1 rounded-full bg-surface-stroke"></span>
+</div>
+</div>
+<!-- 6 Vocabulary Pills with German Gender Articles -->
+<div class="flex flex-col gap-2">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-text-muted font-bold">Key Vocabulary (6 target words)</span>
+<span class="font-label-mono text-label-mono text-cyan-spark">Interactive audio chips</span>
+</div>
+<div class="grid grid-cols-2 gap-2">
+<!-- 1: der Bäcker -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-cyan-spark font-bold">der Bäcker</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">the baker</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+<!-- 2: das Brötchen -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-punch-orange font-bold">das Brötchen</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">the bread roll</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+<!-- 3: die Bäckerei -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">die Bäckerei</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">the bakery shop</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+<!-- 4: das Vollkornbrot -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-punch-orange font-bold">das Brot</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">whole loaf</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+<!-- 5: der Kaffee -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-cyan-spark font-bold">der Kaffee</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">the coffee</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+<!-- 6: die Tüte -->
+<button class="p-2.5 rounded-xl bg-surface-raised flex items-center justify-between active:scale-95 transition-transform text-left min-h-[48px]" type="button">
+<div class="flex flex-col min-w-0">
+<span class="font-headline-sm text-headline-sm text-secondary font-bold">die Tüte</span>
+<span class="font-body-sm text-body-sm text-text-muted truncate">paper bag</span>
+</div>
+<span class="material-symbols-outlined text-[18px] text-text-muted">volume_down</span>
+</button>
+</div>
+</div>
+<!-- Dual Action Buttons: Guided Session vs Less Help Mode -->
+<div class="flex flex-col gap-2.5 pt-1">
+<div class="grid grid-cols-2 gap-2">
+<button class="h-14 rounded-xl bg-electric-lime text-surface-container-lowest font-headline-sm text-headline-sm font-bold flex flex-col items-center justify-center shadow-lg active:scale-95 transition-transform min-h-[48px] touch-manipulation" type="button">
+<span>Guided Session</span>
+<span class="font-label-mono text-label-mono text-surface-container-lowest opacity-80">Full audio hints</span>
+</button>
+<button class="h-14 rounded-xl bg-surface-raised text-text-primary font-headline-sm text-headline-sm font-bold flex flex-col items-center justify-center active:scale-95 transition-transform min-h-[48px] touch-manipulation" type="button">
+<span>Less Help Mode</span>
+<span class="font-label-mono text-label-mono text-text-muted">Prompt text only</span>
+</button>
+</div>
+<!-- Provenance & Shortcut: Export for Gemini Conversation -->
+<button class="w-full py-3 px-space-md rounded-xl bg-surface-card flex items-center justify-between text-text-primary hover:bg-surface-raised active:scale-[0.99] transition-all min-h-[48px] touch-manipulation" id="gemini-export-btn" type="button">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-vivid-purple text-[20px]">magic_button</span>
+<div class="flex flex-col text-left">
+<span class="font-label-badge text-label-badge font-bold">Export for Gemini Conversation</span>
+<span class="font-label-mono text-label-mono text-text-muted">AI estimate · Practice roleplay with custom prompt</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted text-[18px]">file_upload</span>
+</button>
+</div>
+</section>
+<!-- Learning Dignity Guarantee Footer Note -->
+<div class="p-space-sm rounded-xl bg-surface-card flex items-center gap-3 mt-1">
+<span class="material-symbols-outlined text-electric-lime text-[22px] shrink-0">verified_user</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+      All 48 lessons are freely accessible at any time without locks, streaks, or penalties. Practice at your own cognitive rhythm.
+    </p>
+</div>
+</div>
+<script>
+  // Simple view toggle micro-interaction between "My Path" and "All 48 Lessons"
+  const tabPath = document.getElementById('tab-path');
+  const tabCatalog = document.getElementById('tab-catalog');
+  const sheet = document.getElementById('lesson-overview-sheet');
+  const closeOverviewBtn = document.getElementById('close-overview-btn');
+  const openOverviewBtn = document.getElementById('open-overview-btn');
+  const geminiBtn = document.getElementById('gemini-export-btn');
+
+  if (tabPath && tabCatalog) {
+    tabPath.addEventListener('click', () => {
+      tabPath.classList.add('bg-electric-lime', 'text-surface-container-lowest', 'font-bold');
+      tabPath.classList.remove('text-text-muted');
+      tabCatalog.classList.remove('bg-electric-lime', 'text-surface-container-lowest', 'font-bold');
+      tabCatalog.classList.add('text-text-muted');
+    });
+
+    tabCatalog.addEventListener('click', () => {
+      tabCatalog.classList.add('bg-electric-lime', 'text-surface-container-lowest', 'font-bold');
+      tabCatalog.classList.remove('text-text-muted');
+      tabPath.classList.remove('bg-electric-lime', 'text-surface-container-lowest', 'font-bold');
+      tabPath.classList.add('text-text-muted');
+    });
+  }
+
+  // Smooth accordion toggle for the lesson overview sheet
+  if (closeOverviewBtn && sheet) {
+    closeOverviewBtn.addEventListener('click', () => {
+      sheet.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+  }
+
+  if (openOverviewBtn && sheet) {
+    openOverviewBtn.addEventListener('click', () => {
+      sheet.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // Gemini roleplay prompt generator notification
+  if (geminiBtn) {
+    geminiBtn.addEventListener('click', () => {
+      const orig = geminiBtn.innerHTML;
+      geminiBtn.innerHTML = `
+        <div class="flex items-center gap-2 text-status-online">
+          <span class="material-symbols-outlined text-[20px]">check_circle</span>
+          <span class="font-label-badge text-label-badge font-bold">Prompt copied to clipboard!</span>
+        </div>
+      `;
+      setTimeout(() => {
+        geminiBtn.innerHTML = orig;
+      }, 2200);
+    });
+  }
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.35)]" data-active-classes="text-electric-lime font-bold"><div class="flex justify-around items-center h-16 px-space-xs"><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="today" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-mono text-label-mono mt-0.5">Today</span></a><a aria-current="page" class="flex flex-col items-center justify-center w-14 h-14 rounded-xl transition-all active:scale-95 touch-manipulation text-electric-lime font-bold" data-path="lessons" href="#"><span class="material-symbols-outlined text-[22px]">school</span><span class="font-label-mono text-label-mono mt-0.5">Lessons</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="words" href="#"><span class="material-symbols-outlined text-[22px]">translate</span><span class="font-label-mono text-label-mono mt-0.5">Words</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">insights</span><span class="font-label-mono text-label-mono mt-0.5">Progress</span></a><a class="flex flex-col items-center justify-center w-14 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-all active:scale-95 touch-manipulation" data-path="more" href="#"><span class="material-symbols-outlined text-[22px]">grid_view</span><span class="font-label-mono text-label-mono mt-0.5">More</span></a></div></nav></body></html>

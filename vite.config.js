@@ -13,8 +13,8 @@ function offlineShell() {
       const graph = shellAssets(bundle);
       const compressedCore = graph.core.reduce((total, name) => total + gzipSync(bundle[name].code ?? bundle[name].source).length, 0);
       if (compressedCore > 150 * 1024) this.error(`Core JavaScript/CSS exceeds the 150 KB gzip budget (${compressedCore} bytes).`);
-      const assets = ['index.html', 'manifest.webmanifest', 'icon.svg', ...graph.core];
-      const publicAssets = await Promise.all(['manifest.webmanifest', 'icon.svg']
+      const assets = ['index.html', 'manifest.webmanifest', 'icons/icon.svg', ...graph.core];
+      const publicAssets = await Promise.all(['manifest.webmanifest', 'icons/icon.svg']
         .map(name => readFile(new URL(`./app/public/${name}`, import.meta.url))));
       const revision = createHash('sha256')
         .update(JSON.stringify(Object.values(bundle).map(item => item.code ?? item.source)))

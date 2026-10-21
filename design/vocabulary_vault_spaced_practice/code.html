@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#2c0051","on-primary-fixed-variant":"#3e4c00","tertiary":"#ffffff","background":"#121316","secondary":"#ddb7ff","status-online":"#22c55e","on-primary":"#2a3400","inverse-primary":"#536600","outline-variant":"#444932","surface-dim":"#121316","surface-bright":"#38393c","primary-container":"#caf300","outline":"#8f9378","surface-container":"#1f1f23","cyan-spark":"#38bdf8","surface-tint":"#b0d500","text-muted":"#94a3b8","primary":"#ffffff","surface":"#121316","on-tertiary-fixed-variant":"#6f3800","surface-stroke":"#33353e","error":"#ffb4ab","surface-card":"#1c1d22","on-tertiary":"#4e2600","electric-lime":"#d4ff00","surface-variant":"#343538","primary-fixed":"#caf300","on-secondary-container":"#d6a9ff","surface-container-high":"#292a2d","status-rest-day":"#64748b","secondary-fixed-dim":"#ddb7ff","tertiary-fixed":"#ffdcc4","secondary-fixed":"#f0dbff","surface-raised":"#25262c","surface-base":"#121316","on-error":"#690005","inverse-surface":"#e3e2e6","punch-orange":"#ff8800","error-container":"#93000a","inverse-on-surface":"#2f3034","on-error-container":"#ffdad6","on-background":"#e3e2e6","surface-container-lowest":"#0d0e11","tertiary-container":"#ffdcc4","surface-container-low":"#1b1b1f","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","on-secondary":"#490080","text-primary":"#f8fafc","secondary-container":"#6f00be","on-primary-fixed":"#171e00","tertiary-fixed-dim":"#ffb781","surface-container-highest":"#343538","on-tertiary-container":"#9b5100","on-primary-container":"#596c00","on-tertiary-fixed":"#2f1400","on-surface-variant":"#c5c9ac","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-lg":"1.5rem","space-md":"1rem","space-sm":"0.5rem","gutter-mobile":"0.75rem","space-xl":"2rem","margin-mobile":"1rem","space-xs":"0.25rem","space-2xl":"3rem","margin":"2rem","gutter":"1.25rem"},fontFamily:{"headline-sm":["Space Grotesk"],"body-md":["Plus Jakarta Sans"],"display-hero":["Space Grotesk"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-lg":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"headline-lg":["Space Grotesk"],"label-badge":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"headline-md":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"]},fontSize:{"headline-sm":["18px",{lineHeight:"24px",fontWeight:"600"}],"body-md":["14px",{lineHeight:"20px",fontWeight:"400"}],"display-hero":["48px",{lineHeight:"56px",letterSpacing:"-0.03em",fontWeight:"700"}],"german-prompt-lg-mobile":["20px",{lineHeight:"28px",fontWeight:"700"}],"body-lg":["16px",{lineHeight:"24px",fontWeight:"500"}],"label-mono":["11px",{lineHeight:"14px",letterSpacing:"0.06em",fontWeight:"600"}],"body-sm":["12px",{lineHeight:"18px",fontWeight:"400"}],"headline-lg":["28px",{lineHeight:"36px",letterSpacing:"-0.02em",fontWeight:"600"}],"label-badge":["12px",{lineHeight:"16px",letterSpacing:"0.04em",fontWeight:"700"}],"display-hero-mobile":["32px",{lineHeight:"40px",letterSpacing:"-0.02em",fontWeight:"700"}],"headline-md":["22px",{lineHeight:"30px",letterSpacing:"-0.01em",fontWeight:"600"}],"german-prompt-lg":["24px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"700"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_16px_rgba(0,0,0,0.4)]"><div class="h-20 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="Sprich Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1WqPQfp992ARq-5bvRGJWXZJsyLcCbQfVjqqv9edcLcdjy2atKrHoFKJgSB_sXpNM-wmIQVi9NKQT2CZAHqlm5UfhIEhZCBNBRHL0DZYplbZrWbgMexCM7z3XHTH6odzaqhfwLLMqNsJm9zpjJaCfrOJxjCmR_9E_3fU5ZKVAEyzNpWgGWkeY335K--2FIumG5YwTzNTpL3EX9Xgo9Yx5b9X7rLolHWa8AYIKivsNxYpPDVOG0iMOer8A"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight leading-none">Sprich</span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-container"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface">Local-First / Offline Ready</span></div><div class="hidden 2xl:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised"><span class="font-label-badge text-label-badge text-secondary">Beginner Track</span><span class="text-on-surface-variant font-label-mono text-label-mono">•</span><span class="font-label-mono text-label-mono text-on-surface-variant hover:text-on-surface cursor-pointer transition-colors">Switch</span></div></div><nav class="hidden lg:flex items-center gap-space-xs p-1 rounded-full bg-surface-container" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today-practice" href="#">Today</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="situations-catalog" href="#">Lessons</a><a aria-current="page" class="px-space-md py-1.5 rounded-full transition-all bg-primary-container text-on-primary-container font-bold" data-path="vocabulary-vault" href="#">Words</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace-missions" href="#">Workplace</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#">Checks &amp; Roleplays</a><a class="px-space-md py-1.5 rounded-full font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress-analytics" href="#">Progress</a></nav><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden sm:flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-raised"><span class="material-symbols-outlined text-punch-orange text-lg">local_fire_department</span><span class="font-label-badge text-label-badge text-on-surface">6 Days</span><span class="text-on-surface-variant font-label-mono text-label-mono">•</span><span class="font-label-mono text-label-mono text-status-rest-day flex items-center gap-0.5"><span class="material-symbols-outlined text-sm">shield</span>1 Rest Banked</span></div><div class="hidden md:flex items-center gap-space-xs px-space-sm py-1.5 rounded-full bg-surface-container"><span class="material-symbols-outlined text-cyan-spark text-lg">timer</span><span class="font-label-mono text-label-mono text-on-surface">12 / 15m</span></div><button class="hidden md:flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-primary-container text-on-primary-container hover:bg-electric-lime font-label-badge text-label-badge transition-all shadow-[0_0_12px_rgba(202,243,0,0.2)]"><span class="material-symbols-outlined text-base">play_arrow</span><span>Resume: Bakery</span></button><div class="flex items-center gap-space-xs pl-space-xs py-1 pr-space-sm rounded-full bg-surface-raised"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1qCbDK_-SwPxUA_cou0YW06E64VZFtniURdun45fCr5qcFbJfspMO4dvSP53X5-zH7C1H9GJ6VPhAHlW0kLcP_oXPz3s3a-MILVIqjs5dyiBV7nCF-8sR-o-nO5hKJVSjiJmCgbNS7hzgwAxPrMKecj9g77HEczT4BAoi1VF9cmgdWF7FB-oDiOpqoYvMwHtaaYpJCidTxM80wNS1Pdw3Rd6zqyJs3d7cJ0eBdqyDitzZbvQF2xm-"/><div class="hidden xl:flex flex-col text-left pr-1"><span class="font-label-badge text-label-badge text-primary leading-tight">Felix K.</span><span class="font-label-mono text-label-mono text-secondary leading-none">A1 Spoken</span></div></div></div></div></header><aside class="fixed left-0 top-20 bottom-0 w-64 bg-surface-container-lowest z-40 flex flex-col justify-between py-space-lg px-space-md"><div class="flex flex-col gap-space-md"><div class="px-space-sm"><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Active Session</span><p class="font-headline-sm text-headline-sm text-primary mt-1">A1.2 Bakery Desk</p></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold"><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today-practice" href="#"><span class="material-symbols-outlined text-lg">mic</span>Daily Practice</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="situations-catalog" href="#"><span class="material-symbols-outlined text-lg">auto_stories</span>48 Situations</a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl transition-all bg-primary-container text-on-primary-container font-bold" data-path="vocabulary-vault" href="#"><span class="material-symbols-outlined text-lg">style</span>250 Vocab</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace-missions" href="#"><span class="material-symbols-outlined text-lg">badge</span>12 Workplace</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-lg">forum</span>Roleplays</a><a class="flex items-center gap-space-sm px-space-md py-2.5 rounded-xl font-body-md text-body-md text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress-analytics" href="#"><span class="material-symbols-outlined text-lg">insights</span>Effort &amp; Mastery</a></nav></div><div class="p-space-md rounded-2xl bg-surface-card flex flex-col gap-space-xs"><div class="flex items-center justify-between"><span class="font-label-mono text-label-mono text-on-surface-variant">Forgiving Streak</span><span class="font-label-badge text-label-badge text-status-online">Healthy</span></div><p class="font-body-sm text-body-sm text-text-muted">Next rest day auto-banks after 7 daily completions.</p></div></aside><div class="pl-64"><main class="relative pt-20 w-full min-h-screen bg-surface px-gutter py-space-xl"><div class="flex flex-col w-full gap-y-space-xl">
+<!-- Top Hero Bar / Cognitive Status Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-surface-card p-space-lg shadow-xl">
+<!-- Ambient Neon Cyber-Tactile Gradient -->
+<div class="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-electric-lime/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 h-64 w-64 rounded-full bg-vivid-purple/15 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-raised font-label-badge text-label-badge text-electric-lime">
+<span class="w-2 h-2 rounded-full bg-electric-lime animate-ping"></span>
+            14 Words Due for Spoken Recall
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">
+<span class="material-symbols-outlined text-sm">bolt</span>
+            5 Fresh Words Ready
+          </span>
+<span class="inline-flex items-center gap-1 px-space-sm py-1 rounded-full bg-surface-container font-label-mono text-label-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+            ADHD 3-Step Cadence
+          </span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+          Vocabulary Vault <span class="text-on-surface-variant font-normal text-headline-sm">/ 250 Spoken Lexicon</span>
+</h1>
+<p class="font-body-md text-body-md text-text-muted">
+          Dopamine-driven, low-cognitive-load recall. Say it aloud before reading it. No penalties, banked rest protection.
+        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-space-sm flex-shrink-0">
+<button class="group flex items-center justify-center gap-space-xs px-space-lg py-3 rounded-full bg-primary-container text-on-primary-container hover:bg-electric-lime font-label-badge text-label-badge transition-all shadow-[0_0_20px_rgba(202,243,0,0.25)] hover:scale-[1.02] active:scale-[0.98]" id="quickSprintBtn">
+<span class="material-symbols-outlined text-xl transition-transform group-hover:rotate-12">bolt</span>
+<span>Launch 5-Word Micro-Sprint</span>
+<span class="ml-1 text-on-primary-container/80 text-xs">(2 mins)</span>
+</button>
+<div class="flex items-center justify-center gap-1.5 px-space-md py-3 rounded-full bg-surface-raised font-label-mono text-label-mono text-status-online">
+<span class="material-symbols-outlined text-sm">cloud_done</span>
+<span>100% Offline Cached</span>
+</div>
+</div>
+</div>
+<!-- ADHD 3-Step Interactive Practice Loop Bar -->
+<div class="mt-space-lg pt-space-md grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Step 1 -->
+<button class="flex items-center gap-space-sm p-space-md rounded-xl bg-surface-container text-left hover:bg-surface-raised transition-all group">
+<div class="w-8 h-8 rounded-lg bg-surface-raised flex items-center justify-center font-label-badge text-label-badge text-cyan-spark group-hover:bg-cyan-spark group-hover:text-surface">
+          1
+        </div>
+<div class="flex flex-col">
+<span class="font-label-badge text-label-badge text-primary leading-tight">Recognise Meaning</span>
+<span class="font-body-sm text-body-sm text-text-muted">Fast tap • Semantic anchor</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-cyan-spark text-sm">chevron_right</span>
+</button>
+<!-- Step 2: Highlighted active loop -->
+<button class="relative flex items-center gap-space-sm p-space-md rounded-xl bg-surface-raised text-left ring-2 ring-electric-lime/80 shadow-[0_0_16px_rgba(212,255,0,0.15)] transition-all">
+<div class="w-8 h-8 rounded-lg bg-electric-lime flex items-center justify-center font-label-badge text-label-badge text-on-primary-container">
+          2
+        </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-label-badge text-label-badge text-primary leading-tight">Say German from Memory</span>
+<span class="px-1.5 py-0.2 rounded-full bg-primary-container text-on-primary-container font-label-mono text-[9px] uppercase font-bold">Active</span>
+</div>
+<span class="font-body-sm text-body-sm text-electric-lime">Audio recall challenge</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-electric-lime text-base animate-pulse">mic</span>
+</button>
+<!-- Step 3 -->
+<button class="flex items-center gap-space-sm p-space-md rounded-xl bg-surface-container text-left hover:bg-surface-raised transition-all group">
+<div class="w-8 h-8 rounded-lg bg-surface-raised flex items-center justify-center font-label-badge text-label-badge text-vivid-purple group-hover:bg-vivid-purple group-hover:text-surface">
+          3
+        </div>
+<div class="flex flex-col">
+<span class="font-label-badge text-label-badge text-primary leading-tight">Use in Real Sentence</span>
+<span class="font-body-sm text-body-sm text-text-muted">Spontaneous workplace context</span>
+</div>
+<span class="material-symbols-outlined ml-auto text-on-surface-variant group-hover:text-vivid-purple text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Active Spurt: Interactive Center Flashcard & Audio Sandbox -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- Main Focus Interactive Flashcard (8 cols on desktop) -->
+<div class="lg:col-span-8 flex flex-col gap-space-md">
+<!-- Stage Card Container -->
+<div class="relative bg-surface-card rounded-2xl p-space-xl shadow-2xl flex flex-col justify-between overflow-hidden">
+<!-- Header Strip within card -->
+<div class="flex items-center justify-between pb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="px-space-sm py-1 rounded-full bg-electric-lime/20 text-electric-lime font-label-badge text-label-badge uppercase tracking-wider">
+              Essen &amp; Trinken
+            </span>
+<span class="font-label-mono text-label-mono text-text-muted">Word 3 of 5 Micro-Sprint</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded-full bg-surface-raised hover:bg-surface-bright font-label-mono text-label-mono text-on-surface transition-all flex items-center gap-1" id="speedToggleBtn" title="Slower 0.75x">
+<span class="material-symbols-outlined text-sm">speed</span>
+<span id="speedLabel">1.0x</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-surface-raised hover:bg-punch-orange/20 hover:text-punch-orange flex items-center justify-center transition-colors" title="Star for later">
+<span class="material-symbols-outlined text-base">star</span>
+</button>
+</div>
+</div>
+<!-- Center Prompt -->
+<div class="my-space-lg flex flex-col gap-space-sm text-center items-center">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">English Anchor &amp; Context</span>
+<h2 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+            “the bread roll”
+          </h2>
+<span class="font-body-md text-body-md text-text-muted italic">
+            Essential bakery staple in Germany, Austria, and Switzerland.
+          </span>
+</div>
+<!-- Masked German Answer Module -->
+<div class="bg-surface-raised rounded-xl p-space-lg text-center flex flex-col items-center justify-center cursor-pointer transition-all hover:bg-surface-container-high group" id="answerRevealModule">
+<div class="flex flex-col items-center gap-space-xs py-space-sm" id="maskedState">
+<div class="w-10 h-10 rounded-full bg-surface-card flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-electric-lime text-xl">visibility</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-primary">Tap to Reveal German &amp; Grammar</span>
+<span class="font-label-mono text-label-mono text-text-muted">Say it aloud first to trigger natural dopamine loop</span>
+</div>
+<!-- Revealed State (Hidden initially via JS toggle) -->
+<div class="hidden flex-col items-center gap-space-sm w-full py-space-xs" id="revealedState">
+<div class="flex flex-wrap items-center justify-center gap-space-sm">
+<span class="px-2.5 py-0.5 rounded-full bg-cyan-spark/20 text-cyan-spark font-label-badge text-label-badge">das (neuter)</span>
+<span class="font-german-prompt-lg text-german-prompt-lg text-primary">das Brötchen</span>
+<span class="font-body-md text-body-md text-on-surface-variant font-medium">(Plural: die Brötchen)</span>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-sm text-secondary">record_voice_over</span>
+<span>IPA: /ˈbʁøːtçən/ • Regional: Semmel (Bavaria), Schrippe (Berlin)</span>
+</div>
+</div>
+</div>
+<!-- Audio Waveform & Speech Sandbox Bed -->
+<div class="mt-space-lg pt-space-md flex flex-col items-center gap-space-md">
+<!-- Waveform Visualizer Visual Canvas -->
+<div class="w-full h-16 bg-surface-container rounded-xl flex items-center justify-center px-space-md gap-1 overflow-hidden relative">
+<!-- Decibel Frequency Bars -->
+<div class="waveform-bar w-1.5 h-3 bg-secondary rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-6 bg-secondary rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-10 bg-vivid-purple rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-5 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-12 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-8 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-14 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-10 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-6 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-12 bg-vivid-purple rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-4 bg-secondary rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-8 bg-secondary rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-11 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="waveform-bar w-1.5 h-5 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="absolute inset-y-0 right-4 flex items-center gap-2">
+<span class="inline-flex items-center gap-1 font-label-mono text-label-mono text-text-muted">
+<span class="w-2 h-2 rounded-full bg-status-online"></span> Local STT Active
+              </span>
+</div>
+</div>
+<!-- Dual Speech Trigger Bar -->
+<div class="flex flex-wrap items-center justify-center gap-space-md w-full">
+<!-- Native Audio Listen -->
+<button class="flex items-center gap-space-xs px-space-md py-3 rounded-full bg-surface-raised hover:bg-surface-bright text-primary font-label-badge text-label-badge transition-all" id="listenNativeBtn">
+<span class="material-symbols-outlined text-secondary text-xl">volume_up</span>
+<span>Native Audio</span>
+</button>
+<!-- Massive ADHD Record Mic Button -->
+<button class="relative group flex items-center gap-space-sm px-space-xl py-3.5 rounded-full bg-surface-raised hover:bg-surface-container-high transition-all shadow-lg active:scale-95" id="recordMicBtn">
+<div class="w-8 h-8 rounded-full bg-electric-lime text-on-primary-container flex items-center justify-center transition-transform group-hover:scale-110" id="micRing">
+<span class="material-symbols-outlined text-xl">mic</span>
+</div>
+<div class="flex flex-col text-left">
+<span class="font-label-badge text-label-badge text-primary leading-none">Record Spoken German</span>
+<span class="font-label-mono text-label-mono text-electric-lime mt-0.5" id="recordingStatus">Push to test articulation</span>
+</div>
+</button>
+</div>
+<!-- Provenance Attribution Badge -->
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-on-surface-variant uppercase">
+              Provenance: checked locally (whisper-web / offline)
+            </span>
+</div>
+<!-- Supportive Outcome Feedback Pills (Cognitive Safe / Dignified) -->
+<div class="w-full pt-space-sm border-t-0 flex flex-col gap-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted text-center uppercase tracking-wider">How did that feel? (Self-Evaluation &amp; Rhythm)</span>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs">
+<button class="outcome-pill p-space-sm rounded-xl bg-surface-raised hover:bg-error-container hover:text-on-error-container text-text-muted font-label-badge text-label-badge transition-all flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-base">replay</span>
+<span>Redo Soon</span>
+<span class="font-label-mono text-[9px] text-text-muted">in 10 mins</span>
+</button>
+<button class="outcome-pill p-space-sm rounded-xl bg-surface-raised hover:bg-punch-orange/20 hover:text-punch-orange text-text-muted font-label-badge text-label-badge transition-all flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-base">help_outline</span>
+<span>With Help</span>
+<span class="font-label-mono text-[9px] text-text-muted">tomorrow</span>
+</button>
+<button class="outcome-pill p-space-sm rounded-xl bg-surface-raised hover:bg-cyan-spark/20 hover:text-cyan-spark text-text-muted font-label-badge text-label-badge transition-all flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-base">sentiment_satisfied</span>
+<span>Remembered!</span>
+<span class="font-label-mono text-[9px] text-text-muted">in 3 days</span>
+</button>
+<button class="outcome-pill p-space-sm rounded-xl bg-surface-raised hover:bg-electric-lime/20 hover:text-electric-lime text-text-muted font-label-badge text-label-badge transition-all flex flex-col items-center gap-1 text-center">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span>Mastered in Sentence</span>
+<span class="font-label-mono text-[9px] text-text-muted">in 8 days</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Sidebar Bento: Micro-Stats, Spaced Memory Bar, & Context Card (4 cols) -->
+<div class="lg:col-span-4 flex flex-col gap-space-md">
+<!-- Visual Context Scene Preview with data-alt -->
+<div class="relative rounded-2xl bg-surface-card overflow-hidden shadow-xl p-space-md flex flex-col gap-space-sm">
+<div class="relative w-full h-36 rounded-xl overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A warm artisan German bakery interior at morning dawn with fresh golden crispy Brötchen rolls neatly stacked in wooden baskets, subtle atmospheric steam, soft cinematic lighting, deep charcoal accents with ambient amber and lime glow." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkb7vuG0xDjINuXcVvM_2Jr3WKP301-V1bMoIH5RpHLsTbQKc8iORFgt_KqFLQmgyqafYDpn_EDjUzAA9AT5h_ZR5R_uc5mNLMIqrIVmGHy-vgkwifjuVo3qKUPe5HX2Cad2gJqRVGXg0rpBYIC0mUvwOx4vOotrAYLGDiv2hX00VuJpns4dYVdg_pGKTH0VbE_xcPk4F8DpwKktw9CgsR-u7PYGJYMrOCkDzRBlYbR3VcR8yAZK1j"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+<span class="absolute bottom-2 left-2 px-2 py-0.5 rounded-full bg-surface-card/90 backdrop-blur-md font-label-mono text-label-mono text-electric-lime">
+            Berlin Prenzlauer Berg Bakery
+          </span>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-primary">“Zwei Brötchen, bitte!”</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+            The quickest spoken bridge to authentic daily life. Cashiers will respond with either “Schrippen?” or “Zusammen oder getrennt?”.
+          </p>
+</div>
+</div>
+<!-- Spaced Mastery & Rest Rhythm Widget -->
+<div class="rounded-2xl bg-surface-card p-space-lg shadow-xl flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-electric-lime">donut_large</span>
+<span class="font-headline-sm text-headline-sm text-primary">Vault Retention</span>
+</div>
+<span class="font-label-mono text-label-mono text-status-online">A1/A2 Core</span>
+</div>
+<!-- Inline SVG Mini Donut Progress Chart -->
+<div class="flex items-center gap-space-md">
+<div class="relative w-20 h-20 flex-shrink-0">
+<svg class="w-full h-full transform -rotate-90" viewbox="0 0 36 36">
+<!-- Background Ring -->
+<path class="text-surface-raised stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<!-- Mastered (84/250 = 33.6%) -->
+<path class="text-electric-lime stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="34, 100" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- In Review (52/250 = 20.8%) -->
+<path class="text-cyan-spark stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="21, 100" stroke-dashoffset="-34" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-headline-sm text-headline-sm text-primary leading-none">84</span>
+<span class="font-label-mono text-[9px] text-text-muted">Mastered</span>
+</div>
+</div>
+<div class="flex flex-col gap-1 text-left flex-grow">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-electric-lime font-medium">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span> Mastered
+              </span>
+<span class="font-label-mono text-label-mono text-primary">84 / 250</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-cyan-spark font-medium">
+<span class="w-2 h-2 rounded-full bg-cyan-spark"></span> In Review
+              </span>
+<span class="font-label-mono text-label-mono text-primary">52 words</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="flex items-center gap-1 text-text-muted font-medium">
+<span class="w-2 h-2 rounded-full bg-surface-raised"></span> Unlocked Fresh
+              </span>
+<span class="font-label-mono text-label-mono text-text-muted">114 left</span>
+</div>
+</div>
+</div>
+<!-- 7-Day Forgiving Rhythm Horizontal Bar -->
+<div class="pt-space-xs flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted">Weekly Cadence</span>
+<span class="font-label-mono text-label-mono text-secondary">Banked Day Available</span>
+</div>
+<div class="grid grid-cols-7 gap-1">
+<div class="h-6 rounded bg-electric-lime text-on-primary-container flex items-center justify-center font-label-mono text-[10px]" title="Mon: 18m">M</div>
+<div class="h-6 rounded bg-electric-lime text-on-primary-container flex items-center justify-center font-label-mono text-[10px]" title="Tue: 22m">T</div>
+<div class="h-6 rounded bg-electric-lime text-on-primary-container flex items-center justify-center font-label-mono text-[10px]" title="Wed: 15m">W</div>
+<div class="h-6 rounded bg-status-rest-day text-surface flex items-center justify-center font-label-mono text-[10px]" title="Thu: Rest Shield Active">
+<span class="material-symbols-outlined text-xs">shield</span>
+</div>
+<div class="h-6 rounded bg-electric-lime text-on-primary-container flex items-center justify-center font-label-mono text-[10px]" title="Fri: 25m">F</div>
+<div class="h-6 rounded bg-cyan-spark text-surface flex items-center justify-center font-label-mono text-[10px] font-bold" title="Today: In Progress">S</div>
+<div class="h-6 rounded bg-surface-raised text-text-muted flex items-center justify-center font-label-mono text-[10px]" title="Sun: Scheduled">S</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 3: Search, Filter, and Vocabulary Catalog -->
+<div class="flex flex-col gap-space-lg mt-space-md">
+<!-- Filter, Category & Search Control Hub -->
+<div class="flex flex-col gap-space-md bg-surface-card p-space-lg rounded-2xl shadow-xl">
+<!-- Top Row: Full Search Bar -->
+<div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+<input class="w-full bg-surface-container rounded-full pl-12 pr-space-lg py-3 text-on-surface placeholder:text-text-muted focus:outline-none focus:bg-surface-raised font-body-md text-body-md transition-all shadow-inner" id="vocabSearchInput" placeholder="Search German, English, gender (der/die/das), or workplace phrase..." type="text"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-[10px] text-text-muted hover:text-primary">
+            ⌘K
+          </button>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0">
+<button class="flex items-center gap-1.5 px-space-md py-2.5 rounded-full bg-surface-raised hover:bg-surface-bright text-on-surface font-label-badge text-label-badge transition-all">
+<span class="material-symbols-outlined text-base">swap_vert</span>
+<span>Sort: Due First</span>
+</button>
+<button class="flex items-center gap-1.5 px-space-md py-2.5 rounded-full bg-surface-raised hover:bg-surface-bright text-on-surface font-label-badge text-label-badge transition-all">
+<span class="material-symbols-outlined text-base">tune</span>
+<span>Grammar Filters</span>
+</button>
+</div>
+</div>
+<!-- Category Badges / Gamified Semantic Capsules -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted mr-1">Domains:</span>
+<button class="px-space-md py-1.5 rounded-full bg-electric-lime text-on-primary-container font-label-badge text-label-badge flex items-center gap-1.5 shadow-[0_0_12px_rgba(212,255,0,0.2)]">
+<span class="material-symbols-outlined text-sm">restaurant</span>
+<span>Essen &amp; Trinken (48)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-punch-orange text-surface font-label-badge text-label-badge flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">work</span>
+<span>Im Büro (56)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-vivid-purple text-primary font-label-badge text-label-badge flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">train</span>
+<span>Unterwegs (50)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-cyan-spark text-surface font-label-badge text-label-badge flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">school</span>
+<span>Uni &amp; Lernen (42)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-error-container text-on-error-container font-label-badge text-label-badge flex items-center gap-1.5 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-sm">emergency</span>
+<span>Notfall &amp; Arzt (34)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-surface-raised text-text-muted hover:text-primary font-label-badge text-label-badge transition-colors ml-auto">
+          + Custom Tag
+        </button>
+</div>
+<!-- Secondary Filter States (ADHD Chunks) -->
+<div class="flex flex-wrap items-center gap-space-xs pt-space-xs">
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-primary font-label-mono text-label-mono flex items-center gap-1 hover:bg-surface-raised">
+<span>All 250</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg bg-electric-lime/20 text-electric-lime font-label-mono text-label-mono flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-electric-lime animate-pulse"></span>
+<span>Due for Review (14)</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-mono text-label-mono flex items-center gap-1 hover:bg-surface-raised">
+<span class="material-symbols-outlined text-xs text-punch-orange">star</span>
+<span>Saved Stars (19)</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-mono text-label-mono flex items-center gap-1 hover:bg-surface-raised">
+<span class="material-symbols-outlined text-xs text-status-online">check_circle</span>
+<span>Mastered (84)</span>
+</button>
+<button class="px-space-sm py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-mono text-label-mono flex items-center gap-1 hover:bg-surface-raised">
+<span>Sentences Only (40)</span>
+</button>
+</div>
+</div>
+<!-- Lexicon 4-Card Showcase Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-space-md">
+<!-- Word Card 1: das Brötchen -->
+<div class="group relative bg-surface-card rounded-2xl p-space-md shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-cyan-spark/15 text-cyan-spark font-label-mono text-[10px] font-bold uppercase">
+            das • Neuter
+          </span>
+<button class="w-7 h-7 rounded-full bg-surface-raised flex items-center justify-center text-text-muted hover:text-electric-lime transition-colors">
+<span class="material-symbols-outlined text-base">volume_up</span>
+</button>
+</div>
+<div class="my-space-md flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">
+            das Brötchen
+          </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">the bread roll / bun</span>
+<span class="font-label-mono text-[10px] text-text-muted mt-1 italic">Pl: die Brötchen</span>
+</div>
+<div class="pt-space-sm bg-surface-container/50 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-2xl flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-electric-lime flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">record_voice_over</span>
+            Spoken 3x
+          </span>
+<span class="font-label-mono text-label-mono text-text-muted">Due in 2d</span>
+</div>
+</div>
+<!-- Word Card 2: die Rechnung -->
+<div class="group relative bg-surface-card rounded-2xl p-space-md shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-punch-orange/15 text-punch-orange font-label-mono text-[10px] font-bold uppercase">
+            die • Feminine
+          </span>
+<button class="w-7 h-7 rounded-full bg-surface-raised flex items-center justify-center text-text-muted hover:text-punch-orange transition-colors">
+<span class="material-symbols-outlined text-base">volume_up</span>
+</button>
+</div>
+<div class="my-space-md flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-punch-orange transition-colors">
+            die Rechnung
+          </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">the bill / restaurant check</span>
+<span class="font-label-mono text-[10px] text-text-muted mt-1 italic">Pl: die Rechnungen</span>
+</div>
+<div class="pt-space-sm bg-surface-container/50 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-2xl flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-punch-orange flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">work</span>
+            Workplace / Dining
+          </span>
+<span class="font-label-mono text-label-mono text-text-muted">Due in 4h</span>
+</div>
+</div>
+<!-- Word Card 3: Ich hätte gern... (Pattern Phrase) -->
+<div class="group relative bg-surface-card rounded-2xl p-space-md shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-vivid-purple/20 text-vivid-purple font-label-mono text-[10px] font-bold uppercase">
+            Konjunktiv II • Pattern
+          </span>
+<button class="w-7 h-7 rounded-full bg-surface-raised flex items-center justify-center text-text-muted hover:text-vivid-purple transition-colors">
+<span class="material-symbols-outlined text-base">volume_up</span>
+</button>
+</div>
+<div class="my-space-md flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-vivid-purple transition-colors">
+            Ich hätte gern...
+          </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">“I would like to have...”</span>
+<span class="font-label-mono text-[10px] text-text-muted mt-1 italic">Polite cafe &amp; counter staple</span>
+</div>
+<div class="pt-space-sm bg-surface-container/50 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-2xl flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-status-online flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">check_circle</span>
+            Mastered 5x
+          </span>
+<span class="font-label-mono text-label-mono text-text-muted">In 14d</span>
+</div>
+</div>
+<!-- Word Card 4: Entschuldigung -->
+<div class="group relative bg-surface-card rounded-2xl p-space-md shadow-lg hover:shadow-2xl transition-all duration-200 flex flex-col justify-between hover:-translate-y-1">
+<div class="flex items-start justify-between">
+<span class="px-2.5 py-0.5 rounded-full bg-secondary/20 text-secondary font-label-mono text-[10px] font-bold uppercase">
+            Everyday Social
+          </span>
+<button class="w-7 h-7 rounded-full bg-surface-raised flex items-center justify-center text-text-muted hover:text-secondary transition-colors">
+<span class="material-symbols-outlined text-base">volume_up</span>
+</button>
+</div>
+<div class="my-space-md flex flex-col">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-secondary transition-colors">
+            Entschuldigung
+          </h3>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Excuse me / Pardon me</span>
+<span class="font-label-mono text-[10px] text-text-muted mt-1 italic">Transit opener, asking help</span>
+</div>
+<div class="pt-space-sm bg-surface-container/50 -mx-space-md -mb-space-md px-space-md py-space-sm rounded-b-2xl flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">hearing</span>
+            High Priority
+          </span>
+<span class="font-label-mono text-label-mono text-electric-lime">Due Now</span>
+</div>
+</div>
+</div>
+<!-- Offline Synchronization & Local Storage Diagnostic Strip -->
+<div class="rounded-xl bg-surface-card p-space-md flex flex-col sm:flex-row items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-status-online/15 flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-lg">offline_pin</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-badge text-label-badge text-primary">All 250 words and native audio cached locally.</span>
+<span class="font-body-sm text-body-sm text-text-muted">You can practice on the U-Bahn or flight with 0kb bandwidth.</span>
+</div>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted">Storage: 28.4 MB / 1 GB</span>
+<button class="px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-on-surface hover:bg-surface-bright transition-colors">
+          Verify Cache
+        </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Interactive Behavior Script -->
+<script>
+  // Step Flashcard Reveal Toggle
+  const answerModule = document.getElementById('answerRevealModule');
+  const maskedState = document.getElementById('maskedState');
+  const revealedState = document.getElementById('revealedState');
+
+  if (answerModule) {
+    answerModule.addEventListener('click', () => {
+      maskedState.classList.toggle('hidden');
+      revealedState.classList.toggle('hidden');
+      revealedState.classList.toggle('flex');
+    });
+  }
+
+  // Audio Playback Rate Toggle (1.0x <-> 0.75x)
+  const speedToggleBtn = document.getElementById('speedToggleBtn');
+  const speedLabel = document.getElementById('speedLabel');
+  let isSlow = false;
+
+  if (speedToggleBtn && speedLabel) {
+    speedToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isSlow = !isSlow;
+      speedLabel.textContent = isSlow ? '0.75x' : '1.0x';
+      speedToggleBtn.classList.toggle('bg-electric-lime');
+      speedToggleBtn.classList.toggle('text-on-primary-container');
+    });
+  }
+
+  // Mic Simulation Micro-Interaction
+  const recordMicBtn = document.getElementById('recordMicBtn');
+  const micRing = document.getElementById('micRing');
+  const recordingStatus = document.getElementById('recordingStatus');
+  let isRecording = false;
+  let waveInterval;
+
+  if (recordMicBtn) {
+    recordMicBtn.addEventListener('click', () => {
+      isRecording = !isRecording;
+      const bars = document.querySelectorAll('.waveform-bar');
+      
+      if (isRecording) {
+        micRing.classList.add('animate-pulse');
+        recordMicBtn.classList.add('bg-electric-lime/20');
+        recordingStatus.textContent = 'Recording 0:04s... (Speak aloud)';
+        recordingStatus.classList.remove('text-electric-lime');
+        recordingStatus.classList.add('text-punch-orange');
+
+        waveInterval = setInterval(() => {
+          bars.forEach(bar => {
+            const randomH = Math.floor(Math.random() * 40) + 8;
+            bar.style.height = `${randomH}px`;
+          });
+        }, 120);
+      } else {
+        micRing.classList.remove('animate-pulse');
+        recordMicBtn.classList.remove('bg-electric-lime/20');
+        recordingStatus.textContent = 'Evaluation: 94% Clear Articulation';
+        recordingStatus.classList.remove('text-punch-orange');
+        recordingStatus.classList.add('text-status-online');
+        clearInterval(waveInterval);
+      }
+    });
+  }
+
+  // Quick Sprint Launch Trigger
+  const quickSprintBtn = document.getElementById('quickSprintBtn');
+  if (quickSprintBtn) {
+    quickSprintBtn.addEventListener('click', () => {
+      if (maskedState.classList.contains('hidden')) {
+        maskedState.classList.remove('hidden');
+        revealedState.classList.add('hidden');
+        revealedState.classList.remove('flex');
+      }
+      quickSprintBtn.classList.add('scale-95');
+      setTimeout(() => quickSprintBtn.classList.remove('scale-95'), 150);
+    });
+  }
+
+  // Native Audio Play Button feedback
+  const listenNativeBtn = document.getElementById('listenNativeBtn');
+  if (listenNativeBtn) {
+    listenNativeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      listenNativeBtn.classList.add('bg-secondary/20');
+      setTimeout(() => listenNativeBtn.classList.remove('bg-secondary/20'), 800);
+    });
+  }
+</script></main></div></body></html>

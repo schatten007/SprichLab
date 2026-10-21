@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "punch-orange": "#ff8800", "error-container": "#93000a", "surface-variant": "#343538", "tertiary-fixed-dim": "#ffb781", "on-tertiary": "#4e2600", "inverse-on-surface": "#2f3034", "inverse-primary": "#536600", "cyan-spark": "#38bdf8", "surface-stroke": "#33353e", "text-primary": "#f8fafc", "primary-fixed": "#caf300", "inverse-surface": "#e3e2e6", "on-secondary-fixed-variant": "#6900b3", "on-error": "#690005", "surface-container-high": "#292a2d", "secondary-fixed": "#f0dbff", "on-surface-variant": "#c5c9ac", "surface-container-lowest": "#0d0e11", "surface-card": "#1c1d22", "surface-container-low": "#1b1b1f", "background": "#121316", "secondary-fixed-dim": "#ddb7ff", "on-secondary-fixed": "#2c0051", "primary-container": "#caf300", "tertiary-fixed": "#ffdcc4", "electric-lime": "#d4ff00", "surface": "#121316", "on-primary": "#2a3400", "surface-container": "#1f1f23", "on-primary-fixed-variant": "#3e4c00", "on-primary-container": "#596c00", "surface-tint": "#b0d500", "primary-fixed-dim": "#b0d500", "on-tertiary-container": "#9b5100", "on-secondary": "#490080", "surface-bright": "#38393c", "primary": "#ffffff", "vivid-purple": "#a855f7", "on-error-container": "#ffdad6", "secondary-container": "#6f00be", "text-muted": "#94a3b8", "on-primary-fixed": "#171e00", "surface-container-highest": "#343538", "secondary": "#ddb7ff", "outline": "#8f9378", "on-secondary-container": "#d6a9ff", "error": "#ffb4ab", "outline-variant": "#444932", "status-rest-day": "#64748b", "on-background": "#e3e2e6", "surface-base": "#121316", "surface-dim": "#121316", "on-tertiary-fixed-variant": "#6f3800", "tertiary": "#ffffff", "on-tertiary-fixed": "#2f1400", "on-surface": "#e3e2e6", "status-online": "#22c55e", "surface-raised": "#25262c", "tertiary-container": "#ffdcc4" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-2xl": "3rem", "space-xl": "2rem", "space-md": "1rem", "margin": "2rem", "space-xs": "0.25rem", "gutter": "1.25rem", "gutter-mobile": "0.75rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "margin-mobile": "1rem" }, fontFamily: { "label-badge": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "german-prompt-lg": ["Plus Jakarta Sans"], "headline-lg": ["Space Grotesk"], "body-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-mono": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "german-prompt-lg-mobile": ["Plus Jakarta Sans"], "headline-md": ["Space Grotesk"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Space Grotesk"] }, fontSize: { "label-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "german-prompt-lg": ["24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "german-prompt-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-electric-lime selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.35)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-xs"><div class="flex items-center gap-space-sm min-w-0"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VBWgLT0kz-tjg7OiyfsMpXYIj6M0wHhJ8MVw1pBeHQTe_TOI4rQ52L_OnjaBEwzQnt5fyIOKtmoBc3CeIV7MtXzPcDWVNg2NRn62BkYP1CvYDAsohyuEWXII1rNXBIpHkvh4c5IVwrbBcOSQmuOjHvW6YkfpwfCS2WdPz_3GrG8GglVoHzVlHyCdaTa4QbqItQpcGxwXbp1-NRMcOWImWIcxFqrpiSnYjlLl56z2SQS9PxP04e0hQolj0"/><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm tracking-tight text-text-primary uppercase">Sprich</span><span class="hidden sm:inline-block font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-surface-raised text-on-surface-variant">Workplace</span></div><div class="flex items-center gap-1.5 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-text-muted truncate">Offline Local</span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><div class="flex items-center gap-1.5 bg-surface-card px-space-sm py-1 rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.2)]"><span class="material-symbols-outlined text-electric-lime text-[18px]">local_fire_department</span><span class="font-label-badge text-label-badge text-text-primary">5d</span><div class="w-px h-3 bg-surface-stroke"></div><span class="material-symbols-outlined text-status-rest-day text-[15px]" title="2 Banked Rest Days">shield</span><span class="font-label-mono text-label-mono text-status-rest-day">2</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full pt-16 pb-24 bg-surface min-h-screen"><div class="flex flex-col w-full px-gutter-mobile py-space-sm gap-space-md">
+<!-- Level Progress & Stage Context Card -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono text-electric-lime uppercase tracking-wider">Stage 2 of 6</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-raised px-space-xs py-0.5 rounded-full">
+<span class="material-symbols-outlined text-vivid-purple text-[14px]">psychology</span>
+<span class="font-label-mono text-label-mono text-secondary">B1 Readiness 68%</span>
+</div>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Office &amp; Standups</h2>
+<span class="font-label-badge text-label-badge text-text-primary">45%</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted mt-0.5">Berufssprache: Expressing impediments &amp; scheduling</p>
+</div>
+<!-- Dual-tone high contrast progress bar -->
+<div class="w-full h-2 rounded-full bg-surface-raised overflow-hidden p-0.5">
+<div class="h-full rounded-full bg-gradient-to-r from-cyan-spark via-vivid-purple to-electric-lime w-[45%] transition-all duration-500"></div>
+</div>
+<!-- Quick Action Pills (ADHD Direct Execution) -->
+<div class="grid grid-cols-2 gap-space-xs pt-1">
+<button class="flex items-center justify-center gap-1.5 bg-surface-raised hover:bg-surface-variant active:scale-[0.98] transition px-space-xs py-2 rounded-full text-text-primary">
+<span class="material-symbols-outlined text-punch-orange text-[16px]">neurology</span>
+<span class="font-label-badge text-[11px] truncate">Gemini Roleplay Pack</span>
+</button>
+<button class="flex items-center justify-center gap-1.5 bg-surface-raised hover:bg-surface-variant active:scale-[0.98] transition px-space-xs py-2 rounded-full text-text-muted hover:text-text-primary">
+<span class="material-symbols-outlined text-cyan-spark text-[16px]">download</span>
+<span class="font-label-badge text-[11px] truncate">Local JSON Backup</span>
+</button>
+</div>
+</div>
+<!-- Forgiving Rhythm & Rest Safeguard -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-electric-lime text-[20px]">equalizer</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">Weekly Vocal Cadence</span>
+</div>
+<div class="flex items-center gap-1 bg-surface-raised px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-status-rest-day text-[14px]">shield</span>
+<span class="font-label-mono text-label-mono text-status-rest-day">1 Banked Rest</span>
+</div>
+</div>
+<!-- 7-Day Visual Rhythm Strip -->
+<div class="grid grid-cols-7 gap-1 pt-1">
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">M</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-[9px] text-text-muted">18m</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">T</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-[9px] text-text-muted">22m</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">W</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-[9px] text-text-muted">15m</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">T</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-[9px] text-text-muted">25m</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-text-muted">F</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-online">
+<span class="material-symbols-outlined text-[16px]">check</span>
+</div>
+<span class="font-label-mono text-[9px] text-text-muted">30m</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-status-rest-day font-bold">S</span>
+<div class="w-8 h-10 rounded-full bg-surface-raised flex items-center justify-center text-status-rest-day" title="Safeguard Activated: Rest intentional">
+<span class="material-symbols-outlined text-[16px]">nightlight</span>
+</div>
+<span class="font-label-mono text-[9px] text-status-rest-day">Rest</span>
+</div>
+<div class="flex flex-col items-center gap-1">
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">S</span>
+<div class="w-8 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container animate-pulse">
+<span class="material-symbols-outlined text-[16px]">mic</span>
+</div>
+<span class="font-label-mono text-[9px] text-electric-lime font-bold">Today</span>
+</div>
+</div>
+</div>
+<!-- Workplace Missions Header -->
+<div class="flex items-center justify-between pt-1">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary tracking-tight">Active Workplace Missions</h3>
+<p class="font-body-sm text-body-sm text-text-muted">Low cognitive-load spoken drills</p>
+</div>
+<span class="font-label-mono text-label-mono px-2 py-0.5 rounded-full bg-surface-raised text-text-muted">3 queued</span>
+</div>
+<!-- Mission Card 1: Resume Active Mission (Hero Focus) -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-lg flex flex-col gap-space-sm relative overflow-hidden">
+<div class="absolute -right-8 -top-8 w-28 h-28 bg-electric-lime/5 rounded-full pointer-events-none blur-2xl"></div>
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-punch-orange text-on-tertiary">B1 Spoken</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-electric-lime text-[15px]">autorenew</span>
+<span class="font-label-mono text-label-mono text-text-muted">Step 3 of 6 • Shadowing</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Calling about a Job Vacancy</h4>
+<p class="font-body-sm text-body-sm text-text-muted italic">Anruf wegen Stellenanzeige</p>
+</div>
+<!-- Acoustic phrase snippet preview -->
+<div class="bg-surface-raised p-2.5 rounded-md flex items-center justify-between gap-2">
+<div class="min-w-0">
+<p class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary truncate">„Ich rufe bezüglich Ihrer Anzeige an...“</p>
+<span class="font-label-mono text-label-mono text-text-muted">12 Core Phrases • 4 Spoken Today</span>
+</div>
+<button class="w-9 h-9 rounded-full bg-surface-container flex items-center justify-center flex-shrink-0 text-text-primary active:scale-95 transition">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+</div>
+<!-- High-Contrast Electric Lime Action Trigger -->
+<button class="w-full py-3 px-space-md rounded-full bg-electric-lime text-on-primary font-label-badge text-label-badge uppercase tracking-wide flex items-center justify-center gap-2 shadow-[0_4px_16px_rgba(212,255,0,0.25)] active:scale-[0.98] transition">
+<span class="material-symbols-outlined text-[20px]">mic</span>
+<span>Resume Spoken Mission</span>
+</button>
+</div>
+<!-- Mission Card 2: Explaining a Problem -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-cyan-spark text-surface-container-lowest">A2/B1 Bridge</span>
+<div class="flex items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span class="font-label-mono text-label-mono">8 Mins • 9 Phrases</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Explaining a Problem &amp; Asking Help</h4>
+<p class="font-body-sm text-body-sm text-text-muted italic">Problem schildern &amp; um Unterstützung bitten</p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono text-label-mono px-2 py-0.5 rounded-full bg-surface-raised text-on-surface-variant">0/9 recorded</span>
+<button class="px-4 py-2 rounded-full bg-surface-raised hover:bg-surface-variant text-text-primary font-label-badge text-label-badge flex items-center gap-1.5 active:scale-95 transition">
+<span>Start Mission</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Mission Card 3: Standup Recap -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge px-2 py-0.5 rounded-full bg-vivid-purple text-text-primary">B1 Core</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-status-online text-[15px]">verified</span>
+<span class="font-label-mono text-label-mono text-status-online">92% Echo Match</span>
+</div>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Participating in Team Daily Standup</h4>
+<p class="font-body-sm text-body-sm text-text-muted italic">Teilnahme am morgendlichen Standup-Meeting</p>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono text-label-mono text-text-muted">Practised 2x • Yesterday</span>
+<button class="px-4 py-2 rounded-full bg-surface-raised hover:bg-surface-variant text-text-primary font-label-badge text-label-badge flex items-center gap-1.5 active:scale-95 transition">
+<span class="material-symbols-outlined text-[16px]">replay</span>
+<span>Review &amp; Refine</span>
+</button>
+</div>
+</div>
+<!-- Honest Evidence & Telemetry Dashboard -->
+<div class="w-full flex flex-col gap-space-xs pt-2">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Empirical Telemetry</h3>
+<span class="font-label-mono text-label-mono text-text-muted">Zero Vanity Metrics</span>
+</div>
+<!-- 2x2 Telemetry Grid with Clear Provenance Badges -->
+<div class="grid grid-cols-2 gap-space-xs">
+<!-- Card 1 -->
+<div class="bg-surface-card rounded-md p-space-sm flex flex-col justify-between h-28 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-electric-lime text-[18px]">timer</span>
+<span class="font-label-mono text-[9px] px-1.5 py-0.5 rounded-full bg-surface-raised text-text-muted">measured locally</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-text-primary">48<span class="text-body-sm text-text-muted font-normal"> min</span></div>
+<p class="font-body-sm text-[11px] text-text-muted truncate">Active Vocal Practice</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-card rounded-md p-space-sm flex flex-col justify-between h-28 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-cyan-spark text-[18px]">graphic_eq</span>
+<span class="font-label-mono text-[9px] px-1.5 py-0.5 rounded-full bg-surface-raised text-text-muted">raw mic audio</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-text-primary">14.5<span class="text-body-sm text-text-muted font-normal"> min</span></div>
+<p class="font-body-sm text-[11px] text-text-muted truncate">Recorded Voice Output</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-card rounded-md p-space-sm flex flex-col justify-between h-28 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-punch-orange text-[18px]">psychology_alt</span>
+<span class="font-label-mono text-[9px] px-1.5 py-0.5 rounded-full bg-surface-raised text-text-muted">self-rated</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-text-primary">84<span class="text-body-sm text-text-muted font-normal">/250</span></div>
+<p class="font-body-sm text-[11px] text-text-muted truncate">Words Recalled Active</p>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-card rounded-md p-space-sm flex flex-col justify-between h-28 shadow-sm">
+<div class="flex items-center justify-between">
+<span class="material-symbols-outlined text-vivid-purple text-[18px]">assignment_turned_in</span>
+<span class="font-label-mono text-[9px] px-1.5 py-0.5 rounded-full bg-surface-raised text-text-muted">Gemini report</span>
+</div>
+<div>
+<div class="font-headline-lg text-headline-lg text-text-primary">12<span class="text-body-sm text-text-muted font-normal">/48</span></div>
+<p class="font-body-sm text-[11px] text-text-muted truncate">Situations Mastered</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Acoustic Evidence Comparison: First vs. Latest Waveform Player -->
+<div class="w-full bg-surface-card rounded-lg p-space-md shadow-md flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-vivid-purple text-[20px]">compare</span>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Acoustic Evolution</h3>
+</div>
+<span class="font-label-mono text-label-mono text-status-online bg-surface-raised px-2 py-0.5 rounded-full">Latency -85%</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+      Direct latency &amp; phonetic rhythm playback for: <br/>
+<span class="text-text-primary font-medium">„Könnten wir das Meeting kurz verschieben?“</span>
+</p>
+<!-- Waveform Comparison Module -->
+<div class="flex flex-col gap-space-xs pt-1">
+<!-- Day 1 Baseline Track -->
+<div class="bg-surface-raised rounded-md p-2.5 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-status-rest-day"></span>
+<span class="font-label-mono text-label-mono text-text-muted">Day 1 Baseline (Hesitation: 2.8s)</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-surface-card flex items-center justify-center text-text-muted hover:text-text-primary active:scale-95 transition" id="play-baseline-btn">
+<span class="material-symbols-outlined text-[15px]">play_arrow</span>
+</button>
+</div>
+<!-- Synthetic Decibel Visualizer (Hesitant/Gapped) -->
+<div class="h-8 flex items-center gap-1 px-1">
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-2 bg-text-muted/60 rounded-full"></div>
+<div class="w-1.5 h-4 bg-text-muted/70 rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-5 bg-text-muted/80 rounded-full"></div>
+<div class="w-1.5 h-3 bg-text-muted/70 rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-6 bg-text-muted/80 rounded-full"></div>
+<div class="w-1.5 h-2 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+<div class="w-1.5 h-4 bg-text-muted/60 rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+<!-- Day 14 Fluent Track -->
+<div class="bg-surface-raised rounded-md p-2.5 flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">Day 14 Fluent Cadence (Latency: 0.4s)</span>
+</div>
+<button class="w-6 h-6 rounded-full bg-electric-lime flex items-center justify-center text-on-primary active:scale-95 transition" id="play-fluent-btn">
+<span class="material-symbols-outlined text-[15px]">play_arrow</span>
+</button>
+</div>
+<!-- Synthetic Decibel Visualizer (Punchy, Connected Waveform) -->
+<div class="h-8 flex items-center gap-1 px-1">
+<div class="w-1.5 h-3 bg-gradient-to-t from-vivid-purple to-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-6 bg-gradient-to-t from-vivid-purple to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-7 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-5 bg-gradient-to-t from-vivid-purple to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-8 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-6 bg-gradient-to-t from-vivid-purple to-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-7 bg-gradient-to-t from-vivid-purple to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-4 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-8 bg-gradient-to-t from-vivid-purple to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-6 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-5 bg-gradient-to-t from-vivid-purple to-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-7 bg-gradient-to-t from-vivid-purple to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-6 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-4 bg-gradient-to-t from-vivid-purple to-cyan-spark rounded-full"></div>
+<div class="w-1.5 h-3 bg-gradient-to-t from-cyan-spark to-electric-lime rounded-full"></div>
+<div class="w-1.5 h-1 bg-surface-variant rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Dopamine Confirmation Toast Simulator (Hidden by default, triggered on interaction) -->
+<div class="hidden w-full bg-surface-raised p-space-sm rounded-lg shadow-lg flex items-center justify-between gap-2 border-l-4 border-electric-lime" id="action-toast">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-electric-lime text-[18px]">check_circle</span>
+<span class="font-body-sm text-body-sm text-text-primary" id="toast-text">Progress locally synced</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Just now</span>
+</div>
+</div>
+<script>
+  // Lightweight tactile feedback micro-interactions
+  document.addEventListener('DOMContentLoaded', () => {
+    const baselineBtn = document.getElementById('play-baseline-btn');
+    const fluentBtn = document.getElementById('play-fluent-btn');
+    const toast = document.getElementById('action-toast');
+    const toastText = document.getElementById('toast-text');
+
+    function triggerToast(message) {
+      if (!toast) return;
+      toastText.textContent = message;
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3200);
+    }
+
+    if (baselineBtn) {
+      baselineBtn.addEventListener('click', () => {
+        baselineBtn.classList.toggle('text-punch-orange');
+        triggerToast('Playing Day 1 baseline (Latency: 2.8s)');
+      });
+    }
+
+    if (fluentBtn) {
+      fluentBtn.addEventListener('click', () => {
+        fluentBtn.classList.add('scale-110');
+        setTimeout(() => fluentBtn.classList.remove('scale-110'), 200);
+        triggerToast('Playing Day 14 cadence (Latency: 0.4s)');
+      });
+    }
+  });
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface-card/90 backdrop-blur-xl shadow-[0_-8px_24px_rgba(0,0,0,0.45)]" data-active-classes="text-electric-lime"><div class="flex items-center justify-around h-16 px-space-xs max-w-md mx-auto"><a class="flex flex-col items-center justify-center min-w-[56px] h-14 rounded-full text-text-muted hover:text-text-primary transition-colors gap-0.5" data-path="today" href="#"><span class="material-symbols-outlined text-[22px]">bolt</span><span class="font-label-badge text-[10px] tracking-wide uppercase">Today</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-14 rounded-full text-text-muted hover:text-text-primary transition-colors gap-0.5" data-path="lessons" href="#"><span class="material-symbols-outlined text-[22px]">route</span><span class="font-label-badge text-[10px] tracking-wide uppercase">Lessons</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-14 rounded-full text-text-muted hover:text-text-primary transition-colors gap-0.5" data-path="words-vault" href="#"><span class="material-symbols-outlined text-[22px]">inventory_2</span><span class="font-label-badge text-[10px] tracking-wide uppercase">Vault</span></a><a aria-current="page" class="flex flex-col items-center justify-center min-w-[56px] h-14 rounded-full transition-colors gap-0.5 text-electric-lime" data-path="workplace" href="#"><span class="material-symbols-outlined text-[22px]">business_center</span><span class="font-label-badge text-[10px] tracking-wide uppercase">Work</span></a><a class="flex flex-col items-center justify-center min-w-[56px] h-14 rounded-full text-text-muted hover:text-text-primary transition-colors gap-0.5" data-path="progress" href="#"><span class="material-symbols-outlined text-[22px]">insights</span><span class="font-label-badge text-[10px] tracking-wide uppercase">Rhythm</span></a></div></nav></body></html>

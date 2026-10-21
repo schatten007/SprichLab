@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "label-badge": [ "Space Grotesk" ], "german-prompt-lg": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "german-prompt-lg-mobile": [ "Plus Jakarta Sans" ], "label-mono": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-md": [ "Plus Jakarta Sans" ], "display-hero": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-badge": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "german-prompt-lg": [ "24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "german-prompt-lg-mobile": [ "20px", { "lineHeight": "28px", "fontWeight": "700" } ], "label-mono": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold leading-none">Sprich</span><span class="font-body-sm text-body-sm text-text-muted hidden sm:inline leading-tight">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-raised px-space-sm py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Offline / local</span></div></div><div class="hidden lg:flex items-center gap-space-md flex-1 justify-center max-w-2xl"><div class="flex items-center bg-surface-container-high p-space-xs rounded-full"><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(212,255,0,0.25)] transition-all" type="button">Start speaking</button><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface hover:bg-surface-raised transition-all" type="button">Workplace</button></div><a class="flex items-center gap-space-xs bg-surface-card hover:bg-surface-raised px-space-md py-space-xs rounded-full text-text-primary transition-all group" data-path="practice-session" href="#"><span class="material-symbols-outlined text-electric-lime text-[18px] group-hover:scale-110 transition-transform">play_circle</span><span class="font-body-sm text-body-sm text-text-muted">Resume:</span><span class="font-body-sm text-body-sm text-primary font-semibold truncate max-w-[170px]">Beim Bäcker (2/7)</span></a></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs bg-surface-card px-space-sm py-space-xs rounded-full text-on-surface-variant" title="Local-first database with JSON backup"><span class="material-symbols-outlined text-[16px] text-electric-lime">database</span><span class="font-label-mono text-label-mono text-text-muted">JSON synced</span></div><button aria-label="Data Backup Settings" class="p-space-xs rounded-full hover:bg-surface-raised text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">cloud_done</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low/95 backdrop-blur-lg z-40 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col gap-space-md px-space-sm"><div class="px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Daily Practice</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]"><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-all bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">today</span><span class="font-body-md text-body-md font-medium">Today</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md font-medium">Lessons</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md font-medium">Words</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span class="font-body-md text-body-md font-medium">Progress</span></a></nav><div class="pt-space-sm px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Modules &amp; Coach</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-md text-body-md font-medium">Workplace</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-cyan-spark">graphic_eq</span><span class="font-body-md text-body-md font-medium">AI Talk</span></div><span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-cyan-spark/20 text-cyan-spark font-bold">MIC</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md font-medium">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span class="font-body-md text-body-md font-medium">Resources</span></a></nav></div><div class="flex flex-col gap-space-xs px-space-sm pt-space-md bg-surface-container-lowest/40 rounded-xl mx-space-xs p-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm pt-space-xs text-text-muted"><span class="font-label-mono text-label-mono">Storage: Local DB</span><span class="font-label-mono text-label-mono text-status-online">Ready</span></div></div></aside><div class="pl-64"><main class="relative pt-16 min-h-screen w-full px-space-xl py-space-lg bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Quick Context & Offline Trust Bar -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md p-space-md bg-surface-container-low rounded-lg shadow-sm">
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-space-xs bg-surface-raised px-space-sm py-space-xs rounded-full">
+<span class="w-2.5 h-2.5 rounded-full bg-status-online"></span>
+<span class="font-label-mono text-label-mono text-text-primary uppercase tracking-wider">Device Ready</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+        Cached for offline use — all core speaking exercises and audio synthesis run directly in your browser without internet connection or account.
+      </p>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0">
+<span class="font-label-mono text-label-mono text-on-surface-variant bg-surface-card px-space-sm py-space-xs rounded-full">
+        Local IndexedDB: Synced
+      </span>
+</div>
+</div>
+<!-- Bento Grid Hero & Daily Vitality Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT 7 COLS: Primary Spoken Recommendation (Hero Action) -->
+<section class="lg:col-span-7 flex flex-col gap-space-lg">
+<div class="relative bg-surface-card rounded-lg p-space-xl overflow-hidden shadow-xl flex flex-col justify-between min-h-[460px]">
+<!-- Ambient subtle glow element -->
+<div class="absolute -right-24 -top-24 w-72 h-72 rounded-full bg-primary-container/10 blur-3xl pointer-events-none"></div>
+<div class="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-cyan-spark/10 blur-3xl pointer-events-none"></div>
+<!-- Meta Header Row -->
+<div class="relative z-10 flex flex-col gap-space-sm">
+<div class="flex items-center justify-between flex-wrap gap-space-xs">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-badge text-label-badge uppercase tracking-wider bg-surface-raised text-primary px-space-sm py-1 rounded-full">
+                Stage 1 · Everyday Situations · Mod 1
+              </span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider bg-tertiary-container/20 text-tertiary-fixed-dim px-space-sm py-1 rounded-full">
+                Level A1
+              </span>
+<span class="font-label-mono text-label-mono bg-surface-container-high text-text-muted px-space-xs py-1 rounded-full">
+                Self-rated practice evidence
+              </span>
+</div>
+<div class="flex items-center gap-1 text-electric-lime font-label-mono text-label-mono">
+<span class="material-symbols-outlined text-[16px]">schedule</span>
+<span>3 mins estimated practice</span>
+</div>
+</div>
+<!-- Title & Context -->
+<div class="pt-space-xs">
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight font-bold">
+              Beim Bäcker in Berlin
+            </h1>
+<p class="font-body-md text-body-md text-electric-lime font-medium mt-1 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px]">history</span>
+              Unfinished session from yesterday — Step 2 of 7 is saved on this device
+            </p>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">
+              Target German goal: Order morning bread rolls and coffee with natural spoken cadence
+            </p>
+</div>
+</div>
+<!-- Spoken Target Interactive Audio Card -->
+<div class="relative z-10 my-space-md p-space-lg bg-surface-raised rounded-lg shadow-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted uppercase tracking-wider">
+              Warm-up Sentence · Acoustic Cadence
+            </span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-0.5 rounded-full bg-surface-container text-text-muted hover:text-text-primary font-label-mono text-label-mono transition-colors" id="speedToggleBtn" type="button">
+                1.0x
+              </button>
+<span class="material-symbols-outlined text-text-muted text-[16px]">volume_up</span>
+</div>
+</div>
+<!-- German Prompt With Syllabic Emphasis -->
+<div class="my-space-sm">
+<p class="font-german-prompt-lg text-german-prompt-lg text-text-primary font-bold tracking-tight">
+              »Ich hätte gern <span class="text-electric-lime">zwei Brötchen</span> und ein Croissant, bitte.«
+            </p>
+<div class="flex flex-wrap gap-x-space-sm gap-y-1 mt-space-xs font-label-mono text-label-mono text-on-surface-variant">
+<span>[ɪç]</span>
+<span>[ˈhɛ.tə ɡɛʁn]</span>
+<span class="text-electric-lime">[tsvaɪ̯ ˈbʁøːt.çən]</span>
+<span>[ʊnt aɪ̯n kʁoaˈsãː]</span>
+<span>[ˈbɪ.tə]</span>
+</div>
+</div>
+<!-- Minimal Waveform Visualizer & Listen Trigger -->
+<div class="flex items-center gap-space-md pt-space-xs">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full bg-surface-container-high hover:bg-surface-bright text-text-primary transition-all" id="playAudioSampleBtn" type="button">
+<span class="material-symbols-outlined text-[20px] text-electric-lime">play_arrow</span>
+<span class="font-label-badge text-label-badge">Listen Cadence</span>
+</button>
+<div class="flex items-center gap-1.5 flex-1 h-6 px-space-sm bg-surface-container-lowest/60 rounded-full overflow-hidden" id="miniWaveContainer">
+<div class="w-1 h-2 rounded-full bg-cyan-spark/70"></div>
+<div class="w-1 h-4 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-3 rounded-full bg-cyan-spark/80"></div>
+<div class="w-1 h-5 rounded-full bg-vivid-purple"></div>
+<div class="w-1 h-2 rounded-full bg-text-muted/60"></div>
+<div class="w-1 h-3 rounded-full bg-cyan-spark"></div>
+<div class="w-1 h-4 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-2 rounded-full bg-text-muted/60"></div>
+<div class="w-1 h-5 rounded-full bg-vivid-purple"></div>
+<div class="w-1 h-3 rounded-full bg-cyan-spark"></div>
+<div class="w-1 h-4 rounded-full bg-electric-lime"></div>
+<div class="w-1 h-2 rounded-full bg-text-muted/60"></div>
+<div class="w-1 h-3 rounded-full bg-cyan-spark/80"></div>
+<div class="w-1 h-2 rounded-full bg-electric-lime/80"></div>
+</div>
+</div>
+</div>
+<!-- Direct CTA Group -->
+<div class="relative z-10 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-space-md pt-space-xs">
+<a class="flex-1 flex items-center justify-center gap-space-sm px-space-xl py-space-md rounded-full bg-primary-container text-on-primary-container font-headline-sm text-headline-sm font-bold shadow-[0_0_24px_rgba(212,255,0,0.25)] hover:scale-[1.01] active:scale-[0.99] transition-all text-center" data-path="practice-session" href="#">
+<span class="material-symbols-outlined text-[26px]">mic</span>
+<span>Resume Speaking (Step 2/7)</span>
+</a>
+<div class="flex items-center gap-space-xs justify-end flex-shrink-0">
+<button class="px-space-md py-space-md rounded-full bg-surface-raised hover:bg-surface-bright text-text-primary font-body-sm text-body-sm transition-colors flex items-center gap-space-xs" title="Reduced scaffolding mode" type="button">
+<span class="material-symbols-outlined text-[18px]">psychology</span>
+<span class="hidden xl:inline">Less help</span>
+</button>
+<button class="px-space-md py-space-md rounded-full bg-surface-raised hover:bg-surface-bright text-text-muted hover:text-text-primary font-body-sm text-body-sm transition-colors flex items-center gap-space-xs" title="Export session prompt for Google Gemini assessment" type="button">
+<span class="material-symbols-outlined text-[18px]">ios_share</span>
+<span class="hidden xl:inline">Export for Gemini</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Session Visual Anchor Image -->
+<div class="relative h-44 rounded-lg overflow-hidden shadow-md flex items-end p-space-lg" data-alt="Warm modern Berlin bakery counter display in soft morning directional light. German sourdough loaves, fresh golden Brötchen rolls and croissants in woven wicker baskets, slate black menu boards, contemporary urban warm mood with subtle electric lime and slate charcoal atmosphere, highly detailed photorealistic slice-of-life interior." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAAzqKwFW5y0vTEFNJRXvX4zdGXklNQKwImYwDgNKcg1pxjLyLKsqvLYWvZ9cl84L9t7JftYNkWjzP-TTAX_iOkbMt1lU5JogLUxBCC91r7iEaVm1QbmyR7n7DxsSukvSkwxpeC7GhMXyAqytBWc4tUfDpO1pXvEb0GDLW--os3poMiQC_eKEAWxKN1CWNiQOSXYolU4lUNAAJjKMv0V78sISkB45wKcxAaGagREb85YrwVUP5aYk7f')">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-card via-surface-card/60 to-transparent"></div>
+<div class="relative z-10 flex items-center justify-between w-full">
+<div>
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-cyan-spark">Scenario Briefing</span>
+<p class="font-body-md text-body-md text-text-primary font-semibold">Berlin neighborhood bakery · Quick counter service context</p>
+</div>
+<span class="font-label-badge text-label-badge bg-surface/80 backdrop-blur-md px-space-md py-1 rounded-full text-text-primary">
+            A1 Authentic Context
+          </span>
+</div>
+</div>
+</section>
+<!-- RIGHT 5 COLS: Daily Goal & Forgiving Streak Rhythm -->
+<section class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Daily 15-Minute Goal Dial Card -->
+<div class="bg-surface-card rounded-lg p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-electric-lime text-[22px]">timer</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Daily Goal Progress</h2>
+</div>
+<span class="font-label-mono text-label-mono bg-surface-raised px-space-sm py-0.5 rounded-full text-on-surface-variant">
+            Measured
+          </span>
+</div>
+<!-- SVG Circular Ring & Time Readout -->
+<div class="flex items-center gap-space-lg py-space-xs">
+<div class="relative w-24 h-24 flex-shrink-0 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 36 36">
+<!-- Background Ring -->
+<path class="text-surface-raised stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3.5"></path>
+<!-- Progress Ring (11/15 mins = 73.3%) -->
+<path class="text-electric-lime stroke-current transition-all duration-700 ease-out" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="73.3, 100" stroke-linecap="round" stroke-width="3.5"></path>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="font-display-hero-mobile text-display-hero-mobile text-text-primary leading-none">11</span>
+<span class="font-label-mono text-label-mono text-text-muted mt-0.5">/15 m</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<span class="font-headline-sm text-headline-sm text-text-primary font-bold">4 mins to seal today</span>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Target chosen: 15 mins daily spoken commitment. Measured from mic activation and phrase repetitions.
+            </p>
+</div>
+</div>
+</div>
+<!-- Forgiving Streak & Seven-Day Activity Strip -->
+<div class="bg-surface-card rounded-lg p-space-lg shadow-md flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-status-online text-[22px]">verified</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">Forgiving Cadence</h2>
+</div>
+<span class="font-label-mono text-label-mono bg-surface-raised px-space-sm py-0.5 rounded-full text-status-online font-bold">
+            6 Days Active
+          </span>
+</div>
+<!-- Banked Rest Shield Callout -->
+<div class="p-space-sm bg-surface-raised rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-status-rest-day/20 flex items-center justify-center text-status-rest-day flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-text-primary font-semibold">1 Banked Rest Day available</p>
+<p class="font-body-sm text-body-sm text-text-muted">Banked rest protects your streak if a day is skipped.</p>
+</div>
+</div>
+<span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded bg-surface-container text-text-muted">Saved</span>
+</div>
+<!-- 7-Day Horizontal Practice Time Activity Strip -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between text-text-muted font-label-mono text-label-mono pb-1">
+<span>7-Day Spoken Effort (Minutes)</span>
+<span class="text-status-online">Zero-shame cadence</span>
+</div>
+<div class="grid grid-cols-7 gap-space-xs">
+<!-- Mon: 18m -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-text-muted">Mon</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-status-online rounded-full h-[60%]"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary">18m</span>
+</div>
+<!-- Tue: 22m -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-text-muted">Tue</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-status-online rounded-full h-[73%]"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary">22m</span>
+</div>
+<!-- Wed: 15m -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-text-muted">Wed</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-status-online rounded-full h-[50%]"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary">15m</span>
+</div>
+<!-- Thu: 0m (Used Rest Day) -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-status-rest-day">Thu</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-center justify-center">
+<span class="material-symbols-outlined text-[16px] text-status-rest-day" title="Intentional Rest Day Used">bed</span>
+</div>
+<span class="font-label-mono text-label-mono text-status-rest-day">Rest</span>
+</div>
+<!-- Fri: 30m -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-text-muted">Fri</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-status-online rounded-full h-[100%]"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary">30m</span>
+</div>
+<!-- Sat: 14m -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-surface-raised rounded-lg">
+<span class="font-label-mono text-label-mono text-text-muted">Sat</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-status-online rounded-full h-[46%]"></div>
+</div>
+<span class="font-label-mono text-label-mono text-text-primary">14m</span>
+</div>
+<!-- Sun: Today 11m active -->
+<div class="flex flex-col items-center gap-1.5 p-space-xs bg-primary-container/10 rounded-lg">
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">Sun</span>
+<div class="w-full bg-surface-container rounded-full h-12 flex items-end justify-center p-0.5">
+<div class="w-full bg-electric-lime rounded-full h-[37%] animate-pulse"></div>
+</div>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">11m</span>
+</div>
+</div>
+<!-- Explicit zero-shame wording requirement -->
+<p class="font-body-sm text-body-sm text-on-surface-variant pt-space-xs text-center">
+            Missed days never delete earned learning evidence. Practice adjusts to your life rhythm.
+          </p>
+</div>
+</div>
+</section>
+</div>
+<!-- SECONDARY ROW: 3 Distinct Modular Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-lg items-stretch">
+<!-- 1. Next Effort Milestone -->
+<div class="bg-surface-card rounded-lg p-space-lg shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-cyan-spark text-[20px]">flag</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted">Effort Target</span>
+</div>
+<span class="font-label-mono text-label-mono bg-surface-raised px-space-sm py-0.5 rounded-full text-on-surface-variant">
+            Measured
+          </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold">
+          Next Milestone: 10 Spoken Attempts
+        </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">
+          Measured live sound bursts across any active lesson or sandbox drill.
+        </p>
+<!-- Progress bar -->
+<div class="mt-space-md flex flex-col gap-1.5">
+<div class="flex items-center justify-between font-label-mono text-label-mono">
+<span class="text-text-primary font-bold">8 of 10 completed</span>
+<span class="text-cyan-spark font-bold">80%</span>
+</div>
+<div class="w-full h-2.5 bg-surface-raised rounded-full overflow-hidden">
+<div class="h-full bg-cyan-spark rounded-full transition-all duration-500" style="width: 80%"></div>
+</div>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm flex items-center justify-between text-body-sm text-text-muted font-body-sm">
+<span>2 attempts remaining today</span>
+<span class="material-symbols-outlined text-cyan-spark text-[18px]">task_alt</span>
+</div>
+</div>
+<!-- 2. Due Word Spoken Review -->
+<div class="bg-surface-card rounded-lg p-space-lg shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-punch-orange text-[20px]">record_voice_over</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted">Spoken Recall</span>
+</div>
+<span class="font-label-mono text-label-mono bg-surface-raised px-space-sm py-0.5 rounded-full text-on-surface-variant">
+            Self-rated
+          </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold">
+          Due for Spoken Recall: 5 Words
+        </h3>
+<p class="font-body-sm text-body-sm text-text-muted mt-1">
+          Vocal prompt cueing without visual German text. Speak before the flip card reveals.
+        </p>
+<!-- Due Word Pills -->
+<div class="flex flex-wrap gap-1.5 mt-space-md">
+<span class="px-space-sm py-1 bg-surface-raised rounded-full text-body-sm font-body-sm text-text-primary">
+            das Brötchen
+          </span>
+<span class="px-space-sm py-1 bg-surface-raised rounded-full text-body-sm font-body-sm text-text-primary">
+            geschnitten
+          </span>
+<span class="px-space-sm py-1 bg-surface-raised rounded-full text-body-sm font-body-sm text-text-primary">
+            Sonst noch etwas?
+          </span>
+<span class="px-space-sm py-1 bg-surface-raised rounded-full text-body-sm font-body-sm text-text-primary">
+            die Quittung
+          </span>
+<span class="px-space-sm py-1 bg-surface-raised rounded-full text-body-sm font-body-sm text-text-primary">
+            bar zahlen
+          </span>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm">
+<a class="w-full py-space-sm px-space-md rounded-full bg-surface-raised hover:bg-surface-bright text-text-primary font-label-badge text-label-badge flex items-center justify-center gap-space-xs transition-colors" data-path="words" href="#">
+<span class="material-symbols-outlined text-[18px] text-punch-orange">replay</span>
+<span>Review 5 Words (2 mins)</span>
+</a>
+</div>
+</div>
+<!-- 3. Saved Daily Takeaway (Editable / Reflective) -->
+<div class="bg-surface-card rounded-lg p-space-lg shadow-md flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-vivid-purple text-[20px]">sticky_note_2</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted">Daily Takeaway</span>
+</div>
+<button class="font-label-mono text-label-mono text-cyan-spark hover:underline" id="editTakeawayBtn" type="button">
+            Edit
+          </button>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary font-bold">
+          Today's Takeaway
+        </h3>
+<div class="mt-space-sm p-space-md bg-surface-raised rounded-lg text-on-surface">
+<p class="font-body-md text-body-md text-text-primary italic" id="takeawayDisplay">
+            “Remember to stress <strong class="text-electric-lime">BÄCK-er-ei</strong> and use Konjunktiv II (<strong class="text-cyan-spark">hätte gern</strong>) for polite counter requests.”
+          </p>
+<textarea class="hidden w-full bg-surface-container p-space-sm rounded-lg text-body-md font-body-md text-text-primary focus:outline-none resize-none h-24 mt-2" id="takeawayInput">Remember to stress BÄCK-er-ei and use Konjunktiv II (hätte gern) for polite counter requests.</textarea>
+</div>
+</div>
+<div class="mt-space-lg pt-space-sm flex items-center justify-between text-body-sm text-text-muted font-body-sm">
+<span class="font-label-mono text-label-mono text-text-muted">Saved to Local Notes</span>
+<span class="material-symbols-outlined text-text-muted text-[16px]">bookmark_added</span>
+</div>
+</div>
+</div>
+<!-- BOTTOM ACCELERATOR STRIP: Secondary Quick Jumps & Resources -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-space-md p-space-lg bg-surface-card rounded-lg shadow-sm">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-full bg-surface-raised flex items-center justify-center text-text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<h4 class="font-headline-sm text-headline-sm text-text-primary font-bold">Broaden your practice</h4>
+<p class="font-body-sm text-body-sm text-text-muted">Professional scenarios or supplementary audio guides</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm flex-wrap w-full md:w-auto justify-end">
+<a class="px-space-md py-space-xs rounded-full bg-surface-raised hover:bg-surface-bright text-text-primary font-body-sm text-body-sm flex items-center gap-space-xs transition-colors" data-path="workplace" href="#">
+<span class="material-symbols-outlined text-[18px] text-electric-lime">domain</span>
+<span>Start 15m Workplace Focus</span>
+</a>
+<a class="px-space-md py-space-xs rounded-full bg-surface-raised hover:bg-surface-bright text-text-muted hover:text-text-primary font-body-sm text-body-sm flex items-center gap-space-xs transition-colors" data-path="resources" href="#">
+<span class="material-symbols-outlined text-[18px]">open_in_new</span>
+<span>Browse 15 Curated Resources (Requires Connection)</span>
+</a>
+</div>
+</div>
+</div>
+<script>
+  // Speed playback toggle state
+  const speedBtn = document.getElementById('speedToggleBtn');
+  if (speedBtn) {
+    let speed = 1.0;
+    speedBtn.addEventListener('click', () => {
+      speed = speed === 1.0 ? 0.75 : 1.0;
+      speedBtn.textContent = speed + 'x';
+    });
+  }
+
+  // Audio waveform animation simulation on click
+  const playSampleBtn = document.getElementById('playAudioSampleBtn');
+  const waveBars = document.querySelectorAll('#miniWaveContainer > div');
+  if (playSampleBtn && waveBars.length > 0) {
+    let isPlaying = false;
+    let waveInterval;
+    playSampleBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      const icon = playSampleBtn.querySelector('.material-symbols-outlined');
+      const text = playSampleBtn.querySelector('span:last-child');
+      
+      if (isPlaying) {
+        if (icon) icon.textContent = 'pause';
+        if (text) text.textContent = 'Playing...';
+        waveInterval = setInterval(() => {
+          waveBars.forEach(bar => {
+            const h = Math.floor(Math.random() * 16) + 6;
+            bar.style.height = h + 'px';
+          });
+        }, 120);
+      } else {
+        if (icon) icon.textContent = 'play_arrow';
+        if (text) text.textContent = 'Listen Cadence';
+        clearInterval(waveInterval);
+        waveBars.forEach((bar, i) => {
+          bar.style.height = '';
+        });
+      }
+    });
+  }
+
+  // Daily takeaway inline editing
+  const editTakeawayBtn = document.getElementById('editTakeawayBtn');
+  const takeawayDisplay = document.getElementById('takeawayDisplay');
+  const takeawayInput = document.getElementById('takeawayInput');
+  if (editTakeawayBtn && takeawayDisplay && takeawayInput) {
+    let isEditing = false;
+    editTakeawayBtn.addEventListener('click', () => {
+      isEditing = !isEditing;
+      if (isEditing) {
+        takeawayDisplay.classList.add('hidden');
+        takeawayInput.classList.remove('hidden');
+        takeawayInput.focus();
+        editTakeawayBtn.textContent = 'Save';
+      } else {
+        takeawayDisplay.innerHTML = '&ldquo;' + takeawayInput.value.trim().replace(/</g, '&lt;').replace(/>/g, '&gt;') + '&rdquo;';
+        takeawayDisplay.classList.remove('hidden');
+        takeawayInput.classList.add('hidden');
+        editTakeawayBtn.textContent = 'Edit';
+      }
+    });
+  }
+</script></main></div></body></html>

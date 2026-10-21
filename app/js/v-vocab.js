@@ -16,13 +16,16 @@ export function render(el, ctx) {
   const hasShared = Boolean(shared?.text || shared?.sourceUrl || shared?.rejected);
   const sharedSource = shared?.sourceUrl ? { url: shared.sourceUrl, title: 'Shared source' } : null;
   const exampleResults = new Map();
-  el.innerHTML = `${pageHeading('WORDS YOU CAN ACTUALLY USE', 'Your conversation toolkit.', `${PHRASES.length} curated phrases, plus the expressions you collect yourself. Recall first, then use a phrase in your own situation.`)}
-    <details class="card phrase-add" ${hasShared ? 'open' : ''}><summary>${hasShared ? 'Save shared phrase' : 'Add a personal phrase'}</summary>${hasShared ? `<p class="callout ${shared.rejected ? 'error' : ''}">${esc(shared.rejected ? shared.error : shared.tooLong ? 'That shared text is longer than one phrase. Select one sentence or edit it below.' : 'Your shared German text is ready. Check the meaning before saving.')}</p>` : ''}${phraseForm(sharedSource, shared?.text ?? '')}</details>
-    <div class="phrase-toolbar section-gap"><label class="search-field"><span class="sr-only">Search phrases</span><input id="phrase-search" type="text" placeholder="Find a phrase, meaning, or situation…"></label><a href="#resources" class="btn secondary">${icon('book')}Find phrases in context</a></div>
-    <div class="filter-row" role="group" aria-label="Phrase topics">${Object.entries({ all: 'All phrases', personal: 'My saved phrases', interview: 'Interviews', phone: 'Phone calls', time: 'Times & availability', work: 'At work', repair: 'When you get stuck', meeting: 'Meetings', smalltalk: 'Small talk' }).map(([tag, label]) => `<button class="filter-chip" data-filter="${tag}" aria-pressed="${filter === tag}">${label}</button>`).join('')}</div>
-    <p id="phrase-count" class="fine" aria-live="polite"></p><div id="phrase-list" class="phrase-grid"></div><button class="btn secondary section-gap" id="more-phrases">Show more phrases</button>
+  el.innerHTML = `<section class="phrase-collection" role="region" aria-label="Phrase collection">
+    ${pageHeading('SPOKEN PHRASE BANK', 'Your conversation toolkit.', `${PHRASES.length} curated phrases, plus the expressions you collect yourself. Recall first, then use a phrase in your own situation.`)}
+    <div class="phrase-collection-header"><div><div class="pills"><span class="pill">SPOKEN BANK · ${PHRASES.length} PHRASES</span><span class="pill">Curated offline ready</span></div><p class="fine">Situational prompts and your own real-world German chunks, kept local and scheduled by honest self-rating.</p></div><button class="btn" id="open-capture" type="button">${icon('book')}Capture phrase</button></div>
+    <div class="phrase-offline-notice"><strong>Data &amp; network rule:</strong><span>Curated phrase audio works offline. Tatoeba example lookups require an active connection.</span><span class="pill">Checked locally</span></div>
+    <details id="phrase-capture" class="card phrase-add" ${hasShared ? 'open' : ''}><summary>${hasShared ? 'Save shared phrase' : 'Add a personal phrase'}</summary>${hasShared ? `<p class="callout ${shared.rejected ? 'error' : ''}">${esc(shared.rejected ? shared.error : shared.tooLong ? 'That shared text is longer than one phrase. Select one sentence or edit it below.' : 'Your shared German text is ready. Check the meaning before saving.')}</p>` : ''}${phraseForm(sharedSource, shared?.text ?? '')}</details>
+    <div class="phrase-library section-gap"><aside class="phrase-filter-panel"><section class="card"><div class="card-title"><h2>Situational channels</h2><span class="pill">${Object.keys({ all: 1, personal: 1, interview: 1, phone: 1, time: 1, work: 1, repair: 1, meeting: 1, smalltalk: 1 }).length} filters</span></div><div class="filter-row" role="group" aria-label="Phrase topics">${Object.entries({ all: 'All phrases', personal: 'My saved phrases', interview: 'Interviews', phone: 'Phone calls', time: 'Times & availability', work: 'At work', repair: 'When you get stuck', meeting: 'Meetings', smalltalk: 'Small talk' }).map(([tag, label]) => `<button class="filter-chip" data-filter="${tag}" aria-pressed="${filter === tag}">${label}</button>`).join('')}</div></section></aside>
+      <section class="phrase-results"><div class="phrase-toolbar"><label class="search-field"><span class="sr-only">Search phrases</span><input id="phrase-search" type="text" placeholder="Find a phrase, meaning, or situation…"></label><a href="#resources" class="btn secondary">${icon('book')}Find phrases in context</a></div><p id="phrase-count" class="fine" aria-live="polite"></p><div id="phrase-list" class="phrase-grid"></div><button class="btn secondary section-gap" id="more-phrases">Show more phrases</button></section>
+    </div>
     <details class="reference-collection section-gap"><summary>More reference words &amp; sentence frames <span class="fine">Original collection</span></summary><p class="fine">Extra reference material. Practise it in a sentence of your own.</p>
-      <div class="reference-grid">${[...VOCAB.map(word => ({ de: word.german, en: word.english, ex: word.ex })), ...CHUNKS.map(chunk => ({ de: chunk.frame, en: chunk.en, ex: chunk.ex }))].map(entry => `<div><strong lang="de">${esc(entry.de)}</strong>${englishMeaning(entry.en, { always })}<p lang="de">${esc(entry.ex)}</p><button class="text-button" data-say="${esc(entry.ex)}">${icon('volume')} Listen to example</button></div>`).join('')}</div></details>`;
+      <div class="reference-grid">${[...VOCAB.map(word => ({ de: word.german, en: word.english, ex: word.ex })), ...CHUNKS.map(chunk => ({ de: chunk.frame, en: chunk.en, ex: chunk.ex }))].map(entry => `<div><strong lang="de">${esc(entry.de)}</strong>${englishMeaning(entry.en, { always })}<p lang="de">${esc(entry.ex)}</p><button class="text-button" data-say="${esc(entry.ex)}">${icon('volume')} Listen to example</button></div>`).join('')}</div></details></section>`;
   function draw() {
     const matches = allPhrases(ctx.store.state).filter(phrase => (filter === 'all' || phrase.tags.includes(filter)) && `${phrase.de} ${phrase.en} ${phrase.cueDe} ${phrase.cue}`.toLocaleLowerCase('de').includes(query));
     const visible = matches.slice(0, limit);
@@ -40,6 +43,12 @@ export function render(el, ctx) {
     }).join('') : '<div class="empty-state"><h3>No matching phrases</h3><p class="muted small">Try a different topic, or add a phrase from your own reading or conversations.</p></div>';
   }
   draw();
+  el.querySelector('#open-capture').addEventListener('click', () => {
+    const capture = el.querySelector('#phrase-capture');
+    capture.open = true;
+    capture.scrollIntoView({ block: 'nearest' });
+    capture.querySelector('input[name="de"]')?.focus();
+  });
   bindPhraseForm(el, ctx, () => {
     if (hasShared) ctx.clearSharedCapture?.();
     filter = 'personal'; limit = 24; el.querySelectorAll('[data-filter]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.filter === filter))); draw();

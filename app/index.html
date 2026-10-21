@@ -3,10 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#195446">
+    <meta name="theme-color" content="#121316">
     <meta name="description" content="Speaking-first German practice for Werkstudent interviews and everyday work. Free, local-first, and built around useful conversations.">
-    <meta name="color-scheme" content="light dark">
-    <link rel="icon" href="./icon.svg" type="image/svg+xml">
+    <meta name="color-scheme" content="dark light">
+    <link rel="icon" href="./icons/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="./icons/icon.svg">
     <link rel="manifest" href="./manifest.webmanifest">
     <script>
       // Apply the mirrored preference before paint. Older installs only have the
@@ -24,7 +25,7 @@
         try {
           var mirrored = localStorage.getItem('sprich.mode');
           if (mirrored) { paint(mirrored); reveal(); return; }
-          paint('system');
+          paint('dark');
           root.style.visibility = 'hidden';
           var timeout = setTimeout(reveal, 250);
           var request = indexedDB.open('sprich-german-v2');
@@ -49,13 +50,14 @@
       })();
     </script>
     <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/electric-slate.css">
     <title>Sprich · German for your next step</title>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="app-shell">
       <aside class="sidebar">
-        <a class="brand" href="#today" aria-label="Sprich home"><span class="brand-mark" aria-hidden="true">s<span>·</span></span><span><strong>sprich<span class="brand-dot">.</span></strong><small>German for your next step</small></span></a>
+        <a class="brand" href="#today" aria-label="Sprich home"><img class="brand-mark" src="./icons/icon.svg" alt=""><span><strong>sprich<span class="brand-dot">.</span></strong><small>German for your next step</small></span></a>
         <p class="nav-label">YOUR PRACTICE SPACE</p>
         <nav id="navigation" aria-label="Main navigation"></nav>
         <div class="sidebar-bottom"><div class="sidebar-note"><span class="tiny-dot"></span><strong>A little more confident.<br>One conversation at a time.</strong><p>Speak. Reflect. Try again.</p></div><a class="settings-link" href="#settings" id="settings-link">Settings &amp; your profile</a></div>

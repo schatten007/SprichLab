@@ -62,7 +62,11 @@ function readPalette() {
   catch { return 'paper'; }
 }
 function applyTheme() {
-  const mode = store?.state.preferences.theme ?? 'system';
+  let mirrored = null;
+  try { mirrored = localStorage.getItem('sprich.mode'); } catch { /* Theme still applies from IndexedDB. */ }
+  const saved = store?.state.preferences.theme ?? 'dark';
+  // Keep older device-local light/system choices working while new state defaults to Night.
+  const mode = saved === 'dark' && ['system', 'light'].includes(mirrored) ? mirrored : saved;
   const dark = mode === 'dark' || (mode === 'system' && themeQuery.matches);
   const root = document.documentElement;
   root.dataset.theme = dark ? 'dark' : 'light';
@@ -73,7 +77,7 @@ function applyTheme() {
 themeQuery.addEventListener('change', applyTheme);
 
 const PRIMARY_NAV = [['today', 'home', 'Today'], ['lessons', 'messages', 'Lessons'], ['words', 'book', 'Words'], ['progress', 'chart', 'Progress']];
-const MORE_NAV = [['ai', 'mic', 'AI Talk'], ['assessments', 'check', 'Checks'], ['practice', 'briefcase', 'Workplace'], ['settings', 'settings', 'Settings'], ['how', 'eye', 'How progress works']];
+const MORE_NAV = [['ai', 'mic', 'AI Talk'], ['assessments', 'check', 'Checks & roleplays'], ['practice', 'briefcase', 'Workplace'], ['settings', 'settings', 'Settings'], ['how', 'eye', 'How progress works']];
 const navLink = ([route, symbol, label]) => `<a class="nav-link" href="#${route}" data-nav="${route}">${icon(symbol)}<span>${label}</span></a>`;
 document.querySelector('#navigation').innerHTML = `${PRIMARY_NAV.map(navLink).join('')}
   <details class="nav-more"><summary class="nav-link">${icon('layers')}<span>More</span></summary>
@@ -99,7 +103,7 @@ moreMenu.addEventListener('keydown', event => {
 
 window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); installPrompt = event; });
 function updateConnection() {
-  document.querySelector('#connection').textContent = navigator.onLine ? 'Saved on this device' : 'Offline · on this device';
+  document.querySelector('#connection').textContent = navigator.onLine ? 'Device ready · local' : 'Offline · local';
 }
 
 function captureSharedIntent() {

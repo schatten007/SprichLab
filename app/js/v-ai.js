@@ -35,8 +35,8 @@ function statusLine(status) {
 
 function usageCard(usage, status) {
   if (!usage) return '';
-  const bar = (label, used, limit) => `<div class="usage-row"><span>${esc(label)}</span><span>${used} / ${limit}</span></div>`;
-  return `<div class="usage-block">${bar('Speaking turns today', usage.turnsUsed, status.limits.dailyTurns)}${bar('Reviews today', usage.reviewsUsed, status.limits.dailyReviews)}<p class="fine">Counts reset at 00:00 UTC. These are this app's free-use guards, not a bill.</p></div>`;
+  const bar = (label, used, limit) => `<div class="usage-quota"><div class="usage-row"><span>${esc(label)}</span><span>${used} / ${limit}</span></div><meter min="0" max="${esc(limit)}" value="${esc(used)}" aria-label="${esc(label)}">${used} / ${limit}</meter></div>`;
+  return `<div class="usage-block"><p class="eyebrow">TODAY'S GATEWAY ALLOWANCE</p>${bar('Speaking turns today', usage.turnsUsed, status.limits.dailyTurns)}${bar('Reviews today', usage.reviewsUsed, status.limits.dailyReviews)}<p class="fine">Counts reset at 00:00 UTC. These are this app's free-use guards, not a bill.</p></div>`;
 }
 
 /** A failed send keeps its request ID when it may already have reached the gateway. */
@@ -81,15 +81,17 @@ export async function renderLobby(el, ctx) {
   let unlocking = false;
   let alive = true;
 
-  el.innerHTML = `${pageHeading('AI TALK', 'A private German conversation that waits for you.', 'Optional, unscored roleplay. Answers you choose to send go through your gateway to its provider; conversations are saved on this device.')}
-     <div class="practice-toolbar"><span class="pill green">Push to talk · 60 seconds · send only when you choose</span><a class="inline-link" href="#practice">Offline missions ${icon('messages')}</a></div>
-     <p id="ai-setup-status" class="sr-only" aria-live="polite"></p><div class="grid-2 section-gap"><section class="card" id="ai-setup"></section><section class="card" id="ai-start"></section></div>
+  el.innerHTML = `<div class="ai-talk ai-lobby">${pageHeading('AI TALK', 'A private German conversation that waits for you.', 'Optional, unscored roleplay. Answers you choose to send go through your gateway to its provider; conversations are saved on this device.')}
+     <div class="ai-mode-bar"><div class="ai-mode-title"><span class="ai-mode-icon">${icon('messages')}</span><div><strong>AI Talk &amp; Gemini handoff</strong><p class="fine">Connect here, or take a lesson to your phone.</p></div></div><a class="btn secondary" href="#practice">Offline missions ${icon('arrow')}</a></div>
+     <p id="ai-setup-status" class="sr-only" aria-live="polite"></p><div class="ai-lobby-grid section-gap"><section class="card ai-connection" id="ai-setup" aria-label="Private connection"></section><section class="card ai-configurator" id="ai-start" aria-label="Start a conversation"></section></div>
     <div id="ai-conversations"></div>
-    <section class="card section-gap" id="ai-companion"></section>`;
+    <section class="ai-companion section-gap" id="ai-companion" aria-label="Gemini Companion"></section></div>`;
 
   function setupCard() {
     if (!alive) return;
     const host = el.querySelector('#ai-setup');
+    host.dataset.connection = !status ? loading ? 'checking' : 'unavailable' : !status.configured || !status.groqReady ? 'incomplete' : status.authenticated ? 'ready' : 'locked';
+    host.setAttribute('aria-busy', String(loading));
     if (!status) {
       host.innerHTML = `<p class="eyebrow">PRIVATE CONNECTION</p><h2>${loading ? 'Checking the gateway…' : 'AI gateway unavailable'}</h2>
         ${setupError ? `<p class="small section-gap" role="alert">${esc(setupError)}</p>` : ''}
@@ -100,7 +102,7 @@ export async function renderLobby(el, ctx) {
       return;
     }
     const missingSetup = !status.configured || !status.groqReady;
-    host.innerHTML = `<div class="card-title"><div><p class="eyebrow">PRIVATE CONNECTION</p><h2>Your own AI connection</h2></div></div>
+    host.innerHTML = `<div class="card-title"><div><p class="eyebrow">PRIVATE CONNECTION</p><h2>Your own AI connection</h2></div><span class="ai-mode-icon">${icon('settings')}</span></div>
       ${statusLine(status)}
       <p class="small">${!missingSetup
         ? 'Provider keys stay on your server. This app only sends the words you chose to send.'
@@ -111,9 +113,9 @@ export async function renderLobby(el, ctx) {
         : `<form id="ai-unlock" class="inline-form"><label for="ai-token">Owner access code<input id="ai-token" name="token" type="password" autocomplete="one-time-code" minlength="43" maxlength="43" required placeholder="43 characters" ${status.configured ? '' : 'disabled'}></label><button class="btn" type="submit" ${status.configured ? '' : 'disabled'}>Unlock AI Talk</button></form><p class="fine">The generated owner code is sent only to this gateway to unlock it. Provider API keys stay on the server. No Sprich account is needed.</p>`}
       <p class="fine section-gap">${status.naturalVoiceConfigured ? 'ElevenLabs is configured; its Free tier and remaining credits are checked before each new synthesis.' : 'German device speech needs no TTS API key. Add a German voice in your device settings if needed.'} <a href="#settings">Voice settings</a></p>
       ${status.authenticated ? usageCard(usage, status) : ''}
-      ${missingSetup ? '<p class="fine">Gemini Companion below needs no gateway at all.</p>' : ''}
-       <button class="text-button" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
-    el.querySelector('#ai-setup-status').textContent = status?.authenticated ? 'AI connection unlocked.' : status ? 'AI connection setup is incomplete.' : loading ? 'Checking the AI connection.' : 'AI connection unavailable.';
+      <div class="ai-boundary"><strong>Always optional</strong><p class="fine">Core lessons stay available. Gemini Companion below needs no gateway at all.</p></div>
+        <button class="text-button" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
+    el.querySelector('#ai-setup-status').textContent = loading ? 'Checking the AI connection.' : missingSetup ? 'AI connection setup is incomplete.' : status.authenticated ? 'AI connection unlocked.' : 'AI connection locked.';
     safeAction(host.querySelector('#ai-retry'), refresh, ctx.error);
     host.querySelector('#ai-unlock')?.addEventListener('submit', async event => {
       event.preventDefault();
@@ -139,12 +141,23 @@ export async function renderLobby(el, ctx) {
   }
 
   function startCard() {
-    const current = state.preferences.aiLevel;
-    el.querySelector('#ai-start').innerHTML = `<div class="card-title"><div><p class="eyebrow">CHOOSE A SITUATION</p><h2>Start a conversation</h2></div><span class="pill">${esc(current)}</span></div>
-      <div class="form-grid"><label>Situation<select id="ai-mission">${MISSIONS.map(mission => `<option value="${mission.id}">${esc(mission.shortTitle)}</option>`).join('')}</select></label>
-      <label>Level<select id="ai-level">${['A2', 'B1'].map(level => `<option value="${level}" ${level === current ? 'selected' : ''}>${level} · ${level === 'A2' ? 'short, supported answers' : 'longer, more detail'}</option>`).join('')}</select></label></div>
-      <p class="fine">What the partner may know about you:</p>${profileSummary(state)}
+    const current = el.querySelector('#ai-level')?.value ?? state.preferences.aiLevel;
+    const selected = el.querySelector('#ai-mission')?.value ?? MISSIONS[0].id;
+    el.querySelector('#ai-start').innerHTML = `<div class="card-title"><div><p class="eyebrow">CHOOSE A SITUATION</p><h2>Start a conversation</h2></div><span class="pill" id="ai-selected-level">${esc(current)}</span></div>
+      <div class="form-grid"><div class="form-field"><label for="ai-mission">Situation</label><select id="ai-mission" aria-label="Situation">${MISSIONS.map(mission => `<option value="${mission.id}" ${mission.id === selected ? 'selected' : ''}>${esc(mission.shortTitle)}</option>`).join('')}</select></div>
+      <div class="form-field"><label for="ai-level">Level</label><select id="ai-level" aria-label="Level">${['A2', 'B1'].map(level => `<option value="${level}" ${level === current ? 'selected' : ''}>${level} · ${level === 'A2' ? 'short, supported answers' : 'longer, more detail'}</option>`).join('')}</select></div></div>
+      <section class="ai-situation" id="ai-situation" aria-label="Situation preview" aria-live="polite"></section>
+      <div class="ai-profile-preview"><p class="fine">What the partner may know about you:</p>${profileSummary(state)}</div>
+      <p class="fine">Push to talk · 60 seconds · send only when you choose</p>
       <div class="btn-row"><button class="btn" id="ai-start-button" ${status?.configured && status?.groqReady && status?.authenticated ? '' : 'disabled'}>Start conversation ${icon('arrow')}</button><a class="btn secondary" href="#assessments">Choose a graded roleplay</a></div>`;
+    const preview = () => {
+      const mission = missionById(el.querySelector('#ai-mission').value);
+      el.querySelector('#ai-selected-level').textContent = el.querySelector('#ai-level').value;
+      el.querySelector('#ai-situation').innerHTML = `<div class="ai-situation-meta"><span class="ai-mode-icon">${icon(mission.icon)}</span><span class="pill">${esc(mission.register)}</span></div><h3>${esc(mission.shortTitle)}</h3><p class="small">${esc(mission.goal)}</p><p class="eyebrow">PARTNER OPENS WITH</p><blockquote lang="de">${esc(mission.turns[0].prompts[0])}</blockquote>`;
+    };
+    el.querySelector('#ai-mission').addEventListener('change', preview);
+    el.querySelector('#ai-level').addEventListener('change', preview);
+    preview();
     safeAction(el.querySelector('#ai-start-button'), async () => {
       if (!status?.authenticated || !status?.groqReady) throw new Error('Configure and unlock the private AI connection first, or use Gemini Companion below.');
       const missionId = el.querySelector('#ai-mission').value;
@@ -158,7 +171,7 @@ export async function renderLobby(el, ctx) {
   function conversations() {
     const host = el.querySelector('#ai-conversations');
     const sessions = [...state.aiSessions].sort((a, b) => b.updatedAt - a.updatedAt).slice(0, 8);
-    if (!sessions.length) { host.innerHTML = ''; return; }
+    if (!sessions.length) { host.innerHTML = `<div class="ai-empty section-gap">${icon('messages')}<div><strong>Your saved conversations will appear here.</strong><p class="fine">Start above when your connection is ready. You can leave and return to an unfinished answer.</p></div></div>`; return; }
     host.innerHTML = `<section class="card section-gap"><div class="card-title"><div><p class="eyebrow">SAVED ON THIS DEVICE</p><h2>Continue a conversation</h2></div></div>
       <div class="stack-list">${sessions.map(session => {
         const mission = missionById(session.missionId);
@@ -169,10 +182,10 @@ export async function renderLobby(el, ctx) {
 
   function companion() {
     const host = el.querySelector('#ai-companion');
-    host.innerHTML = `<div class="card-title"><div><p class="eyebrow">NO GATEWAY NEEDED</p><h2>Gemini Companion on your phone</h2></div><span class="pill green">Uses your own Gemini app</span></div>
+    host.innerHTML = `<div class="ai-companion-heading"><div class="card-title"><div><p class="eyebrow">NO GATEWAY NEEDED</p><h2>Gemini Companion on your phone</h2></div><span class="pill">Uses your own Gemini app</span></div>
       <p class="small">Choose the lesson you want to practise. Its vocabulary, examples, and roleplay instructions travel together.</p>
-      <label>Lesson for Gemini<select id="companion-lesson" aria-label="Lesson for Gemini"><optgroup label="Start speaking">${STARTER_LESSONS.map(lesson => `<option value="${lesson.id}">${lesson.number}. ${esc(lesson.title)}</option>`).join('')}</optgroup><optgroup label="Workplace course">${MISSIONS.map(mission => `<option value="${mission.id}">${esc(mission.shortTitle)}</option>`).join('')}</optgroup></select></label>
-      <div class="section-gap" id="companion-pack"></div><div class="section-gap" id="companion-note"></div>`;
+      <label>Lesson for Gemini<select id="companion-lesson" aria-label="Lesson for Gemini"><optgroup label="Start speaking">${STARTER_LESSONS.map(lesson => `<option value="${lesson.id}">${lesson.number}. ${esc(lesson.title)}</option>`).join('')}</optgroup><optgroup label="Workplace course">${MISSIONS.map(mission => `<option value="${mission.id}">${esc(mission.shortTitle)}</option>`).join('')}</optgroup></select></label></div>
+      <div class="section-gap" id="companion-pack"></div><div class="gemini-return section-gap" id="companion-note"></div>`;
     const select = host.querySelector('#companion-lesson');
     if (state.preferences.learningPath === 'work') select.value = MISSIONS[0].id;
     let selection = 0;
@@ -233,18 +246,19 @@ export async function renderSession(el, ctx, id) {
   const meaning = value => checkpoint ? '' : englishMeaning(value, { always: always(ctx.store.state) });
   const aiSpeech = createAISpeech(ctx, client);
 
-  el.innerHTML = `<a class="inline-link" href="#ai">${icon('back')}AI Talk</a>
-     ${pageHeading(assessed ? 'GRADED ROLEPLAY' : 'AI TALK', assessed ? session.context.title : session.context.title, assessed ? definition.scenario.learnerTask : session.context.goal)}
-     ${assessed ? `<p class="fine">${checkpoint ? 'Checkpoint: answer models and English question translations are hidden.' : 'Practice: answer help and English question meanings are recorded.'} Aim for 5–8 short replies, then choose End &amp; grade. This grade is based on submitted text/transcripts, not pronunciation.</p>` : ''}
-    <div id="ai-session"></div>`;
+  el.innerHTML = `<div class="ai-talk ai-studio"><a class="inline-link" href="#ai">${icon('back')}AI Talk</a>
+      ${pageHeading(assessed ? 'GRADED ROLEPLAY' : 'AI TALK', assessed ? session.context.title : session.context.title, assessed ? definition.scenario.learnerTask : session.context.goal)}
+      ${assessed ? `<p class="fine">${checkpoint ? 'Checkpoint: answer models and English question translations are hidden.' : 'Practice: answer help and English question meanings are recorded.'} Aim for 5–8 short replies, then choose End &amp; grade. This grade is based on submitted text/transcripts, not pronunciation.</p>` : ''}
+    <div class="ai-mode-bar"><div class="ai-mode-title"><span class="ai-mode-icon">${icon('mic')}</span><div><strong>${assessed ? 'Graded roleplay' : 'Conversation studio'}</strong><p class="fine">One reply at a time. You choose when to send.</p></div></div><span class="pill">Saved on this device</span></div>
+    <div id="ai-session" class="section-gap"></div></div>`;
 
   function transcriptCard() {
     const turns = activeAITurns(session);
     return `<section class="card transcript-card"><div class="card-title"><div><p class="eyebrow">${esc(mission.shortTitle)}</p><h2>${assessed ? 'Your conversation' : esc(session.context.title)}</h2></div><span class="pill">${esc(session.level)} · ${esc(session.context.register)}</span></div>
       <p class="fine">${esc(session.context.goal)}</p>
-      <div class="transcript" role="log" aria-live="polite">
+      <div class="transcript" role="log" aria-label="Conversation transcript" aria-live="polite" tabindex="0">
         <div class="transcript-line assistant" data-evidence-ref="${session.id}:opening"><span class="transcript-who">Partner</span><p lang="de">${esc(session.context.openingDe)}</p>${meaning(session.context.openingEn)}</div>
-        ${turns.map(turn => `${turn.transcript ? `<div class="transcript-line you"><span class="transcript-who">You</span><p lang="de">${esc(turn.transcript)}</p></div>` : ''}
+        ${turns.map(turn => `${turn.transcript ? `<div class="transcript-line you"><span class="transcript-who">You</span><p lang="de">${esc(turn.transcript)}</p><span class="ai-input-kind">${turn.inputMode === 'transcribed' || !turn.inputMode && turn.recordingMs > 0 ? 'Recorded · transcript' : 'Typed · not speaking evidence'}</span></div>` : ''}
           <div class="transcript-line assistant" data-evidence-ref="${turn.id}:partner"><span class="transcript-who">Partner</span><p lang="de">${esc(turn.replyDe)}</p>${meaning(turn.meaningEn)}</div>`).join('')}
       </div>
       ${sendError ? `<div class="callout ${session.draft.status === 'sending' ? 'amber' : 'error'}" role="alert">${esc(sendError)}</div>` : ''}
@@ -258,15 +272,16 @@ export async function renderSession(el, ctx, id) {
     const canReview = activeAITurns(session).filter(turn => turn.operation === 'reply').length >= (assessed ? 3 : 2);
     const ready = Boolean(draft.recordingMs || draft.text.trim());
     const heading = ended ? 'Conversation finished' : busy ? 'Talking to your partner…' : sending ? 'Waiting for the reply…' : 'Answer out loud';
-    return `<section class="card"><div class="card-title"><div><p class="eyebrow">YOUR TURN</p><h2>${esc(heading)}</h2></div><output id="ai-time" aria-label="Recording duration">${duration(draft.recordingMs)}</output></div>
+    return `<section class="card ai-answer" aria-label="Your answer"><div class="card-title"><div><p class="eyebrow">YOUR TURN</p><h2>${esc(heading)}</h2></div><output id="ai-time" aria-label="Recording duration">${duration(draft.recordingMs)}</output></div>
       ${ended ? `<p class="small">This conversation is closed so its feedback stays tied to these words.</p>${assessed ? `<a class="btn" href="#assessment-result/${attemptId}">View assessment result ${icon('arrow')}</a>` : `<a class="btn" href="#ai">Start another conversation ${icon('arrow')}</a>`}`
-        : `<div class="record-controls"><button class="btn" id="ai-record">${icon('mic')}${draft.recordingMs ? 'Record again' : 'Hold a short answer'}</button>
+        : `<div class="ai-capture"><div class="ai-capture-status"><span class="ai-mode-icon">${icon('mic')}</span><div><p class="eyebrow">LOCAL ANSWER</p><p id="ai-answer-status" role="status" aria-label="Answer status"></p></div></div>
+        <div class="record-controls"><button class="btn secondary" id="ai-record">${icon('mic')}${draft.recordingMs ? 'Record again' : 'Hold a short answer'}</button>
         <button class="btn danger" id="ai-stop" hidden>${icon('stop')}Stop</button>
         <button class="btn" id="ai-send" ${sending || !ready || busy ? 'disabled' : ''}>${sending ? 'Sending…' : `${icon('arrow')}Send to partner`}</button>
         ${sending && sendError ? '<button class="btn secondary" id="ai-recover">Check for my reply</button>' : ''}</div>
         <p class="fine">Up to 60 seconds. Nothing is sent until you choose Send.</p>
+        <div id="ai-audio" class="audio-preview"></div></div>
         <p class="fine">${ctx.store.state.preferences.aiVoice === 'natural' ? 'Natural speech by <a href="https://elevenlabs.io/" target="_blank" rel="noopener noreferrer">ElevenLabs</a> · cached replays · device-voice fallback.' : 'German device voice · no TTS API key needed.'} <a href="#settings">Voice settings</a></p>
-        <div id="ai-audio" class="audio-preview"></div>
         <details class="notes-details" ${draft.text ? 'open' : ''}><summary>Type a correction instead</summary>
           <label for="ai-text" class="fine">Use this only if recording is not possible. Typed text is never counted as speaking.</label>
           <textarea id="ai-text" maxlength="3000" placeholder="Deine Antwort …" lang="de">${esc(draft.text)}</textarea></details>
@@ -279,6 +294,16 @@ export async function renderSession(el, ctx, id) {
           <button class="btn secondary" id="ai-review" ${!canReview || busy ? 'disabled' : ''}>${assessed ? 'End &amp; grade' : 'End &amp; get a review'} ${icon('check')}</button>
         </div>`}
     </section>`;
+  }
+
+  function contextCard() {
+    const facts = Object.entries(session.context.profile);
+    return `<aside class="ai-context" aria-label="Conversation context"><section class="card"><p class="eyebrow">SESSION BRIEF</p><h2>Keep the situation in view.</h2>
+      <dl class="ai-context-facts"><dt>Situation</dt><dd>${esc(session.context.title)}</dd><dt>Level &amp; register</dt><dd>${esc(session.level)} · ${esc(session.context.register)}</dd><dt>Replies sent</dt><dd>${activeAITurns(session).filter(turn => turn.operation === 'reply').length}</dd></dl>
+      ${facts.length ? `<details class="ai-context-profile"><summary>Profile facts in this conversation</summary><dl class="fact-list">${facts.map(([field, value]) => `<dt>${esc(PROFILE_LABELS[field])}</dt><dd lang="de">${esc(value)}</dd>`).join('')}</dl></details>` : '<p class="fine">No profile facts added to this conversation.</p>'}
+      </section><section class="card ai-review-scope"><span class="ai-mode-icon">${icon('book')}</span><h3>${assessed ? 'Feedback on submitted evidence' : 'Review, not a score'}</h3>
+      <p class="small">${assessed ? 'Your submitted words and recorded support are used for the assessment. Pronunciation is not graded.' : 'After at least two answers, end the conversation for good moments, useful corrections, and a small retry task.'}</p>
+      <p class="fine">${assessed ? checkpoint ? 'Checkpoint: hints and English question meanings stay hidden.' : 'Practice: question meanings and answer help are recorded.' : 'AI Talk does not award mastery, a CEFR level, or a pronunciation grade.'}</p></section></aside>`;
   }
 
   function reviewCard() {
@@ -300,7 +325,7 @@ export async function renderSession(el, ctx, id) {
     if (!alive) return;
     aiSpeech.stop();
     if (audioUrl) { URL.revokeObjectURL(audioUrl); audioUrl = null; }
-    el.querySelector('#ai-session').innerHTML = `${transcriptCard()}${controlsCard()}${reviewCard()}`;
+    el.querySelector('#ai-session').innerHTML = `<div class="ai-studio-grid"><div class="ai-studio-main">${transcriptCard()}${controlsCard()}</div>${contextCard()}</div>${reviewCard()}`;
     bind();
   }
 
@@ -419,6 +444,11 @@ export async function renderSession(el, ctx, id) {
     if (!alive) return;
     const phase = recorder?.phase ?? 'idle';
     const blocked = busy || session.draft.status === 'sending' || phase !== 'idle';
+    const capture = el.querySelector('.ai-capture');
+    if (capture) capture.dataset.phase = phase;
+    const status = el.querySelector('#ai-answer-status');
+    if (status) status.textContent = { requesting: 'Waiting for the microphone…', recording: 'Recording on this device…', saving: 'Saving on this device…' }[phase]
+      ?? (busy ? 'Talking to your partner…' : session.draft.status === 'sending' ? 'Waiting for the reply…' : session.draft.recordingMs ? 'Recording saved on this device. Ready to send.' : session.draft.text.trim() ? 'Typed draft · not speaking evidence' : 'Ready when you are.');
     const start = el.querySelector('#ai-record');
     const stop = el.querySelector('#ai-stop');
     if (start) { start.hidden = phase === 'recording'; start.disabled = blocked; }
