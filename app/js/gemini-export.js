@@ -9,15 +9,20 @@ export function mountGeminiExport(host, ctx, source, { beforeExport = async () =
   const available = Object.entries(GEMINI_FACTS).filter(([key]) => profile[key]?.trim());
   host.innerHTML = `<details class="card gemini-export" ${open ? 'open' : ''}><summary>Export for Gemini ${icon('external')}</summary>
     <p class="small section-gap">Take <strong>${esc(source.title)}</strong> into a natural voice conversation on your phone. This pack includes the lesson’s words, meanings, models, and roleplay instructions.</p>
+    <div class="gemini-pack-grid"><section class="gemini-pack-config" aria-label="Practice pack options"><p class="eyebrow">01 · PERSONALISE</p><h3>Make it yours.</h3>
     <div class="form-grid"><label>Level target<select data-pack-level aria-label="Level target">${GEMINI_LEVELS.map(id => { const entry = levelById(id); return `<option value="${id}" ${level === id ? 'selected' : ''}>${esc(entry ? `${entry.short} · ${entry.label}` : id)}</option>`; }).join('')}</select></label>
     <label>Help from Gemini<select data-pack-support aria-label="Help from Gemini"><option value="guided" ${support === 'guided' ? 'selected' : ''}>Guided · hints and English when needed</option><option value="light" ${support === 'light' ? 'selected' : ''}>Less help · only when I ask</option></select></label></div>
-    ${available.length ? `<fieldset class="pack-facts"><legend>Optional facts to include</legend>${available.map(([key, label]) => `<label class="check-label"><input type="checkbox" data-pack-fact="${key}">${esc(label)}: ${esc(profile[key])}</label>`).join('')}<p class="fine">Only checked fields go into the pack. You can edit the text below.</p></fieldset>` : ''}
-    <label class="section-gap">Practice pack preview<textarea data-pack-text aria-label="Practice pack preview" rows="12" maxlength="16000" spellcheck="false"></textarea></label>
+    ${available.length ? `<fieldset class="pack-facts"><legend>Optional facts to include</legend>${available.map(([key, label]) => `<label class="check-label"><input type="checkbox" data-pack-fact="${key}">${esc(label)}: ${esc(profile[key])}</label>`).join('')}<p class="fine">Only checked fields go into the pack. You can edit the text below.</p></fieldset>` : '<p class="fine section-gap">No profile facts are included. Add optional facts in <a href="#settings">Settings</a> if you want to personalise the pack.</p>'}
+    </section><section class="gemini-pack-editor" aria-label="Editable practice pack"><p class="eyebrow">02 · PREVIEW &amp; EXPORT</p>
+    <label>Practice pack preview<textarea data-pack-text aria-label="Practice pack preview" rows="16" maxlength="16000" spellcheck="false"></textarea></label>
+    <p class="fine">Edit freely. Changing the level, help, or checked facts rebuilds this preview.</p>
     <div class="btn-row section-gap"><button class="btn" data-pack-copy>${icon('book')}Copy practice pack</button><button class="btn secondary" data-pack-download>${icon('download')}Download .txt</button><button class="btn secondary" data-pack-share ${typeof navigator.share === 'function' ? '' : 'hidden'}>${icon('external')}Share</button></div>
     <p class="fine section-gap" data-pack-status role="status"></p>
+    <div class="gemini-export-boundary">${icon('eye')}<div><strong>Exporting does not complete or grade a lesson.</strong><p class="fine">Prepared on this device. You choose when to send it.</p></div></div>
+    </section><section class="gemini-handoff" aria-label="Phone handoff"><p class="eyebrow">03 · CONTINUE ON YOUR PHONE</p><h3>Phone handoff</h3>
+    <p class="fine">Gemini runs outside Sprich. The pack is prepared locally; the conversation needs your own Gemini app or chat.</p>
     <ol class="guided-steps"><li><strong>On your phone:</strong> copy this pack into a normal Gemini chat, then tap Live.</li><li><strong>On your computer:</strong> paste it into a normal <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini text chat</a>. Open that same chat in the Gemini phone app and tap Live. The .txt file is another way to carry the lesson between devices.</li><li>Ask Gemini to start the warm-up. Come back afterward to save a takeaway. Copying or downloading does not complete this lesson.</li></ol>
-    <p class="fine">Prepared on this device. You choose when to send it.</p>
-    <a class="btn secondary section-gap" href="#assessments/lesson/${esc(source.id)}">Use a graded roleplay ${icon('arrow')}</a></details>`;
+    <a class="btn secondary" href="#assessments/lesson/${esc(source.id)}">Use a graded roleplay ${icon('arrow')}</a></section></div></details>`;
   const editor = host.querySelector('[data-pack-text]');
   const status = host.querySelector('[data-pack-status]');
   const rebuild = () => {

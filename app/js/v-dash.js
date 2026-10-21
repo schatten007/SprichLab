@@ -23,26 +23,31 @@ export async function render(el, ctx) {
   const position = session ? Math.min(session.cursor + 1, tasksFor(session).length) : null;
   const greeting = state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.';
   const goalPct = stats.todayMs / (state.preferences.dailyMinutes * 60_000) * 100;
-  const heroTitle = session?.kind === 'review' ? 'Bring your phrases back.' : session?.kind === 'resource' ? session.content.resource.title : mission.title;
+  const currentTask = session ? tasksFor(session)[position - 1] : null;
+  const resource = session?.kind === 'resource' ? session.content.resource : null;
+  const heroTitle = session?.kind === 'review' ? 'Bring your phrases back.' : resource ? resource.title : session?.content.mission.title || mission.title;
   const heroDescription = session?.kind === 'review' ? 'Recall your phrases, compare with a model, and choose an honest rating.' : session?.kind === 'resource' ? 'Return to the source activity and save your own German response.' : mission.subtitle;
-  el.innerHTML = `
+  const preview = currentTask?.kind === 'recall' ? session.content.phrases.find(word => word.id === currentTask.phraseId)?.cueDe || 'Finde die Wendung aus dem Gedächtnis.'
+    : currentTask?.prompt || currentTask?.model || currentTask?.listening?.title || session?.content.mission.goalDe || mission.goalDe;
+  el.innerHTML = `<div class="workplace-today">
     <div class="dashboard-heading"><div><p class="eyebrow">${esc(new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric', timeZone: state.preferences.timeZone }))}</p>
        <h1 tabindex="-1">${esc(greeting)}</h1><p class="lede">Useful German for your next interview, your next colleague, your next step.</p></div><span class="pill green">Stage ${stage.number} of 6 · your pace</span></div>
     ${pathPicker(state)}
     ${state.legacy && !state.attempts.length ? '<div class="callout amber section-gap"><strong>A fresh, reliable baseline.</strong> Previous trainer data is preserved in your progress backup.</div>' : ''}
-    <section class="hero section-gap" aria-labelledby="mission-title"><div class="hero-main"><div class="pills"><span class="pill">${session ? 'CONTINUE YOUR PRACTICE' : 'YOUR DAILY FOCUS'}</span><span class="hero-number">${mission.number} / ${MISSIONS.length}</span></div>
+    <section class="hero workplace-focus section-gap" aria-labelledby="mission-title"><div class="hero-main workplace-focus-main"><div class="pills"><span class="pill">${session ? 'CONTINUE YOUR PRACTICE' : 'YOUR DAILY FOCUS'}</span><span class="hero-number">${resource ? 'Guided resource' : session?.kind === 'review' ? 'Phrase recall' : `Mission ${mission.number} / ${MISSIONS.length}`}</span></div>
       <h2 id="mission-title">${esc(heroTitle)}</h2><p>${esc(heroDescription)}</p>
-      <div class="hero-meta"><span>${icon('messages')} ${esc(mission.register)}</span><span>${icon('mic')} Record, replay, try again</span></div>
+      <div class="hero-meta"><span>${icon(resource ? 'external' : 'messages')} ${esc(resource ? resource.provider : session?.content.mission.register || mission.register)}</span><span>${icon('mic')} Record, replay, try again</span></div>
       <div class="btn-row"><button class="btn hero-cta" id="start-mission">${icon(session ? 'play' : 'arrow')}${session ? `Resume · step ${position}` : 'Start this mission'}</button><a class="hero-more" href="#practice">Explore all missions ${icon('arrow')}</a></div>
       <span class="hero-caption">${session ? 'Pick up exactly where you left off.' : 'Follow the queue below, or choose another focus.'}</span></div>
-      <div class="hero-scene" aria-hidden="true"><div class="scene-orbit"></div><span class="scene-tag">A SMALL CONVERSATION. A REAL STEP.</span>
-        <div class="scene-bubble">${esc(mission.turns[0].prompts[0])}<span lang="de">Du bist dran.</span></div><div class="scene-reply"><span class="scene-wave">${[8, 15, 23, 12, 19, 9, 17, 25, 15, 8, 18, 12].map(height => `<i style="height:${height}px"></i>`).join('')}</span><span>Your voice belongs here.</span></div><span class="scene-spark">✳</span></div></section>
+      <section class="workplace-preview" aria-label="Practice preview"><p class="eyebrow">${resource ? 'FROM THE SOURCE TO YOUR OWN WORDS' : 'YOUR NEXT GERMAN STEP'}</p><span class="circle-icon">${icon(resource ? 'book' : 'messages')}</span>
+        <p class="workplace-preview-prompt" lang="de">${esc(preview)}</p><div class="pills">${resource || currentTask?.kind === 'shadow' ? '<span class="pill">Unscored practice</span>' : currentTask?.kind === 'listen' ? provenance('checked') : provenance('self-rated', 'spoken practice')}</div>
+        <p class="fine">${resource ? 'Publisher media needs a connection. Your response and notes stay on this device.' : 'Try in your own words. Models and English help are available inside the session.'}</p></section></section>
     <section class="quick-stats" aria-label="Your practice at a glance">
       <div><span class="stat-icon">${icon('clock')}</span><div><strong>${minutes(stats.todayMs)} <small>min</small></strong><span>Measured practice today</span></div></div>
       <div><span class="stat-icon">${icon('refresh')}</span><div><strong>${due.length} <small>phrases</small></strong><span>Ready to recall</span></div></div>
       <div><span class="stat-icon">${icon('mic')}</span><div><strong>${minutes(stats.recordingMs)} <small>min</small></strong><span>Saved response recordings</span></div></div>
       <div><span class="stat-icon">${icon('check')}</span><div><strong>${stats.completed.length} <small>sessions</small></strong><span>Completed, at your pace</span></div></div></section>
-    <div class="dashboard-lower daily-layout"><section class="card daily-card"><div class="card-title"><h2>Your actual work for today</h2>
+    <div class="dashboard-lower daily-layout"><section class="card daily-card"><p class="eyebrow">ONE SMALL STEP AT A TIME</p><div class="card-title"><h2>Your actual work for today</h2>
       <label class="goal-select"><span class="sr-only">Daily practice goal</span><select id="daily-goal" aria-label="Daily practice goal">${[15, 30, 60, 90, 120].map(value => `<option value="${value}" ${value === state.preferences.dailyMinutes ? 'selected' : ''}>${value} min</option>`).join('')}</select></label></div>
       <label class="daily-focus-label">Today’s focus<select id="daily-focus">${MISSIONS.map(item => `<option value="${item.id}" ${item.id === plan.missionId ? 'selected' : ''}>${esc(item.shortTitle)}</option>`).join('')}</select></label>
       <div class="goal-line"><span>${minutes(stats.todayMs)} measured minutes / ${state.preferences.dailyMinutes}-minute budget</span><span>${Math.min(100, Math.floor(goalPct))}%</span></div>${progressBar(goalPct, 'Daily practice goal')}
@@ -57,7 +62,7 @@ export async function render(el, ctx) {
     <section class="card section-gap"><div class="card-title"><div><p class="eyebrow">ONE TAKEAWAY</p><h2>What can you use in real life?</h2></div>${plan.reflectionAt ? '<span class="pill green">Reflection saved</span>' : ''}</div>
       <form id="reflection-form"><label for="daily-reflection">A useful sentence and where you will use it</label><textarea id="daily-reflection" lang="de" maxlength="2000" required placeholder="Heute kann ich … Das möchte ich … benutzen.">${esc(plan.reflection)}</textarea>
       <div class="btn-row"><button class="btn" type="submit">Save today’s takeaway ${icon('check')}</button><span class="fine">${provenance('reported')}</span></div></form></section>
-    <div class="daily-nudge"><span>${icon('spark')}</span><p><strong>Stage ${stage.number}: ${esc(stage.title)}.</strong> ${esc(stage.realWorld)}</p></div>`;
+    <div class="daily-nudge"><span>${icon('spark')}</span><p><strong>Stage ${stage.number}: ${esc(stage.title)}.</strong> ${esc(stage.realWorld)}</p></div></div>`;
   safeAction(el.querySelector('#start-mission'), () => session ? ctx.go(`session/${session.id}`) : ctx.startMission(mission.id), ctx.error);
   bindPathPicker(el, ctx);
   safeAction(el.querySelector('#review-now'), () => due.length ? ctx.startReview(due.slice(0, 10).map(word => word.id)) : ctx.go('phrases'), ctx.error);

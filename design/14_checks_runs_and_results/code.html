@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"tertiary":"#ffffff","status-online":"#22c55e","text-primary":"#f8fafc","cyan-spark":"#38bdf8","on-secondary-fixed":"#2c0051","on-primary":"#2a3400","secondary-fixed-dim":"#ddb7ff","surface-card":"#1c1d22","on-error":"#690005","on-error-container":"#ffdad6","surface-tint":"#b0d500","on-secondary":"#490080","surface-bright":"#38393c","on-primary-fixed-variant":"#3e4c00","text-muted":"#94a3b8","primary":"#ffffff","inverse-surface":"#e3e2e6","surface-variant":"#343538","surface-raised":"#25262c","on-tertiary":"#4e2600","secondary":"#ddb7ff","primary-fixed":"#caf300","surface-container-low":"#1b1b1f","inverse-on-surface":"#2f3034","tertiary-fixed-dim":"#ffb781","outline-variant":"#444932","surface-container-highest":"#343538","surface":"#121316","tertiary-fixed":"#ffdcc4","on-tertiary-container":"#9b5100","primary-container":"#caf300","surface-base":"#121316","error":"#ffb4ab","on-background":"#e3e2e6","inverse-primary":"#536600","surface-container":"#1f1f23","on-tertiary-fixed-variant":"#6f3800","surface-dim":"#121316","tertiary-container":"#ffdcc4","secondary-container":"#6f00be","error-container":"#93000a","on-surface-variant":"#c5c9ac","status-rest-day":"#64748b","on-secondary-fixed-variant":"#6900b3","vivid-purple":"#a855f7","on-primary-fixed":"#171e00","surface-stroke":"#33353e","on-secondary-container":"#d6a9ff","punch-orange":"#ff8800","on-surface":"#e3e2e6","primary-fixed-dim":"#b0d500","outline":"#8f9378","secondary-fixed":"#f0dbff","on-primary-container":"#596c00","electric-lime":"#d4ff00","surface-container-high":"#292a2d","background":"#121316","on-tertiary-fixed":"#2f1400","surface-container-lowest":"#0d0e11"},borderRadius:{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},spacing:{"space-xs":"0.25rem","space-xl":"2rem","margin-mobile":"1rem","gutter":"1.25rem","space-sm":"0.5rem","space-md":"1rem","margin":"2rem","space-lg":"1.5rem","gutter-mobile":"0.75rem","space-2xl":"3rem"},fontFamily:{"headline-lg":["Space Grotesk"],"german-prompt-lg":["Plus Jakarta Sans"],"german-prompt-lg-mobile":["Plus Jakarta Sans"],"body-md":["Plus Jakarta Sans"],"label-badge":["Space Grotesk"],"body-sm":["Plus Jakarta Sans"],"label-mono":["Space Grotesk"],"headline-sm":["Space Grotesk"],"body-lg":["Plus Jakarta Sans"],"headline-md":["Space Grotesk"],"display-hero-mobile":["Space Grotesk"],"display-hero":["Space Grotesk"]},fontSize:{"headline-lg":["28px",{"lineHeight":"36px","letterSpacing":"-0.02em","fontWeight":"600"}],"german-prompt-lg":["24px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"700"}],"german-prompt-lg-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-badge":["12px",{"lineHeight":"16px","letterSpacing":"0.04em","fontWeight":"700"}],"body-sm":["12px",{"lineHeight":"18px","fontWeight":"400"}],"label-mono":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"600"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"500"}],"headline-md":["22px",{"lineHeight":"30px","letterSpacing":"-0.01em","fontWeight":"600"}],"display-hero-mobile":["32px",{"lineHeight":"40px","letterSpacing":"-0.02em","fontWeight":"700"}],"display-hero":["48px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-72 bg-surface-container-lowest z-50 flex flex-col pt-space-lg pb-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="px-space-lg mb-space-lg flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-2.5 h-2.5 rounded-full bg-primary-fixed"></div><span class="font-label-mono text-label-mono uppercase text-on-surface-variant">A2 / B1 Fluency</span></div><span class="px-space-xs py-0.5 rounded-full bg-surface-container font-label-mono text-label-mono text-cyan-spark">ADHD Mode</span></div><div class="flex-1 overflow-y-auto px-space-md space-y-space-lg"><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Daily Practice</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">bolt</span><span class="font-body-md text-body-md">Today</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">record_voice_over</span><span class="font-body-md text-body-md">Lessons</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md">Words</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span class="font-body-md text-body-md">Progress</span></a></nav></div><div class="space-y-space-xs"><div class="px-space-sm py-1 font-label-mono text-label-mono uppercase tracking-wider text-outline">Modules &amp; Coach</div><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">business_center</span><span class="font-body-md text-body-md">Workplace</span></a><a class="flex items-center justify-between px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px]">mic</span><span class="font-body-md text-body-md">AI Talk</span></div><span class="px-1.5 py-0.5 rounded-full bg-surface-container-high font-label-mono text-label-mono text-primary-fixed">MIC</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-sm py-2 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">auto_stories</span><span class="font-body-md text-body-md">Resources</span></a></nav></div></div><div class="px-space-md pt-space-md border-t border-surface-stroke/40 space-y-space-xs"><nav class="space-y-1" data-active-classes="bg-surface-raised text-primary-fixed font-bold"><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-sm py-1.5 rounded text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm py-2 rounded-lg bg-surface-card"><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-[16px] text-cyan-spark">database</span><span class="font-label-mono text-label-mono text-on-surface">Storage: Local DB Ready</span></div><span class="w-2 h-2 rounded-full bg-status-online"></span></div></div></aside><div class="pl-72"><header class="fixed top-0 left-72 right-0 h-16 bg-surface/85 backdrop-blur-xl z-40 flex items-center justify-between px-space-lg shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex items-center gap-space-md"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm font-bold tracking-tight text-text-primary">Sprich</span><span class="font-label-mono text-label-mono text-text-muted hidden xl:inline">German for your next step</span></div></div><div class="flex items-center gap-1.5 px-space-sm py-1 rounded-full bg-surface-raised font-label-mono text-label-mono text-on-surface-variant"><span class="w-2 h-2 rounded-full bg-status-online"></span><span>OFFLINE / LOCAL</span></div><nav class="flex items-center bg-surface-card p-1 rounded-full" data-active-classes="bg-surface-bright text-text-primary font-bold"><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="today" href="#">Start speaking</a><a class="px-space-sm py-1 rounded-full font-body-sm text-body-sm text-on-surface-variant hover:text-on-surface transition-colors" data-path="workplace" href="#">Workplace</a></nav></div><div class="flex items-center gap-space-md"><a class="hidden lg:flex items-center gap-space-xs px-space-sm py-1 rounded-full bg-surface-raised text-primary-fixed hover:bg-surface-variant hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[16px]">play_circle</span><span class="font-label-mono text-label-mono">Resume: Beim Bäcker (2/7)</span></a><div class="flex items-center gap-space-xs text-text-muted"><span class="material-symbols-outlined text-[18px] text-primary-fixed-dim">sync</span><span class="font-label-mono text-label-mono hidden sm:inline">Local JSON Synced</span></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative w-full pt-16 bg-surface px-space-lg py-space-xl"><div class="flex flex-col w-full space-y-space-xl">
+<!-- Mode Switcher, Notice & Header Strip -->
+<div class="flex flex-col gap-space-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md">
+<div class="space-y-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">Continuous Assessment Framework · v2.4</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Evaluations &amp; Objective Runs</h2>
+</div>
+<!-- Mode Selector -->
+<div class="inline-flex p-1 rounded-full bg-surface-card self-start lg:self-auto shadow-sm">
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all bg-electric-lime text-surface font-bold shadow-sm" id="mode-practice-btn" onclick="switchMode('practice')">
+<span class="material-symbols-outlined text-[16px]">school</span>
+<span>Practice Mode (Help tracked)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface" id="mode-checkpoint-btn" onclick="switchMode('checkpoint')">
+<span class="material-symbols-outlined text-[16px]">lock_clock</span>
+<span>Checkpoint Mode (Sealed)</span>
+</button>
+</div>
+</div>
+<!-- Transparent Trust Notice -->
+<div class="p-space-md rounded bg-surface-card flex items-start gap-space-md shadow-sm">
+<span class="material-symbols-outlined text-punch-orange text-[20px] shrink-0 mt-0.5">verified_user</span>
+<div class="flex-1 space-y-space-xs">
+<div class="flex flex-wrap items-center gap-x-space-sm gap-y-1">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-punch-orange">Evaluation Scope Disclosure</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-text-muted">Task-specific check only</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+          Task-specific evaluations. These checks never award a CEFR level, permanent ability rank, or pronunciation score. Scores reflect exact alignment with target rules for this session only.
+        </p>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Main Live Test + Writing Section -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-space-lg items-start">
+<!-- LEFT COLUMN: Live Test Run (8 Cols) -->
+<div class="xl:col-span-8 flex flex-col space-y-space-lg">
+<!-- Section 1: Objective Assessment Run Card -->
+<div class="p-space-xl rounded-lg bg-surface-container-low flex flex-col space-y-space-lg relative shadow-md overflow-hidden">
+<!-- Live Run Header & Timer Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-md">
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs font-label-mono text-label-mono text-cyan-spark">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+<span>RUN #4082 · ITEM 4 OF 12</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Satzbau &amp; Konjunktiv II im Büro</h3>
+</div>
+<!-- Controls: Timer + Pause + Seal -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-space-xs px-space-md py-1.5 rounded-full bg-surface-card text-electric-lime font-label-mono text-label-mono shadow-sm">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+<span class="font-bold tracking-wider" id="session-timer">04:12</span>
+</div>
+<button class="px-space-md py-1.5 rounded-full bg-surface-raised text-on-surface font-body-sm text-body-sm hover:bg-surface-variant transition-colors flex items-center gap-space-xs" id="pause-btn" onclick="toggleTimer()">
+<span class="material-symbols-outlined text-[16px]">pause</span>
+<span id="pause-text">Pause Check</span>
+</button>
+<button class="px-space-md py-1.5 rounded-full bg-surface-card text-punch-orange font-label-badge text-label-badge hover:bg-surface-raised transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">lock</span>
+<span>Submit &amp; Seal</span>
+</button>
+</div>
+</div>
+<!-- ADHD Help Transparency Pill -->
+<div class="flex items-center gap-space-xs px-space-sm py-1.5 rounded bg-surface-card text-on-surface-variant font-label-mono text-label-mono" id="help-tracker-indicator">
+<span class="material-symbols-outlined text-[16px] text-vivid-purple">history_toggle_off</span>
+<span>Practice Mode: Hint used on Q2 (Marked in attempt metadata)</span>
+</div>
+<!-- Task Instruction -->
+<div class="space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Bauen Sie den korrekten Höflichkeitssatz</span>
+<span class="font-label-badge text-label-badge text-cyan-spark">Polite Office Request</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface">
+            Translate the communicative intent into natural German business structure: <span class="italic text-text-muted">"I would like to have the report by tomorrow."</span>
+</p>
+</div>
+<!-- Interactive Word Ordering Assembly Line -->
+<div class="flex flex-col space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Target Word Placement Slots</span>
+<div class="flex items-center gap-space-xs">
+<button class="px-space-sm py-1 rounded bg-surface-raised text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-1" onclick="undoPlacement()">
+<span class="material-symbols-outlined text-[14px]">undo</span>
+<span>Undo</span>
+</button>
+<button class="px-space-sm py-1 rounded bg-surface-raised text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm flex items-center gap-1" onclick="resetPlacement()">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+<span>Reset</span>
+</button>
+</div>
+</div>
+<!-- Placement Drop Slots (Tactile empty vs filled states) -->
+<div class="min-h-16 p-space-md rounded-lg bg-surface flex flex-wrap items-center gap-space-sm shadow-inner" id="drop-slots-container">
+<!-- Dynamic interactive tokens land here -->
+<div class="h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all" id="slot-0">Slot 1</div>
+<div class="h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all" id="slot-1">Slot 2</div>
+<div class="h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all" id="slot-2">Slot 3</div>
+<div class="h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all" id="slot-3">Slot 4</div>
+<div class="h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all" id="slot-4">Slot 5</div>
+</div>
+</div>
+<!-- Available Token Word Chips Pool -->
+<div class="space-y-space-xs">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Tap word chips to place</span>
+<div class="flex flex-wrap gap-space-sm pt-space-xs" id="chips-pool">
+<button class="word-chip px-space-lg py-2.5 rounded-full bg-surface-raised text-on-surface font-headline-sm text-headline-sm hover:bg-surface-variant active:scale-95 transition-all shadow-sm" data-word="Ich" onclick="placeToken(this, 'Ich')">Ich</button>
+<button class="word-chip px-space-lg py-2.5 rounded-full bg-surface-raised text-on-surface font-headline-sm text-headline-sm hover:bg-surface-variant active:scale-95 transition-all shadow-sm" data-word="hätte" onclick="placeToken(this, 'hätte')">hätte</button>
+<button class="word-chip px-space-lg py-2.5 rounded-full bg-surface-raised text-on-surface font-headline-sm text-headline-sm hover:bg-surface-variant active:scale-95 transition-all shadow-sm" data-word="gern" onclick="placeToken(this, 'gern')">gern</button>
+<button class="word-chip px-space-lg py-2.5 rounded-full bg-surface-raised text-on-surface font-headline-sm text-headline-sm hover:bg-surface-variant active:scale-95 transition-all shadow-sm" data-word="den Bericht" onclick="placeToken(this, 'den Bericht')">den Bericht</button>
+<button class="word-chip px-space-lg py-2.5 rounded-full bg-surface-raised text-on-surface font-headline-sm text-headline-sm hover:bg-surface-variant active:scale-95 transition-all shadow-sm" data-word="bis morgen" onclick="placeToken(this, 'bis morgen')">bis morgen</button>
+</div>
+</div>
+<!-- Item 4b: Integrated Multi-Choice Sub-question (Office Pragmatics) -->
+<div class="pt-space-md space-y-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Pragmatic Formality Validation</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-raised font-label-mono text-label-mono text-text-muted">A2/B1 Bridge</span>
+</div>
+<p class="font-body-md text-body-md text-text-primary">Welche Alternative ist in einer formalen E-Mail an die Geschäftsführung noch höflicher?</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+<label class="p-space-md rounded bg-surface-card hover:bg-surface-raised cursor-pointer transition-colors flex items-start gap-space-sm">
+<input checked="" class="mt-1 accent-electric-lime" name="pragmatics" type="radio"/>
+<div class="space-y-0.5">
+<span class="font-body-md text-body-md text-text-primary font-medium block">Ich wäre Ihnen dankbar, wenn...</span>
+<span class="font-body-sm text-body-sm text-text-muted block">Gehobener Konjunktiv II</span>
+</div>
+</label>
+<label class="p-space-md rounded bg-surface-card hover:bg-surface-raised cursor-pointer transition-colors flex items-start gap-space-sm">
+<input class="mt-1 accent-electric-lime" name="pragmatics" type="radio"/>
+<div class="space-y-0.5">
+<span class="font-body-md text-body-md text-text-primary font-medium block">Geben Sie mir das morgen.</span>
+<span class="font-body-sm text-body-sm text-text-muted block">Direkter Imperativ (Unangemessen)</span>
+</div>
+</label>
+</div>
+</div>
+<!-- Next / Validation Action Bar -->
+<div class="flex items-center justify-between pt-space-sm">
+<button class="px-space-md py-2 rounded-full bg-surface-raised text-on-surface font-body-md text-body-md hover:bg-surface-variant transition-colors flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+<span>Q3 (Reviewed)</span>
+</button>
+<button class="px-space-xl py-2.5 rounded-full bg-electric-lime text-surface font-headline-sm text-headline-sm font-bold shadow-md hover:opacity-95 transition-all flex items-center gap-space-xs" onclick="checkSyntaxDirectly()">
+<span>Check &amp; Next Question</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Section 2: Short Writing Assessment Run -->
+<div class="p-space-xl rounded-lg bg-surface-container-low flex flex-col space-y-space-lg shadow-md">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="space-y-1">
+<div class="flex items-center gap-space-xs font-label-mono text-label-mono text-vivid-purple">
+<span class="material-symbols-outlined text-[16px]">edit_note</span>
+<span>WRITING CHECK · SITUATIONAL AGILITY</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary">Kurze Nachricht: Verspätung am Arbeitsplatz</h3>
+</div>
+<span class="px-space-sm py-1 rounded-full bg-surface-card text-on-surface-variant font-label-mono text-label-mono self-start sm:self-auto">Draft Mode (Local autosave)</span>
+</div>
+<!-- Real-World Scenario Prompt -->
+<div class="p-space-md rounded bg-surface-card space-y-space-xs">
+<div class="flex items-center gap-space-xs text-electric-lime">
+<span class="material-symbols-outlined text-[18px]">assignment</span>
+<span class="font-label-badge text-label-badge uppercase tracking-wider">Aufgabenstellung</span>
+</div>
+<p class="font-body-lg text-body-lg text-text-primary">
+            „Schreibe eine kurze Nachricht an Kollegin Sarah: Entschuldige die Verspätung beim Meeting und schlage einen neuen Termin um 14:30 Uhr vor.“
+          </p>
+</div>
+<!-- Live Editor Bed -->
+<div class="flex flex-col space-y-space-xs">
+<div class="relative">
+<textarea class="w-full p-space-md rounded bg-surface text-on-surface font-body-md text-body-md focus:outline-none focus:ring-1 focus:ring-electric-lime resize-none transition-all placeholder:text-text-muted" id="writing-area" oninput="updateWordCount(this)" placeholder="Hallo Sarah, es tut mir leid, aber mein Zug hat heute..." rows="4">Hallo Sarah, entschuldige bitte die Verspätung für unser Meeting. Ich stecke noch in einer wichtigen Abstimmung fest. Könnten wir unseren Termin vielleicht auf heute Nachmittag um 14:30 Uhr verschieben? Passt dir das zeitlich? Gib mir gerne kurz Bescheid. Viele Grüße!</textarea>
+</div>
+<!-- Non-Punitive Word Counter strip -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pt-1">
+<div class="flex items-center gap-space-xs font-label-mono text-label-mono text-text-muted">
+<span class="material-symbols-outlined text-[14px] text-cyan-spark">info</span>
+<span>Word count is guidance, not a semantic score</span>
+</div>
+<div class="font-label-mono text-label-mono text-electric-lime self-end sm:self-auto" id="word-count-badge">
+              44 words (Suggested range: 35–60 words)
+            </div>
+</div>
+</div>
+<!-- Writing Task Action Bar -->
+<div class="flex items-center justify-between pt-space-xs flex-wrap gap-space-sm">
+<button class="px-space-md py-2 rounded-full bg-surface-card text-on-surface-variant hover:text-on-surface font-body-md text-body-md flex items-center gap-space-xs transition-colors" onclick="saveDraftLocally()">
+<span class="material-symbols-outlined text-[16px] text-status-online">save</span>
+<span id="draft-status-msg">Save Draft locally</span>
+</button>
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded bg-surface-card font-label-mono text-label-mono text-text-muted hidden md:inline">Evaluated via Syntax Match &amp; Rubric</span>
+<button class="px-space-lg py-2 rounded-full bg-vivid-purple text-primary font-headline-sm text-headline-sm hover:opacity-90 transition-opacity flex items-center gap-space-xs shadow-md">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Submit for Rubric Evaluation</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Honest Assessment Result Card (4 Cols) -->
+<div class="xl:col-span-4 flex flex-col space-y-space-lg">
+<!-- Section 3: Honest Assessment Result Card -->
+<div class="p-space-xl rounded-lg bg-surface-container-low flex flex-col space-y-space-lg shadow-md relative">
+<!-- Result Banner -->
+<div class="flex flex-col space-y-space-xs">
+<div class="flex items-center justify-between">
+<span class="px-space-xs py-0.5 rounded bg-surface-card font-label-mono text-label-mono text-cyan-spark">EVALUATION SUMMARY</span>
+<span class="px-space-xs py-0.5 rounded bg-surface-card font-label-mono text-label-mono text-punch-orange">Practice Mode</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary tracking-tight">Standup Status Check</h3>
+<span class="font-body-sm text-body-sm text-text-muted">Target Context: B1 Office Core Fluency</span>
+</div>
+<!-- Big Score Breakdown with Local Provenance Badge -->
+<div class="p-space-lg rounded bg-surface-card flex flex-col items-center justify-center text-center space-y-space-xs shadow-sm">
+<div class="flex items-baseline gap-space-xs">
+<span class="font-display-hero text-display-hero text-electric-lime">18</span>
+<span class="font-headline-md text-headline-md text-text-muted">/ 20</span>
+</div>
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-text-primary">Points Earned</span>
+<!-- Exact Evidence Classification Pills -->
+<div class="flex flex-wrap items-center justify-center gap-space-xs pt-space-xs">
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-status-online flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span>
+<span>Checked locally (Syntax/Order)</span>
+</span>
+<span class="px-space-xs py-0.5 rounded-full bg-surface-raised font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-cyan-spark"></span>
+<span>AI estimate (Writing Rubric)</span>
+</span>
+</div>
+</div>
+<!-- Trust Safeguard Disclaimer Box -->
+<div class="p-space-md rounded bg-surface flex items-start gap-space-xs shadow-inner">
+<span class="material-symbols-outlined text-[16px] text-text-muted shrink-0 mt-0.5">shield</span>
+<p class="font-label-mono text-label-mono text-text-muted leading-relaxed">
+<strong class="text-on-surface">Explicit Trust Safeguard:</strong> No CEFR claim made. Validated purely against task-specific syntax rules. Missing grades or provider timeouts never default to zero.
+          </p>
+</div>
+<!-- Detailed Rubric Feedback (Strengths & Corrections) -->
+<div class="space-y-space-md">
+<span class="font-label-mono text-label-mono text-outline uppercase tracking-wider">Detailed Diagnostic Feedback</span>
+<!-- Strength Item -->
+<div class="p-space-md rounded bg-surface-card space-y-space-xs">
+<div class="flex items-center gap-space-xs text-status-online">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span class="font-label-badge text-label-badge uppercase">Strength identified</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+              Correct separable verb placement in subordinate clause: <span class="text-electric-lime font-bold">„...rufe ich Sarah umgehend zurück.“</span>
+</p>
+<span class="font-label-mono text-label-mono text-text-muted block">Evidence: Local Deterministic Rule v1.2</span>
+</div>
+<!-- Correction Item -->
+<div class="p-space-md rounded bg-surface-card space-y-space-xs">
+<div class="flex items-center gap-space-xs text-punch-orange">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+<span class="font-label-badge text-label-badge uppercase">Pragmatic improvement</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+              Use accusative for direct temporal specifications: <span class="line-through text-text-muted">„nächster Dienstag“</span> → <span class="text-cyan-spark font-bold">„nächsten Dienstag“</span>.
+            </p>
+<span class="font-label-mono text-label-mono text-text-muted block">Evidence: Syntactic Pattern Match</span>
+</div>
+</div>
+<!-- Action Loop: Retry with new variation -->
+<div class="pt-space-xs flex flex-col gap-space-sm">
+<button class="w-full py-2.5 rounded-full bg-surface-raised hover:bg-surface-variant text-text-primary font-headline-sm text-headline-sm transition-all flex items-center justify-center gap-space-xs shadow-sm">
+<span class="material-symbols-outlined text-[18px]">casino</span>
+<span>Retry with new variation</span>
+</button>
+<button class="w-full py-2 rounded-full bg-surface-card hover:bg-surface-raised text-text-muted hover:text-on-surface font-body-sm text-body-sm transition-colors text-center">
+            Export Attempt Ledger (JSON)
+          </button>
+</div>
+</div>
+<!-- Quick Session Effort Context -->
+<div class="p-space-lg rounded bg-surface-card space-y-space-sm shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">7-Day Cadence Impact</span>
+<span class="font-label-badge text-label-badge text-status-online">+15 Min Qualifying</span>
+</div>
+<div class="flex items-center justify-between gap-1">
+<div class="flex-1 py-1.5 rounded text-center bg-surface-raised font-label-mono text-label-mono text-text-muted">Mo<span class="block text-status-online text-[10px]">✓</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-surface-raised font-label-mono text-label-mono text-text-muted">Di<span class="block text-status-online text-[10px]">✓</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-surface-raised font-label-mono text-label-mono text-text-muted">Mi<span class="block text-status-rest-day text-[10px]">Rest</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-surface-raised font-label-mono text-label-mono text-text-muted">Do<span class="block text-status-online text-[10px]">✓</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-electric-lime text-surface font-label-mono text-label-mono font-bold">Fr<span class="block text-[10px]">Active</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-surface font-label-mono text-label-mono text-text-muted">Sa<span class="block text-text-muted text-[10px]">-</span></div>
+<div class="flex-1 py-1.5 rounded text-center bg-surface font-label-mono text-label-mono text-text-muted">So<span class="block text-text-muted text-[10px]">-</span></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Interactive Word Ordering Engine
+  const placedTokens = [];
+  const totalSlots = 5;
+
+  function placeToken(buttonEl, word) {
+    if (placedTokens.length >= totalSlots) return;
+    
+    // Add to state
+    placedTokens.push({ word: word, button: buttonEl });
+    buttonEl.classList.add('opacity-30', 'pointer-events-none');
+    
+    renderSlots();
+  }
+
+  function undoPlacement() {
+    if (placedTokens.length === 0) return;
+    const last = placedTokens.pop();
+    last.button.classList.remove('opacity-30', 'pointer-events-none');
+    renderSlots();
+  }
+
+  function resetPlacement() {
+    while(placedTokens.length > 0) {
+      const item = placedTokens.pop();
+      item.button.classList.remove('opacity-30', 'pointer-events-none');
+    }
+    renderSlots();
+  }
+
+  function renderSlots() {
+    for (let i = 0; i < totalSlots; i++) {
+      const slotEl = document.getElementById(`slot-${i}`);
+      if (placedTokens[i]) {
+        slotEl.textContent = placedTokens[i].word;
+        slotEl.className = "h-10 px-space-md rounded flex items-center justify-center bg-electric-lime text-surface font-headline-sm text-headline-sm font-bold min-w-20 shadow-sm transition-all";
+      } else {
+        slotEl.textContent = `Slot ${i + 1}`;
+        slotEl.className = "h-10 px-space-md rounded flex items-center justify-center bg-surface-card text-text-muted font-label-mono text-label-mono min-w-20 transition-all";
+      }
+    }
+  }
+
+  // Direct Syntax Feedback Micro-interaction
+  function checkSyntaxDirectly() {
+    const currentOrder = placedTokens.map(t => t.word).join(' ');
+    const correctOrder = "Ich hätte gern den Bericht bis morgen";
+    
+    if (placedTokens.length < totalSlots) {
+      alert("Bitte platzieren Sie alle 5 Wortbausteine in den Slots.");
+      return;
+    }
+
+    if (currentOrder === correctOrder) {
+      const dropContainer = document.getElementById('drop-slots-container');
+      dropContainer.classList.add('bg-status-online/20');
+      setTimeout(() => {
+        dropContainer.classList.remove('bg-status-online/20');
+        alert("Perfekt! Die Satzstellung 'Subjekt + Konjunktiv II Verb + gern + Akkusativobjekt + Temporaladverbial' ist absolut stimmig.");
+      }, 300);
+    } else {
+      alert("Fast! Achten Sie auf die Verb-Zweit-Stellung: 'Ich hätte gern...'");
+    }
+  }
+
+  // Active Session Timer
+  let seconds = 252; // 04:12
+  let timerInterval = null;
+  let isPaused = false;
+
+  function runTimer() {
+    timerInterval = setInterval(() => {
+      if (!isPaused && seconds > 0) {
+        seconds--;
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        document.getElementById('session-timer').textContent = `${m}:${s}`;
+      }
+    }, 1000);
+  }
+  runTimer();
+
+  function toggleTimer() {
+    isPaused = !isPaused;
+    const pauseText = document.getElementById('pause-text');
+    pauseText.textContent = isPaused ? 'Resume Check' : 'Pause Check';
+  }
+
+  // Mode Switcher Interaction
+  function switchMode(mode) {
+    const practiceBtn = document.getElementById('mode-practice-btn');
+    const checkpointBtn = document.getElementById('mode-checkpoint-btn');
+    const helpIndicator = document.getElementById('help-tracker-indicator');
+
+    if (mode === 'practice') {
+      practiceBtn.className = "flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all bg-electric-lime text-surface font-bold shadow-sm";
+      checkpointBtn.className = "flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface";
+      helpIndicator.style.display = "flex";
+    } else {
+      checkpointBtn.className = "flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all bg-punch-orange text-surface font-bold shadow-sm";
+      practiceBtn.className = "flex items-center gap-space-xs px-space-md py-1.5 rounded-full font-label-badge text-label-badge transition-all text-on-surface-variant hover:text-on-surface";
+      helpIndicator.style.display = "none";
+    }
+  }
+
+  // Word Counter & Non-punitive indicator
+  function updateWordCount(textarea) {
+    const text = textarea.value.trim();
+    const count = text ? text.split(/\s+/).length : 0;
+    const badge = document.getElementById('word-count-badge');
+    badge.textContent = `${count} words (Suggested range: 35–60 words)`;
+  }
+
+  // Local Autosave Micro-Feedback
+  function saveDraftLocally() {
+    const statusMsg = document.getElementById('draft-status-msg');
+    const current = statusMsg.textContent;
+    statusMsg.textContent = "Saved to Local DB!";
+    setTimeout(() => {
+      statusMsg.textContent = "Save Draft locally";
+    }, 2000);
+  }
+</script></main></div></body></html>

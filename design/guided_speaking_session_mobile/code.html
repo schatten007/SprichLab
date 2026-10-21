@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><style>@layer base{html,body{width:100vw;margin:0;padding:0;}body{overscroll-behavior:none;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "punch-orange": "#ff8800", "error-container": "#93000a", "surface-variant": "#343538", "tertiary-fixed-dim": "#ffb781", "on-tertiary": "#4e2600", "inverse-on-surface": "#2f3034", "inverse-primary": "#536600", "cyan-spark": "#38bdf8", "surface-stroke": "#33353e", "text-primary": "#f8fafc", "primary-fixed": "#caf300", "inverse-surface": "#e3e2e6", "on-secondary-fixed-variant": "#6900b3", "on-error": "#690005", "surface-container-high": "#292a2d", "secondary-fixed": "#f0dbff", "on-surface-variant": "#c5c9ac", "surface-container-lowest": "#0d0e11", "surface-card": "#1c1d22", "surface-container-low": "#1b1b1f", "background": "#121316", "secondary-fixed-dim": "#ddb7ff", "on-secondary-fixed": "#2c0051", "primary-container": "#caf300", "tertiary-fixed": "#ffdcc4", "electric-lime": "#d4ff00", "surface": "#121316", "on-primary": "#2a3400", "surface-container": "#1f1f23", "on-primary-fixed-variant": "#3e4c00", "on-primary-container": "#596c00", "surface-tint": "#b0d500", "primary-fixed-dim": "#b0d500", "on-tertiary-container": "#9b5100", "on-secondary": "#490080", "surface-bright": "#38393c", "primary": "#ffffff", "vivid-purple": "#a855f7", "on-error-container": "#ffdad6", "secondary-container": "#6f00be", "text-muted": "#94a3b8", "on-primary-fixed": "#171e00", "surface-container-highest": "#343538", "secondary": "#ddb7ff", "outline": "#8f9378", "on-secondary-container": "#d6a9ff", "error": "#ffb4ab", "outline-variant": "#444932", "status-rest-day": "#64748b", "on-background": "#e3e2e6", "surface-base": "#121316", "surface-dim": "#121316", "on-tertiary-fixed-variant": "#6f3800", "tertiary": "#ffffff", "on-tertiary-fixed": "#2f1400", "on-surface": "#e3e2e6", "status-online": "#22c55e", "surface-raised": "#25262c", "tertiary-container": "#ffdcc4" }, borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, spacing: { "space-2xl": "3rem", "space-xl": "2rem", "space-md": "1rem", "margin": "2rem", "space-xs": "0.25rem", "gutter": "1.25rem", "gutter-mobile": "0.75rem", "space-sm": "0.5rem", "space-lg": "1.5rem", "margin-mobile": "1rem" }, fontFamily: { "label-badge": ["Space Grotesk"], "display-hero": ["Space Grotesk"], "german-prompt-lg": ["Plus Jakarta Sans"], "headline-lg": ["Space Grotesk"], "body-md": ["Plus Jakarta Sans"], "body-sm": ["Plus Jakarta Sans"], "label-mono": ["Space Grotesk"], "display-hero-mobile": ["Space Grotesk"], "german-prompt-lg-mobile": ["Plus Jakarta Sans"], "headline-md": ["Space Grotesk"], "body-lg": ["Plus Jakarta Sans"], "headline-sm": ["Space Grotesk"] }, fontSize: { "label-badge": ["12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" }], "display-hero": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "german-prompt-lg": ["24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }], "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }], "label-mono": ["11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" }], "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "german-prompt-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "700" }], "headline-md": ["22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "500" }], "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "600" }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface font-body-md text-body-md text-on-surface antialiased min-h-screen flex flex-col selection:bg-electric-lime selection:text-on-primary"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/85 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.35)]"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs min-w-0"><button aria-label="Go back" class="w-11 h-11 rounded-full flex items-center justify-center bg-surface-raised text-on-surface hover:text-electric-lime transition-colors flex-shrink-0" onclick="history.back()"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-7 w-auto object-contain flex-shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VBWgLT0kz-tjg7OiyfsMpXYIj6M0wHhJ8MVw1pBeHQTe_TOI4rQ52L_OnjaBEwzQnt5fyIOKtmoBc3CeIV7MtXzPcDWVNg2NRn62BkYP1CvYDAsohyuEWXII1rNXBIpHkvh4c5IVwrbBcOSQmuOjHvW6YkfpwfCS2WdPz_3GrG8GglVoHzVlHyCdaTa4QbqItQpcGxwXbp1-NRMcOWImWIcxFqrpiSnYjlLl56z2SQS9PxP04e0hQolj0"/><div class="flex flex-col min-w-0"><h1 class="font-headline-sm text-headline-sm tracking-tight text-text-primary truncate">Live Speaking Studio</h1><span class="font-label-mono text-label-mono text-cyan-spark flex items-center gap-1"><span class="material-symbols-outlined text-[13px]">mic</span>Active Training</span></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Session settings" class="w-11 h-11 rounded-full flex items-center justify-center bg-surface-raised text-on-surface-variant hover:text-text-primary transition-colors"><span class="material-symbols-outlined text-[20px]">tune</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center flex-shrink-0 shadow-sm"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full pt-16 bg-surface min-h-screen"><div class="flex flex-col w-full pb-safe">
+<!-- Stepper & Session Micro-Hub -->
+<div class="w-full px-gutter-mobile py-space-sm flex flex-col gap-space-xs">
+<!-- Breadcrumb meta row -->
+<div class="flex items-center justify-between gap-space-xs text-text-muted">
+<div class="flex items-center gap-1.5 min-w-0">
+<span class="inline-block w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted truncate">Lesson 4 of 48 • Stage 1: Daily Life (A1)</span>
+</div>
+<div class="flex items-center gap-space-xs flex-shrink-0">
+<span class="flex items-center gap-1 font-label-mono text-label-mono text-text-muted bg-surface-raised px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-[13px]">timer</span>~3 min
+        </span>
+<span class="flex items-center gap-1 font-label-mono text-label-mono text-electric-lime bg-surface-card px-2 py-0.5 rounded-full font-bold">
+<span class="material-symbols-outlined text-[13px] text-electric-lime">bolt</span>+15 XP
+        </span>
+</div>
+</div>
+<!-- Segmented 7-Step Progress Rhythm Strip -->
+<div class="flex flex-col gap-1 mt-1">
+<div class="flex items-center justify-between text-body-sm font-body-sm text-text-muted">
+<span class="font-label-badge text-label-badge text-electric-lime flex items-center gap-1">
+<span class="material-symbols-outlined text-[15px]">record_voice_over</span>
+          Step 1 of 7: Model Phrase
+        </span>
+<span class="font-label-mono text-label-mono text-text-muted">Next: Key Words</span>
+</div>
+<!-- Progress Track -->
+<div class="grid grid-cols-7 gap-1.5 w-full h-1.5">
+<div class="h-full rounded-full bg-electric-lime shadow-[0_0_8px_rgba(212,255,0,0.5)]"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+<div class="h-full rounded-full bg-surface-raised"></div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-space-md px-gutter-mobile pb-space-xl">
+<!-- Scene Context Card (Beim Bäcker) -->
+<div class="w-full bg-surface-card rounded-lg p-space-md flex flex-col gap-space-sm relative overflow-hidden shadow-md">
+<div class="flex items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="w-7 h-7 rounded-full bg-punch-orange/20 text-punch-orange flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">bakery_dining</span>
+</span>
+<span class="font-headline-sm text-headline-sm text-text-primary">Beim Bäcker in Berlin</span>
+</div>
+<span class="font-label-mono text-label-mono bg-surface-raised text-cyan-spark px-2 py-0.5 rounded-full flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">verified</span>Checked locally
+        </span>
+</div>
+<!-- Vignette Graphic & Dialogue Trigger -->
+<div class="flex items-center gap-space-md bg-surface-raised/90 p-space-sm rounded-DEFAULT">
+<div class="relative w-14 h-14 rounded-full overflow-hidden flex-shrink-0 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Close-up cozy warm portrait of an authentic German baker in an apron inside a rustic artisan Berlin bakery surrounded by fresh sourdough loaves and pretzels under soft amber morning light, cinematic high contrast cyber tactile style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpNhgvDgf2UjGD0B4Jm-NzBkpIgTw7Brqyc89ps0aIuyv8CmJ6tzj8WDKKLcfbWl1_Nkkjp6SQuVNnW8R5MBrBcxyAlMH0oTKPllEAN2zUVYdinVmIpIQ2zFJLNsmOC6FcanXYZbM_3QEt0dn5yisMRuCwllRZg6ziAtlGt1L_eb8byrjKGcUnJ9gQpB7BclFesj9wAzhUpvZKI8Thulxak_Xs6Kv0aWifaeC8shoR8xcJHkYzlccA"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 rounded-full bg-status-online ring-2 ring-surface-card"></span>
+</div>
+<div class="flex flex-col min-w-0 flex-1">
+<span class="font-label-mono text-label-mono text-text-muted uppercase tracking-wider">Der Bäcker fragt:</span>
+<p class="font-body-lg text-body-lg text-text-primary italic font-medium leading-snug truncate">
+            „Guten Morgen! Was darf es sein?“
+          </p>
+<div class="flex items-center gap-1 mt-1">
+<span class="font-label-mono text-label-mono text-punch-orange">Top 1% Daily Frequency</span>
+<span class="text-text-muted text-[10px]">•</span>
+<span class="font-label-mono text-label-mono text-text-muted">A1 Standard</span>
+</div>
+</div>
+<button aria-label="Play baker's audio" class="w-10 h-10 rounded-full bg-surface-card hover:bg-surface-bright flex items-center justify-center text-text-primary transition-all active:scale-95 flex-shrink-0" id="play-prompt-btn" onclick="playBakerAudio()">
+<span class="material-symbols-outlined text-[20px]" id="baker-speaker-icon">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Target Phrase Hero Card -->
+<div class="w-full bg-surface-card rounded-lg p-space-lg flex flex-col gap-space-md shadow-lg relative">
+<!-- Card Utility Bar -->
+<div class="flex items-center justify-between">
+<span class="font-label-badge text-label-badge uppercase tracking-wider text-text-muted flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-vivid-purple"></span>
+          Your Spoken Line
+        </span>
+<div class="flex items-center gap-space-xs">
+<!-- Audio Speed Toggle -->
+<button class="px-2.5 py-1 rounded-full bg-surface-raised hover:bg-surface-bright text-text-primary font-label-mono text-label-mono flex items-center gap-1 transition-colors" id="speed-toggle-btn" onclick="toggleAudioSpeed()">
+<span class="material-symbols-outlined text-[14px]">speed</span>
+<span id="speed-label">1.0x</span>
+</button>
+<!-- Play Full Model Audio -->
+<button aria-label="Hear natural model" class="w-9 h-9 rounded-full bg-surface-raised hover:bg-electric-lime hover:text-on-primary flex items-center justify-center text-text-primary transition-colors" id="model-play-btn" onclick="playModelAudio()">
+<span class="material-symbols-outlined text-[18px]">volume_up</span>
+</button>
+</div>
+</div>
+<!-- Main German Prompt with Tactile Stress Rhythm Beats -->
+<div class="flex flex-col gap-space-xs">
+<p class="font-german-prompt-lg-mobile text-german-prompt-lg-mobile text-text-primary tracking-tight leading-relaxed">
+          »Ich <span class="text-electric-lime bg-surface-raised px-1.5 py-0.5 rounded underline decoration-electric-lime/40 decoration-2">hätte gern</span> zwei <span class="text-cyan-spark bg-surface-raised px-1.5 py-0.5 rounded font-bold">Brötchen</span> und ein <span class="text-vivid-purple bg-surface-raised px-1.5 py-0.5 rounded font-bold">Croissant</span>, bitte.«
+        </p>
+<!-- Natural Stress Guide Cue -->
+<div class="flex items-center gap-1 text-text-muted font-label-mono text-label-mono pt-1">
+<span class="material-symbols-outlined text-[13px] text-electric-lime">graphic_eq</span>
+          Stress beats: <span class="text-text-primary font-bold">HÄT-te gern</span> • <span class="text-text-primary font-bold">BRÖT-chen</span> • <span class="text-text-primary font-bold">crois-SANT</span>
+</div>
+</div>
+<!-- Collapsible English Accordion -->
+<div class="pt-space-xs">
+<button class="flex items-center justify-between w-full py-2 px-3 rounded bg-surface-raised hover:bg-surface-bright text-text-muted transition-colors text-left" onclick="toggleTranslation()">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-cyan-spark">translate</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant font-medium">English Translation &amp; Nuance</span>
+</div>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200" id="trans-arrow">expand_more</span>
+</button>
+<div class="hidden mt-2 p-3 rounded bg-surface-container-low text-text-primary flex flex-col gap-1" id="trans-content">
+<p class="font-body-md text-body-md font-medium text-text-primary">“I would like two bread rolls and one croissant, please.”</p>
+<p class="font-body-sm text-body-sm text-text-muted">
+<span class="text-electric-lime font-bold">Nuance Tip:</span> „Ich hätte gern“ (subjunctive II) is significantly warmer and more polite in German bakeries than „Ich will“ or „Ich möchte“.
+          </p>
+</div>
+</div>
+<!-- Active Practice Chips -->
+<div class="flex flex-col gap-1.5 pt-1">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted">Tap word to isolate rhythm:</span>
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-raised hover:bg-surface-bright active:scale-95 text-text-primary font-body-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="speakWord('Ich hätte gern', this)">
+<span class="material-symbols-outlined text-[15px] text-electric-lime">volume_down</span>
+<span>Ich hätte gern</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-raised hover:bg-surface-bright active:scale-95 text-text-primary font-body-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="speakWord('Brötchen', this)">
+<span class="material-symbols-outlined text-[15px] text-cyan-spark">volume_down</span>
+<span>Brötchen [ˈbʁøːtçən]</span>
+</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-raised hover:bg-surface-bright active:scale-95 text-text-primary font-body-sm text-body-sm flex items-center gap-1.5 transition-all" onclick="speakWord('Croissant', this)">
+<span class="material-symbols-outlined text-[15px] text-vivid-purple">volume_down</span>
+<span>Croissant [kʁwaˈsɑ̃ː]</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Audio Wave & Voice Mic Station -->
+<div class="w-full bg-surface-card rounded-lg p-space-lg flex flex-col items-center gap-space-md shadow-xl relative overflow-hidden">
+<!-- Glow ambient backdrop for mic -->
+<div class="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full bg-electric-lime/5 blur-3xl pointer-events-none transition-all duration-300" id="mic-halo"></div>
+<!-- Dynamic Waveform Visualizer -->
+<div class="w-full flex flex-col items-center gap-2">
+<div class="flex items-center justify-between w-full px-2 text-text-muted font-label-mono text-label-mono">
+<span class="flex items-center gap-1 text-cyan-spark">
+<span class="w-2 h-2 rounded-full bg-cyan-spark animate-pulse"></span>
+            Acoustic Ready
+          </span>
+<span class="text-text-muted" id="record-timer">00:00 / 00:60</span>
+</div>
+<!-- 32-Bar Tactile Cyber Visualizer -->
+<div class="w-full h-16 bg-surface-container rounded-DEFAULT p-3 flex items-center justify-between gap-1 overflow-hidden" id="waveform-bar-box">
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 25%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 35%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 15%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 50%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 70%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 40%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 85%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 60%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 30%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 45%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 75%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 90%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 65%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 40%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 55%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 20%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 65%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 80%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 45%"></div>
+<div class="wave-bar w-1 rounded-full bg-electric-lime transition-all duration-100" style="height: 70%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 35%"></div>
+<div class="wave-bar w-1 rounded-full bg-cyan-spark transition-all duration-100" style="height: 90%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 50%"></div>
+<div class="wave-bar w-1 rounded-full bg-vivid-purple transition-all duration-100" style="height: 30%"></div>
+</div>
+</div>
+<!-- Main Thumb-Friendly Record Station Button -->
+<div class="flex flex-col items-center gap-space-sm w-full">
+<button aria-label="Hold or tap to speak German" class="relative w-20 h-20 rounded-full bg-surface-raised flex items-center justify-center text-electric-lime transition-all shadow-[0_0_24px_rgba(212,255,0,0.2)] active:scale-95 group focus:outline-none" id="main-record-btn" onclick="toggleRecording()">
+<span class="absolute inset-0 rounded-full bg-electric-lime/10 group-hover:bg-electric-lime/20 animate-ping opacity-30"></span>
+<span class="material-symbols-outlined text-[36px]" id="mic-icon">mic</span>
+</button>
+<div class="flex flex-col items-center text-center">
+<span class="font-headline-sm text-headline-sm text-text-primary tracking-tight font-semibold" id="record-state-text">
+            Tap to Record Voice
+          </span>
+<span class="font-body-sm text-body-sm text-text-muted mt-0.5">
+            Clear voice capture • 60s soft boundary
+          </span>
+</div>
+</div>
+<!-- Dignified Cognitive Safety Action: Practice Aloud Without Mic -->
+<div class="w-full pt-space-xs flex justify-center">
+<button class="w-full py-2.5 px-4 rounded-full bg-surface-raised hover:bg-surface-bright active:scale-95 text-text-muted hover:text-text-primary font-body-sm text-body-sm flex items-center justify-center gap-2 transition-all" onclick="skipMicPractised()">
+<span class="material-symbols-outlined text-[17px] text-cyan-spark">record_voice_over</span>
+<span>Practised aloud without mic</span>
+<span class="font-label-mono text-label-mono text-electric-lime bg-surface-card px-2 py-0.5 rounded-full">+10 XP</span>
+</button>
+</div>
+</div>
+<!-- Self-Evaluation Provenance Bar (ADHD Dignified Rating) -->
+<div class="w-full bg-surface-card rounded-lg p-space-md flex flex-col gap-space-sm shadow-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[18px] text-punch-orange">sentiment_satisfied</span>
+<h2 class="font-headline-sm text-headline-sm text-text-primary">How did it roll off the tongue?</h2>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-raised px-2 py-0.5 rounded-full">
+          self-rated
+        </span>
+</div>
+<div class="grid grid-cols-1 gap-2 pt-1">
+<!-- Option 1: Smooth Delivery -->
+<button class="rating-btn w-full p-space-sm rounded bg-surface-raised hover:bg-surface-bright active:scale-[0.98] flex items-center justify-between text-left transition-all" onclick="selectRating(1, this)">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-full bg-status-online/20 text-status-online flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">verified</span>
+</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-text-primary font-bold">Said it on my own!</span>
+<span class="font-body-sm text-body-sm text-text-muted">Natural cadence, no hesitation</span>
+</div>
+</div>
+<span class="font-label-badge text-label-badge text-electric-lime bg-surface-card px-2 py-1 rounded-full">
+            +30 XP
+          </span>
+</button>
+<!-- Option 2: Needed Prompt -->
+<button class="rating-btn w-full p-space-sm rounded bg-surface-raised hover:bg-surface-bright active:scale-[0.98] flex items-center justify-between text-left transition-all" onclick="selectRating(2, this)">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-full bg-punch-orange/20 text-punch-orange flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">lightbulb</span>
+</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-text-primary font-bold">Needed the hint</span>
+<span class="font-body-sm text-body-sm text-text-muted">Glanced at words or checked phonetic stress</span>
+</div>
+</div>
+<span class="font-label-badge text-label-badge text-punch-orange bg-surface-card px-2 py-1 rounded-full">
+            +15 XP
+          </span>
+</button>
+<!-- Option 3: Snooze / Repeat Later (No guilt) -->
+<button class="rating-btn w-full p-space-sm rounded bg-surface-raised hover:bg-surface-bright active:scale-[0.98] flex items-center justify-between text-left transition-all" onclick="selectRating(3, this)">
+<div class="flex items-center gap-space-xs">
+<span class="w-8 h-8 rounded-full bg-status-rest-day/20 text-status-rest-day flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">replay</span>
+</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md text-text-primary font-bold">Try again later</span>
+<span class="font-body-sm text-body-sm text-text-muted">Quiet day • zero penalty • keeps streak banked</span>
+</div>
+</div>
+<span class="font-label-badge text-label-badge text-text-muted bg-surface-card px-2 py-1 rounded-full">
+            Snooze
+          </span>
+</button>
+</div>
+</div>
+<!-- Gemini Live Companion Live Roleplay Drawer Preview -->
+<div class="w-full bg-gradient-to-r from-surface-card via-surface-container to-surface-card rounded-lg p-space-md flex items-center justify-between shadow-lg">
+<div class="flex items-center gap-space-sm min-w-0">
+<div class="w-10 h-10 rounded-full bg-vivid-purple/20 text-vivid-purple flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[22px]">smart_toy</span>
+</div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5">
+<span class="font-headline-sm text-headline-sm text-text-primary">Gemini Live Roleplay</span>
+<span class="font-label-mono text-label-mono bg-vivid-purple/20 text-vivid-purple px-1.5 py-0.2 rounded uppercase">Next</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted truncate">
+            Der Bäcker responds dynamically to whatever you order.
+          </p>
+</div>
+</div>
+<button aria-label="Open Gemini Companion" class="w-10 h-10 rounded-full bg-surface-raised hover:bg-vivid-purple hover:text-white flex items-center justify-center text-text-primary transition-all active:scale-95 flex-shrink-0 ml-2" onclick="openGeminiCompanion()">
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  let isRecording = false;
+  let recordTimer = null;
+  let recordSeconds = 0;
+  let currentSpeed = '1.0x';
+
+  function toggleAudioSpeed() {
+    const label = document.getElementById('speed-label');
+    if (currentSpeed === '1.0x') {
+      currentSpeed = '0.8x';
+      label.innerText = '0.8x Slower';
+      label.classList.add('text-electric-lime');
+    } else {
+      currentSpeed = '1.0x';
+      label.innerText = '1.0x';
+      label.classList.remove('text-electric-lime');
+    }
+  }
+
+  function toggleTranslation() {
+    const content = document.getElementById('trans-content');
+    const arrow = document.getElementById('trans-arrow');
+    const isHidden = content.classList.contains('hidden');
+    if (isHidden) {
+      content.classList.remove('hidden');
+      arrow.style.transform = 'rotate(180deg)';
+    } else {
+      content.classList.add('hidden');
+      arrow.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  function playBakerAudio() {
+    const icon = document.getElementById('baker-speaker-icon');
+    icon.innerText = 'graphic_eq';
+    icon.classList.add('text-punch-orange');
+    setTimeout(() => {
+      icon.innerText = 'volume_up';
+      icon.classList.remove('text-punch-orange');
+    }, 1500);
+  }
+
+  function playModelAudio() {
+    const btn = document.getElementById('model-play-btn');
+    btn.classList.add('bg-electric-lime', 'text-on-primary');
+    animateWaveform(2000);
+    setTimeout(() => {
+      btn.classList.remove('bg-electric-lime', 'text-on-primary');
+    }, 2000);
+  }
+
+  function speakWord(word, btnElement) {
+    const prevBg = btnElement.className;
+    btnElement.classList.add('bg-surface-bright', 'scale-105');
+    setTimeout(() => {
+      btnElement.classList.remove('bg-surface-bright', 'scale-105');
+    }, 600);
+  }
+
+  function toggleRecording() {
+    const btn = document.getElementById('main-record-btn');
+    const micIcon = document.getElementById('mic-icon');
+    const stateText = document.getElementById('record-state-text');
+    const halo = document.getElementById('mic-halo');
+    const timerDisplay = document.getElementById('record-timer');
+
+    if (!isRecording) {
+      isRecording = true;
+      btn.classList.remove('bg-surface-raised', 'text-electric-lime');
+      btn.classList.add('bg-electric-lime', 'text-on-primary', 'shadow-[0_0_32px_rgba(212,255,0,0.6)]');
+      micIcon.innerText = 'stop';
+      stateText.innerText = 'Listening to your German...';
+      stateText.classList.add('text-electric-lime');
+      halo.classList.remove('bg-electric-lime/5');
+      halo.classList.add('bg-electric-lime/25', 'scale-125');
+
+      recordSeconds = 0;
+      recordTimer = setInterval(() => {
+        recordSeconds++;
+        const s = recordSeconds < 10 ? '0' + recordSeconds : recordSeconds;
+        timerDisplay.innerText = '00:' + s + ' / 00:60';
+        jitterWaveform();
+        if (recordSeconds >= 60) {
+          toggleRecording();
+        }
+      }, 1000);
+    } else {
+      isRecording = false;
+      btn.classList.remove('bg-electric-lime', 'text-on-primary', 'shadow-[0_0_32px_rgba(212,255,0,0.6)]');
+      btn.classList.add('bg-surface-raised', 'text-electric-lime');
+      micIcon.innerText = 'mic';
+      stateText.innerText = 'Captured! Rate your delivery below';
+      stateText.classList.remove('text-electric-lime');
+      halo.classList.remove('bg-electric-lime/25', 'scale-125');
+      halo.classList.add('bg-electric-lime/5');
+      clearInterval(recordTimer);
+    }
+  }
+
+  function jitterWaveform() {
+    const bars = document.querySelectorAll('.wave-bar');
+    bars.forEach(bar => {
+      const h = Math.floor(Math.random() * 85) + 15;
+      bar.style.height = h + '%';
+    });
+  }
+
+  function animateWaveform(durationMs) {
+    const interval = setInterval(jitterWaveform, 120);
+    setTimeout(() => clearInterval(interval), durationMs);
+  }
+
+  function skipMicPractised() {
+    const stateText = document.getElementById('record-state-text');
+    stateText.innerText = 'Logged! Great aloud session!';
+    stateText.classList.add('text-cyan-spark');
+    setTimeout(() => {
+      stateText.innerText = 'Tap to Record Voice';
+      stateText.classList.remove('text-cyan-spark');
+    }, 2500);
+  }
+
+  function selectRating(index, el) {
+    document.querySelectorAll('.rating-btn').forEach(b => {
+      b.classList.remove('bg-surface-bright', 'ring-2', 'ring-electric-lime');
+    });
+    el.classList.add('bg-surface-bright');
+  }
+
+  function openGeminiCompanion() {
+    alert('Launching Gemini Companion roleplay with Der Bäcker...');
+  }
+</script></main></body></html>
