@@ -1,5 +1,7 @@
 # Start speaking — a short guide
 
+> Want the smallest possible routine, or have ADHD? Start with [Start small](START_SMALL.md). This page is the fuller walkthrough.
+
 ## Find your next lesson
 
 Open **Lessons**. **My path** shows your current stage, one recommended lesson with a short reason, and progress for each of the five stages:

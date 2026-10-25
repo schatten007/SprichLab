@@ -9,6 +9,7 @@ import { esc, icon } from './ui.js';
 import { hasSharedCaptureIntent, sharedCapture } from './phrase-form.js';
 import * as Lessons from './v-lessons.js';
 import * as Words from './v-words.js';
+import { finishOnboarding, shouldOfferOnboarding } from './onboarding.js';
 
 // Only the beginner path is in the core bundle. Every other screen is a
 // separate chunk, so the default route never downloads the workplace course UI.
@@ -24,6 +25,7 @@ const views = {
   ai: () => import('./v-ai.js'),
   assessments: () => import('./v-assessments.js'),
   how: () => import('./v-how.js'),
+  'getting-started': () => import('./v-onboarding.js'),
 };
 const SIMPLE_ROUTES = new Set(['today', 'lessons', 'words', 'practice', 'phrases', 'resources', 'progress', 'settings', 'how']);
 import { loadCourse, starterSnapshot } from './starter-content.js';
@@ -130,6 +132,7 @@ async function boot() {
     try { legacyRaw = localStorage.getItem(LEGACY_KEY); } catch { /* IndexedDB does not require access to localStorage. */ }
     store = await createStore({ legacyRaw });
     await recoverDrafts(store);
+    let offerOnboarding = shouldOfferOnboarding(store.state);
     applyTheme();
     const speech = createSpeechService(() => store.state.preferences);
     async function play(text, button, options) {
@@ -145,6 +148,8 @@ async function boot() {
     }
     const context = {
       store, speech, play, notify, error: showError, applyTheme,
+      get shouldOfferOnboarding() { return offerOnboarding; },
+      finishOnboarding() { finishOnboarding(); offerOnboarding = false; },
       sharedCapture: bootSharedCapture,
       clearSharedCapture() { context.sharedCapture = null; },
       go(route) {
@@ -153,6 +158,7 @@ async function boot() {
       },
       refresh: () => requestRender(),
       async startStarter(id, { support = 'guided' } = {}) {
+        context.finishOnboarding();
         await store.refresh();
         let session = store.state.starter.sessions.find(item => item.lessonId === id && !item.completedAt);
         if (!session) {
@@ -240,6 +246,7 @@ async function boot() {
         else if (route.startsWith('learn/')) cleanup = await Lessons.renderSession(main, viewContext, route.slice('learn/'.length));
         else if (route.startsWith('word-session/')) cleanup = await Words.renderSession(main, viewContext, route.slice('word-session/'.length));
         else if (route.startsWith('gemini/')) cleanup = await (await views.gemini()).render(main, viewContext, route.slice('gemini/'.length));
+        else if (route === 'getting-started') cleanup = await (await views['getting-started']()).render(main, viewContext);
         else if (route === 'assessments' || route.startsWith('assessments/lesson/')) {
           const module = await views.assessments();
           cleanup = await module.render(main, viewContext, route === 'assessments' ? null : route.slice('assessments/lesson/'.length));

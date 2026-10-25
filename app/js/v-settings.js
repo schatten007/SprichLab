@@ -54,6 +54,11 @@ export async function render(el, ctx) {
       <span id="local-first-status" class="settings-status" role="status">Local-first storage · ${ctx.store.persistent ? 'this browser' : 'this session'}</span>
     </section>
 
+    <section class="settings-card card"><div class="card-title"><div><p class="eyebrow">FIRST STEPS</p><h2>Getting started</h2></div><span class="circle-icon">${icon('arrow')}</span></div>
+      <p class="small muted">Reopen the short guide for the daily routine, free device audio, optional gateway setup, and the manual Gemini conversation.</p>
+      <a class="btn secondary" href="#getting-started" aria-label="Open getting started guide">Open getting started guide ${icon('arrow')}</a>
+    </section>
+
     <div class="settings-layout">
       <div class="settings-primary">
         <section class="settings-card card">
@@ -85,7 +90,12 @@ export async function render(el, ctx) {
           </form>
         </section>
 
-        <section class="settings-card card" id="backup-section">
+       <section class="settings-card card" id="audio-api-setup">
+         <div class="card-title"><div><p class="eyebrow">OPTIONAL LOCAL GATEWAY</p><h2>Audio API setup</h2></div><span class="pill" id="audio-api-status">Not checked</span></div>
+         <div id="audio-api-content"><p class="small muted">Device speech works without a key. Check the local gateway only when you want to save Groq or ElevenLabs settings from this app.</p><button class="btn secondary" id="audio-api-check" type="button">Check local gateway</button></div>
+       </section>
+
+       <section class="settings-card card" id="backup-section">
           <div class="card-title"><div><p class="eyebrow">TRANSFER YOUR STATE</p><h2>Progress backups</h2></div><span class="pill">Account-free</span></div>
           <p class="small muted">Export a Sprich progress file, send it to another device, and import it there. Imports merge evidence by its stored IDs, so repeating a file does not duplicate attempts.</p>
           <div id="backup-composition" class="backup-composition">${backupComposition(state)}</div>
@@ -139,6 +149,59 @@ export async function render(el, ctx) {
   }
   fillVoices();
   globalThis.speechSynthesis?.addEventListener('voiceschanged', fillVoices);
+
+  async function loadAudioSetup() {
+    const host = el.querySelector('#audio-api-content');
+    const badge = el.querySelector('#audio-api-status');
+    if (!host || !badge) return;
+    try {
+      const status = await (ctx.aiClient ?? aiClient).status({ signal: ctx.signal });
+      if (ctx.signal?.aborted) return;
+      if (!status.audioSetupAvailable) {
+        badge.textContent = 'Server-managed';
+        host.innerHTML = '<p class="small muted">This gateway does not accept provider keys from the browser. Use the host’s secret manager. German device speech and Gemini Companion need no key.</p>';
+        return;
+      }
+      if (!status.authenticated) {
+        badge.textContent = 'Unlock first';
+        host.innerHTML = '<p class="small muted">Unlock the private local gateway in <a href="#ai">AI Talk</a>, then return here. The key is sent only to that same-origin gateway and is never added to progress exports.</p>';
+        return;
+      }
+      badge.textContent = status.groqReady || status.naturalVoiceConfigured ? 'Configured' : 'Optional';
+      host.innerHTML = `<p class="small muted">Save provider credentials on the local gateway for AI Talk transcription and optional natural speech. The browser never receives them back, and they are not stored in IndexedDB or progress backups.</p>
+        <form id="audio-api-form" class="settings-form"><div class="form-grid">
+          <label>Groq API key<input type="password" name="groqApiKey" autocomplete="off" placeholder="Paste only on your own local gateway"></label>
+          <label>ElevenLabs API key <span class="fine">optional</span><input type="password" name="elevenLabsApiKey" autocomplete="off" placeholder="For natural AI Talk voice"></label>
+          <label>ElevenLabs voice ID <span class="fine">optional</span><input type="text" name="elevenLabsVoiceId" autocomplete="off" placeholder="A default or Voice Design voice ID"></label>
+          <label class="check-label"><input type="checkbox" name="groqFreeTierConfirmed"> <span>I confirm this is a Groq Free account with no paid upgrade.</span></label>
+        </div><div class="form-actions btn-row"><button class="btn" type="submit">Save audio API settings</button><span class="fine" id="audio-api-form-status" role="status"></span></div></form>`;
+      host.querySelector('#audio-api-form').addEventListener('submit', async event => {
+        event.preventDefault();
+        const formElement = event.currentTarget;
+        const form = new FormData(formElement);
+        const button = event.submitter;
+        button.disabled = true;
+        try {
+          await (ctx.aiClient ?? aiClient).setupAudio({
+            groqApiKey: String(form.get('groqApiKey') ?? ''),
+            groqFreeTierConfirmed: form.get('groqFreeTierConfirmed') === 'on',
+            elevenLabsApiKey: String(form.get('elevenLabsApiKey') ?? ''),
+            elevenLabsVoiceId: String(form.get('elevenLabsVoiceId') ?? ''),
+          }, { signal: ctx.signal });
+          formElement.reset();
+          host.querySelector('#audio-api-form-status').textContent = 'Audio API settings saved locally. Keys are not in this browser or its backups.';
+          badge.textContent = 'Saved locally';
+        } catch (error) { ctx.error(error.message); }
+        finally { if (button?.isConnected) button.disabled = false; }
+      });
+    } catch {
+      if (!ctx.signal?.aborted) {
+        badge.textContent = 'Not connected';
+        host.innerHTML = `<p class="small muted">The local gateway is not available. Device speech still works without it. <a href="#ai">Open AI Talk</a> to check the connection.</p>`;
+      }
+    }
+  }
+  el.querySelector('#audio-api-check').addEventListener('click', () => { void loadAudioSetup(); });
 
   async function savePreferences() {
     const form = new FormData(el.querySelector('#preferences-form'));

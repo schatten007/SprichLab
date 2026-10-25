@@ -148,6 +148,21 @@ test('Today recommends a path step and the library classifies and filters the wh
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
 
+test('a new install gets a small getting-started guide that can be reopened from Settings', async ({ page }) => {
+  await page.goto('/#today');
+  await expect(page.getByRole('region', { name: 'Getting started' })).toBeVisible();
+  await expect(page.getByText('Audio setup is optional', { exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Open getting started' }).click();
+  await expect(page.getByRole('heading', { name: 'Start here with Sprich.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'What to send and what to get back' })).toBeVisible();
+  await page.getByRole('button', { name: 'Start practicing' }).click();
+  await expect(page.getByRole('heading', { name: /A little more confident/ })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Getting started' })).toHaveCount(0);
+  await page.goto('/#settings');
+  await page.getByRole('link', { name: 'Open getting started guide' }).click();
+  await expect(page.getByRole('heading', { name: 'Start here with Sprich.' })).toBeVisible();
+});
+
 test('Electric Slate Today groups the next action, measured effort, and milestone without fixture metrics', async ({ page }) => {
   await page.goto('/#today');
   await expect(page.getByRole('region', { name: 'Today recommendation' })).toBeVisible();

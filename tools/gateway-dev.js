@@ -6,10 +6,13 @@ import { sqliteD1 } from '../worker/sqlite-adapter.js';
 import { sha256 } from '../worker/auth.js';
 import { createMockProvider, TEST_ACCESS_CODE, TEST_SESSION_SECRET } from './mock-ai-provider.js';
 import { loadLocalAssessment } from './assessment-definitions.js';
+import { readAudioCredentials, writeAudioCredentials } from './local-audio-credentials.js';
 
 const testMode = process.argv.includes('--test');
 const port = Number(process.env.AI_GATEWAY_PORT || 8787);
 const fileEnv = {};
+const audioCredentialsPath = fileURLToPath(new URL('../.local/ai-credentials.json', import.meta.url));
+const localAudio = testMode ? {} : await readAudioCredentials(audioCredentialsPath);
 if (!testMode) {
   try {
     const text = await readFile(new URL('../.dev.vars', import.meta.url), 'utf8');
@@ -22,12 +25,14 @@ if (!testMode) {
 }
 const db = sqliteD1(testMode ? ':memory:' : fileURLToPath(new URL('../.local/ai-gateway.sqlite', import.meta.url)));
 db.exec(await readFile(new URL('../worker/migrations/0001_ai.sql', import.meta.url), 'utf8'));
-const env = { ...fileEnv, ...Object.fromEntries(Object.entries(process.env).filter(([, value]) => value)), AI_DB: db };
+const env = { ...localAudio, ...fileEnv, ...Object.fromEntries(Object.entries(process.env).filter(([, value]) => value)), AI_DB: db };
 let gateway;
 if (testMode) {
   Object.assign(env, { OWNER_TOKEN_HASH: await sha256(TEST_ACCESS_CODE), SESSION_SECRET: TEST_SESSION_SECRET, GROQ_API_KEY: 'test-provider-only', GROQ_FREE_TIER_CONFIRMED: 'true', ELEVENLABS_API_KEY: 'test-provider-only', ELEVENLABS_VOICE_ID: 'test-voice', AI_DAILY_TURNS: '100', AI_MINUTE_TURNS: '100', AI_DAILY_REVIEWS: '50', AI_AUTH_ATTEMPTS: '500' });
-  gateway = createGateway({ fetcher: createMockProvider().fetch, testMode: true, loadAssessmentDefinition: loadLocalAssessment });
-} else gateway = createGateway({ loadAssessmentDefinition: loadLocalAssessment });
+  gateway = createGateway({ fetcher: createMockProvider().fetch, testMode: true, loadAssessmentDefinition: loadLocalAssessment,
+    saveAudioConfig: async config => { Object.assign(env, config); } });
+} else gateway = createGateway({ loadAssessmentDefinition: loadLocalAssessment,
+  saveAudioConfig: async config => { await writeAudioCredentials(audioCredentialsPath, { ...localAudio, ...config }); Object.assign(env, config); } });
 
 const server = createServer(async (incoming, outgoing) => {
   try {

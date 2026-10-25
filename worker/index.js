@@ -47,7 +47,7 @@ async function turnBody(request, kind) {
   return { input, audio, extension, hash: await sha256(canonical({ input, audioHash })) };
 }
 
-export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console, loadAssessmentDefinition = loadWorkerAssessment } = {}) {
+export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console, loadAssessmentDefinition = loadWorkerAssessment, saveAudioConfig = null } = {}) {
   async function handle(request, env, execution = {}) {
     const path = new URL(request.url).pathname;
     if (!path.startsWith('/api/')) return env.ASSETS ? env.ASSETS.fetch(request) : new Response('Not found', { status: 404 });
@@ -69,6 +69,7 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
         return securityHeaders(success({ configured: configured && databaseReady, authenticated: signedIn, groqReady,
           naturalVoiceConfigured: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID), naturalVoiceId: env.ELEVENLABS_VOICE_ID ?? '',
           testMode, models: AI_MODELS, limits,
+          audioSetupAvailable: Boolean(saveAudioConfig),
           missing: [!authConfigured(env) && 'owner access code / signing secret', !databaseReady && 'request database and migrations', !env.GROQ_API_KEY && 'Groq API key', env.GROQ_FREE_TIER_CONFIRMED !== 'true' && 'owner confirmation of the Groq Free plan'].filter(Boolean) }), request);
       }
       if (!configured) throw problem(503, 'setup', 'The owner has not configured the AI gateway yet. Open the setup guide; Gemini Companion is available now.');
@@ -88,6 +89,31 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
       }
       if (!signedIn) throw problem(401, 'authentication', 'Unlock the private AI connection first.');
       const day = new Date(now()).toISOString().slice(0, 10);
+      if (path === `${PREFIX}/setup/audio` && request.method === 'POST') {
+        if (!saveAudioConfig) throw problem(503, 'setup_remote', 'Provider keys can only be saved by the local gateway. Use your host’s secret manager for a deployed gateway.');
+        const input = await jsonBody(request, 5000);
+        const config = {};
+        const groqKey = typeof input?.groqApiKey === 'string' ? input.groqApiKey.trim() : '';
+        const elevenLabsKey = typeof input?.elevenLabsApiKey === 'string' ? input.elevenLabsApiKey.trim() : '';
+        const voiceId = typeof input?.elevenLabsVoiceId === 'string' ? input.elevenLabsVoiceId.trim() : '';
+        if (groqKey) {
+          if (groqKey.length > 500 || input.groqFreeTierConfirmed !== true) throw problem(422, 'validation', 'Confirm the Groq Free account before saving its key.');
+          config.GROQ_API_KEY = groqKey;
+          config.GROQ_FREE_TIER_CONFIRMED = 'true';
+        }
+        if (elevenLabsKey) {
+          if (elevenLabsKey.length > 500) throw problem(422, 'validation', 'The ElevenLabs key is too long.');
+          config.ELEVENLABS_API_KEY = elevenLabsKey;
+        }
+        if (voiceId) {
+          if (voiceId.length > 200) throw problem(422, 'validation', 'The ElevenLabs voice ID is too long.');
+          config.ELEVENLABS_VOICE_ID = voiceId;
+        }
+        if (!Object.keys(config).length) throw problem(422, 'validation', 'Enter a provider key or voice ID first.');
+        await saveAudioConfig(config);
+        Object.assign(env, config);
+        return securityHeaders(success({ saved: true, groqReady: Boolean(env.GROQ_API_KEY) && env.GROQ_FREE_TIER_CONFIRMED === 'true', naturalVoiceConfigured: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID) }), request);
+      }
       if (path === `${PREFIX}/usage` && request.method === 'GET') return securityHeaders(success({ day, resetAt: Date.parse(`${day}T00:00:00Z`) + 86_400_000,
         turnsUsed: await ledger.count(`turns:${day}`), reviewsUsed: await ledger.count(`reviews:${day}`), limits, testMode }), request);
       if (path === `${PREFIX}/capabilities` && request.method === 'GET') {

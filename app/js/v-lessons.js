@@ -11,6 +11,7 @@ import { courseError, wordCard, bindWordActions, pathPicker, bindPathPicker, sta
 import { esc, icon, pageHeading, safeAction, duration, progressBar, provenance, howLink, blockMeter, minutes } from './ui.js';
 import { rewards } from './rewards.js';
 import { dateKey } from './model.js';
+import { firstLaunchCard } from './onboarding-card.js';
 
 export async function render(el, ctx) {
   el.innerHTML = pageHeading('YOUR PATH', 'Small lessons, in a useful order.', 'Opening your course…');
@@ -150,7 +151,7 @@ export async function renderToday(el, ctx) {
   const weekMax = Math.max(reward.ring.goalMs, ...reward.week.map(day => day.ms), 1);
   const weekday = day => new Intl.DateTimeFormat(undefined, { weekday: 'short', timeZone: state.preferences.timeZone }).format(Date.parse(`${day.day}T12:00:00Z`));
   el.innerHTML = `${pageHeading('ONE SMALL CONVERSATION', state.profile.name ? `A little more confident, ${state.profile.name}.` : 'A little more confident, every day.', 'One lesson at a time. Say a useful sentence out loud, then keep the conversation going.')}
-    <div class="starter-today-path">${pathPicker(state)}</div>
+    ${ctx.shouldOfferOnboarding ? firstLaunchCard() : ''}<div class="starter-today-path">${pathPicker(state)}</div>
     <div class="starter-today-grid">
       <section class="card next-lesson starter-today-hero" role="region" aria-label="Today recommendation"><div class="starter-today-hero-head"><div><p class="eyebrow">${done ? 'PRACTISED TODAY' : active ? 'CONTINUE' : esc(stage.stage.title.toUpperCase())}</p><h2>${esc(meta.title)}</h2></div><div class="pills">${levelPill(meta.level)}<span class="pill">${meta.minutes} min</span>${done ? '<span class="pill green">Done today</span>' : ''}</div></div>
         <p class="starter-model" lang="de">${esc(chosen.warmup.de)}</p><p>${esc(chosen.warmup.en)}</p><p class="small">${esc(chosen.goal)}</p>
