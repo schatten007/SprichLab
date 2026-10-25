@@ -6,35 +6,39 @@ import { createPracticeClock } from './clock.js';
 import { mountRecording } from './recording-ui.js';
 import { journalDraft, clearJournal } from './draft-journal.js';
 import { phraseForm, bindPhraseForm } from './phrase-form.js';
-import { esc, icon, pageHeading, lessonCopy, englishMeaning, safeAction, duration } from './ui.js';
+import { esc, icon, pageHeading, lessonCopy, englishMeaning, safeAction, duration, provenance } from './ui.js';
 
 const registrationLabel = value => ({ none: 'No account required', optional: 'Free account optional', required: 'Free registration needed' }[value]);
 const transcriptLabel = value => ({ available: 'Transcript / text', vocabulary: 'Vocabulary text', exercises: 'Exercise text', 'bilingual-captions': 'DE + EN captions', none: 'No text support' }[value]);
 
 function card(resource, state) {
   const saved = resourceState(state, resource.id);
-  return `<article class="card catalog-card"><div class="card-title"><span class="eyebrow">${esc(resource.provider)}</span>
+  return `<article class="card catalog-card"><div class="card-title"><div class="catalog-provider"><span class="circle-icon">${icon(resource.formats.includes('video') ? 'play' : resource.formats.includes('audio') ? 'volume' : 'book')}</span><span class="eyebrow">${esc(resource.provider)}</span></div>
     <button class="bookmark-button" data-bookmark="${resource.id}" aria-pressed="${saved.bookmarked}" aria-label="${saved.bookmarked ? 'Unsave' : 'Save'} ${esc(resource.title)}">${icon('book')}</button></div>
-    <div class="pills"><span class="pill green">${esc(resource.level)}${resource.levelBasis === 'editorial' ? ' *' : ''}</span><span class="pill">${resource.practiceMinutes} min practice</span></div>
+    <div class="pills"><span class="pill green">${esc(resource.level)}${resource.levelBasis === 'editorial' ? ' *' : ''}</span><span class="pill">${esc(resource.formats.join(' · '))}</span><span class="pill">${resource.practiceMinutes} min practice</span></div>
     <h2><a href="#resource/${resource.id}">${esc(resource.title)}</a></h2><p lang="de">${esc(resource.summaryDe)}</p>
     ${englishMeaning(resource.summaryEn, { always: state.preferences.englishSupport === 'always' })}
-    <div class="resource-meta"><span>${esc(resource.formats.join(' · '))}</span><span>${transcriptLabel(resource.transcript)}</span><span>${registrationLabel(resource.registration)}</span></div>
+    <div class="resource-meta"><span>${transcriptLabel(resource.transcript)}</span><span>${registrationLabel(resource.registration)}</span></div>
     ${saved.unavailable ? '<span class="pill amber">Reported unavailable</span>' : saved.difficulty === 'hard' ? '<span class="pill amber">You asked for more support</span>' : resource.accessCheck === 'manual' ? '<span class="pill amber">Publisher access needs a manual check</span>' : ''}
-    <a href="#resource/${resource.id}" class="btn secondary">View guided activity ${icon('arrow')}</a></article>`;
+    <footer class="catalog-footer"><span class="fine">Source check · ${esc(resource.browserCheckedOn ?? resource.checkedOn)}<br>Publisher media needs internet</span><a href="#resource/${resource.id}" class="btn secondary">View guided activity ${icon('arrow')}</a></footer></article>`;
 }
 
 export function render(el, ctx) {
   const filters = { query: '', level: 'all', format: 'all', maxMinutes: 0, noRegistration: false, textSupport: false, bookmarked: false };
-  el.innerHTML = `${pageHeading('REAL RESOURCES. YOUR OWN WORDS.', 'Listen, notice, then use it.', 'A curated library for job conversations and everyday work. Every resource has a short follow-up task inside Sprich.')}
+  const active = ctx.store.state.sessions.filter(session => session.kind === 'resource' && !session.completedAt).sort((a, b) => b.updatedAt - a.updatedAt)[0];
+  el.innerHTML = `<div class="resource-page resource-library"><header class="workspace-heading"><span class="pill">German resource library</span>${pageHeading('REAL RESOURCES. YOUR OWN WORDS.', 'Listen, notice, then use it.', 'A curated library for job conversations and everyday work. Every resource has a short follow-up task inside Sprich.')}</header>
     <div class="practice-toolbar"><span class="pill green">${RESOURCES.length} guided resources · free-access material</span><a class="inline-link" href="#practice">Speaking missions ${icon('messages')}</a></div>
     <section class="card resource-filters" aria-label="Resource filters"><div class="resource-filter-grid">
       <label class="resource-search">Search resources<input type="text" id="resource-search" placeholder="Telefon, interview, office…"></label>
       <label>Level<select id="resource-level" aria-label="Level"><option value="all">All levels</option><option value="A2">A2 and supported basics</option><option value="B1">B1 and consolidation</option></select></label>
       <label>Format<select id="resource-format" aria-label="Format"><option value="all">All formats</option>${['audio', 'video', 'text', 'course', 'pronunciation', 'pdf', 'exercises'].map(format => `<option value="${format}">${format[0].toUpperCase() + format.slice(1)}</option>`).join('')}</select></label>
       <label>Practice time<select id="resource-time" aria-label="Practice time"><option value="0">Any length</option><option value="10">Up to 10 minutes</option><option value="15">Up to 15 minutes</option><option value="20">Up to 20 minutes</option></select></label></div>
-      <div class="resource-checks"><label class="check-label"><input id="resource-no-account" type="checkbox">No registration required</label><label class="check-label"><input id="resource-text" type="checkbox">Text or captions available</label><label class="check-label"><input id="resource-saved" type="checkbox">Saved resources only</label></div></section>
-    <p id="resource-count" class="fine section-gap" aria-live="polite"></p><div id="resource-grid" class="resource-catalog-grid"></div>
-    <p class="fine section-gap">* Suggested placement by Sprich where the publisher does not assign a CEFR level. Practice times include the follow-up task; they are not video lengths. External resources require internet.</p>`;
+      <div class="resource-checks"><label class="check-label"><input id="resource-no-account" type="checkbox">No registration required</label><label class="check-label"><input id="resource-text" type="checkbox">Text or captions available</label><label class="check-label"><input id="resource-saved" type="checkbox">Saved resources only</label><button class="text-button" id="clear-resource-filters">Clear resource filters</button></div></section>
+    <div class="resource-library-layout section-gap"><section aria-label="Resource catalog"><div class="catalog-heading"><h2>Choose your source</h2><p id="resource-count" class="fine" aria-live="polite"></p></div><div id="resource-grid" class="resource-catalog-grid"></div></section>
+    <aside class="stack resource-practice-rail" aria-label="Your resource practice">${active ? `<section class="card resource-resume"><p class="eyebrow">YOUR SAVED WORKSPACE</p><h2>${esc(active.content.resource.title)}</h2><p class="fine">Your response draft is ready to continue.</p><a class="btn" href="#session/${esc(active.id)}">Resume guided activity ${icon('arrow')}</a></section>` : ''}
+      <section class="card"><span class="circle-icon">${icon('mic')}</span><p class="eyebrow">FROM INPUT TO CONVERSATION</p><h2>Make it your own.</h2><ol class="resource-workflow"><li><strong>Listen or read</strong><p>Choose a short section on the publisher’s site.</p></li><li><strong>Respond in German</strong><p>Return here to record or write your own response.</p></li><li><strong>Keep a useful phrase</strong><p>Save its meaning and source for your next conversation.</p></li></ol><span class="pill">Unscored practice</span></section>
+      <section class="card resource-local"><h2>Ready when you return.</h2><p class="small">Guided notes and phrase capture stay available offline after the app is cached. Publisher audio and video need a connection.</p><p class="fine">Outside study time is self-reported, separate from measured in-app practice.</p><a class="inline-link" href="#phrases">Open my phrases ${icon('arrow')}</a></section></aside></div>
+    <p class="fine section-gap">* Level suggested by Sprich. Times include the follow-up task. External sources need internet.</p></div>`;
   function draw() {
     const resources = filterResources(ctx.store.state, filters);
     el.querySelector('#resource-count').textContent = `${resources.length} ${resources.length === 1 ? 'resource matches' : 'resources match'} your filters`;
@@ -43,11 +47,18 @@ export function render(el, ctx) {
   const inputs = [['#resource-search', 'query'], ['#resource-level', 'level'], ['#resource-format', 'format'], ['#resource-time', 'maxMinutes']];
   inputs.forEach(([selector, key]) => el.querySelector(selector).addEventListener(selector === '#resource-search' ? 'input' : 'change', event => { filters[key] = event.target.value; draw(); }));
   [['#resource-no-account', 'noRegistration'], ['#resource-text', 'textSupport'], ['#resource-saved', 'bookmarked']].forEach(([selector, key]) => el.querySelector(selector).addEventListener('change', event => { filters[key] = event.target.checked; draw(); }));
+  el.querySelector('#clear-resource-filters').addEventListener('click', () => {
+    Object.assign(filters, { query: '', level: 'all', format: 'all', maxMinutes: 0, noRegistration: false, textSupport: false, bookmarked: false });
+    inputs.forEach(([selector, key]) => { el.querySelector(selector).value = filters[key]; });
+    el.querySelectorAll('.resource-checks input').forEach(input => { input.checked = false; });
+    draw();
+    el.querySelector('#resource-search').focus();
+  });
   el.querySelector('#resource-grid').addEventListener('click', async event => {
     const button = event.target.closest('[data-bookmark]');
     if (!button || button.disabled) return;
     button.disabled = true;
-    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); draw(); }
+    try { const current = resourceState(ctx.store.state, button.dataset.bookmark); await ctx.store.setResourceState(current.id, { bookmarked: !current.bookmarked }); const id = button.dataset.bookmark; draw(); [...el.querySelectorAll('[data-bookmark]')].find(item => item.dataset.bookmark === id)?.focus(); }
     catch (error) { ctx.error(error.message); button.disabled = false; }
   });
   draw();
@@ -56,12 +67,12 @@ export function render(el, ctx) {
 function sourceHeader(resource, ctx, { start = false } = {}) {
   const saved = resourceState(ctx.store.state, resource.id);
   const always = ctx.store.state.preferences.englishSupport === 'always';
-  return `<section class="card resource-source"><div class="pills"><span class="pill green">${esc(resource.level)}</span><span class="pill">${resource.practiceMinutes} min estimated practice</span><span class="pill">${registrationLabel(resource.registration)}</span></div>
+  return `<section class="card resource-source" aria-label="Publisher source"><header class="resource-panel-heading"><span class="circle-icon">${icon('external')}</span><div><p class="eyebrow">PUBLISHER SOURCE</p><h2>${esc(resource.provider)}</h2></div></header><div class="pills"><span class="pill green">${esc(resource.level)}</span><span class="pill">${resource.practiceMinutes} min estimated practice</span><span class="pill">${registrationLabel(resource.registration)}</span></div>
     ${lessonCopy(resource.summaryDe, resource.summaryEn, { always })}
     <div class="btn-row"><a class="btn secondary" id="open-resource-source" href="${esc(resource.url)}" target="_blank" rel="noopener noreferrer">Open original resource ${icon('external')}</a>
       ${start ? `<button class="btn" id="start-resource">Start guided activity ${icon('arrow')}</button>` : ''}
       <button class="btn soft" id="save-resource" aria-pressed="${saved.bookmarked}">${icon('book')}${saved.bookmarked ? 'Saved resource' : 'Save resource'}</button></div>
-    <p id="resource-network" class="fine section-gap" ${navigator.onLine ? 'hidden' : ''}>You are offline. Use an in-app mission now, or open the source when connected.</p>
+    <p id="resource-network" class="callout section-gap" role="status" ${navigator.onLine ? 'hidden' : ''}>You are offline. Your guided notes and phrase capture still work. Open the source when connected.</p>
     <div class="resource-access"><span>${esc(resource.provider)}</span><span>${transcriptLabel(resource.transcript)}</span><span>${resource.voice === 'mixed' ? 'Mixed human / generated voices' : resource.voice === 'human' ? 'Human voice/video source' : resource.voice === 'provider-feedback' ? 'Publisher pronunciation feedback' : 'Reading material'}</span></div>
     <details class="source-notes"><summary>Access and source details</summary><p>${esc(resource.access)}</p><p class="fine">${esc(resource.verification)} Publisher information checked ${esc(resource.checkedOn)}.</p>
       <p class="fine">Browser check ${esc(resource.browserCheckedOn ?? 'pending')}: ${resource.accessCheck === 'manual' ? 'the publisher restricted automated access; it may work in your normal browser. An alternative is available below.' : resource.playbackCheck === 'verified' ? 'page access and muted media playback were verified.' : 'the page was reachable; media may require choosing an exercise or signing in.'}</p></details>
@@ -110,13 +121,13 @@ export function renderDetail(el, ctx, id) {
   if (!resource) throw new Error('This resource is not in the current catalog. Open the resource library to choose another.');
   const always = ctx.store.state.preferences.englishSupport === 'always';
   const words = resource.phraseIds.map(phraseId => phraseById(phraseId, ctx.store.state)).filter(Boolean);
-  el.innerHTML = `<a class="inline-link" href="#resources">${icon('back')}All German resources</a>
-    ${pageHeading(resource.provider, resource.title, resource.titleEn)}${sourceHeader(resource, ctx, { start: true })}
-    ${alternatives(resource, ctx.store.state)}<div class="grid-2 section-gap"><section class="card"><p class="eyebrow">YOUR FOLLOW-UP TASK</p>
+  el.innerHTML = `<div class="resource-page resource-detail"><a class="inline-link" href="#resources">${icon('back')}All German resources</a>
+    ${pageHeading(resource.provider, resource.title, resource.titleEn)}<div class="resource-detail-layout">${sourceHeader(resource, ctx, { start: true })}
+    <section class="card resource-followup" aria-label="Guided follow-up"><div class="workspace-task-meta"><p class="eyebrow">YOUR FOLLOW-UP TASK</p><span class="pill">Unscored practice</span></div>
       ${lessonCopy(resource.taskDe, resource.taskEn, { always })}<ol class="guided-steps" lang="de">${resource.stepsDe.map(step => `<li>${esc(step)}</li>`).join('')}</ol>
-      ${englishMeaning(resource.stepsEn.join('\n'), { always })}<p class="fine">Opening the source does not complete the activity. Save your own response in the guided workspace.</p></section>
-    <section class="card"><p class="eyebrow">PHRASES TO NOTICE</p>${words.map(word => `<div class="resource-phrase"><strong lang="de">${esc(word.de)}</strong>${englishMeaning(word.en, { always })}</div>`).join('')}
-      <a href="#phrases" class="inline-link">Your complete phrase collection ${icon('arrow')}</a></section></div>`;
+      ${englishMeaning(resource.stepsEn.join('\n'), { always })}<p class="fine">Opening the source does not complete the activity. Save your own response in the guided workspace.</p>
+    <div class="resource-phrase-bench"><p class="eyebrow">PHRASES TO NOTICE</p>${words.map(word => `<div class="resource-phrase"><strong lang="de">${esc(word.de)}</strong>${englishMeaning(word.en, { always })}</div>`).join('')}
+      <a href="#phrases" class="inline-link">Your complete phrase collection ${icon('arrow')}</a></div></section></div>${alternatives(resource, ctx.store.state)}</div>`;
   safeAction(el.querySelector('#start-resource'), () => ctx.startResource(resource.id), ctx.error);
   bindSource(el, resource, ctx);
 }
@@ -164,21 +175,22 @@ export async function renderActivity(el, ctx, sessionId) {
     if (note) note.hidden = validMinutes;
     el.querySelector('#outside-minutes')?.setAttribute('aria-invalid', String(!validMinutes));
   }
-  el.innerHTML = `<div class="session-top"><a class="inline-link" href="#resources">${icon('back')}Resource library</a><div class="session-time"><span id="resource-clock">${duration(activeMs())}</span><span class="fine" id="resource-clock-label">in-app practice</span></div></div>
+  el.innerHTML = `<div class="resource-page resource-activity"><div class="session-top"><a class="inline-link" href="#resources">${icon('back')}Resource library</a><div class="session-time"><span id="resource-clock">${duration(activeMs())}</span><span class="fine" id="resource-clock-label">in-app practice</span></div></div>
     ${pageHeading(locked ? 'SAVED RESOURCE PRACTICE' : 'LISTEN. NOTICE. USE YOUR OWN WORDS.', resource.title, 'A saved response connects this source to your German practice.')}
-    ${sourceHeader(resource, ctx)}${alternatives(resource, ctx.store.state)}
-    <div class="resource-workspace section-gap"><section class="card"><p class="eyebrow">YOUR GERMAN RESPONSE</p>
-      ${lessonCopy(resource.taskDe, resource.taskEn, { always })}
+    <div class="resource-workspace section-gap"><section class="card resource-response" aria-label="Your German response"><div class="workspace-task-meta"><h2>Your German response</h2><span class="pill">Unscored practice</span></div>
+      <div class="resource-response-prompt"><p class="eyebrow">USE YOUR OWN WORDS</p>${lessonCopy(resource.taskDe, resource.taskEn, { always })}</div>
       <div id="resource-recorder"></div><p class="fine" id="resource-draft-status" aria-live="polite">Draft saved on this device</p>
       ${locked ? `<div class="callout"><strong>Practice response saved.</strong><p>This is unscored practice. ${draft.recordingMs ? `${duration(draft.recordingMs)} of recording was saved.` : 'Your written response is saved.'}</p></div>
+        <div class="resource-outside">${provenance('reported')}<p>${draft.externalMinutes} minutes on the publisher’s site · kept out of the measured timer.</p></div>
         <div class="btn-row section-gap"><button class="btn" id="continue-mission">Practise the matching mission ${icon('arrow')}</button><a class="btn secondary" href="#today">Back to Today</a></div>` : `
-        <label class="outside-time">Minutes studied on the publisher’s site (optional)<input type="number" id="outside-minutes" min="0" max="120" step="1" value="${draft.externalMinutes}" aria-describedby="outside-time-error"><span class="field-hint">Self-reported outside study, kept separate from the measured timer.</span></label>
-        <p class="callout error small" id="outside-time-error" role="status" hidden>Use a whole number from 0 to 120 minutes.</p>
-        <p class="fine">Save a recording or write a response in Optional notes or transcript. Confirming that you spoke aloud alone does not save an artifact.</p>
+        <div class="resource-outside"><div class="workspace-task-meta"><h3>Outside study</h3>${provenance('reported')}</div>
+        <label class="outside-time">Minutes studied on the publisher’s site (optional)<input type="number" id="outside-minutes" min="0" max="120" step="1" value="${draft.externalMinutes}" aria-describedby="outside-time-error"><span class="field-hint">Self-reported, kept out of the measured timer.</span></label>
+         <p class="callout error small" id="outside-time-error" role="alert" hidden>Use a whole number from 0 to 120 minutes.</p></div>
+        <p class="fine">Save a recording or a written response to finish.</p>
         <button class="btn" id="finish-resource">Save response &amp; complete activity ${icon('check')}</button>`}</section>
-      <aside class="stack"><section class="card"><p class="eyebrow">A SHORT WORKFLOW</p><ol class="guided-steps" lang="de">${resource.stepsDe.map(step => `<li>${esc(step)}</li>`).join('')}</ol>${englishMeaning(resource.stepsEn.join('\n'), { always })}
-        <p class="fine">The timer pauses while you are on another tab. Returning here and saving a response provides your practice evidence.</p></section>
-      <section class="card"><p class="eyebrow">CARRY A PHRASE FORWARD</p><h2>Keep something you can use.</h2><p class="fine">Save a short phrase and your own example. It becomes available for spoken recall.</p><details><summary>Add a personal phrase</summary>${phraseForm(resource)}</details></section></aside></div>`;
+      <aside class="stack" aria-label="Source and phrase workspace">${sourceHeader(resource, ctx)}${alternatives(resource, ctx.store.state)}<section class="card"><p class="eyebrow">A SHORT WORKFLOW</p><ol class="guided-steps" lang="de">${resource.stepsDe.map(step => `<li>${esc(step)}</li>`).join('')}</ol>${englishMeaning(resource.stepsEn.join('\n'), { always })}
+        <p class="fine">The timer pauses while you are on another tab.</p></section>
+      <section class="card resource-capture"><p class="eyebrow">CARRY A PHRASE FORWARD</p><h2>Keep something you can use.</h2><p class="fine">Save a short phrase and your own example. It becomes available for spoken recall.</p><p class="phrase-source fine">Source: ${esc(resource.provider)} · ${esc(resource.title)}</p><details><summary>Add a personal phrase</summary>${phraseForm(resource)}</details></section></aside></div></div>`;
   if (!locked) {
     clock = createPracticeClock({ sessionId: session.id, timeZone: ctx.store.state.preferences.timeZone,
       onSegments: async segments => { try { await ctx.store.addActivity(segments); } catch (error) { ctx.error(error.message); } },

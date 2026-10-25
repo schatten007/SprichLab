@@ -121,6 +121,36 @@ test('owner access issues a signed session that rejects tampering, reuse after e
   assert.equal((await read(await call(gateway, env, '/api/v1/session', { method: 'DELETE' }))).data.authenticated, false);
 });
 
+test('authenticated local setup saves audio provider keys without returning them', async () => {
+  const clock = { t: START };
+  const env = await makeEnv();
+  const saved = [];
+  const provider = createMockProvider();
+  const gateway = createGateway({ fetcher: provider.fetch, now: () => clock.t, testMode: true, logger: SILENT,
+    saveAudioConfig: async config => { saved.push(config); } });
+  const { cookie } = await signIn(gateway, env);
+  const response = await call(gateway, env, '/api/v1/setup/audio', { method: 'POST', cookie, body: {
+    groqApiKey: 'gsk-from-settings', groqFreeTierConfirmed: true,
+    elevenLabsApiKey: 'eleven-from-settings', elevenLabsVoiceId: 'voice-from-settings',
+  } });
+  assert.equal(response.status, 200, await response.clone().text());
+  const body = await read(response);
+  assert.deepEqual(body.data, { saved: true, groqReady: true, naturalVoiceConfigured: true });
+  assert.deepEqual(saved, [{ GROQ_API_KEY: 'gsk-from-settings', GROQ_FREE_TIER_CONFIRMED: 'true', ELEVENLABS_API_KEY: 'eleven-from-settings', ELEVENLABS_VOICE_ID: 'voice-from-settings' }]);
+  assert.ok(!JSON.stringify(body).includes('gsk-from-settings'));
+  assert.ok(!JSON.stringify(body).includes('eleven-from-settings'));
+});
+
+test('audio provider setup is unavailable when the gateway has no local persistence hook', async () => {
+  const clock = { t: START };
+  const env = await makeEnv();
+  const { gateway } = makeGateway({ clock });
+  const { cookie } = await signIn(gateway, env);
+  const response = await call(gateway, env, '/api/v1/setup/audio', { method: 'POST', cookie, body: { groqApiKey: 'gsk-key', groqFreeTierConfirmed: true } });
+  assert.equal(response.status, 503);
+  assert.equal((await read(response)).code, 'setup_remote');
+});
+
 test('the router refuses unsupported methods, unknown routes, and cross-origin mutations', async () => {
   const clock = { t: START };
   const env = await makeEnv();

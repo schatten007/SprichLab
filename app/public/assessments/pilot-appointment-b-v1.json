@@ -1,0 +1,397 @@
+{
+  "schemaVersion": 1,
+  "id": "pilot-appointment-b",
+  "version": "1",
+  "definitions": [
+    {
+      "schemaVersion": 1,
+      "id": "pilot.appointment.b.objective",
+      "version": "1",
+      "kind": "objective",
+      "title": "Appointment logistics — form B",
+      "level": "A2",
+      "lessonIds": ["starter-meeting-time", "starter-change-time", "starter-repeat"],
+      "skillIds": ["appointment-vocabulary", "time-prepositions", "modal-verbs", "word-order", "formal-register", "appointment-reading", "appointment-rescheduling", "appointment-confirmation", "clarification"],
+      "familyId": "appointment",
+      "formId": "b",
+      "exposureGroupIds": ["pilot.appointment.b"],
+      "instructions": "Answer all 15 items. Read the German message or calendar linked to each reading question. Select one option, fill each labelled slot, or arrange all the supplied tokens once. Write short answers in German and follow the stated sentence frames for the two constrained writing items.",
+      "stimuli": [
+        {
+          "id": "appointment.b.message",
+          "de": "Stadtbibliothek Nordring — Terminänderung\nGuten Tag, wir müssen Ihren Termin für die Bibliotheksanmeldung am Freitag um 10 Uhr verschieben. Frei sind Dienstag um 8 Uhr und Donnerstag um 9 Uhr. Welchen Ersatztermin möchten Sie?\nIhre Antwort: Am Dienstag habe ich einen Kurs und bin nicht frei. Ich kann am Donnerstag um 9 Uhr kommen.",
+          "en": "Nordring Public Library — appointment change\nHello, we need to reschedule your appointment to register at the library on Friday at 10:00. Tuesday at 08:00 and Thursday at 09:00 are available. Which replacement appointment would you like?\nYour reply: I have a class on Tuesday and am not free. I can come on Thursday at 09:00."
+        },
+        {
+          "id": "appointment.b.calendar",
+          "de": "Bibliotheksteam — Ihr neuer Kalendereintrag\nDanke für Ihre Antwort. Wir bestätigen Ihnen den neuen Termin.\nFreitag, 10:00 Uhr: gestrichen; der alte Termin gilt nicht mehr.\nDienstag, 08:00 Uhr: angeboten, aber wegen Ihres Kurses nicht möglich.\nDonnerstag, 09:00 Uhr: verbindlich für Sie gebucht.\nWir erwarten Sie am Donnerstag zur Anmeldung an der Information.",
+          "en": "Library team — your new calendar entry\nThank you for your reply. We confirm your new appointment.\nFriday, 10:00: removed; the old appointment is no longer valid.\nTuesday, 08:00: offered, but not possible because of your class.\nThursday, 09:00: firmly booked for you.\nWe look forward to seeing you at the information desk on Thursday to register."
+        }
+      ],
+      "items": [
+        {
+          "id": "appointment.b.vocab.termin",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Für die Anmeldung vereinbaren Sie einen festen Zeitpunkt. Welches Wort passt: Ich habe einen ____?",
+          "promptEn": "You arrange a specific time to register. Which word completes Ich habe einen ____ (I have an appointment)?",
+          "stimulusIds": [],
+          "skillIds": ["appointment-vocabulary"],
+          "feedback": {
+            "de": "Ich habe einen Termin. Ein Termin ist ein vereinbarter Zeitpunkt.",
+            "en": "Ich habe einen Termin means I have an appointment. A Termin is an agreed time."
+          },
+          "points": 1,
+          "options": [
+            { "id": "appointment", "text": "Termin" },
+            { "id": "letter", "text": "Brief" },
+            { "id": "room", "text": "Raum" }
+          ],
+          "answer": "appointment"
+        },
+        {
+          "id": "appointment.b.vocab.change",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Der Besuch soll stattfinden, aber zu einer anderen Zeit. Welches Verb passt zu dieser Änderung?",
+          "promptEn": "The visit should still take place, but at a different time. Which verb means to reschedule it?",
+          "stimulusIds": [],
+          "skillIds": ["appointment-vocabulary", "appointment-rescheduling"],
+          "feedback": {
+            "de": "Einen Termin verschieben bedeutet, einen anderen Zeitpunkt dafür zu wählen. Absagen allein legt keinen Ersatztermin fest.",
+            "en": "Einen Termin verschieben means to reschedule an appointment. Cancelling alone does not arrange a replacement."
+          },
+          "points": 1,
+          "options": [
+            { "id": "cancel", "text": "absagen" },
+            { "id": "postpone", "text": "verschieben" },
+            { "id": "repeat", "text": "wiederholen" }
+          ],
+          "answer": "postpone"
+        },
+        {
+          "id": "appointment.b.vocab.time",
+          "type": "text",
+          "domain": "vocabulary",
+          "promptDe": "Schreiben Sie das Gegenteil von „später“ (ein Wort).",
+          "promptEn": "Write the German opposite of später (later), using one word.",
+          "stimulusIds": [],
+          "skillIds": ["appointment-vocabulary"],
+          "feedback": {
+            "de": "Das Gegenteil von später ist früher. Schreiben Sie früher mit ü.",
+            "en": "The opposite of später (later) is früher (earlier). The ü in früher is required."
+          },
+          "points": 1,
+          "accepted": ["früher"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "appointment.b.vocab.repeat",
+          "type": "text",
+          "domain": "vocabulary",
+          "promptDe": "Ich habe Sie nicht verstanden. Sagen Sie es bitte ____. Ergänzen Sie einen Ausdruck für „again“, der mit „noch“ beginnt (ein oder zwei Wörter).",
+          "promptEn": "Complete Sagen Sie es bitte ____ with a German expression meaning again that starts with noch (one or two words).",
+          "stimulusIds": [],
+          "skillIds": ["appointment-vocabulary", "clarification"],
+          "feedback": {
+            "de": "Sagen Sie es bitte noch einmal. Auch noch mal, nochmal und nochmals passen in diese Lücke.",
+            "en": "Please say it once more. Noch mal, nochmal and nochmals also fit this gap."
+          },
+          "points": 1,
+          "accepted": ["noch einmal", "noch mal", "nochmal", "nochmals"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "appointment.b.vocab.confirm",
+          "type": "choice",
+          "domain": "vocabulary",
+          "promptDe": "Mit welcher Antwort nehmen Sie den vorgeschlagenen Termin an?",
+          "promptEn": "Which reply confirms that the proposed appointment suits you?",
+          "stimulusIds": [],
+          "skillIds": ["appointment-vocabulary", "appointment-confirmation"],
+          "feedback": {
+            "de": "Ja, der Termin passt mir gut. Damit nehmen Sie das Angebot an. Die anderen Antworten bitten um eine Änderung oder lehnen ab.",
+            "en": "Yes, the appointment suits me well accepts the offer. The other replies ask for a change or decline it."
+          },
+          "points": 1,
+          "options": [
+            { "id": "change", "text": "Bitte ändern Sie den Termin." },
+            { "id": "decline", "text": "Da habe ich leider keine Zeit." },
+            { "id": "confirm", "text": "Ja, der Termin passt mir gut." }
+          ],
+          "answer": "confirm"
+        },
+        {
+          "id": "appointment.b.grammar.prepositions",
+          "type": "slots",
+          "domain": "grammar",
+          "promptDe": "Ergänzen Sie je ein Wort: Die Anmeldung ist ____ Mittwoch ____ vierzehn Uhr.",
+          "promptEn": "Fill each gap with one word: Die Anmeldung ist ____ Mittwoch ____ vierzehn Uhr.",
+          "stimulusIds": [],
+          "skillIds": ["time-prepositions"],
+          "feedback": {
+            "de": "Die Anmeldung ist am Mittwoch um vierzehn Uhr. Am steht vor dem Wochentag, um vor der Uhrzeit.",
+            "en": "Registration is on Wednesday at 14:00. Use am before the weekday and um before the time. Each gap earns its own point."
+          },
+          "parts": [
+            { "id": "day", "label": "Before Mittwoch", "points": 1, "accepted": ["am"], "policy": { "case": "fold", "punctuation": "terminal" } },
+            { "id": "time", "label": "Before vierzehn Uhr", "points": 1, "accepted": ["um"], "policy": { "case": "fold", "punctuation": "terminal" } }
+          ]
+        },
+        {
+          "id": "appointment.b.grammar.modal",
+          "type": "text",
+          "domain": "grammar",
+          "promptDe": "Ergänzen Sie die Form von möchten für ich: Ich ____ den Termin bitte verschieben.",
+          "promptEn": "Use the ich form of möchten: Ich ____ den Termin bitte verschieben.",
+          "stimulusIds": [],
+          "skillIds": ["modal-verbs"],
+          "feedback": {
+            "de": "Ich möchte den Termin bitte verschieben. Nach ich steht möchte, mit ö und ohne n am Ende.",
+            "en": "I would like to reschedule the appointment, please. With ich, use möchte: keep ö and omit the final n."
+          },
+          "points": 1,
+          "accepted": ["möchte"],
+          "policy": { "case": "fold", "punctuation": "terminal" }
+        },
+        {
+          "id": "appointment.b.grammar.order",
+          "type": "order",
+          "domain": "grammar",
+          "promptDe": "Bilden Sie eine höfliche Frage. Beginnen Sie mit „Können Sie“ und verwenden Sie alle Teile genau einmal.",
+          "promptEn": "Arrange all the tokens once to make a polite question beginning with Können Sie.",
+          "stimulusIds": [],
+          "skillIds": ["word-order", "modal-verbs", "formal-register"],
+          "feedback": {
+            "de": "„Können Sie bitte am Montag anrufen?“ und „Können Sie am Montag bitte anrufen?“ sind beide richtig. Der Infinitiv anrufen steht am Ende.",
+            "en": "Can you please call on Monday? Bitte can go before or after am Montag. The infinitive anrufen comes at the end."
+          },
+          "points": 2,
+          "tokens": [
+            { "id": "call", "text": "anrufen?" },
+            { "id": "please", "text": "bitte" },
+            { "id": "you", "text": "Sie" },
+            { "id": "monday", "text": "am Montag" },
+            { "id": "can", "text": "Können" }
+          ],
+          "orders": [
+            ["can", "you", "please", "monday", "call"],
+            ["can", "you", "monday", "please", "call"]
+          ]
+        },
+        {
+          "id": "appointment.b.grammar.sie",
+          "type": "choice",
+          "domain": "grammar",
+          "promptDe": "Welche Frage an einen Bibliotheksmitarbeiter benutzt die höfliche Sie-Form richtig?",
+          "promptEn": "Which question to a library employee correctly uses the polite Sie form?",
+          "stimulusIds": [],
+          "skillIds": ["formal-register", "modal-verbs"],
+          "feedback": {
+            "de": "Können Sie den Termin bestätigen? Kannst du ist informell. Zu Sie gehört können, nicht könnt.",
+            "en": "Can you confirm the appointment? Kannst du is informal. Sie takes können, not könnt."
+          },
+          "points": 1,
+          "options": [
+            { "id": "wrong-verb", "text": "Könnt Sie den Termin bestätigen?" },
+            { "id": "informal", "text": "Kannst du den Termin bestätigen?" },
+            { "id": "formal", "text": "Können Sie den Termin bestätigen?" }
+          ],
+          "answer": "formal"
+        },
+        {
+          "id": "appointment.b.reading.original",
+          "type": "choice",
+          "domain": "reading",
+          "promptDe": "Welcher ursprüngliche Termin muss laut Nachricht verschoben werden?",
+          "promptEn": "According to the message, which original appointment has to be rescheduled?",
+          "stimulusIds": ["appointment.b.message"],
+          "skillIds": ["appointment-reading"],
+          "feedback": {
+            "de": "Der ursprüngliche Termin ist am Freitag um 10 Uhr. Dienstag und Donnerstag werden als Ersatz angeboten.",
+            "en": "The original appointment is on Friday at 10:00. Tuesday and Thursday are offered as replacements."
+          },
+          "points": 1,
+          "options": [
+            { "id": "friday-10", "text": "Freitag um 10 Uhr" },
+            { "id": "thursday-09", "text": "Donnerstag um 9 Uhr" },
+            { "id": "tuesday-08", "text": "Dienstag um 8 Uhr" }
+          ],
+          "answer": "friday-10"
+        },
+        {
+          "id": "appointment.b.reading.unavailable",
+          "type": "choice",
+          "domain": "reading",
+          "promptDe": "Welcher angebotene Ersatztermin ist laut Ihrer Antwort wegen Ihres Kurses nicht möglich?",
+          "promptEn": "According to your reply, which offered replacement appointment is not possible because of your class?",
+          "stimulusIds": ["appointment.b.message"],
+          "skillIds": ["appointment-reading", "appointment-rescheduling"],
+          "feedback": {
+            "de": "Sie haben am Dienstag einen Kurs. Deshalb können Sie den angebotenen Termin am Dienstag um 8 Uhr nicht nehmen.",
+            "en": "You have a class on Tuesday, so you cannot take the offered Tuesday appointment at 08:00."
+          },
+          "points": 1,
+          "options": [
+            { "id": "thursday-09", "text": "Donnerstag um 9 Uhr" },
+            { "id": "tuesday-08", "text": "Dienstag um 8 Uhr" },
+            { "id": "friday-10", "text": "Freitag um 10 Uhr" }
+          ],
+          "answer": "tuesday-08"
+        },
+        {
+          "id": "appointment.b.reading.final",
+          "type": "slots",
+          "domain": "reading",
+          "promptDe": "Welcher Termin ist im neuen Kalender verbindlich für Sie gebucht? Geben Sie den Wochentag und die Uhrzeit an.",
+          "promptEn": "Which appointment is firmly booked for you in the new calendar? Give the German weekday and the time. Digits or a German number word are accepted for the time.",
+          "stimulusIds": ["appointment.b.calendar"],
+          "skillIds": ["appointment-reading", "appointment-confirmation"],
+          "feedback": {
+            "de": "Gebucht ist Donnerstag um 9 Uhr. Freitag gilt nicht mehr. Dienstag war ein Angebot, das wegen Ihres Kurses nicht passt.",
+            "en": "Thursday at 09:00 is booked. Friday is no longer valid. Tuesday was an offer that conflicts with your class. The day and time each earn one point."
+          },
+          "parts": [
+            { "id": "day", "label": "German weekday (with or without am)", "points": 1, "accepted": ["Donnerstag", "am Donnerstag"], "policy": { "case": "fold", "punctuation": "terminal" } },
+            { "id": "time", "label": "Time (digits or a German number word; um and Uhr are optional)", "points": 1, "accepted": ["9", "09", "9:00", "09:00", "9.00", "09.00", "neun", "9 Uhr", "09 Uhr", "9:00 Uhr", "09:00 Uhr", "9.00 Uhr", "09.00 Uhr", "neun Uhr", "um 9", "um 09", "um 9:00", "um 09:00", "um 9.00", "um 09.00", "um neun", "um 9 Uhr", "um 09 Uhr", "um 9:00 Uhr", "um 09:00 Uhr", "um 9.00 Uhr", "um 09.00 Uhr", "um neun Uhr"], "policy": { "case": "fold", "punctuation": "terminal" } }
+          ]
+        },
+        {
+          "id": "appointment.b.reading.correction",
+          "type": "choice",
+          "domain": "reading",
+          "promptDe": "Jemand fragt: „Also Dienstag um 8 Uhr?“ Welche Antwort stimmt mit dem neuen Kalendereintrag überein?",
+          "promptEn": "Someone checks: So, Tuesday at 08:00? Which reply agrees with the new calendar entry?",
+          "stimulusIds": ["appointment.b.calendar"],
+          "skillIds": ["appointment-reading", "appointment-confirmation"],
+          "feedback": {
+            "de": "Nein, am Donnerstag um 9 Uhr. Dienstag war nur ein Angebot; gebucht ist Donnerstag.",
+            "en": "No, on Thursday at 09:00. Tuesday was only an offer; Thursday is booked."
+          },
+          "points": 1,
+          "options": [
+            { "id": "restore-original", "text": "Nein, am Freitag um 10 Uhr." },
+            { "id": "correct-final", "text": "Nein, am Donnerstag um 9 Uhr." },
+            { "id": "accept-unavailable", "text": "Ja, am Dienstag um 8 Uhr." },
+            { "id": "wrong-time", "text": "Nein, am Donnerstag um 8 Uhr." }
+          ],
+          "answer": "correct-final"
+        },
+        {
+          "id": "appointment.b.writing.decline",
+          "type": "text",
+          "domain": "writing",
+          "promptDe": "Sagen Sie in einem Satz, dass Sie am Dienstag nicht kommen können. Beginnen Sie mit „Am Dienstag“. Verwenden Sie „kann ich … nicht kommen“ oder „habe ich … keine Zeit“. Sie dürfen direkt vor nicht oder keine das Wort leider ergänzen.",
+          "promptEn": "Decline Tuesday in one sentence. Start with Am Dienstag and use either kann ich … nicht kommen or habe ich … keine Zeit. You may add leider immediately before nicht or keine. Use correct German capitalization.",
+          "stimulusIds": [],
+          "skillIds": ["appointment-rescheduling", "modal-verbs"],
+          "feedback": {
+            "de": "Zum Beispiel: Am Dienstag kann ich leider nicht kommen. Oder: Am Dienstag habe ich keine Zeit. Die Verneinung muss erhalten bleiben.",
+            "en": "For example: Unfortunately, I cannot come on Tuesday. Or: I have no time on Tuesday. Leider is optional, but the refusal must remain negative."
+          },
+          "points": 2,
+          "accepted": [
+            "Am Dienstag kann ich nicht kommen.",
+            "Am Dienstag kann ich leider nicht kommen.",
+            "Am Dienstag habe ich keine Zeit.",
+            "Am Dienstag habe ich leider keine Zeit."
+          ],
+          "policy": { "case": "exact", "punctuation": "terminal" }
+        },
+        {
+          "id": "appointment.b.writing.confirm",
+          "type": "text",
+          "domain": "writing",
+          "promptDe": "Bestätigen Sie den endgültigen Termin aus dem Kalender in einem Satz. Beginnen Sie mit „Ich bestätige den Termin“ oder „Der neue Termin ist“. Ergänzen Sie „am [Wochentag] um [Uhrzeit] Uhr“. Schreiben Sie die Uhrzeit als ganze Zahl, im Format HH:MM oder als Zahlwort.",
+          "promptEn": "Confirm the final calendar appointment in one sentence. Start with Ich bestätige den Termin or Der neue Termin ist, then add am [weekday] um [time] Uhr. Write the time as a whole number, HH:MM or a German number word. Use correct German capitalization.",
+          "stimulusIds": ["appointment.b.calendar"],
+          "skillIds": ["appointment-confirmation"],
+          "feedback": {
+            "de": "Möglich sind zum Beispiel „Ich bestätige den Termin am Donnerstag um 9 Uhr.“ und „Der neue Termin ist am Donnerstag um neun Uhr.“ Der bestätigte Termin darf nicht verneint oder durch Dienstag ersetzt werden.",
+            "en": "I confirm the appointment on Thursday at 09:00. The new appointment is on Thursday at nine is also accepted. Do not negate the confirmed appointment or replace it with Tuesday."
+          },
+          "points": 2,
+          "accepted": [
+            "Ich bestätige den Termin am Donnerstag um 9 Uhr.",
+            "Ich bestätige den Termin am Donnerstag um 09 Uhr.",
+            "Ich bestätige den Termin am Donnerstag um 9:00 Uhr.",
+            "Ich bestätige den Termin am Donnerstag um 09:00 Uhr.",
+            "Ich bestätige den Termin am Donnerstag um neun Uhr.",
+            "Der neue Termin ist am Donnerstag um 9 Uhr.",
+            "Der neue Termin ist am Donnerstag um 09 Uhr.",
+            "Der neue Termin ist am Donnerstag um 9:00 Uhr.",
+            "Der neue Termin ist am Donnerstag um 09:00 Uhr.",
+            "Der neue Termin ist am Donnerstag um neun Uhr."
+          ],
+          "policy": { "case": "exact", "punctuation": "terminal" }
+        }
+      ],
+      "rubricId": null,
+      "task": null,
+      "scenario": null
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pilot.appointment.b.writing",
+      "version": "1",
+      "kind": "writing",
+      "title": "A rescheduling message — form B",
+      "level": "A2",
+      "lessonIds": ["starter-meeting-time", "starter-change-time", "starter-repeat"],
+      "skillIds": ["appointment-rescheduling", "appointment-confirmation", "formal-register", "message-writing"],
+      "familyId": "appointment",
+      "formId": "b",
+      "exposureGroupIds": ["pilot.appointment.b"],
+      "instructions": "Write a 40–80-word message in German. Address the library team politely using Sie, cover all three goals, and include a suitable greeting and closing.",
+      "stimuli": [],
+      "items": [],
+      "rubricId": "writing:1",
+      "task": {
+        "prompt": "Reply to the team at Stadtbibliothek Nordring about your library-registration appointment. The library must move your original appointment on Friday at 10:00. It offers Tuesday at 08:00 or Thursday at 09:00. You have a class on Tuesday and cannot attend then; Thursday at 09:00 is possible for you. Write your reply to this offer, before receiving a booking confirmation. Request the suitable replacement and ask the team to confirm it. Use only these appointment facts; no other personal details are needed.",
+        "goals": [
+          "Refer to the original Friday appointment at 10:00 that must be moved, and ask to reschedule it.",
+          "Explain that you cannot attend on Tuesday at 08:00 because you have a class, and propose Thursday at 09:00.",
+          "Ask the library team to confirm the new day and time, and close politely."
+        ],
+        "words": [40, 80]
+      },
+      "scenario": null
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pilot.appointment.b.roleplay",
+      "version": "1",
+      "kind": "roleplay",
+      "title": "Reschedule with the library — form B",
+      "level": "A2",
+      "lessonIds": ["starter-meeting-time", "starter-change-time", "starter-repeat"],
+      "skillIds": ["appointment-rescheduling", "appointment-confirmation", "formal-register", "clarification"],
+      "familyId": "appointment",
+      "formId": "b",
+      "exposureGroupIds": ["pilot.appointment.b"],
+      "instructions": "Arrange the replacement appointment in German using polite Sie. Ask for the proposed times again, reject the unsuitable slot, propose the suitable one, and confirm the agreed day and time before ending.",
+      "stimuli": [],
+      "items": [],
+      "rubricId": "conversation:1",
+      "task": null,
+      "scenario": {
+        "id": "appointment-rescheduling",
+        "variantId": "b",
+        "register": "Sie",
+        "learnerRole": "A customer arranging a library-registration appointment at Stadtbibliothek Nordring.",
+        "partnerRole": "An employee at the information desk of Stadtbibliothek Nordring.",
+        "learnerTask": "Your original appointment on Friday at 10:00 must be moved. The library offers Tuesday at 08:00 or Thursday at 09:00. You have a class on Tuesday and cannot attend then; Thursday at 09:00 suits you. Imagine you did not catch the offered times: first ask for repetition. Then reject Tuesday, propose Thursday at 09:00, and explicitly confirm that day and time after the employee accepts.",
+        "partnerInstructions": "Speak in short A2-level German turns using Sie and ask one question at a time. Use the supplied opening. The original Friday at 10:00 appointment is no longer available; the only offered replacements are Tuesday at 08:00 and Thursday at 09:00. The learner cannot attend Tuesday because of a class. When asked to repeat, repeat both options without supplying a learner response. After the learner rejects Tuesday, ask when they can come instead and let them propose a day and time. If they request Friday at 10:00, explain that it is no longer available; if they choose Tuesday, remind them of their class and invite another choice. Accept Thursday at 09:00 only after the learner proposes it. Then confirm the booking and ask the learner to repeat the agreed day and time. Allow at least three substantive learner replies and an opportunity for each goal before closing. Discuss appointment logistics only.",
+        "openingDe": "Guten Tag, hier ist die Stadtbibliothek Nordring. Wir müssen Ihren Termin am Freitag um zehn Uhr verschieben. Wir bieten Ihnen Dienstag um acht Uhr oder Donnerstag um neun Uhr an. Passt Ihnen Dienstag?",
+        "openingEn": "Hello, this is Nordring Public Library. We need to reschedule your appointment on Friday at 10:00. We can offer you Tuesday at 08:00 or Thursday at 09:00. Would Tuesday suit you?",
+        "preparation": "Facts to plan with: Friday at 10:00 is no longer available. The library offers Tuesday at 08:00 and Thursday at 09:00. You have a class on Tuesday, so only Thursday at 09:00 suits you. Plan a polite request for repetition, a refusal, an alternative, and a final confirmation. Address the employee as Sie.",
+        "goals": [
+          { "id": "repeat-options", "text": "Politely ask the employee to repeat the proposed days and times before choosing." },
+          { "id": "reject-unavailable", "text": "Say that you cannot attend on Tuesday at 08:00 because you have a class." },
+          { "id": "propose-suitable", "text": "Propose Thursday at 09:00 as the replacement appointment." },
+          { "id": "confirm-final", "text": "After the employee accepts, explicitly confirm Thursday at 09:00 by repeating both the day and the time." }
+        ]
+      }
+    }
+  ]
+}

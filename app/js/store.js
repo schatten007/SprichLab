@@ -11,18 +11,24 @@ import { starterLessonById } from '../data/starter-catalog.js';
 import { validatePack } from './starter-content.js';
 import { validateStarter, validateStarterSession, starterSteps, starterResponse, starterCanFinish, wordReview } from './starter-state.js';
 import { newStarterPlan } from './starter-progress.js';
+import { assessmentStore } from './assessment-store.js';
+import { verifyAssessmentHashes } from './assessment-state.js';
+import { createAssessedAIConversation } from './ai-state.js';
+import { assessmentDefinition } from './assessment-state.js';
+import { canonicalJSON } from '../../shared/assessment-contracts.js';
 
 export const DATABASE_NAME = 'sprich-german-v2';
 export const LEGACY_KEY = 'deutsch-trainer-v1';
 
 /** All read-modify-write operations share one IndexedDB transaction, including across tabs. */
 export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now = Date.now } = {}) {
-  const database = await openDB(name, 4, {
+  const database = await openDB(name, 5, {
     upgrade(db) {
       if (!db.objectStoreNames.contains('meta')) db.createObjectStore('meta');
       if (!db.objectStoreNames.contains('recordings')) db.createObjectStore('recordings');
       if (!db.objectStoreNames.contains('ttsCache')) db.createObjectStore('ttsCache');
       if (!db.objectStoreNames.contains('coursePacks')) db.createObjectStore('coursePacks');
+      if (!db.objectStoreNames.contains('assessmentPacks')) db.createObjectStore('assessmentPacks');
     },
     blocking() { database.close(); },
   });
@@ -47,6 +53,7 @@ export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now 
   }
   await init.done;
   validateState(snapshot);
+  await verifyAssessmentHashes(snapshot.assessments);
 
   async function update(mutator) {
     const transaction = database.transaction('meta', 'readwrite');
@@ -73,6 +80,20 @@ export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now 
     get state() { return snapshot; },
     async refresh() { snapshot = validateState(await database.get('meta', 'state')); return snapshot; },
     update,
+    ...assessmentStore({ update, database, state: () => snapshot, now }),
+    async startAssessmentConversation(attemptId) {
+      let conversationId;
+      await update(state => {
+        const attempt = state.assessments.attempts.find(item => item.id === attemptId);
+        assert(attempt && ['prepared', 'in_progress'].includes(attempt.state), 'Start a new assessment attempt.');
+        if (attempt.aiSessionId) { conversationId = attempt.aiSessionId; return; }
+        const conversation = createAssessedAIConversation(attempt, assessmentDefinition(state.assessments, attempt), { now: now() });
+        validateAIConversation(conversation);
+        state.aiSessions.push(conversation); attempt.aiSessionId = conversation.id; attempt.state = 'in_progress';
+        attempt.startedAt ??= now(); attempt.updatedAt = now(); conversationId = conversation.id;
+      });
+      return conversationId;
+    },
     getCoursePack(id) { return database.get('coursePacks', id); },
     async putCoursePack(pack) {
       validatePack(pack);
@@ -266,6 +287,10 @@ export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now 
     },
     async saveAIDraft(id, draft) {
       return this.updateAIConversation(id, session => {
+        if (session.draft.status === 'sending' && session.draft.requestId === draft.requestId) {
+          const payload = value => ({ text: value.text, operation: value.operation, recordingMs: value.recordingMs, audioKey: value.audioKey, supersedes: value.supersedes, createdAt: value.createdAt });
+          assert(draft.status !== 'draft' && canonicalJSON(payload(session.draft)) === canonicalJSON(payload(draft)), 'This answer is being sent. Wait for its receipt before changing it.');
+        }
         if (!session.endedAt && !session.turns.some(turn => turn.id === draft.requestId)) session.draft = structuredClone(draft);
       });
     },
@@ -298,7 +323,9 @@ export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now 
         const state = await tx.objectStore('meta').get('state');
         assert(!state.attempts.some(attempt => attempt.id === key), 'This answer was already graded in another tab. Its saved audio cannot be replaced.');
         assert(!state.aiSessions.some(session => session.turns.some(turn => turn.audioKey === key)), 'This recording belongs to a completed AI turn.');
+        assert(!state.aiSessions.some(session => session.draft.status === 'sending' && session.draft.audioKey === key), 'This recording is being sent and cannot be replaced.');
         assert(!state.starter.sessions.some(session => session.responses.some(response => response.recordingKey === key)), 'This recording belongs to a saved beginner response.');
+        assert(!state.assessments.attempts.some(attempt => attempt.submission?.kind === 'roleplay' && attempt.submission.turns.some(turn => turn.audioKey === key)), 'This recording belongs to a submitted assessment.');
         await tx.objectStore('recordings').put(blob, key);
         await tx.done;
       } catch (error) {
@@ -329,11 +356,15 @@ export async function createStore({ name = DATABASE_NAME, legacyRaw = null, now 
       return JSON.stringify({ app: 'sprich', format: 1, exportedAt: now(), state: snapshot }, null, 2);
     },
     async previousBackup() {
-      const previous = await database.get('meta', 'schema-4-backup') ?? await database.get('meta', 'schema-3-backup') ?? await database.get('meta', 'schema-2-backup');
-      return previous ? JSON.stringify({ app: 'sprich', format: 1, state: previous }, null, 2) : null;
+      for (let version = SCHEMA_VERSION - 1; version >= 2; version--) {
+        const previous = await database.get('meta', `schema-${version}-backup`);
+        if (previous) return JSON.stringify({ app: 'sprich', format: 1, state: previous }, null, 2);
+      }
+      return null;
     },
     async import(raw, useProfile = false) {
       const incoming = parseBackup(raw);
+      await verifyAssessmentHashes(incoming.assessments);
       return update(state => mergeProgress(state, incoming, useProfile, now()));
     },
     close() { database.close(); },

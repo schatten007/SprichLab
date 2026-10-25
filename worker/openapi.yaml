@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: Sprich Private AI Gateway
-  version: 1.0.0
+  version: 1.1.0
   license: { name: UNLICENSED, identifier: LicenseRef-Proprietary }
   description: |
     Single-owner gateway for short German practice conversations. Provider keys are
@@ -16,6 +16,8 @@ tags:
     description: Owner authentication and configuration status.
   - name: Practice
     description: Bounded generation requests and recoverable receipts.
+  - name: Assessments
+    description: Version-bound task grading with quoted evidence and immutable receipts.
 paths:
   /status:
     get:
@@ -92,6 +94,8 @@ paths:
         Use the same requestId only for unchanged retries. Duplicate completed
         requests return their receipt. A changed payload with the same ID returns 409.
         Audio is at most 60 seconds / 1.5 MB. No raw audio is persisted by the gateway.
+        Assessed roleplays use assessmentRef instead of a mission ID. Their published
+        definition determines the scenario and level; checkpoint answer hints are rejected.
       requestBody:
         required: true
         content:
@@ -135,7 +139,7 @@ paths:
       operationId: createConversationReview
       tags: [Practice]
       summary: Produce a brief review grounded in at least two learner responses
-      description: Quotes are checked against the supplied learner history. AI suggestions never award mastery automatically.
+      description: Legacy qualitative review of supplied conversational history. Assessed conversations use the assessment evaluation endpoint; neither route automatically awards mastery.
       requestBody:
         required: true
         content:
@@ -206,6 +210,47 @@ paths:
         '502': { $ref: '#/components/responses/Problem' }
         '503': { $ref: '#/components/responses/Problem' }
         '504': { $ref: '#/components/responses/Problem' }
+  /assessments/evaluations:
+    post:
+      operationId: evaluateAssessment
+      tags: [Assessments]
+      summary: Grade sealed writing or a complete roleplay segment
+      description: |
+        Uses a deployment-owned definition and rubric. The definition and submission
+        hashes are recomputed. No client-selected prompt, model, URL, answer key, or
+        scoring weights are accepted. Writing is limited to 3000 characters; roleplay
+        evidence to 64 units and 8000 text characters, with at least three actual learner
+        replies. Request bodies are at most 32768 bytes. The existing daily review and
+        per-minute quotas apply. Duplicate request IDs recover receipts; different
+        input with the same ID conflicts. Acoustic performance is not graded.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: '#/components/schemas/AssessmentRequest' }
+      responses:
+        '200':
+          description: Validated criterion ratings, application-calculated score, and grader provenance.
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [data, meta]
+                properties:
+                  data: { $ref: '#/components/schemas/AssessmentEvaluation' }
+                  meta: { type: object, additionalProperties: true }
+        '202': { $ref: '#/components/responses/Pending' }
+        '400': { $ref: '#/components/responses/Problem' }
+        '401': { $ref: '#/components/responses/Problem' }
+        '403': { $ref: '#/components/responses/Problem' }
+        '404': { $ref: '#/components/responses/Problem' }
+        '409': { $ref: '#/components/responses/Problem' }
+        '413': { $ref: '#/components/responses/Problem' }
+        '422': { $ref: '#/components/responses/Problem' }
+        '429': { $ref: '#/components/responses/Problem' }
+        '502': { $ref: '#/components/responses/Problem' }
+        '503': { $ref: '#/components/responses/Problem' }
+        '504': { $ref: '#/components/responses/Problem' }
 components:
   securitySchemes:
     OwnerSession: { type: apiKey, in: cookie, name: sprich_ai_session }
@@ -218,20 +263,36 @@ components:
         meta: { type: object, additionalProperties: true }
     TurnInput:
       type: object
-      required: [requestId, sessionId, missionId, operation, level, profile, text, opening, history, recordingMs]
+      required: [requestId, sessionId, operation, level, profile, text, opening, history, recordingMs]
+      if:
+        required: [assessmentRef]
+        properties:
+          assessmentRef: { type: object }
+      then:
+        properties:
+          missionId: { type: 'null' }
+      else:
+        required: [missionId]
+        properties:
+          missionId: { type: string }
+          level: { enum: [A2, B1] }
       properties:
         requestId: { type: string, maxLength: 160 }
         sessionId: { type: string, maxLength: 160 }
-        missionId: { type: string, example: first-interview }
+        missionId: { type: [string, 'null'], example: first-interview }
+        assessmentRef:
+          oneOf:
+            - { $ref: '#/components/schemas/AssessmentRef' }
+            - { type: 'null' }
         operation: { type: string, enum: [reply, rephrase, hint] }
-        level: { type: string, enum: [A2, B1] }
+        level: { type: string, enum: [starter, A1, A2, B1] }
         profile: { type: object, additionalProperties: { type: string, maxLength: 500 }, description: Only selected name/studies/experience/availability/start/motivation fields; 1800 characters total. }
         text: { type: string, maxLength: 3000 }
         opening: { type: string, maxLength: 1200 }
         history:
           type: array
           maxItems: 12
-          description: At most 8000 characters across all entries. Review requests contain actual learner exchanges only.
+          description: Bounded chat context, at most 8000 characters. Assessment grading uses its separate complete, provenance-labelled submission instead.
           items:
             type: object
             required: [user, assistant]
@@ -258,6 +319,141 @@ components:
         promptVersion: { type: string }
         testMode: { type: boolean }
         usage: { type: object, additionalProperties: { type: number } }
+        assessmentRef: { $ref: '#/components/schemas/AssessmentRef' }
+    AssessmentHash:
+      type: string
+      pattern: '^[a-f0-9]{64}$'
+      description: SHA-256 of the canonical JSON defined by the shared assessment contracts.
+    AssessmentRef:
+      type: object
+      additionalProperties: false
+      required: [attemptId, definitionId, definitionVersion, definitionHash, mode]
+      properties:
+        attemptId: { type: string, maxLength: 160 }
+        definitionId: { type: string, maxLength: 160 }
+        definitionVersion: { type: string, minLength: 1, maxLength: 100 }
+        definitionHash: { $ref: '#/components/schemas/AssessmentHash' }
+        mode: { type: string, enum: [practice, checkpoint] }
+    AssessmentSupport:
+      type: object
+      required: [id, kind, phase, refId, at]
+      properties:
+        id: { type: string, maxLength: 160 }
+        kind: { type: string, enum: [question_repeat, question_rephrase, question_translation, word_lookup, answer_hint, model_answer, answer_reveal] }
+        phase: { type: string, enum: [preparation, assessment] }
+        refId: { type: [string, 'null'], maxLength: 160 }
+        at: { type: number, minimum: 0 }
+    AssessmentTurn:
+      type: object
+      required: [id, role, phase, inputMode, text, audioKey, edited]
+      properties:
+        id: { type: string, maxLength: 160 }
+        role: { type: string, enum: [learner, partner, control] }
+        phase: { type: string, enum: [preparation, assessment] }
+        inputMode: { type: string, enum: [typed, transcribed, generated, control, unknown] }
+        text: { type: string, maxLength: 3000 }
+        audioKey: { type: string, maxLength: 200, description: Local recording reference; raw audio is not sent to the grader. }
+        edited: { type: boolean }
+    AssessmentSubmission:
+      oneOf:
+        - type: object
+          required: [kind, text, inputMode, events]
+          properties:
+            kind: { const: writing }
+            text: { type: string, minLength: 1, maxLength: 3000 }
+            inputMode: { type: string, enum: [typed, dictated, unknown] }
+            events: { type: array, maxItems: 100, items: { $ref: '#/components/schemas/AssessmentSupport' } }
+        - type: object
+          required: [kind, complete, turns, events]
+          properties:
+            kind: { const: roleplay }
+            complete: { const: true }
+            turns: { type: array, maxItems: 64, items: { $ref: '#/components/schemas/AssessmentTurn' } }
+            events: { type: array, maxItems: 100, items: { $ref: '#/components/schemas/AssessmentSupport' } }
+    AssessmentRequest:
+      type: object
+      additionalProperties: false
+      required: [requestId, attemptId, definitionRef, definitionHash, mode, submissionHash, submission]
+      properties:
+        requestId: { type: string, maxLength: 160 }
+        attemptId: { type: string, maxLength: 160 }
+        definitionRef:
+          type: object
+          required: [id, version]
+          properties:
+            id: { type: string, maxLength: 160 }
+            version: { type: string, maxLength: 100 }
+        definitionHash: { $ref: '#/components/schemas/AssessmentHash' }
+        mode: { type: string, enum: [practice, checkpoint] }
+        submissionHash: { $ref: '#/components/schemas/AssessmentHash' }
+        submission: { $ref: '#/components/schemas/AssessmentSubmission' }
+    AssessmentQuote:
+      type: object
+      additionalProperties: false
+      required: [refId, quote]
+      properties:
+        refId: { type: [string, 'null'], maxLength: 160 }
+        quote: { type: string, minLength: 1, maxLength: 500 }
+    RubricFeedback:
+      type: object
+      additionalProperties: false
+      required: [ratings, strengths, corrections, retryDe, retryEn]
+      properties:
+        ratings:
+          type: array
+          minItems: 5
+          maxItems: 5
+          items:
+            type: object
+            additionalProperties: false
+            required: [id, score, reasonEn, evidence]
+            properties:
+              id: { type: string, enum: [task, interaction, clarity, vocabulary, grammar, organisation, mechanics] }
+              score: { type: [integer, 'null'], minimum: 0, maximum: 4 }
+              reasonEn: { type: string, minLength: 1, maxLength: 600 }
+              evidence: { type: array, maxItems: 2, items: { $ref: '#/components/schemas/AssessmentQuote' } }
+        strengths: { type: array, maxItems: 2, items: { type: string, maxLength: 500 } }
+        corrections:
+          type: array
+          maxItems: 2
+          items:
+            type: object
+            required: [refId, original, corrected, explanationDe, explanationEn]
+            properties:
+              refId: { type: [string, 'null'] }
+              original: { type: string, minLength: 1, maxLength: 500 }
+              corrected: { type: string, minLength: 1, maxLength: 500 }
+              explanationDe: { type: string, minLength: 1, maxLength: 600 }
+              explanationEn: { type: string, minLength: 1, maxLength: 600 }
+        retryDe: { type: string, minLength: 1, maxLength: 800 }
+        retryEn: { type: string, minLength: 1, maxLength: 800 }
+    AssessmentEvaluation:
+      type: object
+      required: [id, attemptId, definitionHash, submissionHash, source, createdAt, mode, rubricId, scorerVersion, model, promptVersion, testMode, support, result]
+      properties:
+        id: { type: string, maxLength: 160 }
+        attemptId: { type: string, maxLength: 160 }
+        definitionHash: { $ref: '#/components/schemas/AssessmentHash' }
+        submissionHash: { $ref: '#/components/schemas/AssessmentHash' }
+        source: { const: gateway-ai }
+        createdAt: { type: number }
+        mode: { type: string, enum: [practice, checkpoint] }
+        rubricId: { type: string, enum: ['conversation:1', 'writing:1'] }
+        scorerVersion: { type: 'null' }
+        model: { type: string }
+        promptVersion: { type: string }
+        testMode: { type: boolean }
+        support: { type: string, enum: [no-answer-help-recorded, answer-help-recorded] }
+        result:
+          type: object
+          required: [type, status, earned, maximum, percentage, raw]
+          properties:
+            type: { const: rubric }
+            status: { type: string, enum: [graded, partial, insufficient_evidence] }
+            earned: { type: integer, minimum: 0, maximum: 20 }
+            maximum: { const: 20 }
+            percentage: { type: [integer, 'null'], minimum: 0, maximum: 100, description: Null if any required criterion is unobserved; never renormalized. }
+            raw: { $ref: '#/components/schemas/RubricFeedback' }
     Problem:
       type: object
       required: [type, title, status, detail, code, requestId, retryAfterSeconds]

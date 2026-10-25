@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "label-badge": [ "Space Grotesk" ], "german-prompt-lg": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "german-prompt-lg-mobile": [ "Plus Jakarta Sans" ], "label-mono": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-md": [ "Plus Jakarta Sans" ], "display-hero": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-badge": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "german-prompt-lg": [ "24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "german-prompt-lg-mobile": [ "20px", { "lineHeight": "28px", "fontWeight": "700" } ], "label-mono": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold leading-none">Sprich</span><span class="font-body-sm text-body-sm text-text-muted hidden sm:inline leading-tight">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-raised px-space-sm py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Offline / local</span></div></div><div class="hidden lg:flex items-center gap-space-md flex-1 justify-center max-w-2xl"><div class="flex items-center bg-surface-container-high p-space-xs rounded-full"><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(212,255,0,0.25)] transition-all" type="button">Start speaking</button><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface hover:bg-surface-raised transition-all" type="button">Workplace</button></div><a class="flex items-center gap-space-xs bg-surface-card hover:bg-surface-raised px-space-md py-space-xs rounded-full text-text-primary transition-all group" data-path="practice-session" href="#"><span class="material-symbols-outlined text-electric-lime text-[18px] group-hover:scale-110 transition-transform">play_circle</span><span class="font-body-sm text-body-sm text-text-muted">Resume:</span><span class="font-body-sm text-body-sm text-primary font-semibold truncate max-w-[170px]">Beim Bäcker (2/7)</span></a></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs bg-surface-card px-space-sm py-space-xs rounded-full text-on-surface-variant" title="Local-first database with JSON backup"><span class="material-symbols-outlined text-[16px] text-electric-lime">database</span><span class="font-label-mono text-label-mono text-text-muted">JSON synced</span></div><button aria-label="Data Backup Settings" class="p-space-xs rounded-full hover:bg-surface-raised text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">cloud_done</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low/95 backdrop-blur-lg z-40 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col gap-space-md px-space-sm"><div class="px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Daily Practice</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">today</span><span class="font-body-md text-body-md font-medium">Today</span></a><a aria-current="page" class="flex items-center gap-space-sm px-space-md py-space-sm transition-all bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md font-medium">Lessons</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md font-medium">Words</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span class="font-body-md text-body-md font-medium">Progress</span></a></nav><div class="pt-space-sm px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Modules &amp; Coach</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-md text-body-md font-medium">Workplace</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-cyan-spark">graphic_eq</span><span class="font-body-md text-body-md font-medium">AI Talk</span></div><span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-cyan-spark/20 text-cyan-spark font-bold">MIC</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md font-medium">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span class="font-body-md text-body-md font-medium">Resources</span></a></nav></div><div class="flex flex-col gap-space-xs px-space-sm pt-space-md bg-surface-container-lowest/40 rounded-xl mx-space-xs p-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm pt-space-xs text-text-muted"><span class="font-label-mono text-label-mono">Storage: Local DB</span><span class="font-label-mono text-label-mono text-status-online">Ready</span></div></div></aside><div class="pl-64"><main class="relative pt-16 min-h-screen w-full px-space-xl py-space-lg bg-surface"><div class="flex flex-col w-full gap-space-xl">
+<!-- Top Header Deck: Title, Path / Catalog Segmented Switcher & Quick Stats -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono text-label-mono text-electric-lime uppercase tracking-widest">Spoken Curriculum • CEFR A1-B1</span>
+<span class="inline-block w-1 h-1 rounded-full bg-surface-stroke"></span>
+<span class="font-label-mono text-label-mono text-text-muted">Local IndexedDB • Zero lock enforcement</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Speaking Path &amp; Exploration</h1>
+<p class="font-body-md text-body-md text-text-muted">
+        Tactile conversational stages designed for low cognitive friction. All 48 lessons remain completely unlocked—jump directly to what your day demands.
+      </p>
+</div>
+<!-- Segmented Tab Controls & Global Filter Toggle -->
+<div class="flex items-center gap-space-sm bg-surface-card p-1.5 rounded-full shadow-md self-start xl:self-auto">
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all bg-primary-container text-on-primary-container shadow-[0_0_16px_rgba(212,255,0,0.2)]" id="view-tab-path" onclick="switchView('path')" type="button">
+<span class="material-symbols-outlined text-[18px]">alt_route</span>
+<span>My Path (5 Stages)</span>
+</button>
+<button class="flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all text-text-muted hover:text-text-primary hover:bg-surface-raised" id="view-tab-catalog" onclick="switchView('catalog')" type="button">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+<span>All Lessons (48 Catalog)</span>
+</button>
+</div>
+</div>
+<!-- Search & Filter Bar (Dual-purpose: persistent, expandable filters) -->
+<div class="bg-surface-card p-space-md rounded-2xl flex flex-col lg:flex-row lg:items-center justify-between gap-space-md shadow-sm">
+<div class="flex items-center gap-space-sm bg-surface-container-high px-space-md py-2.5 rounded-xl flex-1 max-w-xl">
+<span class="material-symbols-outlined text-text-muted text-[20px]">search</span>
+<input class="bg-transparent border-0 outline-none text-text-primary placeholder:text-text-muted font-body-md text-body-md w-full" placeholder="Search speaking situations (e.g. Bäcker, Arzttermin, S-Bahn, Ticket)..." type="text"/>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-card px-2 py-0.5 rounded">⌘K</span>
+</div>
+<!-- Filter chips cluster -->
+<div class="flex items-center gap-space-xs overflow-x-auto pb-1 lg:pb-0 scrollbar-none flex-wrap">
+<!-- Level pill filter -->
+<div class="flex items-center bg-surface-container-high rounded-full p-1 gap-1">
+<span class="font-label-mono text-label-mono text-text-muted px-2">Level:</span>
+<button class="px-2.5 py-1 rounded-full font-label-badge text-label-badge bg-surface-raised text-text-primary hover:bg-surface-variant" type="button">All</button>
+<button class="px-2.5 py-1 rounded-full font-label-badge text-label-badge text-text-muted hover:text-text-primary" type="button">A1</button>
+<button class="px-2.5 py-1 rounded-full font-label-badge text-label-badge text-text-muted hover:text-text-primary" type="button">A2</button>
+<button class="px-2.5 py-1 rounded-full font-label-badge text-label-badge text-text-muted hover:text-text-primary" type="button">B1</button>
+</div>
+<!-- Topic Pill Dropdown Simulation -->
+<div class="relative group">
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-full font-label-badge text-label-badge bg-surface-raised text-text-primary hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-punch-orange">restaurant</span>
+<span>Topic: Food &amp; Transit</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Skill Tag Filter -->
+<div class="relative group">
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-full font-label-badge text-label-badge bg-surface-raised text-text-primary hover:bg-surface-variant transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px] text-cyan-spark">record_voice_over</span>
+<span>Skill: Requesting</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+</div>
+<!-- Status Pill -->
+<button class="flex items-center gap-1 px-space-md py-2 rounded-full font-label-badge text-label-badge bg-surface-raised text-text-primary hover:bg-surface-variant transition-colors" type="button">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span>Active &amp; In-Progress</span>
+</button>
+</div>
+</div>
+<!-- Primary Desktop Workspace: 12-Column Asymmetric Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-xl items-start">
+<!-- LEFT / MAIN COLUMN: 5-Stage Path Stream (Span 7) -->
+<div class="lg:col-span-7 flex flex-col gap-space-lg" id="path-view-container">
+<!-- Stage 1 Banner (Active) -->
+<div class="bg-surface-card rounded-2xl p-space-lg flex flex-col gap-space-md shadow-md relative overflow-hidden">
+<div class="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-electric-lime/5 blur-3xl pointer-events-none"></div>
+<div class="flex items-start justify-between gap-space-md">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-electric-lime/10 text-electric-lime font-bold">STAGE 01 • ACTIVE</span>
+<span class="font-label-mono text-label-mono text-text-muted">A1 Foundational</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-text-primary tracking-tight">Everyday Situations</h2>
+<p class="font-body-md text-body-md text-text-muted">Direct counter interactions, routine questions, and grocery phrases.</p>
+</div>
+<div class="flex flex-col items-end gap-1 flex-shrink-0">
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-electric-lime font-bold">3</span>
+<span class="font-label-mono text-label-mono text-text-muted">/ 10 practiced</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">30% Complete</span>
+</div>
+</div>
+<!-- Stage 1 Progress bar -->
+<div class="w-full h-2 rounded-full bg-surface-container-high overflow-hidden">
+<div class="h-full bg-electric-lime rounded-full transition-all duration-500 shadow-[0_0_12px_rgba(212,255,0,0.4)]" style="width: 30%"></div>
+</div>
+</div>
+<!-- Highlighted Resume Item: Lesson 4 (Active Unfinished Session) -->
+<div class="bg-surface-raised rounded-2xl p-space-lg flex flex-col gap-space-md shadow-xl transition-all ring-1 ring-electric-lime/40">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full font-label-mono text-label-mono bg-punch-orange/15 text-punch-orange font-semibold">
+<span class="material-symbols-outlined text-[14px] animate-pulse">pause_circle</span>
+              Unfinished session — Step 2/7 saved on device
+            </span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-card px-2 py-0.5 rounded">Checked locally</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-card px-2 py-0.5 rounded">3 mins</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-electric-lime text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center font-bold">4</span>
+<h3 class="font-german-prompt-lg text-german-prompt-lg text-text-primary tracking-tight">Beim Bäcker in Berlin</h3>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant pl-9">
+            Ordering specialty breads, asking for slice preferences, and handling cash or card payments with natural cadence.
+          </p>
+</div>
+<!-- Progress step visualizer -->
+<div class="pl-9 flex items-center gap-1.5 py-1">
+<span class="w-6 h-1.5 rounded-full bg-status-online"></span>
+<span class="w-6 h-1.5 rounded-full bg-status-online"></span>
+<span class="w-6 h-1.5 rounded-full bg-electric-lime shadow-[0_0_8px_rgba(212,255,0,0.5)]"></span>
+<span class="w-6 h-1.5 rounded-full bg-surface-container-high"></span>
+<span class="w-6 h-1.5 rounded-full bg-surface-container-high"></span>
+<span class="w-6 h-1.5 rounded-full bg-surface-container-high"></span>
+<span class="w-6 h-1.5 rounded-full bg-surface-container-high"></span>
+<span class="font-label-mono text-label-mono text-text-muted ml-2">Step 2: »Zwei Roggenbrötchen, bitte«</span>
+</div>
+<!-- Action Row -->
+<div class="pt-2 flex flex-wrap items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<a class="flex items-center gap-space-xs px-space-lg py-2.5 rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container hover:bg-electric-lime transition-all shadow-[0_0_20px_rgba(212,255,0,0.25)]" data-path="practice-session" href="#">
+<span class="material-symbols-outlined text-[18px]">play_arrow</span>
+<span>Resume Session</span>
+</a>
+<button class="flex items-center gap-1.5 px-space-md py-2.5 rounded-full font-label-badge text-label-badge bg-surface-card hover:bg-surface-variant text-text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">restart_alt</span>
+<span>Start Fresh</span>
+</button>
+</div>
+<button class="flex items-center gap-1.5 px-space-md py-2 rounded-full font-label-badge text-label-badge text-cyan-spark hover:bg-surface-card transition-colors" type="button">
+<span class="material-symbols-outlined text-[16px]">ios_share</span>
+<span>Gemini Export</span>
+</button>
+</div>
+</div>
+<!-- Advisory Prerequisite Card: Lesson 5 with advisory context -->
+<div class="bg-surface-card rounded-2xl p-space-lg flex flex-col gap-space-md shadow-sm transition-all hover:bg-surface-container">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="w-7 h-7 rounded-lg bg-surface-raised text-text-muted font-headline-sm text-headline-sm flex items-center justify-center font-bold">5</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-text-primary">Im Supermarkt</h3>
+<span class="font-body-sm text-body-sm text-text-muted">A1 • Asking staff for aisles, weights &amp; receipt requirements</span>
+</div>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-raised px-2.5 py-1 rounded-full self-start">Unpractised</span>
+</div>
+<!-- Advisory Prerequisite Explainer (Advisory Only - No locks!) -->
+<div class="bg-surface-container-high/60 p-space-md rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-cyan-spark text-[20px] flex-shrink-0 mt-0.5">tips_and_updates</span>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-label-badge text-label-badge text-cyan-spark">Useful first:</span>
+<a class="font-label-badge text-label-badge text-text-primary underline decoration-cyan-spark/40 hover:decoration-cyan-spark" href="#">
+                Beim Bäcker (Lesson 4)
+              </a>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted">
+              Advisory link only — all lessons are unlocked. Practise in any order that suits your daily needs.
+            </p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<div class="flex items-center gap-space-xs">
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-muted">4 minutes</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-muted">Food &amp; Shopping</span>
+</div>
+<button class="flex items-center gap-1.5 px-space-md py-1.5 rounded-full font-label-badge text-label-badge bg-surface-raised hover:bg-surface-variant text-text-primary transition-colors" type="button">
+<span>Inspect Lesson</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Other Stages (Collapsible Progressive Overview) -->
+<div class="flex flex-col gap-space-sm pt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted uppercase tracking-wider px-1">Upcoming Stages</span>
+<!-- Stage 2 -->
+<div class="bg-surface-card rounded-xl p-space-md flex items-center justify-between gap-space-md hover:bg-surface-container transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-raised flex items-center justify-center font-headline-sm text-headline-sm text-secondary">02</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Getting Around &amp; City Life</h4>
+<span class="font-body-sm text-body-sm text-text-muted">BVG ticket machines, delays, U-Bahn transfers, asking directions</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono text-label-mono text-text-muted">0 / 10 done</span>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="bg-surface-card rounded-xl p-space-md flex items-center justify-between gap-space-md hover:bg-surface-container transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-raised flex items-center justify-center font-headline-sm text-headline-sm text-cyan-spark">03</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Social, University &amp; Routine</h4>
+<span class="font-body-sm text-body-sm text-text-muted">Café meetups, weekend plans, library access, casual small talk</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono text-label-mono text-text-muted">0 / 10 done</span>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</div>
+</div>
+<!-- Stage 4 -->
+<div class="bg-surface-card rounded-xl p-space-md flex items-center justify-between gap-space-md hover:bg-surface-container transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-raised flex items-center justify-center font-headline-sm text-headline-sm text-punch-orange">04</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Work &amp; Professional Basics</h4>
+<span class="font-body-sm text-body-sm text-text-muted">Stand-up check-ins, sick leave notices, calendar rescheduling</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono text-label-mono text-text-muted">0 / 10 done</span>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</div>
+</div>
+<!-- Stage 5 -->
+<div class="bg-surface-card rounded-xl p-space-md flex items-center justify-between gap-space-md hover:bg-surface-container transition-all">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-xl bg-surface-raised flex items-center justify-center font-headline-sm text-headline-sm text-vivid-purple">05</div>
+<div class="flex flex-col">
+<h4 class="font-headline-sm text-headline-sm text-text-primary">Confident Spoken Interactions</h4>
+<span class="font-body-sm text-body-sm text-text-muted">Bürgeramt appointments, tenancy disputes, customer complaints</span>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono text-label-mono text-text-muted">0 / 8 done</span>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Lesson Overview Inspection Drawer / Detail Card (Span 5) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md sticky top-20">
+<!-- Inspection Card Header -->
+<div class="bg-surface-card rounded-2xl p-space-lg flex flex-col gap-space-lg shadow-xl ring-1 ring-surface-stroke/60">
+<!-- Metadata Header Tag Cluster -->
+<div class="flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-electric-lime font-bold">Selected Lesson Overview</span>
+<div class="flex items-center gap-1.5">
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-raised px-2 py-0.5 rounded">Self-rated</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-raised px-2 py-0.5 rounded">Checked locally</span>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-lg text-headline-lg text-text-primary">Beim Bäcker in Berlin</h3>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-primary">Stage 1</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-primary">Module 1</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-electric-lime/20 text-electric-lime font-bold">Level A1</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-muted">Register: Informal</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-surface-raised text-text-muted">~3 mins</span>
+<span class="px-2 py-0.5 rounded-full font-label-mono text-label-mono bg-status-online/20 text-status-online font-bold">2 attempts</span>
+</div>
+</div>
+</div>
+<!-- Audio Warm-up Phrase & Speed Toggle -->
+<div class="bg-surface-raised p-space-md rounded-xl flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Warm-up Phrase</span>
+<!-- Speed toggle -->
+<div class="flex items-center bg-surface-card p-0.5 rounded-full">
+<button class="px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-primary bg-surface-raised font-bold" id="speed-1x" onclick="setSpeed('1.0')" type="button">1.0x</button>
+<button class="px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-text-primary" id="speed-08x" onclick="setSpeed('0.8')" type="button">0.8x</button>
+</div>
+</div>
+<div class="flex items-center justify-between gap-space-sm pt-1">
+<p class="font-german-prompt-lg text-german-prompt-lg text-text-primary tracking-tight">
+              »Guten Morgen! Was darf es sein?«
+            </p>
+<button aria-label="Listen to model audio" class="w-10 h-10 rounded-full bg-electric-lime text-on-primary-container flex items-center justify-center hover:scale-105 transition-all shadow-[0_0_12px_rgba(212,255,0,0.3)] flex-shrink-0" type="button">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+</div>
+<!-- Waveform Decibel Visualizer Simulation -->
+<div class="flex items-center gap-1 h-6 pt-1">
+<span class="w-1 h-2 rounded-full bg-electric-lime/40"></span>
+<span class="w-1 h-4 rounded-full bg-electric-lime"></span>
+<span class="w-1 h-5 rounded-full bg-cyan-spark"></span>
+<span class="w-1 h-3 rounded-full bg-electric-lime"></span>
+<span class="w-1 h-6 rounded-full bg-electric-lime"></span>
+<span class="w-1 h-2 rounded-full bg-electric-lime/40"></span>
+<span class="w-1 h-4 rounded-full bg-vivid-purple"></span>
+<span class="w-1 h-5 rounded-full bg-electric-lime"></span>
+<span class="w-1 h-3 rounded-full bg-electric-lime"></span>
+<span class="w-1 h-1 rounded-full bg-text-muted"></span>
+<span class="font-label-mono text-label-mono text-text-muted pl-2">Native cadence recorded</span>
+</div>
+</div>
+<!-- Language Focus / Grammar Note -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-1.5 text-text-muted">
+<span class="material-symbols-outlined text-[16px] text-vivid-purple">psychology</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider">Language Focus</span>
+</div>
+<div class="bg-surface-container-high/40 p-space-md rounded-xl">
+<p class="font-body-md text-body-md text-on-surface">
+              Polite requests using Konjunktiv II: <strong class="text-text-primary">»Ich hätte gern...«</strong> paired directly with accusative nouns without over-explaining cases.
+            </p>
+</div>
+</div>
+<!-- 6 Target Words with Tactile Gender Chips -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono text-text-muted uppercase tracking-wider">6 Target Words</span>
+<span class="font-label-mono text-label-mono text-text-muted">Visual gender cues</span>
+</div>
+<div class="flex flex-wrap gap-2">
+<!-- der Bäcker (m) - Blue accent -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-cyan-spark"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">der Bäcker</span>
+<span class="font-label-mono text-label-mono text-cyan-spark font-bold">m</span>
+</div>
+<!-- das Brötchen (n) - Lime accent -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">das Brötchen</span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">n</span>
+</div>
+<!-- das Brot (n) - Lime accent -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">das Brot</span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">n</span>
+</div>
+<!-- das Croissant (n) - Lime accent -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-electric-lime"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">das Croissant</span>
+<span class="font-label-mono text-label-mono text-electric-lime font-bold">n</span>
+</div>
+<!-- die Bäckerei (f) - Purple accent -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-vivid-purple"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">die Bäckerei</span>
+<span class="font-label-mono text-label-mono text-vivid-purple font-bold">f</span>
+</div>
+<!-- bitte (adv) - Neutral -->
+<div class="flex items-center gap-1.5 bg-surface-raised px-3 py-1.5 rounded-full">
+<span class="w-2 h-2 rounded-full bg-status-rest-day"></span>
+<span class="font-body-sm text-body-sm text-text-primary font-medium">bitte</span>
+<span class="font-label-mono text-label-mono text-text-muted">adv</span>
+</div>
+</div>
+</div>
+<!-- Dual Start CTA Buttons (Guided vs Attempt First) -->
+<div class="flex flex-col gap-space-sm pt-2">
+<a class="flex items-center justify-center gap-space-xs w-full py-3 rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container font-bold shadow-[0_0_24px_rgba(212,255,0,0.25)] hover:bg-electric-lime transition-all" data-path="practice-session" href="#">
+<span class="material-symbols-outlined text-[20px]">smart_toy</span>
+<span>Start Guided Session (Full Support)</span>
+</a>
+<button class="flex items-center justify-center gap-space-xs w-full py-3 rounded-full font-label-badge text-label-badge bg-surface-raised hover:bg-surface-variant text-text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-[20px] text-cyan-spark">mic</span>
+<span>Practise with Less Help (Attempt First)</span>
+</button>
+</div>
+<!-- Contextual Links: Related Checks & Gemini Lesson Pack -->
+<div class="flex flex-col gap-2 pt-space-xs border-t border-surface-container-high/60">
+<a class="flex items-center justify-between text-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors py-1" data-path="checks-roleplays" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-electric-lime">forum</span>
+<span>Related Checks &amp; Roleplays (2 available)</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+<a class="flex items-center justify-between text-body-sm text-body-sm text-text-muted hover:text-text-primary transition-colors py-1" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-cyan-spark">download</span>
+<span>Export Gemini Lesson Pack</span>
+</div>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</a>
+</div>
+<!-- After-Gemini Takeaway Box -->
+<div class="bg-surface-container-lowest p-space-md rounded-xl flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-[20px] flex-shrink-0 mt-0.5">sync_saved_locally</span>
+<div class="flex flex-col gap-1">
+<span class="font-label-badge text-label-badge text-secondary">After-Gemini Takeaway</span>
+<p class="font-body-sm text-body-sm text-text-muted leading-relaxed">
+              Practised this dialog with external Gemini Voice? Paste your transcript or upload an audio chunk to save verified phrases back to your local device database.
+            </p>
+<button class="inline-flex items-center gap-1 font-label-mono text-label-mono text-secondary underline hover:no-underline pt-1" type="button">
+<span>Import Gemini transcript</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<script>
+  function switchView(view) {
+    const pathBtn = document.getElementById('view-tab-path');
+    const catalogBtn = document.getElementById('view-tab-catalog');
+    const pathContainer = document.getElementById('path-view-container');
+
+    if (view === 'path') {
+      pathBtn.className = "flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all bg-primary-container text-on-primary-container shadow-[0_0_16px_rgba(212,255,0,0.2)]";
+      catalogBtn.className = "flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all text-text-muted hover:text-text-primary hover:bg-surface-raised";
+    } else {
+      catalogBtn.className = "flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all bg-primary-container text-on-primary-container shadow-[0_0_16px_rgba(212,255,0,0.2)]";
+      pathBtn.className = "flex items-center gap-space-xs px-space-md py-space-xs rounded-full font-label-badge text-label-badge transition-all text-text-muted hover:text-text-primary hover:bg-surface-raised";
+    }
+  }
+
+  function setSpeed(spd) {
+    const speed1x = document.getElementById('speed-1x');
+    const speed08x = document.getElementById('speed-08x');
+    if (spd === '1.0') {
+      speed1x.className = "px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-primary bg-surface-raised font-bold";
+      speed08x.className = "px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-text-primary";
+    } else {
+      speed08x.className = "px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-primary bg-surface-raised font-bold";
+      speed1x.className = "px-2 py-0.5 rounded-full font-label-mono text-label-mono text-text-muted hover:text-text-primary";
+    }
+  }
+</script></main></div></body></html>

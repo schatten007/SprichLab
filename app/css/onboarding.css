@@ -1,0 +1,66 @@
+.getting-started {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.getting-started-hero {
+  border-color: var(--brand);
+  background: linear-gradient(135deg, var(--surface), var(--surface-soft));
+}
+
+.getting-started-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.getting-started-step {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.getting-started-step h2,
+.getting-started-step p:last-child {
+  margin-bottom: 0;
+}
+
+.getting-started-step .step-number {
+  width: 32px;
+  height: 32px;
+}
+
+.getting-started-prompt {
+  padding: var(--space-4);
+  border-left: 3px solid var(--brand);
+  background: var(--surface-soft);
+  font-family: var(--font-pixel);
+  font-size: var(--text-sm);
+}
+
+.getting-started-prompt p:last-child {
+  margin-bottom: 0;
+}
+
+.getting-started-actions {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.getting-started-actions > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.getting-started-mini {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: 1.3rem;
+}
+
+@media (max-width: 760px) {
+  .getting-started-grid { grid-template-columns: minmax(0, 1fr); }
+  .getting-started-actions { display: grid; }
+}

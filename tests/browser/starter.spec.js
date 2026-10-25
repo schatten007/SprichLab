@@ -67,6 +67,7 @@ test('Gemini export is the selected lesson and downloads UTF-8 text without comp
 test('vocabulary saves useful words and early reveal cannot be graded as independent recall', async ({ page }) => {
   await page.goto('/#words');
   await expect(page.getByRole('heading', { name: 'Vocabulary you can use.' })).toBeVisible();
+  await page.getByText('Filter', { exact: true }).click();
   await page.getByLabel('Search words').fill('coffee');
   const word = page.getByRole('article').filter({ has: page.getByRole('heading', { name: 'der Kaffee', exact: true }) });
   await word.getByRole('button', { name: 'Save word', exact: true }).click();
@@ -103,8 +104,8 @@ test('a downloaded beginner course and an in-progress lesson reload offline', as
 test('Today recommends a path step and the library classifies and filters the whole course', async ({ page }, info) => {
   await page.goto('/');
   await expect(page.getByRole('combobox', { name: 'Learning path', exact: true })).toHaveValue('starter');
-  await expect(page.getByRole('button', { name: 'Start guided' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Less help', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^Start · \d+ min/ })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Try with less help', exact: true })).toBeVisible();
   await page.screenshot({ path: info.outputPath('starter-today.png'), fullPage: true });
 
   await page.getByRole('link', { name: 'Lessons', exact: true }).click();
@@ -112,6 +113,8 @@ test('Today recommends a path step and the library classifies and filters the wh
   await expect(page.getByText('RECOMMENDED NEXT · STAGE 1 OF 5')).toBeVisible();
   await expect(page.getByText('STAGE 1 · Start speaking')).toBeVisible();
   await expect(page.getByText('STAGE 5 · University and work')).toBeVisible();
+  await expect(page.getByRole('link', { name: /Buy a ticket/ })).not.toBeVisible();
+  await page.locator('.stage-card > summary').filter({ hasText: 'Handle everyday situations' }).click();
   await expect(page.getByRole('link', { name: /Buy a ticket/ })).toBeVisible();
   await page.screenshot({ path: info.outputPath('starter-path.png'), fullPage: true });
 
@@ -119,6 +122,7 @@ test('Today recommends a path step and the library classifies and filters the wh
   const total = COURSE_LESSONS.length;
   const count = predicate => COURSE_LESSONS.filter(predicate).length;
   await expect(page.getByRole('article')).toHaveCount(total);
+  await page.locator('.lesson-filters > summary').click();
   await expect(page.getByText(`${total} of ${total} lessons · 0 practised`)).toBeVisible();
   await page.getByRole('combobox', { name: 'Level' }).selectOption('A2');
   await expect(page.getByRole('article')).toHaveCount(count(lesson => lesson.level === 'A2'));
@@ -139,8 +143,72 @@ test('Today recommends a path step and the library classifies and filters the wh
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 
   await page.getByRole('link', { name: 'Words', exact: true }).click();
-  await expect(page.getByText('24 of 250 matching words', { exact: true })).toBeVisible();
+  await expect(page.getByText('12 of 250 matching words', { exact: true })).toBeVisible();
   await page.screenshot({ path: info.outputPath('starter-vocabulary.png'), fullPage: true });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('a new install gets a small getting-started guide that can be reopened from Settings', async ({ page }) => {
+  await page.goto('/#today');
+  await expect(page.getByRole('region', { name: 'Getting started' })).toBeVisible();
+  await expect(page.getByText('Audio setup is optional', { exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Open getting started' }).click();
+  await expect(page.getByRole('heading', { name: 'Start here with Sprich.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'What to send and what to get back' })).toBeVisible();
+  await page.getByRole('button', { name: 'Start practicing' }).click();
+  await expect(page.getByRole('heading', { name: /A little more confident/ })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Getting started' })).toHaveCount(0);
+  await page.goto('/#settings');
+  await page.getByRole('link', { name: 'Open getting started guide' }).click();
+  await expect(page.getByRole('heading', { name: 'Start here with Sprich.' })).toBeVisible();
+});
+
+test('Electric Slate Today groups the next action, measured effort, and milestone without fixture metrics', async ({ page }) => {
+  await page.goto('/#today');
+  await expect(page.getByRole('region', { name: 'Today recommendation' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Measured daily effort' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Next milestone' })).toBeVisible();
+  await expect(page.getByText('Measured', { exact: true })).toBeVisible();
+  await expect(page.getByText('Last 7 days', { exact: true })).toBeVisible();
+  await expect(page.getByText('11 / 15 min spoken today', { exact: true })).not.toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Lessons exposes the recommendation and lesson overview without locking advisory prerequisites', async ({ page }) => {
+  await page.goto('/#lessons');
+  await expect(page.getByRole('region', { name: 'Recommended next lesson' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Buy a ticket/ })).not.toBeVisible();
+  await page.locator('.stage-card > summary').filter({ hasText: 'Handle everyday situations' }).click();
+  await expect(page.getByRole('link', { name: /Buy a ticket/ })).toBeVisible();
+  await page.getByRole('link', { name: /Buy a ticket/ }).click();
+  await expect(page.getByRole('heading', { name: 'Buy a ticket' })).toBeVisible();
+  await expect(page.getByText('Words you will use', { exact: true })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Checks & graded roleplays/ })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Words vault and beginner sessions expose the tactile practice shell without changing evidence rules', async ({ page }) => {
+  await page.goto('/#words');
+  await expect(page.getByRole('region', { name: 'Vocabulary vault' })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Word practice' })).toBeVisible();
+  await expect(page.getByRole('radio', { name: 'Say the German word' })).toBeVisible();
+  await expect(page.getByText(/250 beginner-friendly words/)).toBeVisible();
+
+  await page.goto('/#lesson/starter-hello');
+  await page.getByRole('button', { name: 'Start guided', exact: true }).click();
+  await expect(page.getByRole('region', { name: 'Lesson session' })).toBeVisible();
+  await expect(page.getByRole('list', { name: 'Lesson steps' })).toBeVisible();
+  await expect(page.getByText('Saved on this device', { exact: true })).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('Phrase collection makes capture and its offline boundary visible', async ({ page }) => {
+  await page.goto('/#phrases');
+  await expect(page.getByRole('region', { name: 'Phrase collection' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Capture phrase' })).toBeVisible();
+  await expect(page.getByText(/Curated phrase audio works offline/)).toBeVisible();
+  await page.getByRole('button', { name: 'Capture phrase' }).click();
+  await expect(page.getByText('Add a personal phrase', { exact: true })).toBeVisible();
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
 
@@ -179,7 +247,8 @@ test('the Gemini companion changes lesson context and saves its takeaway under t
   await page.getByRole('button', { name: 'Save Gemini takeaway' }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Gemini takeaway saved.' })).toBeVisible();
   await page.getByRole('link', { name: 'Progress', exact: true }).click();
-  await expect(page.getByRole('heading', { name: 'Gemini practice & beginner takeaways' })).toBeVisible();
+  await page.getByText('Details and saved practice', { exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Saved takeaways' })).toBeVisible();
   await expect(page.getByText('Order a drink · 5 min self-reported', { exact: true })).toBeVisible();
   const state = await new PracticePage(page).readState();
   expect(state.companionNotes[0].missionId).toBe('starter-coffee');
@@ -188,7 +257,7 @@ test('the Gemini companion changes lesson context and saves its takeaway under t
 
 test('a just-typed word draft survives reload and recognition stays separate from speaking', async ({ page }) => {
   await page.goto('/#words');
-  await page.getByRole('combobox', { name: 'Practice mode' }).selectOption('meaning');
+  await page.getByRole('radio', { name: 'Recognise the meaning' }).click();
   await page.getByRole('button', { name: 'Learn five words' }).click();
   await page.getByRole('textbox', { name: 'Optional notes' }).fill('Hello');
   await page.reload();

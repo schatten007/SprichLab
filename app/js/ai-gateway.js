@@ -117,8 +117,10 @@ export function createAIClient({ fetchImpl = (...args) => fetch(...args), baseUr
     async lock({ signal } = {}) { await request('/session', { method: 'DELETE', signal }); },
     async usage({ signal } = {}) { return (await request('/usage', { signal })).data; },
     async capabilities({ signal } = {}) { return (await request('/capabilities', { signal })).data; },
+    async setupAudio(config, { signal } = {}) { return (await request('/setup/audio', { method: 'POST', body: config, signal })).data; },
     async turn(payload, options = {}) { return send('/turns', payload, options); },
     async review(payload, options = {}) { return send('/reviews', payload, options); },
+    async evaluateAssessment(payload, options = {}) { return send('/assessments/evaluations', payload, options); },
     async receipt(requestId, options = {}) { return waitFor(requestId, options); },
     async speech(text, { signal } = {}) {
       return request('/speech', { method: 'POST', body: { text }, signal, responseType: 'blob', accept: 'audio/mpeg, audio/wav' });

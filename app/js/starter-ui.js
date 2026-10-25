@@ -16,7 +16,7 @@ export function languageFocus(lesson) {
 export function prepLine(course, starter, lessonId) {
   const prep = missingPrerequisites(course, starter, lessonId);
   if (!prep.length) return '';
-  return `<p class="fine prep-line">Useful first: ${prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>`;
+  return `<p class="small prep-line">Useful first: ${prep.map(item => `<a href="#lesson/${esc(item.id)}">${esc(item.title)}</a>`).join(', ')}</p>`;
 }
 /** One card shape for the path, the library, and search results. */
 export function lessonCard(course, starter, lesson, { showPrep = true } = {}) {
@@ -25,14 +25,12 @@ export function lessonCard(course, starter, lesson, { showPrep = true } = {}) {
   return `<article class="card starter-lesson" data-lesson="${esc(lesson.id)}" data-level="${esc(meta.level)}" data-topic="${esc(meta.topic)}" data-skill="${esc(meta.skill)}" data-status="${status}" data-text="${esc(`${meta.title} ${meta.titleDe} ${lesson.goal ?? ''}`.toLocaleLowerCase('de'))}">
     <div class="pills">${levelPill(meta.level)}<span class="pill">${esc(topicLabel(meta.topic))}</span><span class="pill ${status === 'practised' ? 'green' : status === 'active' ? 'amber' : ''}">${STATUS_LABELS[status]}</span></div>
     <h3>${esc(meta.title)}</h3><p lang="de">${esc(meta.titleDe)}</p>
-    ${lesson.goal ? `<p class="fine">${esc(lesson.goal)}</p>` : ''}
-    <p class="fine">${esc(skillLabel(meta.skill))} · ${meta.minutes} min</p>
+    <p class="small">${esc(skillLabel(meta.skill))} · ${meta.minutes} min</p>
     ${showPrep ? prepLine(course, starter, lesson.id) : ''}
-    <div class="btn-row"><a class="btn ${status === 'new' ? '' : 'secondary'}" href="#lesson/${esc(lesson.id)}">${status === 'active' ? 'Continue lesson' : status === 'practised' ? 'Practise again' : 'Open lesson'} ${icon('arrow')}</a><a class="text-button" href="#gemini/${esc(lesson.id)}">Export for Gemini</a></div></article>`;
+    <div class="btn-row"><a class="btn secondary" href="#lesson/${esc(lesson.id)}">${status === 'active' ? 'Continue lesson' : status === 'practised' ? 'Practise again' : 'Open lesson'} ${icon('arrow')}</a><a class="text-button" href="#gemini/${esc(lesson.id)}">Export for Gemini</a></div></article>`;
 }
 export function supportButtons(id, { guided = 'Start guided', light = 'Try with less help' } = {}) {
-  return `<div class="btn-row"><button class="btn" data-start-lesson="${esc(id)}" data-support="guided">${guided} ${icon('arrow')}</button><button class="btn secondary" data-start-lesson="${esc(id)}" data-support="light">${light}</button></div>
-    <p class="fine">Guided keeps English meanings and a model answer one tap away. With less help, the meaning and model stay hidden until you ask. Both record support the same way.</p>`;
+  return `<div class="btn-row"><button class="btn" data-start-lesson="${esc(id)}" data-support="guided">${guided} ${icon('arrow')}</button><button class="btn secondary" data-start-lesson="${esc(id)}" data-support="light">${light}</button></div>`;
 }
 export function bindSupportButtons(el, ctx) {
   el.querySelectorAll('[data-start-lesson]').forEach(button => safeAction(button,
@@ -50,12 +48,12 @@ export function bindPathPicker(el, ctx) {
 }
 export function courseError(el, ctx, error) {
   if (ctx.signal?.aborted) return;
-  el.innerHTML = `<section class="card"><p class="eyebrow">START SPEAKING</p><h1>Save your course for offline practice.</h1><p class="section-gap" role="alert">${esc(error.message)}</p><div class="btn-row"><button class="btn" data-retry-course>Try again</button><a class="btn secondary" href="#practice">Open workplace missions</a><a href="#settings">Settings &amp; backups</a></div></section>`;
+  el.innerHTML = `<section class="card"><p class="eyebrow">START SPEAKING</p><h1 tabindex="-1">Save your course for offline practice.</h1><p class="section-gap" role="alert">${esc(error.message)}</p><div class="btn-row"><button class="btn" data-retry-course>Try again</button><a class="btn secondary" href="#practice">Open workplace missions</a><a href="#settings">Settings &amp; backups</a></div></section>`;
   safeAction(el.querySelector('[data-retry-course]'), () => ctx.refresh(), ctx.error);
 }
 export function wordCard(word, { saved = false, actions = true } = {}) {
-  return `<article class="card starter-word"><span class="pill">${esc(word.pos)}</span><h3 lang="de">${esc(word.de)}</h3><p class="word-meaning" lang="en">${esc(word.en)}</p>${word.forms ? `<p class="fine word-forms">${esc(word.forms)}</p>` : ''}
-    <p lang="de" class="word-example">${esc(word.exampleDe)}</p><p class="fine" lang="en">${esc(word.exampleEn)}</p>
+  return `<article class="card starter-word"><span class="pill">${esc(word.pos)}</span><h3 lang="de">${esc(word.de)}</h3><p class="word-meaning" lang="en">${esc(word.en)}</p>${word.forms ? `<p class="word-forms small">${esc(word.forms)}</p>` : ''}
+    <p lang="de" class="word-example">${esc(word.exampleDe)}</p><p class="small" lang="en">${esc(word.exampleEn)}</p>
     <div class="btn-row"><button class="text-button" data-say="${esc(word.de)}">${icon('volume')}Hear word</button><button class="text-button" data-say="${esc(word.exampleDe)}">Hear sentence</button></div>
     ${actions ? `<div class="btn-row"><button class="btn secondary small-btn" data-word-practice="${word.id}">Say from memory</button><button class="text-button" data-save-word="${word.id}" aria-pressed="${saved}">${saved ? 'Saved word' : 'Save word'}</button></div>` : ''}</article>`;
 }

@@ -112,6 +112,8 @@ test('personal phrases keep their source and can be practised immediately', asyn
   await page.getByRole('checkbox', { name: 'I practised aloud (recording is optional)' }).check();
   await page.getByRole('button', { name: 'Show model & rate my recall' }).click();
   await page.getByRole('button', { name: 'Recalled independently' }).click();
+  // The rating is written to IndexedDB asynchronously; wait for it instead of racing the read.
+  await expect.poll(async () => (await app.readState()).attempts.length).toBe(1);
   const saved = await app.readState();
   expect(saved.attempts[0].phraseIds).toEqual([saved.personalPhrases[0].id]);
   expect(saved.sessions[0].content.phrases[0].sourceUrl).toBe('https://example.org/lesson');
@@ -215,6 +217,7 @@ test('daily reflections persist and original lessons remain available offline', 
   await expect(page.getByText('Reflection saved', { exact: true })).toBeVisible();
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => undefined));
   await page.reload();
+  await expect.poll(() => page.locator('body').getAttribute('data-assessment-offline-ready'), { timeout: 20_000 }).toBe('true');
   await context.setOffline(true);
   await page.goto('/#resource/dw-phone');
   await page.reload();

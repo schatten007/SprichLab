@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "on-surface-variant": "#c5c9ac", "surface": "#121316", "vivid-purple": "#a855f7", "background": "#121316", "tertiary-fixed-dim": "#ffb781", "punch-orange": "#ff8800", "tertiary": "#ffffff", "secondary": "#ddb7ff", "surface-tint": "#b0d500", "outline-variant": "#444932", "surface-container-lowest": "#0d0e11", "on-secondary-fixed-variant": "#6900b3", "surface-bright": "#38393c", "inverse-primary": "#536600", "error-container": "#93000a", "on-error": "#690005", "on-primary-fixed-variant": "#3e4c00", "on-tertiary-fixed": "#2f1400", "on-tertiary-fixed-variant": "#6f3800", "text-muted": "#94a3b8", "tertiary-container": "#ffdcc4", "tertiary-fixed": "#ffdcc4", "inverse-surface": "#e3e2e6", "on-secondary": "#490080", "electric-lime": "#d4ff00", "surface-container": "#1f1f23", "on-primary-fixed": "#171e00", "primary-fixed-dim": "#b0d500", "secondary-container": "#6f00be", "surface-variant": "#343538", "on-secondary-fixed": "#2c0051", "on-tertiary-container": "#9b5100", "surface-card": "#1c1d22", "primary-fixed": "#caf300", "surface-container-low": "#1b1b1f", "secondary-fixed-dim": "#ddb7ff", "surface-container-high": "#292a2d", "status-rest-day": "#64748b", "on-tertiary": "#4e2600", "surface-raised": "#25262c", "primary-container": "#caf300", "status-online": "#22c55e", "cyan-spark": "#38bdf8", "outline": "#8f9378", "surface-base": "#121316", "on-error-container": "#ffdad6", "inverse-on-surface": "#2f3034", "on-secondary-container": "#d6a9ff", "text-primary": "#f8fafc", "on-background": "#e3e2e6", "surface-dim": "#121316", "error": "#ffb4ab", "primary": "#ffffff", "on-primary-container": "#596c00", "surface-stroke": "#33353e", "on-surface": "#e3e2e6", "surface-container-highest": "#343538", "on-primary": "#2a3400", "secondary-fixed": "#f0dbff" }, "borderRadius": { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" }, "spacing": { "space-md": "1rem", "margin": "2rem", "space-lg": "1.5rem", "gutter": "1.25rem", "space-sm": "0.5rem", "space-xl": "2rem", "gutter-mobile": "0.75rem", "margin-mobile": "1rem", "space-2xl": "3rem", "space-xs": "0.25rem" }, "fontFamily": { "display-hero-mobile": [ "Space Grotesk" ], "headline-md": [ "Space Grotesk" ], "label-badge": [ "Space Grotesk" ], "german-prompt-lg": [ "Plus Jakarta Sans" ], "body-lg": [ "Plus Jakarta Sans" ], "german-prompt-lg-mobile": [ "Plus Jakarta Sans" ], "label-mono": [ "Space Grotesk" ], "headline-sm": [ "Space Grotesk" ], "headline-lg": [ "Space Grotesk" ], "body-md": [ "Plus Jakarta Sans" ], "display-hero": [ "Space Grotesk" ], "body-sm": [ "Plus Jakarta Sans" ] }, "fontSize": { "display-hero-mobile": [ "32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" } ], "headline-md": [ "22px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "600" } ], "label-badge": [ "12px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "700" } ], "german-prompt-lg": [ "24px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" } ], "body-lg": [ "16px", { "lineHeight": "24px", "fontWeight": "500" } ], "german-prompt-lg-mobile": [ "20px", { "lineHeight": "28px", "fontWeight": "700" } ], "label-mono": [ "11px", { "lineHeight": "14px", "letterSpacing": "0.06em", "fontWeight": "600" } ], "headline-sm": [ "18px", { "lineHeight": "24px", "fontWeight": "600" } ], "headline-lg": [ "28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" } ], "body-md": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ], "display-hero": [ "48px", { "lineHeight": "56px", "letterSpacing": "-0.03em", "fontWeight": "700" } ], "body-sm": [ "12px", { "lineHeight": "18px", "fontWeight": "400" } ] } } } };</script></head><body class="bg-surface font-body-md text-on-surface min-h-screen selection:bg-electric-lime selection:text-surface-base"><header class="fixed top-0 left-0 right-0 h-16 z-50 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.4)]"><div class="h-16 w-full px-gutter flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg flex-shrink-0"><div class="flex items-center gap-space-sm"><img alt="App icon and favicon symbol for Sprich, a gamified German speaking trainer app. Minimalist graphic logo symbol combining a neon electric lime (#d4ff00) speech bubble wave with stylized German acoustic speech waveforms or letter 'S' soundwave geometry, modern tactile tech aesthetic. CRITICAL: The entire image IS the icon. Full-bleed dark background filling the entire square canvas edge-to-edge (#121316 dark charcoal/slate background), no rounded corners, no white border, no squircle frame, no drop shadow container, bleed to edges. Sharp vibrant electric lime and ultraviolet accents, high contrast, crisp modern vector look." class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1UG2o3Qm9oalYJep4SMsmR9UgDKph0WnqgXVUUi-EU0zsKSYbjrvg6wf_0sMybjTZnQixHjpM7kPWt4Jz4IJYQWaiwzr6RoB8s72EvhqCq4cOqMj3h04eja4hklsxwgX57sohYWRjxjbLt8Afo83YgX56DYly56Rry8hYOikMxtGoIGMPhQbdczCxpNo3elPLlYZXwXJfzdmjV87NSscKlpPLwjPO7N8MD8xexUbH3YVisxcGC2rK0Dhu4"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold leading-none">Sprich</span><span class="font-body-sm text-body-sm text-text-muted hidden sm:inline leading-tight">German for your next step</span></div></div><div class="hidden xl:flex items-center gap-space-xs bg-surface-raised px-space-sm py-space-xs rounded-full"><span class="w-2 h-2 rounded-full bg-status-online animate-pulse"></span><span class="font-label-mono text-label-mono text-on-surface-variant uppercase tracking-wider">Offline / local</span></div></div><div class="hidden lg:flex items-center gap-space-md flex-1 justify-center max-w-2xl"><div class="flex items-center bg-surface-container-high p-space-xs rounded-full"><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge bg-primary-container text-on-primary-container shadow-[0_0_12px_rgba(212,255,0,0.25)] transition-all" type="button">Start speaking</button><button class="px-space-md py-space-xs rounded-full font-label-badge text-label-badge text-on-surface-variant hover:text-on-surface hover:bg-surface-raised transition-all" type="button">Workplace</button></div><a class="flex items-center gap-space-xs bg-surface-card hover:bg-surface-raised px-space-md py-space-xs rounded-full text-text-primary transition-all group" data-path="practice-session" href="#"><span class="material-symbols-outlined text-electric-lime text-[18px] group-hover:scale-110 transition-transform">play_circle</span><span class="font-body-sm text-body-sm text-text-muted">Resume:</span><span class="font-body-sm text-body-sm text-primary font-semibold truncate max-w-[170px]">Beim Bäcker (2/7)</span></a></div><div class="flex items-center gap-space-sm flex-shrink-0"><div class="hidden md:flex items-center gap-space-xs bg-surface-card px-space-sm py-space-xs rounded-full text-on-surface-variant" title="Local-first database with JSON backup"><span class="material-symbols-outlined text-[16px] text-electric-lime">database</span><span class="font-label-mono text-label-mono text-text-muted">JSON synced</span></div><button aria-label="Data Backup Settings" class="p-space-xs rounded-full hover:bg-surface-raised text-on-surface-variant hover:text-on-surface transition-colors flex items-center justify-center" type="button"><span class="material-symbols-outlined text-[20px]">cloud_done</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low/95 backdrop-blur-lg z-40 flex flex-col justify-between py-space-md shadow-[0_1px_8px_rgba(0,0,0,0.2)]"><div class="flex flex-col gap-space-md px-space-sm"><div class="px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Daily Practice</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary-container font-bold rounded-lg shadow-[0_0_16px_rgba(212,255,0,0.15)]"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="today" href="#"><span class="material-symbols-outlined text-[20px]">today</span><span class="font-body-md text-body-md font-medium">Today</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="lessons" href="#"><span class="material-symbols-outlined text-[20px]">menu_book</span><span class="font-body-md text-body-md font-medium">Lessons</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="words" href="#"><span class="material-symbols-outlined text-[20px]">translate</span><span class="font-body-md text-body-md font-medium">Words</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="progress" href="#"><span class="material-symbols-outlined text-[20px]">trending_up</span><span class="font-body-md text-body-md font-medium">Progress</span></a></nav><div class="pt-space-sm px-space-sm"><span class="font-label-mono text-label-mono uppercase tracking-widest text-text-muted">Modules &amp; Coach</span></div><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary font-semibold rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="workplace" href="#"><span class="material-symbols-outlined text-[20px]">domain</span><span class="font-body-md text-body-md font-medium">Workplace</span></a><a class="flex items-center justify-between px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="ai-talk" href="#"><div class="flex items-center gap-space-sm"><span class="material-symbols-outlined text-[20px] text-cyan-spark">graphic_eq</span><span class="font-body-md text-body-md font-medium">AI Talk</span></div><span class="font-label-mono text-label-mono px-space-xs py-0.5 rounded-full bg-cyan-spark/20 text-cyan-spark font-bold">MIC</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="checks-roleplays" href="#"><span class="material-symbols-outlined text-[20px]">forum</span><span class="font-body-md text-body-md font-medium">Checks &amp; roleplays</span></a><a class="flex items-center gap-space-sm px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="resources" href="#"><span class="material-symbols-outlined text-[20px]">folder_special</span><span class="font-body-md text-body-md font-medium">Resources</span></a></nav></div><div class="flex flex-col gap-space-xs px-space-sm pt-space-md bg-surface-container-lowest/40 rounded-xl mx-space-xs p-space-sm"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-surface-raised text-primary rounded-lg"><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="how-progress-works" href="#"><span class="material-symbols-outlined text-[18px]">help_outline</span><span class="font-body-sm text-body-sm">How progress works</span></a><a class="flex items-center gap-space-sm px-space-md py-space-xs rounded-lg text-on-surface-variant hover:bg-surface-raised hover:text-on-surface transition-all" data-path="settings-profile" href="#"><span class="material-symbols-outlined text-[18px]">settings</span><span class="font-body-sm text-body-sm">Settings &amp; profile</span></a></nav><div class="flex items-center justify-between px-space-sm pt-space-xs text-text-muted"><span class="font-label-mono text-label-mono">Storage: Local DB</span><span class="font-label-mono text-label-mono text-status-online">Ready</span></div></div></aside><div class="pl-64"><main class="relative pt-16 min-h-screen w-full px-space-xl py-space-lg bg-surface"><div class="flex flex-col w-full">
+<!-- Top Control Canvas & Atmospheric Glow -->
+<div class="relative w-full mb-space-xl">
+<div class="absolute -top-12 -left-12 w-96 h-96 bg-electric-lime/5 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-20 right-10 w-80 h-80 bg-vivid-purple/5 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Header & Live Provenance Bar -->
+<div class="flex flex-col xl:flex-row xl:items-end justify-between gap-space-md mb-space-lg relative z-10">
+<div class="flex flex-col gap-space-xs max-w-2xl">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-high text-electric-lime font-label-mono text-label-mono uppercase tracking-wider">CEFR A1 → B2 CURATED</span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-raised text-text-muted font-label-mono text-label-mono">15 VERIFIED SOURCES</span>
+<div class="flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-status-online/15 text-status-online font-label-mono text-label-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online animate-pulse"></span>
+<span>All Sources Checked Locally</span>
+</div>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">Authentic German Resource Library</h1>
+<p class="font-body-md text-body-md text-text-muted">Real-world German audio, podcasts, video, and workplace media paired with structured, low-friction speaking follow-ups. Build cognitive trust through deliberate micro-drills.</p>
+</div>
+<!-- Quick Vault / Stats Pill Strip -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="flex items-center gap-space-sm bg-surface-card px-space-md py-space-sm rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-electric-lime text-[22px]">bookmark_added</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Phrase Vault Sync</span>
+<span class="font-headline-sm text-headline-sm text-primary leading-none">42 Captured</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-card px-space-md py-space-sm rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-cyan-spark text-[22px]">timer</span>
+<div class="flex flex-col">
+<span class="font-label-mono text-label-mono text-text-muted uppercase">Outside Practice</span>
+<span class="font-headline-sm text-headline-sm text-primary leading-none">3.5 hrs <span class="font-label-mono text-label-mono text-text-muted font-normal">(Self-reported)</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Search & Multi-Layer Filter Engine -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-md flex flex-col gap-space-md relative z-10">
+<!-- Main Row: Search Field + Format Filter Pills -->
+<div class="flex flex-col lg:flex-row items-stretch lg:items-center gap-space-md">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-space-md top-1/2 -translate-y-1/2 text-text-muted text-[20px]">search</span>
+<input class="w-full bg-surface-container-low text-primary pl-11 pr-space-md py-space-sm rounded-lg font-body-md text-body-md placeholder:text-text-muted focus:outline-none focus:bg-surface-raised transition-all" id="searchInput" placeholder="Search by topic, keyword (e.g., 'Bäcker', 'Bewerbungsgespräch', 'Kaffee', 'Tagesschau')..." type="text"/>
+</div>
+<!-- CEFR Level Radio-Pills -->
+<div class="flex items-center gap-space-xs bg-surface-container-low p-1 rounded-lg self-start lg:self-auto overflow-x-auto">
+<span class="font-label-mono text-label-mono text-text-muted px-space-xs uppercase">Level:</span>
+<button class="level-filter-btn px-space-sm py-1 rounded-md font-label-badge text-label-badge bg-primary-container text-on-primary-container transition-all" data-level="all">All</button>
+<button class="level-filter-btn px-space-sm py-1 rounded-md font-label-badge text-label-badge text-text-muted hover:text-primary transition-all" data-level="A1">A1</button>
+<button class="level-filter-btn px-space-sm py-1 rounded-md font-label-badge text-label-badge text-text-muted hover:text-primary transition-all" data-level="A2">A2</button>
+<button class="level-filter-btn px-space-sm py-1 rounded-md font-label-badge text-label-badge text-text-muted hover:text-primary transition-all" data-level="B1">B1</button>
+<button class="level-filter-btn px-space-sm py-1 rounded-md font-label-badge text-label-badge text-text-muted hover:text-primary transition-all" data-level="B2">B2</button>
+</div>
+</div>
+<!-- Secondary Filter Row: Format, Duration & Cognitive Convenience Filters -->
+<div class="flex flex-wrap items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted mr-1 uppercase">Format:</span>
+<button class="format-filter-btn px-space-sm py-1 rounded-full font-label-badge text-label-badge bg-surface-raised text-primary transition-all flex items-center gap-1.5" data-format="all">
+<span class="material-symbols-outlined text-[15px]">apps</span> All Media
+          </button>
+<button class="format-filter-btn px-space-sm py-1 rounded-full font-label-badge text-label-badge bg-surface-container-low text-text-muted hover:text-primary transition-all flex items-center gap-1.5" data-format="audio">
+<span class="material-symbols-outlined text-[15px] text-vivid-purple">podcasts</span> Audio / Podcast
+          </button>
+<button class="format-filter-btn px-space-sm py-1 rounded-full font-label-badge text-label-badge bg-surface-container-low text-text-muted hover:text-primary transition-all flex items-center gap-1.5" data-format="video">
+<span class="material-symbols-outlined text-[15px] text-punch-orange">play_circle</span> Video / YouTube
+          </button>
+<button class="format-filter-btn px-space-sm py-1 rounded-full font-label-badge text-label-badge bg-surface-container-low text-text-muted hover:text-primary transition-all flex items-center gap-1.5" data-format="article">
+<span class="material-symbols-outlined text-[15px] text-cyan-spark">article</span> News Article
+          </button>
+<button class="format-filter-btn px-space-sm py-1 rounded-full font-label-badge text-label-badge bg-surface-container-low text-text-muted hover:text-primary transition-all flex items-center gap-1.5" data-format="interactive">
+<span class="material-symbols-outlined text-[15px] text-electric-lime">desktop_windows</span> Interactive Web
+          </button>
+</div>
+<!-- Toggles: Transcripts, No Account, Bookmarks -->
+<div class="flex flex-wrap items-center gap-space-sm">
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low hover:bg-surface-raised px-space-sm py-1 rounded-md transition-colors select-none">
+<input class="accent-electric-lime rounded" id="noRegFilter" type="checkbox"/>
+<span class="font-label-badge text-label-badge text-text-muted">No account needed</span>
+</label>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low hover:bg-surface-raised px-space-sm py-1 rounded-md transition-colors select-none">
+<input class="accent-electric-lime rounded" id="transcriptsFilter" type="checkbox"/>
+<span class="font-label-badge text-label-badge text-text-muted">Full transcripts</span>
+</label>
+<label class="flex items-center gap-1.5 cursor-pointer bg-surface-container-low hover:bg-surface-raised px-space-sm py-1 rounded-md transition-colors select-none">
+<input class="accent-electric-lime rounded" id="bookmarkFilter" type="checkbox"/>
+<span class="material-symbols-outlined text-tertiary-fixed text-[15px]">star</span>
+<span class="font-label-badge text-label-badge text-text-muted">Saved Only</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Workspace Grid: Split Layout (Resource Catalog 60% / Guided Follow-up Workspace 40%) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg w-full items-start">
+<!-- LEFT COLUMN: Curated Catalog List (7 Cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md" id="catalogContainer">
+<div class="flex items-center justify-between px-space-xs">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-text-muted">Catalog Selection</span>
+<span class="font-label-mono text-label-mono px-space-xs rounded bg-surface-raised text-electric-lime" id="resourceCountBadge">15 items</span>
+</div>
+<div class="flex items-center gap-space-xs text-text-muted font-label-mono text-label-mono">
+<span>Sort:</span>
+<button class="text-primary hover:text-electric-lime underline">Follow-up Length</button>
+</div>
+</div>
+<!-- Resource Card 1 (Active Focused Item) -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group active-card bg-surface-raised" data-format="video" data-id="res-1" data-level="A2" data-noreg="true" data-saved="true" data-transcript="true">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-punch-orange/20 text-punch-orange uppercase font-bold">Video</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-primary-container text-on-primary-container font-bold">A2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Deutsche Welle · Nicos Weg</span>
+</div>
+<button class="bookmark-btn text-tertiary-fixed hover:scale-110 transition-transform p-1" title="Saved to Bookmarks">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">Folge 14: Ein Zimmer in der WG suchen</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Nico sucht eine Unterkunft und telefoniert mit einer Wohngemeinschaft in Köln. Authentischer Alltagsdialog mit nützlichen Fragen zur Miete und Nebenkosten.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 15 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            No account needed
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">subtitles</span> German transcript + subs
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Checked locally · Link active
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-primary-container text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 hover:brightness-110 shadow-sm transition-all" onclick="selectResource('res-1')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Card 2 -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group" data-format="audio" data-id="res-2" data-level="B1" data-noreg="true" data-saved="false" data-transcript="true">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-vivid-purple/20 text-vivid-purple uppercase font-bold">Podcast</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-secondary-container text-on-secondary-container font-bold">B1</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Easy German Podcast</span>
+</div>
+<button class="bookmark-btn text-text-muted hover:text-tertiary-fixed transition-colors p-1" title="Bookmark resource">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">Episode 412: Feierabendkultur &amp; Überstunden in Deutschland</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Cari und Manuel diskutieren das deutsche Arbeitsrecht, wie Kolleg:innen den Feierabend einläuten und ob Wochenendarbeit tabu ist.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 20 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            Free stream · No registration
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">description</span> Timed interactive transcript
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Verified online · Link valid
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 transition-all" onclick="selectResource('res-2')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Card 3 -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group" data-format="audio" data-id="res-3" data-level="A1" data-noreg="true" data-saved="true" data-transcript="true">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-vivid-purple/20 text-vivid-purple uppercase font-bold">Audio</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-primary-container text-on-primary-container font-bold">A1/A2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Slow German · Annik Rubens</span>
+</div>
+<button class="bookmark-btn text-tertiary-fixed hover:scale-110 transition-transform p-1" title="Saved">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">#248: Beim Arzt — Die wichtigsten Sätze</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Langsam und glasklar gesprochene Beschreibungen von Symptomen, Krankenversicherungskarte vorzeigen und Termine vereinbaren.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 10 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            Direct MP3 stream
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">article</span> Full PDF / Web text
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Verified online · Audio cached
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 transition-all" onclick="selectResource('res-3')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Card 4 -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group" data-format="video" data-id="res-4" data-level="B2" data-noreg="true" data-saved="false" data-transcript="true">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-punch-orange/20 text-punch-orange uppercase font-bold">News Video</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-status-rest-day text-primary font-bold">B2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">ARD · Tagesschau in 100 Sekunden</span>
+</div>
+<button class="bookmark-btn text-text-muted hover:text-tertiary-fixed transition-colors p-1" title="Bookmark resource">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">Kompakte Nachrichtenübersicht des Tages</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Schneller, hochpräziser Nachrichtenüberblick in 100 Sekunden. Ideal zur Schulung des Hörverstehens bei natürlichem Sprechtempo und formellem Wortschatz.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 10 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            Öffentlich-rechtlich · No paywall
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">subtitles</span> Official ARD teletext subs
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Verified online · Daily refresh
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 transition-all" onclick="selectResource('res-4')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Card 5 -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group" data-format="interactive" data-id="res-5" data-level="A2" data-noreg="true" data-saved="false" data-transcript="true">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-electric-lime/20 text-electric-lime uppercase font-bold">Interactive Web</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-primary-container text-on-primary-container font-bold">A2</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Goethe-Institut · Mein Weg nach Deutschland</span>
+</div>
+<button class="bookmark-btn text-text-muted hover:text-tertiary-fixed transition-colors p-1" title="Bookmark resource">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">Behörden und Ämter: Im Bürgeramt anmelden</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Praktische Simulation zur Wohnsitzanmeldung: Welche Dokumente benötigt man? Dialoge mit Sachbearbeiter:innen und Vokabular zu Meldebestätigung.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 15 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            Goethe open access
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">subtitles</span> Multilingual glossary
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Verified online · Stable portal
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 transition-all" onclick="selectResource('res-5')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Resource Card 6 -->
+<div class="resource-card bg-surface-card hover:bg-surface-raised transition-all p-space-md rounded-xl shadow-md cursor-pointer flex flex-col gap-space-sm relative group" data-format="article" data-id="res-6" data-level="B1" data-noreg="true" data-saved="false" data-transcript="false">
+<div class="flex items-start justify-between gap-space-sm">
+<div class="flex items-center gap-space-sm">
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-cyan-spark/20 text-cyan-spark uppercase font-bold">News Article</span>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-secondary-container text-on-secondary-container font-bold">B1</span>
+<span class="font-body-sm text-body-sm text-text-muted font-medium">Deutsche Welle · Top-Thema mit Vokabeln</span>
+</div>
+<button class="bookmark-btn text-text-muted hover:text-tertiary-fixed transition-colors p-1" title="Bookmark resource">
+<span class="material-symbols-outlined text-[20px]">star</span>
+</button>
+</div>
+<div class="flex flex-col gap-0.5">
+<h3 class="font-headline-sm text-headline-sm text-primary group-hover:text-electric-lime transition-colors">Der Trend zum Homeoffice im Mittelstand</h3>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Kurzer redaktioneller Artikel mit angefügter Vokabelliste zu Arbeitsverträgen, Remote-Work und betrieblicher Vereinbarung.</p>
+</div>
+<div class="flex flex-wrap items-center gap-space-xs pt-1">
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-cyan-spark flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">schedule</span> 15 min follow-up
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted">
+            No registration
+          </span>
+<span class="px-space-sm py-0.5 rounded-full bg-surface-container-low font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-status-online">volume_up</span> Audio reading included
+          </span>
+</div>
+<div class="flex items-center justify-between pt-space-xs mt-space-xs">
+<span class="font-label-mono text-label-mono text-text-muted flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-status-online"></span> Verified online · Link valid
+          </span>
+<button class="px-space-md py-1.5 rounded-lg bg-surface-container-high text-primary hover:bg-primary-container hover:text-on-primary-container font-label-badge text-label-badge font-bold flex items-center gap-1 transition-all" onclick="selectResource('res-6')">
+<span>In-App Activity</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Catalog Pagination & Expansion Indicator -->
+<div class="flex items-center justify-between p-space-sm bg-surface-card rounded-lg text-text-muted font-label-mono text-label-mono">
+<span>Showing 6 of 15 verified resources</span>
+<button class="px-space-md py-1 rounded bg-surface-raised text-primary hover:text-electric-lime transition-colors" onclick="alert('All 15 resources loaded into local cache.')">Load all 15 resources</button>
+</div>
+</div>
+<!-- RIGHT COLUMN: Guided In-App Activity & Phrase Vault Studio (5 Cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-md sticky top-20">
+<!-- Studio Header Card: Resource Context & Publisher Link -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-lg flex flex-col gap-space-md">
+<!-- Offline / Connection Status Banner -->
+<div class="p-space-sm rounded-lg bg-surface-container-low flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-cyan-spark text-[20px] flex-shrink-0 mt-0.5">cloud_sync</span>
+<div class="flex flex-col gap-0.5">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-primary font-bold">Hybrid Offline Architecture</span>
+<span class="px-1.5 py-0.2 rounded bg-status-online/20 text-status-online font-label-mono text-label-mono text-[10px]">Active</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted leading-tight">When offline, external streaming links are disabled, but cached guided notes and personal phrase capture remain 100% active.</p>
+</div>
+</div>
+<!-- Selected Resource Meta -->
+<div class="flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-punch-orange font-bold">Active Guided Practice</span>
+<span class="font-label-mono text-label-mono text-text-muted bg-surface-raised px-space-xs py-0.5 rounded">ID: DW-NICOS-14</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-primary" id="activeResourceTitle">Nicos Weg · Folge 14: WG-Zimmer suchen</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Focus: Housing search, inquiry etiquette, and clarifying shared expenses (Warmmiete vs. Kaltmiete).</p>
+</div>
+<!-- External Publisher Trigger -->
+<div class="flex flex-col gap-space-xs">
+<a class="flex items-center justify-between p-space-sm rounded-lg bg-surface-raised hover:bg-surface-container-high text-primary group transition-all" href="https://learngerman.dw.com" rel="noopener noreferrer" target="_blank">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-punch-orange text-[22px]">smart_display</span>
+<div class="flex flex-col">
+<span class="font-body-md text-body-md font-semibold text-primary group-hover:text-electric-lime transition-colors">Watch on Deutsche Welle</span>
+<span class="font-label-mono text-label-mono text-text-muted">Requires active connection · Opens publisher site in new tab</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted group-hover:translate-x-1 group-hover:text-primary transition-all text-[20px]">open_in_new</span>
+</a>
+<!-- Feedback & Report Bar -->
+<div class="flex items-center justify-between pt-1 text-text-muted font-label-mono text-label-mono">
+<div class="flex items-center gap-space-xs">
+<span>Difficulty:</span>
+<button class="difficulty-btn px-2 py-0.5 rounded hover:bg-surface-raised hover:text-primary transition-colors" data-diff="easy">Easy</button>
+<button class="difficulty-btn px-2 py-0.5 rounded bg-surface-raised text-electric-lime font-bold" data-diff="right">About right</button>
+<button class="difficulty-btn px-2 py-0.5 rounded hover:bg-surface-raised hover:text-primary transition-colors" data-diff="hard">Too hard</button>
+</div>
+<button class="hover:text-error transition-colors flex items-center gap-1" onclick="alert('Link status reported to maintainer. Cached notes remain available.')">
+<span class="material-symbols-outlined text-[14px]">flag</span> Broken link?
+            </button>
+</div>
+</div>
+</div>
+<!-- In-App Speaking Follow-Up Stepper Card -->
+<div class="bg-surface-card p-space-md rounded-xl shadow-lg flex flex-col gap-space-lg">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded-full bg-electric-lime text-on-primary-container font-headline-sm text-headline-sm flex items-center justify-center font-bold text-xs">2</span>
+<span class="font-headline-sm text-headline-sm text-primary">In-App Speaking Task</span>
+</div>
+<span class="px-space-xs py-0.5 rounded font-label-mono text-label-mono bg-surface-raised text-text-muted uppercase">Unscored Practice</span>
+</div>
+<!-- Task Prompt -->
+<div class="p-space-md rounded-xl bg-surface-container-low flex flex-col gap-space-sm">
+<span class="font-label-mono text-label-mono uppercase tracking-widest text-electric-lime">Prompt to Speak (Laut Sprechen)</span>
+<p class="font-german-prompt-lg text-german-prompt-lg text-primary">„Hallo, ich habe Ihre Anzeige für das WG-Zimmer gesehen. Ist das Zimmer noch frei und wie hoch ist die Kaution?“</p>
+<p class="font-body-sm text-body-sm text-text-muted italic">Translation: “Hello, I saw your ad for the flatshare room. Is it still available and how much is the security deposit?”</p>
+</div>
+<!-- Interactive Voice Audio Visualizer Mock + Record Trigger -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl">
+<div class="flex items-center justify-between text-text-muted font-label-mono text-label-mono">
+<span id="recordingStatus">Microphone ready (60s limit)</span>
+<span class="text-electric-lime" id="recordTimer">00:00 / 01:00</span>
+</div>
+<!-- Decibel Waveform Visualizer -->
+<div class="flex items-center justify-between gap-1 h-12 px-2 bg-surface-card rounded-lg overflow-hidden" id="visualizerBars">
+<div class="w-1.5 h-3 bg-vivid-purple/40 rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-5 bg-vivid-purple rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-8 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-4 bg-cyan-spark/60 rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-10 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-7 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-3 bg-vivid-purple/60 rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-6 bg-vivid-purple rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-9 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-11 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-5 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-8 bg-vivid-purple rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-3 bg-vivid-purple/40 rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-7 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-10 bg-electric-lime rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-4 bg-cyan-spark rounded-full transition-all duration-150"></div>
+<div class="w-1.5 h-2 bg-surface-raised rounded-full transition-all duration-150"></div>
+</div>
+<!-- Tactile Mic Controls -->
+<div class="flex items-center justify-center gap-space-md pt-space-xs">
+<button class="flex items-center justify-center w-14 h-14 rounded-full bg-surface-raised hover:bg-electric-lime hover:text-surface-base text-electric-lime shadow-md transition-all active:scale-95 group" id="recordBtn" title="Hold or click to record">
+<span class="material-symbols-outlined text-[28px] group-hover:scale-110 transition-transform">mic</span>
+</button>
+<button class="flex items-center justify-center w-10 h-10 rounded-full bg-surface-card hover:bg-surface-raised text-text-muted hover:text-primary transition-all disabled:opacity-40" disabled="" id="playbackBtn" title="Listen to playback">
+<span class="material-symbols-outlined text-[20px]">play_arrow</span>
+</button>
+<button class="px-space-sm py-1 rounded-full bg-surface-card hover:bg-surface-raised text-text-muted hover:text-primary font-label-mono text-label-mono transition-all" id="speedToggle">
+              1.0x
+            </button>
+</div>
+</div>
+<!-- Step 3: Phrase Vault Capture Box with Attribution Preservation -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-electric-lime text-[18px]">bookmark_add</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-primary font-bold">Step 3: Capture to Phrase Vault</span>
+</div>
+<span class="font-label-mono text-label-mono text-text-muted">Permanent Source Tagging</span>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded-lg flex flex-col gap-space-xs">
+<input class="bg-surface-card text-primary font-body-md text-body-md px-space-sm py-space-xs rounded font-medium focus:outline-none" id="vaultPhraseInput" type="text" value="Ist das Zimmer noch frei und wie hoch ist die Kaution?"/>
+<input class="bg-surface-card text-text-muted font-body-sm text-body-sm px-space-sm py-space-xs rounded focus:outline-none" id="vaultTranslationInput" type="text" value="Is the room still available and how much is the security deposit?"/>
+<div class="flex items-center justify-between pt-1">
+<span class="font-label-mono text-label-mono text-text-muted truncate max-w-[220px]">Source: Deutsche Welle · Nicos Weg Ep.14</span>
+<button class="px-space-md py-1 rounded-md bg-surface-raised hover:bg-electric-lime hover:text-surface-base text-electric-lime font-label-badge text-label-badge font-bold transition-all flex items-center gap-1" id="vaultSaveBtn" onclick="saveToVault()">
+<span class="material-symbols-outlined text-[14px]">save</span> Save Phrase
+              </button>
+</div>
+</div>
+</div>
+<!-- Step 4: Strict Evidence Self-Reported External Minutes Form -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-cyan-spark text-[18px]">av_timer</span>
+<span class="font-label-mono text-label-mono uppercase tracking-wider text-primary font-bold">Step 4: Record Outside Practice</span>
+</div>
+<span class="px-1.5 py-0.5 rounded bg-surface-raised text-text-muted font-label-mono text-label-mono text-[10px]">Unscored</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted leading-tight">External video/podcast duration is logged strictly as <strong class="text-on-surface">Self-reported</strong> and kept separate from measured in-app vocal drill timestamps.</p>
+<div class="flex items-center gap-space-sm pt-space-xs">
+<div class="flex items-center bg-surface-container-low rounded-lg px-space-sm py-space-xs flex-1">
+<input class="bg-transparent text-primary font-headline-sm text-headline-sm w-16 focus:outline-none" id="selfMinutesInput" max="180" min="1" type="number" value="15"/>
+<span class="font-label-mono text-label-mono text-text-muted">minutes watched / listened</span>
+</div>
+<button class="px-space-md py-space-sm rounded-lg bg-cyan-spark/20 hover:bg-cyan-spark hover:text-surface-base text-cyan-spark font-label-badge text-label-badge font-bold transition-all flex items-center gap-1" id="logMinutesBtn" onclick="logExternalTime()">
+<span>Log Minutes</span>
+<span class="material-symbols-outlined text-[16px]">check</span>
+</button>
+</div>
+<div class="flex items-center gap-1 text-text-muted font-label-mono text-label-mono pt-0.5">
+<span class="material-symbols-outlined text-[14px]">verified_user</span>
+<span>Provenance: Marked "Self-reported" in Weekly Progress Ledger</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Toast Notification Feedback Pill (Hidden by default, triggered via JS) -->
+<div class="fixed bottom-6 right-6 bg-surface-container-highest text-primary px-space-md py-space-sm rounded-xl shadow-2xl flex items-center gap-space-sm transition-all duration-300 opacity-0 pointer-events-none translate-y-4 z-50" id="toastNotification">
+<span class="material-symbols-outlined text-electric-lime" id="toastIcon">check_circle</span>
+<span class="font-body-md text-body-md font-semibold" id="toastMessage">Phrase successfully stored into vault!</span>
+</div>
+<!-- Interactive Logic for Resource Selection, Filters, Mic Pulse & Vault Capture -->
+<script>
+    // State management
+    const resourcesData = {
+      'res-1': {
+        title: 'Nicos Weg · Folge 14: WG-Zimmer suchen',
+        publisher: 'Deutsche Welle · Nicos Weg',
+        focus: 'Housing search, inquiry etiquette, and clarifying shared expenses (Warmmiete vs. Kaltmiete).',
+        url: 'https://learngerman.dw.com',
+        prompt: '„Hallo, ich habe Ihre Anzeige für das WG-Zimmer gesehen. Ist das Zimmer noch frei und wie hoch ist die Kaution?“',
+        translation: 'Hello, I saw your ad for the flatshare room. Is it still available and how much is the security deposit?',
+        code: 'DW-NICOS-14'
+      },
+      'res-2': {
+        title: 'Easy German 412: Feierabendkultur in Deutschland',
+        publisher: 'Easy German Podcast',
+        focus: 'Workplace boundaries, after-hours etiquette, and German labour custom idioms.',
+        url: 'https://www.easygerman.org',
+        prompt: '„Schönen Feierabend allerseits! Ich habe meine Aufgaben für heute abgeschlossen und mache jetzt Schluss.“',
+        translation: 'Have a great evening everyone! I finished my tasks for today and am clocking out now.',
+        code: 'EG-POD-412'
+      },
+      'res-3': {
+        title: 'Slow German #248: Beim Arzt — Die wichtigsten Sätze',
+        publisher: 'Slow German Podcast',
+        focus: 'Describing medical symptoms clearly and answering reception questions.',
+        url: 'https://slowgerman.com',
+        prompt: '„Guten Tag, ich habe seit zwei Tagen starke Halsschmerzen und würde gerne einen Termin beim Arzt vereinbaren.“',
+        translation: 'Good day, I have had a severe sore throat for two days and would like to make a doctor appointment.',
+        code: 'SG-MED-248'
+      },
+      'res-4': {
+        title: 'Tagesschau in 100 Sekunden',
+        publisher: 'ARD Tagesschau',
+        focus: 'Rapid formal German, current events lexicon, and broadcast cadence.',
+        url: 'https://www.tagesschau.de',
+        prompt: '„Die Bundesregierung plant neue Maßnahmen zur Förderung erneuerbarer Energien im kommenden Haushaltsjahr.“',
+        translation: 'The federal government is planning new measures to promote renewable energy in the upcoming budget year.',
+        code: 'ARD-TS-100'
+      },
+      'res-5': {
+        title: 'Goethe: Im Bürgeramt anmelden',
+        publisher: 'Goethe-Institut',
+        focus: 'Bureaucracy, residency forms, and appointment confirmation phrases.',
+        url: 'https://www.goethe.de',
+        prompt: '„Guten Morgen, ich möchte mich ummelden. Hier sind mein Reisepass und die Wohnungsgeberbestätigung des Vermieters.“',
+        translation: 'Good morning, I would like to register my new address. Here is my passport and the landlord confirmation.',
+        code: 'GI-BA-01'
+      },
+      'res-6': {
+        title: 'Top-Thema: Homeoffice im Mittelstand',
+        publisher: 'Deutsche Welle Top-Thema',
+        focus: 'Work contracts, telecommuting rights, and office equipment vocab.',
+        url: 'https://learngerman.dw.com',
+        prompt: '„Laut der neuen Betriebsvereinbarung haben die Angestellten das Recht auf zwei Tage mobiles Arbeiten pro Woche.“',
+        translation: 'According to the new works agreement, employees are entitled to two days of remote work per week.',
+        code: 'DW-TT-HOME'
+      }
+    };
+
+    function showToast(msg, icon = 'check_circle') {
+      const toast = document.getElementById('toastNotification');
+      const toastMsg = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+      toastMsg.innerText = msg;
+      toastIcon.innerText = icon;
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+      }, 3000);
+    }
+
+    function selectResource(id) {
+      const data = resourcesData[id];
+      if (!data) return;
+
+      // Update right studio card
+      document.getElementById('activeResourceTitle').innerText = data.title;
+      document.querySelector('.font-german-prompt-lg').innerText = data.prompt;
+      document.querySelector('.italic').innerText = 'Translation: ' + data.translation;
+      document.getElementById('vaultPhraseInput').value = data.prompt.replace(/[„“]/g, '');
+      document.getElementById('vaultTranslationInput').value = data.translation;
+
+      // Card active highlight
+      document.querySelectorAll('.resource-card').forEach(c => {
+        c.classList.remove('bg-surface-raised');
+        c.classList.add('bg-surface-card');
+      });
+      const activeCard = document.querySelector(`[data-id="${id}"]`);
+      if (activeCard) {
+        activeCard.classList.remove('bg-surface-card');
+        activeCard.classList.add('bg-surface-raised');
+      }
+
+      showToast(`Loaded ${data.publisher} guided follow-up`, 'folder_open');
+    }
+
+    // Filter engine
+    let currentLevel = 'all';
+    let currentFormat = 'all';
+
+    function applyFilters() {
+      const query = document.getElementById('searchInput').value.toLowerCase();
+      const noReg = document.getElementById('noRegFilter').checked;
+      const transcripts = document.getElementById('transcriptsFilter').checked;
+      const savedOnly = document.getElementById('bookmarkFilter').checked;
+
+      const cards = document.querySelectorAll('.resource-card');
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        const desc = card.querySelector('p').innerText.toLowerCase();
+        const level = card.dataset.level;
+        const format = card.dataset.format;
+        const cardNoReg = card.dataset.noreg === 'true';
+        const cardTranscript = card.dataset.transcript === 'true';
+        const cardSaved = card.dataset.saved === 'true';
+
+        const matchesQuery = title.includes(query) || desc.includes(query);
+        const matchesLevel = currentLevel === 'all' || level.includes(currentLevel);
+        const matchesFormat = currentFormat === 'all' || format === currentFormat;
+        const matchesNoReg = !noReg || cardNoReg;
+        const matchesTranscript = !transcripts || cardTranscript;
+        const matchesSaved = !savedOnly || cardSaved;
+
+        if (matchesQuery && matchesLevel && matchesFormat && matchesNoReg && matchesTranscript && matchesSaved) {
+          card.style.display = 'flex';
+          visibleCount++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      document.getElementById('resourceCountBadge').innerText = `${visibleCount} item${visibleCount === 1 ? '' : 's'}`;
+    }
+
+    // Event Listeners for Filters
+    document.getElementById('searchInput').addEventListener('input', applyFilters);
+    document.getElementById('noRegFilter').addEventListener('change', applyFilters);
+    document.getElementById('transcriptsFilter').addEventListener('change', applyFilters);
+    document.getElementById('bookmarkFilter').addEventListener('change', applyFilters);
+
+    // Level buttons
+    document.querySelectorAll('.level-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.level-filter-btn').forEach(b => {
+          b.classList.remove('bg-primary-container', 'text-on-primary-container');
+          b.classList.add('text-text-muted');
+        });
+        btn.classList.add('bg-primary-container', 'text-on-primary-container');
+        btn.classList.remove('text-text-muted');
+        currentLevel = btn.dataset.level;
+        applyFilters();
+      });
+    });
+
+    // Format buttons
+    document.querySelectorAll('.format-filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.format-filter-btn').forEach(b => {
+          b.classList.remove('bg-surface-raised', 'text-primary');
+          b.classList.add('bg-surface-container-low', 'text-text-muted');
+        });
+        btn.classList.add('bg-surface-raised', 'text-primary');
+        btn.classList.remove('bg-surface-container-low', 'text-text-muted');
+        currentFormat = btn.dataset.format;
+        applyFilters();
+      });
+    });
+
+    // Difficulty feedback buttons
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.difficulty-btn').forEach(b => {
+          b.classList.remove('bg-surface-raised', 'text-electric-lime', 'font-bold');
+        });
+        btn.classList.add('bg-surface-raised', 'text-electric-lime', 'font-bold');
+        showToast(`Feedback noted: "${btn.innerText}"`, 'thumb_up');
+      });
+    });
+
+    // Bookmark toggling
+    document.querySelectorAll('.bookmark-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const card = btn.closest('.resource-card');
+        const isSaved = card.dataset.saved === 'true';
+        card.dataset.saved = (!isSaved).toString();
+        const star = btn.querySelector('.material-symbols-outlined');
+        if (!isSaved) {
+          star.style.fontVariationSettings = "'FILL' 1";
+          btn.classList.add('text-tertiary-fixed');
+          btn.classList.remove('text-text-muted');
+          showToast('Saved resource to personal bookmarks', 'star');
+        } else {
+          star.style.fontVariationSettings = "'FILL' 0";
+          btn.classList.remove('text-tertiary-fixed');
+          btn.classList.add('text-text-muted');
+          showToast('Removed resource from bookmarks', 'bookmark_remove');
+        }
+      });
+    });
+
+    // Interactive Mic Recording Simulator
+    let isRecording = false;
+    let recordInterval;
+    let recordSec = 0;
+    const recordBtn = document.getElementById('recordBtn');
+    const playbackBtn = document.getElementById('playbackBtn');
+    const recordingStatus = document.getElementById('recordingStatus');
+    const recordTimer = document.getElementById('recordTimer');
+    const visualizerBars = document.querySelectorAll('#visualizerBars div');
+
+    recordBtn.addEventListener('click', () => {
+      if (!isRecording) {
+        // Start recording
+        isRecording = true;
+        recordSec = 0;
+        recordBtn.classList.remove('bg-surface-raised', 'text-electric-lime');
+        recordBtn.classList.add('bg-electric-lime', 'text-surface-base', 'animate-pulse');
+        recordingStatus.innerText = 'Listening to your German speech...';
+        playbackBtn.disabled = true;
+
+        recordInterval = setInterval(() => {
+          recordSec++;
+          const mins = String(Math.floor(recordSec / 60)).padStart(2, '0');
+          const secs = String(recordSec % 60).padStart(2, '0');
+          recordTimer.innerText = `${mins}:${secs} / 01:00`;
+
+          // Randomize waveform decibels
+          visualizerBars.forEach(bar => {
+            const h = Math.floor(Math.random() * 38) + 6;
+            bar.style.height = `${h}px`;
+          });
+
+          if (recordSec >= 60) {
+            recordBtn.click();
+          }
+        }, 1000);
+      } else {
+        // Stop recording
+        isRecording = false;
+        clearInterval(recordInterval);
+        recordBtn.classList.add('bg-surface-raised', 'text-electric-lime');
+        recordBtn.classList.remove('bg-electric-lime', 'text-surface-base', 'animate-pulse');
+        recordingStatus.innerText = 'Audio captured locally · Unscored';
+        playbackBtn.disabled = false;
+        showToast('Speaking completed. You can re-listen or capture phrases.', 'record_voice_over');
+      }
+    });
+
+    // Playback simulator
+    playbackBtn.addEventListener('click', () => {
+      showToast('Playing back your audio attempt at 1.0x', 'play_arrow');
+    });
+
+    // Speed toggle
+    let speeds = ['1.0x', '0.75x'];
+    let speedIdx = 0;
+    document.getElementById('speedToggle').addEventListener('click', function() {
+      speedIdx = (speedIdx + 1) % speeds.length;
+      this.innerText = speeds[speedIdx];
+      showToast(`Playback speed set to ${speeds[speedIdx]}`, 'speed');
+    });
+
+    // Vault Save
+    function saveToVault() {
+      const phrase = document.getElementById('vaultPhraseInput').value;
+      if (phrase.trim()) {
+        showToast(`Phrase saved to vault with source attribution!`, 'bookmark_added');
+      }
+    }
+
+    // Log Minutes
+    function logExternalTime() {
+      const mins = document.getElementById('selfMinutesInput').value;
+      if (mins > 0) {
+        showToast(`Logged ${mins} external mins (Evidence: Self-reported)`, 'schedule');
+      }
+    }
+  </script>
+</div></main></div></body></html>

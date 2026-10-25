@@ -32,7 +32,24 @@ export function createMockProvider() {
         if (last.includes('uncertain-fixture')) throw new Error('Network fixture');
         const isReview = body.response_format.json_schema.name === 'german_review';
         let answer;
-        if (isReview) {
+        if (body.response_format.json_schema.name === 'sprich_assessment_ratings') {
+          const payload = JSON.parse(last);
+          const evidence = payload.eligibleEvidence[0];
+          const criteria = body.response_format.json_schema.schema.properties.ratings.items.properties.id.enum;
+          answer = { ratings: criteria.map(id => ({ id, score: evidence ? 3 : null, reasonEn: 'Fixture estimate for automated checks, not a real language judgment.',
+            evidence: evidence ? [{ refId: evidence.id, quote: evidence.text.slice(0, 120) }] : [] })), strengths: ['This is a test-grader fixture.'], corrections: [],
+            retryDe: 'Versuchen Sie die Aufgabe noch einmal mit einem anderen Beispiel.', retryEn: 'Try the task again with a different example.' };
+        } else if (body.messages[0].content.includes('Trusted definition: ')) {
+          const trusted = JSON.parse(body.messages[0].content.split('Trusted definition: ').at(-1));
+          const replies = body.messages.filter(message => message.role === 'user').length;
+          const cafe = trusted.title.toLowerCase().includes('caf') || trusted.title.toLowerCase().includes('drink');
+          if (body.messages[0].content.includes('Current operation: hint.')) answer = { replyDe: 'Ich möchte …, bitte.', meaningEn: 'I would like …, please.', action: 'clarify' };
+          else if (body.messages[0].content.includes('Current operation: rephrase.')) answer = { replyDe: body.messages.filter(message => message.role === 'assistant').at(-1).content, meaningEn: 'Please answer this question.', action: 'clarify' };
+          else if (cafe) answer = replies === 1 ? { replyDe: 'Klein oder groß?', meaningEn: 'Small or large?', action: 'question' }
+            : replies === 2 ? { replyDe: 'Möchten Sie bar oder mit Karte bezahlen?', meaningEn: 'Would you like to pay cash or by card?', action: 'question' }
+              : { replyDe: 'Vielen Dank. Haben Sie noch eine Frage?', meaningEn: 'Thank you. Do you have another question?', action: 'question' };
+          else answer = { replyDe: 'Welche Zeit passt Ihnen? Bitte bestätigen Sie den Termin.', meaningEn: 'Which time works for you? Please confirm the appointment.', action: 'question' };
+        } else if (isReview) {
           const history = JSON.parse(last).conversation;
           answer = { strengths: [{ quote: history[0].user, de: 'Du hast eine konkrete Information genannt.', en: 'You gave specific information.' }], corrections: [],
             phrases: [{ de: 'Ich gebe Ihnen morgen Bescheid.', en: 'I will let you know tomorrow.', example: 'Ich prüfe meinen Kalender und gebe Ihnen morgen Bescheid.' }], retryDe: 'Erkläre deine Verfügbarkeit noch einmal mit anderen Tagen.', retryEn: 'Explain your availability again using different days.' };

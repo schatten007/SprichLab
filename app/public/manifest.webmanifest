@@ -1,13 +1,50 @@
 {
-  "id": "./",
-  "name": "Sprich · German for your next step",
+  "id": "./?source=pwa",
+  "name": "Sprich — German Speaking Trainer",
   "short_name": "Sprich",
-  "description": "Speaking-first German for Werkstudent interviews and everyday work.",
+  "description": "Local-first German speaking practice for everyday, university, and workplace situations.",
   "start_url": "./#today",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f6f7f3",
-  "theme_color": "#1c594b",
-  "lang": "en",
-  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#121316",
+  "theme_color": "#121316",
+  "lang": "de-DE",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "share_target": {
+    "action": "./",
+    "method": "GET",
+    "params": { "title": "title", "text": "text", "url": "url" }
+  },
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Today's Speaking Bite",
+      "short_name": "Today",
+      "description": "Jump directly into today's speaking practice",
+      "url": "./#today"
+    },
+    {
+      "name": "Vocabulary Vault",
+      "short_name": "Words",
+      "description": "Open the offline vocabulary collection",
+      "url": "./#words"
+    },
+    {
+      "name": "Workplace Missions",
+      "short_name": "Workplace",
+      "description": "Open German workplace speaking practice",
+      "url": "./#practice"
+    }
+  ],
+  "prefer_related_applications": false
 }

@@ -1,0 +1,94 @@
+import { test, expect } from '@playwright/test';
+
+/** Primary routes stay one tap away; everything else lives behind More. */
+test('the four primary destinations are always one tap away', async ({ page }) => {
+  await page.goto('/');
+  for (const name of ['Today', 'Lessons', 'Words', 'Progress']) {
+    await expect(page.getByRole('link', { name, exact: true })).toBeVisible();
+  }
+  await expect(page.locator('#navigation .nav-link')).toHaveCount(10);
+});
+
+test('Settings is reachable on a phone, where the sidebar footer is hidden', async ({ page }) => {
+  await page.goto('/');
+  const summary = page.locator('.nav-more > summary');
+  if (await summary.isVisible() && !(await page.locator('.nav-more').evaluate(menu => menu.open))) await summary.click();
+
+  const settings = page.locator('.nav-more-panel .nav-link[href="#settings"]');
+  await expect(settings).toBeVisible();
+  await settings.click();
+  await expect(page.getByRole('heading', { name: 'Make it fit your life.' })).toBeVisible();
+  await expect(page.locator('.nav-more')).toHaveAttribute('data-active', 'true');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('the More menu reaches every secondary screen and marks the current one', async ({ page }) => {
+  const destinations = [
+    ['#how', 'What your numbers actually mean.'],
+    ['#practice', 'A conversation worth having.'],
+    ['#assessments', 'Checks and graded roleplays'],
+  ];
+  for (const [href, heading] of destinations) {
+    await page.goto('/');
+    const summary = page.locator('.nav-more > summary');
+    if (await summary.isVisible() && !(await page.locator('.nav-more').evaluate(menu => menu.open))) await summary.click();
+    await page.locator(`.nav-more-panel .nav-link[href="${href}"]`).click();
+    await expect(page.getByRole('heading', { name: heading })).toBeVisible();
+    await expect(page.locator(`.nav-more-panel .nav-link[href="${href}"]`)).toHaveAttribute('aria-current', 'page');
+    await expect(page.locator('.nav-more')).toHaveAttribute('data-active', 'true');
+  }
+});
+
+test('a primary destination clears the More menu highlight', async ({ page }) => {
+  await page.goto('/#settings');
+  await expect(page.locator('.nav-more')).toHaveAttribute('data-active', 'true');
+  await page.getByRole('link', { name: 'Lessons', exact: true }).click();
+  await expect(page.locator('.nav-more')).toHaveAttribute('data-active', 'false');
+  await expect(page.getByRole('link', { name: 'Lessons', exact: true })).toHaveAttribute('aria-current', 'page');
+});
+
+test('the explainer page documents each kind of evidence once', async ({ page }) => {
+  await page.goto('/#how');
+  await expect(page.getByRole('heading', { name: 'What your numbers actually mean.' })).toBeVisible();
+  await expect(page.locator('.prov')).toHaveCount(6);
+  for (const label of ['Measured', 'Checked locally', 'Self-rated', 'Self-reported', 'AI estimate', 'Imported Gemini assessment']) {
+    await expect(page.getByText(label, { exact: true })).toBeVisible();
+  }
+  await expect(page.getByText('15 minutes of measured practice')).toBeVisible();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
+
+test('shared text opens the phrase form and saves after the learner confirms its meaning', async ({ page }) => {
+  await page.goto('/?text=Guten%20Tag%21&url=https%3A%2F%2Fexample.org%2Flesson');
+  await expect(page.getByRole('heading', { name: 'Your conversation toolkit.' })).toBeVisible();
+  await expect(page.getByLabel('German phrase', { exact: true })).toHaveValue('Guten Tag!');
+  await expect(page.getByLabel('Source link (optional)')).toHaveValue('https://example.org/lesson');
+  await page.getByLabel('English meaning', { exact: true }).fill('Hello!');
+  await page.getByRole('button', { name: 'Save phrase to my collection', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Guten Tag!', exact: true })).toBeVisible();
+  await expect(page).toHaveURL(/#phrases$/);
+});
+
+test('a saved phrase can choose an attributed Tatoeba example', async ({ page }) => {
+  await page.route('https://api.tatoeba.org/v1/sentences**', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ data: [{ id: 123, text: 'Guten Tag.', lang: 'deu', license: 'CC BY 2.0 FR', owner: 'example-user', is_unapproved: false, is_orphan: false, translations: [{ id: 456, text: 'Hello!', lang: 'eng', license: 'CC BY 2.0 FR', owner: 'translator', is_unapproved: false, is_orphan: false, is_direct: true }] }] }),
+  }));
+  await page.goto('/#phrases');
+  await page.getByText('Add a personal phrase', { exact: true }).click();
+  await page.getByLabel('German phrase', { exact: true }).fill('Guten Tag!');
+  await page.getByLabel('English meaning', { exact: true }).fill('Hello!');
+  await page.getByRole('button', { name: 'Save phrase to my collection', exact: true }).click();
+  const card = page.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Guten Tag!', exact: true }) });
+  await card.getByRole('button', { name: 'Find a free example', exact: true }).click();
+  await expect(card.getByText('Guten Tag.', { exact: true })).toBeVisible();
+  await expect(card.getByRole('button', { name: 'Use this example', exact: true })).toBeVisible();
+  await card.getByRole('button', { name: 'Use this example', exact: true }).click();
+  await expect(card.getByText('Guten Tag.', { exact: true })).toBeVisible();
+  expect((await page.evaluate(async () => {
+    const db = await new Promise((resolve, reject) => { const request = indexedDB.open('sprich-german-v2'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+    const result = await new Promise((resolve, reject) => { const request = db.transaction('meta').objectStore('meta').get('state'); request.onsuccess = () => resolve(request.result); request.onerror = () => reject(request.error); });
+    db.close(); return result;
+  })).personalPhrases[0].exampleSourceTitle).toContain('CC BY 2.0 FR');
+});

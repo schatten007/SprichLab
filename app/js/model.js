@@ -1,8 +1,9 @@
 import { freezeLegacySession } from './legacy-session.js';
 import { validateAIConversation, mergeAIConversations } from './ai-state.js';
 import { emptyStarter, validateStarter, mergeStarter } from './starter-state.js';
+import { emptyAssessments, validateAssessmentState, mergeAssessments, assertAssessmentConversationMerge } from './assessment-state.js';
 
-export const SCHEMA_VERSION = 5;
+export const SCHEMA_VERSION = 6;
 export const DAY = 86_400_000;
 export const PLAN_LENGTHS = [15, 30, 60, 90, 120];
 export const PROFILE_FIELDS = ['name', 'studies', 'experience', 'availability', 'start', 'motivation'];
@@ -55,8 +56,8 @@ export function newState(now = Date.now(), timeZone = 'Europe/Berlin') {
     createdAt: now,
     updatedAt: now,
     profile: Object.fromEntries(PROFILE_FIELDS.map(field => [field, ''])),
-    preferences: { dailyMinutes: 90, timeZone, voiceURI: '', speechRate: 0.9, theme: 'system', englishSupport: 'on-demand', aiVoice: 'device', aiLevel: 'A2', learningPath: 'starter' },
-    sessions: [], attempts: [], activity: [], personalPhrases: [], resourceStates: [], dailyPlans: [], aiSessions: [], companionNotes: [], starter: emptyStarter(), legacy: null,
+    preferences: { dailyMinutes: 90, timeZone, voiceURI: '', speechRate: 0.9, theme: 'dark', englishSupport: 'on-demand', aiVoice: 'device', aiLevel: 'A2', learningPath: 'starter' },
+    sessions: [], attempts: [], activity: [], personalPhrases: [], resourceStates: [], dailyPlans: [], aiSessions: [], companionNotes: [], starter: emptyStarter(), assessments: emptyAssessments(), legacy: null,
   };
 }
 
@@ -94,10 +95,11 @@ export function safeSourceURL(value) {
 export function validatePhrase(phrase, personal = false) {
   assert(object(phrase) && identifier(phrase.id) && text(phrase.de, 500) && phrase.de.trim() && text(phrase.en, 1000) && phrase.en.trim(), 'Invalid phrase or meaning.');
   assert(text(phrase.cue) && text(phrase.example, 1500) && text(phrase.note) && stringList(phrase.tags, 20), 'Invalid phrase example or context.');
-  for (const field of ['cueDe', 'noteDe', 'sourceId', 'sourceTitle']) assert(phrase[field] === undefined || text(phrase[field], 1500), 'Invalid phrase metadata.');
+  for (const field of ['cueDe', 'noteDe', 'sourceId', 'sourceTitle', 'exampleSourceTitle']) assert(phrase[field] === undefined || text(phrase[field], 1500), 'Invalid phrase metadata.');
   if (personal) {
     assert(phrase.id.startsWith('personal-') && timestamp(phrase.createdAt), 'Invalid personal phrase ID or date.');
     assert(phrase.sourceUrl === '' || safeSourceURL(phrase.sourceUrl), 'Use an HTTPS source link for a personal phrase.');
+    assert(phrase.exampleSourceUrl === undefined || phrase.exampleSourceUrl === '' || safeSourceURL(phrase.exampleSourceUrl), 'Use an HTTPS example source link.');
   }
   return phrase;
 }
@@ -222,6 +224,14 @@ export function validateState(state, { legacy = false, version = SCHEMA_VERSION 
     assert(['starter', 'work'].includes(prefs.learningPath), 'Choose the beginner or workplace learning path.');
     validateStarter(state.starter);
   }
+  if (expected >= 6) {
+    validateAssessmentState(state.assessments);
+    for (const conversation of state.aiSessions.filter(session => session.assessmentRef)) {
+      const attempt = state.assessments.attempts.find(item => item.id === conversation.assessmentRef.attemptId);
+      assert(attempt?.aiSessionId === conversation.id && attempt.definitionHash === conversation.assessmentRef.definitionHash && attempt.mode === conversation.assessmentRef.mode, 'An assessed conversation is missing its matching attempt.');
+    }
+    for (const attempt of state.assessments.attempts) assert(attempt.aiSessionId === null || state.aiSessions.some(session => session.id === attempt.aiSessionId && session.assessmentRef?.attemptId === attempt.id), 'A roleplay assessment is missing its conversation.');
+  }
   for (const key of ['sessions', 'attempts', 'activity']) {
     assert(Array.isArray(state[key]) && state[key].length <= 200_000, `Invalid ${key} list.`);
     const ids = new Set();
@@ -254,7 +264,8 @@ export function validateState(state, { legacy = false, version = SCHEMA_VERSION 
   }
   state.attempts.forEach(validateAttempt);
   const sessionIds = new Set([...state.sessions.map(session => session.id), ...(expected >= 4 ? state.aiSessions.map(session => session.id) : []),
-    ...(expected >= 5 ? [...state.starter.sessions, ...state.starter.wordSessions].map(session => session.id) : [])]);
+    ...(expected >= 5 ? [...state.starter.sessions, ...state.starter.wordSessions].map(session => session.id) : []),
+    ...(expected >= 6 ? state.assessments.attempts.map(attempt => attempt.id) : [])]);
   for (const attempt of state.attempts) assert(sessionIds.has(attempt.sessionId), 'An attempt is missing its session.');
   for (const event of state.activity) {
     assert(sessionIds.has(event.sessionId) && timestamp(event.start) && timestamp(event.end) && event.end > event.start, 'Invalid activity interval.');
@@ -288,10 +299,15 @@ export function validateState(state, { legacy = false, version = SCHEMA_VERSION 
 
 export function upgradeState(raw) {
   if (raw?.schemaVersion === SCHEMA_VERSION) return validateState(raw);
+  if (raw?.schemaVersion === 5) {
+    validateState(raw, { version: 5 });
+    return validateState({ ...structuredClone(raw), schemaVersion: SCHEMA_VERSION, assessments: emptyAssessments() });
+  }
   const starterUpgrade = state => {
     state.schemaVersion = SCHEMA_VERSION;
     state.preferences.learningPath = 'starter';
     state.starter = emptyStarter();
+    state.assessments = emptyAssessments();
     return validateState(state);
   };
   if (raw?.schemaVersion === 4) {
@@ -330,6 +346,7 @@ export function parseBackup(raw) {
 /** Immutable attempts are merged by ID; newer session cursors never undo a completion. */
 export function mergeProgress(local, incoming, useProfile = false, now = Date.now()) {
   validateState(incoming);
+  assertAssessmentConversationMerge(local, incoming);
   const merged = structuredClone(local);
   const sessions = new Map(local.sessions.map(session => [session.id, session]));
   for (const session of incoming.sessions) {
@@ -355,6 +372,7 @@ export function mergeProgress(local, incoming, useProfile = false, now = Date.no
   for (const note of incoming.companionNotes) if (!notes.has(note.id)) notes.set(note.id, structuredClone(note));
   merged.companionNotes = [...notes.values()];
   merged.starter = mergeStarter(local.starter, incoming.starter);
+  merged.assessments = mergeAssessments(local.assessments, incoming.assessments);
   merged.activity = mergeActivity(local.activity, incoming.activity);
   if (useProfile) {
     merged.profile = structuredClone(incoming.profile);

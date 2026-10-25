@@ -10,7 +10,9 @@ export default defineConfig({
   reporter: 'list',
   use: {
     baseURL: 'http://127.0.0.1:4173',
-    channel: 'msedge',
+    ...(process.platform === 'linux'
+      ? { executablePath: '/usr/bin/microsoft-edge-stable' }
+      : { channel: 'msedge' }),
     permissions: ['microphone'],
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
@@ -29,7 +31,7 @@ export default defineConfig({
     },
     {
       command: 'npm run ai:gateway:test',
-      url: 'http://127.0.0.1:8787/api/v1/status',
+      url: `http://127.0.0.1:${process.env.AI_GATEWAY_PORT || 8787}/api/v1/status`,
       reuseExistingServer: !process.env.CI,
       timeout: 30_000,
     },

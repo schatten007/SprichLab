@@ -47,6 +47,12 @@ Run commands from the project folder with Node.js 22.13+ (22.x) or 24+. Dependen
 
 The app defaults to **40 turns/day, 3/minute, and 6 reviews/day**. Provider limits also apply; a 429 means wait for the limit to reset. `npm run ai:gateway:test` gives fixture responses for testing, not real AI.
 
+### Save the provider key from inside the app
+
+Once the local gateway is unlocked, open **Settings → Audio API setup → Check local gateway**. Paste the Groq key, confirm the account is on Free, and choose **Save audio API settings**. The optional ElevenLabs key and voice ID can be saved in the same form.
+
+The browser does not keep these values in IndexedDB, localStorage, progress exports, or the response body. The local gateway writes them to `.local/ai-credentials.json`, which is ignored by Git and restricted to the local owner where the operating system supports file permissions. A hosted Worker cannot safely accept and persist provider keys from the browser; use its platform secret manager instead.
+
 ## 3. Optional natural TTS with ElevenLabs Free
 
 1. Create an [ElevenLabs Free account](https://elevenlabs.io/app/sign-up). Keep pay-as-you-go/credit extensions off. The current free allowance lists **10,000 Multilingual v2 characters**; it is limited, not enough for unrestricted daily conversation. [Pricing](https://elevenlabs.io/pricing/api).
