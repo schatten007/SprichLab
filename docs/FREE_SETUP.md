@@ -17,7 +17,7 @@ Run commands from the project folder with Node.js 22.13+ (22.x) or 24+. Dependen
 
 ## 2. Real AI Talk with Groq Free
 
-1. Create a [Groq account and API key](https://console.groq.com/keys). Stay on **Free**; no Developer upgrade or payment method is needed. [Billing details](https://console.groq.com/docs/billing-faqs).
+1. Create a [Groq account](https://console.groq.com/keys). Stay on **Free**; no Developer upgrade or payment method is needed. You can create the key from the link inside Sprich. [Billing details](https://console.groq.com/docs/billing-faqs).
 2. In a second terminal, run:
 
    ```powershell
@@ -25,13 +25,13 @@ Run commands from the project folder with Node.js 22.13+ (22.x) or 24+. Dependen
    ```
 
    Keep the **owner access code** for the app. The command also prints its hash and a separate signing secret; it does not create your Groq key.
-3. Copy `.dev.vars.example` to `.dev.vars` in your editor if that file does not already exist. Fill in the values:
+3. Copy `.dev.vars.example` to `.dev.vars` in your editor if that file does not already exist. Fill in the owner values and leave provider keys blank; the app saves those through the OS keychain:
 
    ```dotenv
    OWNER_TOKEN_HASH=PASTE_THE_GENERATED_HASH
    SESSION_SECRET=PASTE_THE_GENERATED_SIGNING_SECRET
-   GROQ_API_KEY=PASTE_YOUR_GROQ_KEY
-   GROQ_FREE_TIER_CONFIRMED=true
+   GROQ_API_KEY=
+   GROQ_FREE_TIER_CONFIRMED=false
    ELEVENLABS_API_KEY=
    ELEVENLABS_VOICE_ID=
    ```
@@ -43,15 +43,21 @@ Run commands from the project folder with Node.js 22.13+ (22.x) or 24+. Dependen
    npm run ai:gateway
    ```
 
-5. Open **http://localhost:8080/#ai**, enter the **owner access code** (not an API key), choose **Unlock AI Talk → Check models**, then start a conversation. The gateway fixes the models to `whisper-large-v3` and `openai/gpt-oss-120b`.
+5. Open **http://localhost:8080/#ai**, enter the **owner access code** (not an API key), and unlock AI Talk.
+6. Open **Settings → Save your own audio key**, choose Groq, open the official key page shown there, paste the key, confirm the Free plan, and choose **Save this provider key**. Return to AI Talk and choose **Check models**. The gateway uses `whisper-large-v3` and `openai/gpt-oss-120b`.
 
 The app defaults to **40 turns/day, 3/minute, and 6 reviews/day**. Provider limits also apply; a 429 means wait for the limit to reset. `npm run ai:gateway:test` gives fixture responses for testing, not real AI.
 
 ### Save the provider key from inside the app
 
-Once the local gateway is unlocked, open **AI Talk → Set up audio API keys**, or open **Settings → Audio API setup**. Choose **Check gateway and show key fields**, paste the Groq key, confirm the account is on Free, and choose **Save audio API settings**. The optional ElevenLabs key and voice ID can be saved in the same form.
+Once the local gateway is unlocked, open **AI Talk → Set up audio API keys**, or open **Settings → Save your own audio key**. Choose a provider from the dropdown, open its official key page, follow the short guide in the form, paste the key, and choose **Save this provider key**. Use **Remove saved key** to delete it from the keychain. Groq also asks you to confirm that you are using its Free plan; ElevenLabs asks for a voice ID for natural speech.
 
-The browser does not keep these values in IndexedDB, localStorage, progress exports, or the response body. The local gateway writes them to `.local/ai-credentials.json`, which is ignored by Git and restricted to the local owner where the operating system supports file permissions. A hosted Worker cannot safely accept and persist provider keys from the browser; use its platform secret manager instead.
+The browser does not keep these values in IndexedDB, localStorage, progress exports, or the response body. The local gateway stores them with `@github/keytar`: Windows Credential Vault, macOS Keychain, or Linux Secret Service/libsecret. A hosted Worker cannot safely accept and persist personal provider keys from the browser; use its platform secret manager instead. If the form reports that the keychain is unavailable, start the gateway from a normal desktop session with the operating system credential service running.
+
+Official provider pages:
+
+- [Groq API keys](https://console.groq.com/keys) · [Groq quickstart](https://console.groq.com/docs/quickstart)
+- [ElevenLabs API keys](https://elevenlabs.io/app/settings/api-keys) · [ElevenLabs API-key guide](https://help.elevenlabs.io/hc/en-us/articles/14599447207697-How-do-I-authorize-myself-using-an-API-key) · [voice guide](https://elevenlabs.io/docs/overview/capabilities/voices)
 
 ## 3. Optional natural TTS with ElevenLabs Free
 

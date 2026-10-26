@@ -41,12 +41,11 @@ test('local settings can save audio provider setup without keeping the key in th
   const app = new AITalkPage(page);
   await app.unlock();
   await page.goto('/#settings');
-  await expect(page.getByRole('heading', { name: 'Audio API setup' })).toBeVisible();
-  await page.getByRole('button', { name: 'Check gateway and show key fields', exact: true }).click();
+  await expect(page.getByRole('heading', { name: 'Save your own audio key' })).toBeVisible();
   await page.getByLabel('Groq API key').fill('gsk-settings-test');
-  await page.getByRole('checkbox', { name: /I confirm this is a Groq Free account/ }).check();
-  await page.getByRole('button', { name: 'Save audio API settings', exact: true }).click();
-  await expect(page.getByRole('status').filter({ hasText: 'Audio API settings saved locally' })).toBeVisible();
+  await page.getByRole('checkbox', { name: /I am using Groq’s Free plan/ }).check();
+  await page.getByRole('button', { name: 'Save this provider key', exact: true }).click();
+  await expect(page.getByRole('status').filter({ hasText: 'Groq key saved in this computer’s OS keychain' })).toBeVisible();
   await expect(page.getByLabel('Groq API key')).toHaveValue('');
 });
 
@@ -55,10 +54,21 @@ test('AI Talk clearly points to the in-app audio API key setup', async ({ page }
   await expect(page.getByRole('link', { name: 'Set up audio API keys', exact: true })).toBeVisible();
   await page.getByRole('link', { name: 'Set up audio API keys', exact: true }).click();
   await expect(page).toHaveURL(/#settings$/);
-  await expect(page.getByRole('heading', { name: 'Audio API setup' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Check gateway and show key fields', exact: true })).toBeVisible();
-  await page.getByRole('button', { name: 'Check gateway and show key fields', exact: true }).click();
-  await expect(page.getByRole('link', { name: 'Unlock AI Talk', exact: true })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Save your own audio key' })).toBeVisible();
+  await expect(page.getByLabel('API key')).toBeVisible();
+  await expect(page.locator('#audio-api-access').getByRole('link', { name: 'AI Talk', exact: true })).toBeVisible();
+});
+
+test('audio API setup is a visible provider form with official key instructions', async ({ page }) => {
+  await page.goto('/#settings');
+  await expect(page.getByRole('heading', { name: 'Save your own audio key' })).toBeVisible();
+  await expect(page.getByLabel('Which audio service do you want to connect?')).toBeVisible();
+  await expect(page.getByLabel('API key')).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Get a Groq API key', exact: true })).toHaveAttribute('href', 'https://console.groq.com/keys');
+  await expect(page.getByRole('button', { name: 'Save this provider key', exact: true })).toBeVisible();
+  await page.getByLabel('Which audio service do you want to connect?').selectOption('elevenlabs');
+  await expect(page.getByRole('link', { name: 'Get an ElevenLabs API key', exact: true })).toHaveAttribute('href', 'https://elevenlabs.io/app/settings/api-keys');
+  await expect(page.getByLabel('ElevenLabs voice ID')).toBeVisible();
 });
 
 test('device voice is the account-free default and replay reads the most recent simplified question', async ({ page }) => {
@@ -70,7 +80,7 @@ test('device voice is the account-free default and replay reads the most recent 
   await expect(page.getByRole('combobox', { name: /^AI Talk voice/ })).toHaveValue('device');
   await page.getByRole('button', { name: 'Test AI Talk voice', exact: true }).click();
   await expect.poll(() => page.evaluate(() => window.__deviceSpeech.length)).toBe(1);
-  expect(apiCalls).toEqual([]);
+  expect(apiCalls.filter(url => !url.endsWith('/status'))).toEqual([]);
   await app.unlock();
   await app.start();
   await page.getByRole('button', { name: 'Ask it more simply', exact: true }).click();

@@ -1,24 +1,31 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, stat, rm } from 'node:fs/promises';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { readAudioCredentials, writeAudioCredentials } from '../tools/local-audio-credentials.js';
+import { createAudioCredentialStore } from '../tools/local-audio-credentials.js';
 
-test('local audio credentials are restricted to the provider fields and written owner-only', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'sprich-audio-'));
-  const file = join(directory, 'credentials.json');
-  try {
-    await writeAudioCredentials(file, {
-      GROQ_API_KEY: 'gsk-local', GROQ_FREE_TIER_CONFIRMED: 'true',
-      ELEVENLABS_API_KEY: 'eleven-local', ELEVENLABS_VOICE_ID: 'voice-local',
-      SECRET_SHOULD_NOT_BE_SAVED: 'no',
-    });
-    assert.deepEqual(await readAudioCredentials(file), {
-      GROQ_API_KEY: 'gsk-local', GROQ_FREE_TIER_CONFIRMED: 'true',
-      ELEVENLABS_API_KEY: 'eleven-local', ELEVENLABS_VOICE_ID: 'voice-local',
-    });
-    assert.equal((await stat(file)).mode & 0o777, 0o600);
-    assert.ok(!(await readFile(file, 'utf8')).includes('SECRET_SHOULD_NOT_BE_SAVED'));
-  } finally { await rm(directory, { recursive: true, force: true }); }
+function fakeKeytar() {
+  const values = new Map();
+  return {
+    values,
+    async getPassword(service, account) { return values.get(`${service}:${account}`) ?? null; },
+    async setPassword(service, account, value) { values.set(`${service}:${account}`, value); },
+    async deletePassword(service, account) { return values.delete(`${service}:${account}`); },
+  };
+}
+
+test('audio credentials use the OS-keychain adapter and expose only safe provider status', async () => {
+  const keytar = fakeKeytar();
+  const store = createAudioCredentialStore(keytar, { service: 'sprich-test' });
+  await store.write({
+    GROQ_API_KEY: 'gsk-local', GROQ_FREE_TIER_CONFIRMED: 'true',
+    ELEVENLABS_API_KEY: 'eleven-local', ELEVENLABS_VOICE_ID: 'voice-local',
+    SECRET_SHOULD_NOT_BE_SAVED: 'no',
+  });
+  assert.deepEqual(await store.read(), {
+    GROQ_API_KEY: 'gsk-local', GROQ_FREE_TIER_CONFIRMED: 'true',
+    ELEVENLABS_API_KEY: 'eleven-local', ELEVENLABS_VOICE_ID: 'voice-local',
+  });
+  assert.deepEqual(await store.status(), { groq: true, elevenlabs: true });
+  assert.equal(keytar.values.has('sprich-test:SECRET_SHOULD_NOT_BE_SAVED'), false);
+  await store.remove('groq');
+  assert.deepEqual(await store.read(), { ELEVENLABS_API_KEY: 'eleven-local', ELEVENLABS_VOICE_ID: 'voice-local' });
 });

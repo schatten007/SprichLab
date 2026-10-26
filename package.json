@@ -3,7 +3,9 @@
   "version": "2.4.0",
   "private": true,
   "type": "module",
-  "engines": { "node": "^22.13.0 || >=24.0.0" },
+  "engines": {
+    "node": "^22.13.0 || >=24.0.0"
+  },
   "scripts": {
     "dev": "vite --host localhost --port 8080 --strictPort",
     "build": "vite build",
@@ -20,7 +22,10 @@
     "ai:gateway:test": "node tools/gateway-dev.js --test",
     "deploy:check": "wrangler deploy --dry-run --outdir .local/wrangler-dry-run"
   },
-  "dependencies": { "idb": "8.0.3" },
+  "dependencies": {
+    "@github/keytar": "^7.10.6",
+    "idb": "8.0.3"
+  },
   "devDependencies": {
     "@playwright/test": "1.63.0",
     "@redocly/cli": "2.57.0",

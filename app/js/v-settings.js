@@ -4,6 +4,7 @@ import { germanVoices } from './tts.js';
 import { aiClient } from './ai-gateway.js';
 import { createAISpeech } from './ai-speech.js';
 import { esc, icon, pageHeading, safeAction, downloadFile } from './ui.js';
+import { AUDIO_PROVIDERS, audioProviderIds } from './audio-providers.js';
 
 const PROFILE = [
   ['name', 'What should we call you?', 'Your first name'],
@@ -60,9 +61,17 @@ export async function render(el, ctx) {
     </section>
 
     <section class="settings-card card" id="audio-api-setup">
-      <div class="card-title"><div><p class="eyebrow">OPTIONAL LOCAL GATEWAY</p><h2>Audio API setup</h2></div><span class="pill" id="audio-api-status">Needs check</span></div>
-      <p class="small muted">Use this form to save a Groq key for transcription and an optional ElevenLabs key for natural speech. Device speech works without any key.</p>
-      <div id="audio-api-content"><button class="btn" id="audio-api-check" type="button">Check gateway and show key fields</button><p class="fine">For safety, you must unlock AI Talk first. Keys are saved only by your local gateway and never enter progress backups.</p></div>
+      <div class="card-title"><div><p class="eyebrow">OPTIONAL AUDIO APIs</p><h2>Save your own audio key</h2></div><span class="pill" id="audio-api-status">Checking…</span></div>
+      <p class="small muted">Choose a service, follow its official key guide, paste the key, and save. The key goes to this computer’s operating-system keychain; it is never put in browser progress or backups.</p>
+      <form id="audio-api-form" class="settings-form audio-api-form">
+        <label for="audio-provider">Which audio service do you want to connect?<select id="audio-provider" name="provider">${audioProviderIds.map(id => `<option value="${id}">${esc(AUDIO_PROVIDERS[id].option)}</option>`).join('')}</select></label>
+        <div id="audio-provider-guide" class="callout audio-provider-guide"></div>
+        <label for="audio-api-key">API key<input id="audio-api-key" name="apiKey" type="password" autocomplete="off" spellcheck="false" placeholder="Paste the key from the provider"></label>
+        <label for="elevenlabs-voice-id" id="elevenlabs-voice-row" hidden>ElevenLabs voice ID<input id="elevenlabs-voice-id" name="voiceId" type="text" autocomplete="off" placeholder="Only needed for natural ElevenLabs speech"></label>
+        <label class="check-label" id="groq-free-tier-row"><input type="checkbox" id="groq-free-tier" name="freeTier"> <span>I am using Groq’s Free plan and understand that upgrading can create provider charges.</span></label>
+        <div class="form-actions btn-row"><button class="btn" id="audio-api-save" type="submit" disabled>Save this provider key</button><button class="btn secondary" id="audio-api-remove" type="button" disabled>Remove saved key</button><span class="fine" id="audio-api-form-status" role="status"></span></div>
+      </form>
+      <p class="fine" id="audio-api-access">Checking whether this app is connected to a local OS keychain…</p>
     </section>
 
     <div class="settings-layout">
@@ -151,58 +160,99 @@ export async function render(el, ctx) {
   fillVoices();
   globalThis.speechSynthesis?.addEventListener('voiceschanged', fillVoices);
 
+  const providerSelect = el.querySelector('#audio-provider');
+  const providerGuide = el.querySelector('#audio-provider-guide');
+  const apiKeyInput = el.querySelector('#audio-api-key');
+  const voiceRow = el.querySelector('#elevenlabs-voice-row');
+  const voiceInput = el.querySelector('#elevenlabs-voice-id');
+  const freeTierRow = el.querySelector('#groq-free-tier-row');
+  const saveButton = el.querySelector('#audio-api-save');
+  const removeButton = el.querySelector('#audio-api-remove');
+  const formStatus = el.querySelector('#audio-api-form-status');
+  const accessStatus = el.querySelector('#audio-api-access');
+  let audioStatus = null;
+
+  function renderProviderGuide() {
+    const provider = AUDIO_PROVIDERS[providerSelect.value];
+    providerGuide.innerHTML = `<p><strong>${esc(provider.name)}</strong> · ${esc(provider.description)}</p><p class="fine">${esc(provider.steps)} <a href="${provider.keyUrl}" target="_blank" rel="noreferrer">Get ${provider.keyArticle} ${esc(provider.name)} API key</a> · <a href="${provider.guideUrl}" target="_blank" rel="noreferrer">${esc(provider.guideLabel)}</a>${provider.voiceUrl ? ` · <a href="${provider.voiceUrl}" target="_blank" rel="noreferrer">Voice ID guide</a>` : ''}</p>`;
+    voiceRow.hidden = providerSelect.value !== 'elevenlabs';
+    freeTierRow.hidden = providerSelect.value !== 'groq';
+    voiceInput.required = providerSelect.value === 'elevenlabs';
+    apiKeyInput.setAttribute('aria-label', `${provider.name} API key`);
+    formStatus.textContent = '';
+    if (audioStatus) updateAudioAccess(audioStatus);
+  }
+
+  function updateAudioAccess(status) {
+    audioStatus = status;
+    const provider = providerSelect.value;
+    const configured = provider === 'groq' ? status?.groqReady : status?.naturalVoiceConfigured;
+    const canSave = Boolean(status?.audioSetupAvailable && status?.audioKeychainAvailable && status?.authenticated);
+    saveButton.disabled = !canSave;
+    removeButton.disabled = !canSave || !configured;
+    if (!status) {
+      el.querySelector('#audio-api-status').textContent = 'Not connected';
+      accessStatus.innerHTML = 'Start the local gateway on this computer before saving a key. Your key will not be sent while the gateway is unavailable.';
+    } else if (!status.audioSetupAvailable) {
+      el.querySelector('#audio-api-status').textContent = 'Hosted setup';
+      accessStatus.innerHTML = 'This hosted gateway cannot save personal keys. Run Sprich locally for OS-keychain storage, or use the host administrator’s secret manager.';
+    } else if (!status.audioKeychainAvailable) {
+      el.querySelector('#audio-api-status').textContent = 'Keychain unavailable';
+      accessStatus.innerHTML = 'This computer’s secure keychain is unavailable. Start a normal desktop session with its credential service, then refresh Settings.';
+    } else if (!status.authenticated) {
+      el.querySelector('#audio-api-status').textContent = 'Unlock first';
+      accessStatus.innerHTML = 'Open <a href="#ai">AI Talk</a>, unlock it with the local owner code, then return here. The form is ready, but Save stays disabled until the local gateway is unlocked.';
+    } else {
+      el.querySelector('#audio-api-status').textContent = configured ? 'Saved securely' : 'Ready to save';
+      accessStatus.textContent = 'Connected to this computer’s OS keychain. Keys are never returned to the browser or included in progress exports.';
+    }
+  }
+
   async function loadAudioSetup() {
-    const host = el.querySelector('#audio-api-content');
-    const badge = el.querySelector('#audio-api-status');
-    if (!host || !badge) return;
     try {
       const status = await (ctx.aiClient ?? aiClient).status({ signal: ctx.signal });
       if (ctx.signal?.aborted) return;
-      if (!status.audioSetupAvailable) {
-        badge.textContent = 'Server-managed';
-        host.innerHTML = '<p class="small muted">This gateway does not accept provider keys from the browser. Use the host’s secret manager. German device speech and Gemini Companion need no key.</p><a class="btn secondary" href="#ai">Open AI Talk</a>';
-        return;
-      }
-      if (!status.authenticated) {
-        badge.textContent = 'Unlock first';
-        host.innerHTML = '<p class="small muted">Unlock the private local gateway in AI Talk, then return here. The key is sent only to that same-origin gateway and is never added to progress exports.</p><a class="btn secondary" href="#ai">Unlock AI Talk</a>';
-        return;
-      }
-      badge.textContent = status.groqReady || status.naturalVoiceConfigured ? 'Configured' : 'Optional';
-      host.innerHTML = `<p class="small muted">Save provider credentials on the local gateway for AI Talk transcription and optional natural speech. The browser never receives them back, and they are not stored in IndexedDB or progress backups.</p>
-        <form id="audio-api-form" class="settings-form"><div class="form-grid">
-          <label>Groq API key<input type="password" name="groqApiKey" autocomplete="off" placeholder="Paste only on your own local gateway"></label>
-          <label>ElevenLabs API key <span class="fine">optional</span><input type="password" name="elevenLabsApiKey" autocomplete="off" placeholder="For natural AI Talk voice"></label>
-          <label>ElevenLabs voice ID <span class="fine">optional</span><input type="text" name="elevenLabsVoiceId" autocomplete="off" placeholder="A default or Voice Design voice ID"></label>
-          <label class="check-label"><input type="checkbox" name="groqFreeTierConfirmed"> <span>I confirm this is a Groq Free account with no paid upgrade.</span></label>
-        </div><div class="form-actions btn-row"><button class="btn" type="submit">Save audio API settings</button><span class="fine" id="audio-api-form-status" role="status"></span></div></form>`;
-      host.querySelector('#audio-api-form').addEventListener('submit', async event => {
-        event.preventDefault();
-        const formElement = event.currentTarget;
-        const form = new FormData(formElement);
-        const button = event.submitter;
-        button.disabled = true;
-        try {
-          await (ctx.aiClient ?? aiClient).setupAudio({
-            groqApiKey: String(form.get('groqApiKey') ?? ''),
-            groqFreeTierConfirmed: form.get('groqFreeTierConfirmed') === 'on',
-            elevenLabsApiKey: String(form.get('elevenLabsApiKey') ?? ''),
-            elevenLabsVoiceId: String(form.get('elevenLabsVoiceId') ?? ''),
-          }, { signal: ctx.signal });
-          formElement.reset();
-          host.querySelector('#audio-api-form-status').textContent = 'Audio API settings saved locally. Keys are not in this browser or its backups.';
-          badge.textContent = 'Saved locally';
-        } catch (error) { ctx.error(error.message); }
-        finally { if (button?.isConnected) button.disabled = false; }
-      });
-    } catch {
+      updateAudioAccess(status);
+    } catch (error) {
       if (!ctx.signal?.aborted) {
-        badge.textContent = 'Not connected';
-        host.innerHTML = `<p class="small muted">The local gateway is not available. Device speech still works without it. <a href="#ai">Open AI Talk</a> to check the connection.</p>`;
+        updateAudioAccess(null);
+        formStatus.textContent = error.message;
       }
     }
   }
-  el.querySelector('#audio-api-check').addEventListener('click', () => { void loadAudioSetup(); });
+  providerSelect.addEventListener('change', renderProviderGuide);
+  el.querySelector('#audio-api-form').addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!audioStatus?.audioSetupAvailable || !audioStatus.audioKeychainAvailable || !audioStatus.authenticated) {
+      formStatus.textContent = 'Unlock the local gateway before saving. Your key has not been sent.';
+      return;
+    }
+    const provider = providerSelect.value;
+    const key = apiKeyInput.value.trim();
+    if (!key) { formStatus.textContent = 'Paste the API key from the provider first.'; apiKeyInput.focus(); return; }
+    if (provider === 'groq' && !el.querySelector('#groq-free-tier').checked) { formStatus.textContent = 'Confirm the Groq Free plan before saving.'; return; }
+    if (provider === 'elevenlabs' && !voiceInput.value.trim()) { formStatus.textContent = 'Add the ElevenLabs voice ID shown in the voice guide.'; voiceInput.focus(); return; }
+    const button = event.submitter;
+    button.disabled = true;
+    try {
+      await (ctx.aiClient ?? aiClient).setupAudio(provider === 'groq'
+        ? { groqApiKey: key, groqFreeTierConfirmed: true }
+        : { elevenLabsApiKey: key, elevenLabsVoiceId: voiceInput.value.trim() }, { signal: ctx.signal });
+      apiKeyInput.value = ''; voiceInput.value = ''; el.querySelector('#groq-free-tier').checked = false;
+      formStatus.textContent = `${AUDIO_PROVIDERS[provider].name} key saved in this computer’s OS keychain.`;
+      await loadAudioSetup();
+    } catch (error) { ctx.error(error.message); }
+    finally { if (button?.isConnected) button.disabled = false; }
+  });
+  removeButton.addEventListener('click', async () => {
+    const provider = providerSelect.value;
+    if (!confirm(`Remove the saved ${AUDIO_PROVIDERS[provider].name} key from this computer?`)) return;
+    removeButton.disabled = true;
+    try { await (ctx.aiClient ?? aiClient).removeAudio(provider, { signal: ctx.signal }); formStatus.textContent = `${AUDIO_PROVIDERS[provider].name} key removed from the OS keychain.`; await loadAudioSetup(); }
+    catch (error) { ctx.error(error.message); }
+  });
+  renderProviderGuide();
+  void loadAudioSetup();
 
   async function savePreferences() {
     const form = new FormData(el.querySelector('#preferences-form'));
