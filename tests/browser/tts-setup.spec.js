@@ -42,12 +42,23 @@ test('local settings can save audio provider setup without keeping the key in th
   await app.unlock();
   await page.goto('/#settings');
   await expect(page.getByRole('heading', { name: 'Audio API setup' })).toBeVisible();
-  await page.getByRole('button', { name: 'Check local gateway', exact: true }).click();
+  await page.getByRole('button', { name: 'Check gateway and show key fields', exact: true }).click();
   await page.getByLabel('Groq API key').fill('gsk-settings-test');
   await page.getByRole('checkbox', { name: /I confirm this is a Groq Free account/ }).check();
   await page.getByRole('button', { name: 'Save audio API settings', exact: true }).click();
   await expect(page.getByRole('status').filter({ hasText: 'Audio API settings saved locally' })).toBeVisible();
   await expect(page.getByLabel('Groq API key')).toHaveValue('');
+});
+
+test('AI Talk clearly points to the in-app audio API key setup', async ({ page }) => {
+  await page.goto('/#ai');
+  await expect(page.getByRole('link', { name: 'Set up audio API keys', exact: true })).toBeVisible();
+  await page.getByRole('link', { name: 'Set up audio API keys', exact: true }).click();
+  await expect(page).toHaveURL(/#settings$/);
+  await expect(page.getByRole('heading', { name: 'Audio API setup' })).toBeVisible();
+  await expect(page.getByRole('button', { name: 'Check gateway and show key fields', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Check gateway and show key fields', exact: true }).click();
+  await expect(page.getByRole('link', { name: 'Unlock AI Talk', exact: true })).toBeVisible();
 });
 
 test('device voice is the account-free default and replay reads the most recent simplified question', async ({ page }) => {
@@ -86,6 +97,7 @@ test('Gemini Companion is available while setup is loading and a missing gateway
     await expect(page.getByRole('button', { name: 'Start conversation', exact: true })).toBeDisabled();
     release();
     await expect(page.getByRole('heading', { name: 'AI gateway unavailable' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Set up audio API keys', exact: true })).toBeVisible();
     await page.getByRole('button', { name: 'Check connection again', exact: true }).click();
     await expect(page.getByLabel('Owner access code')).toBeEnabled();
     await expect(page.getByText('Test provider · no real AI', { exact: true })).toBeVisible();

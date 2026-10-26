@@ -49,7 +49,7 @@ The app defaults to **40 turns/day, 3/minute, and 6 reviews/day**. Provider limi
 
 ### Save the provider key from inside the app
 
-Once the local gateway is unlocked, open **Settings → Audio API setup → Check local gateway**. Paste the Groq key, confirm the account is on Free, and choose **Save audio API settings**. The optional ElevenLabs key and voice ID can be saved in the same form.
+Once the local gateway is unlocked, open **AI Talk → Set up audio API keys**, or open **Settings → Audio API setup**. Choose **Check gateway and show key fields**, paste the Groq key, confirm the account is on Free, and choose **Save audio API settings**. The optional ElevenLabs key and voice ID can be saved in the same form.
 
 The browser does not keep these values in IndexedDB, localStorage, progress exports, or the response body. The local gateway writes them to `.local/ai-credentials.json`, which is ignored by Git and restricted to the local owner where the operating system supports file permissions. A hosted Worker cannot safely accept and persist provider keys from the browser; use its platform secret manager instead.
 
