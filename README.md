@@ -67,7 +67,7 @@ npm run ai:access
 npm run ai:gateway
 ```
 
-Unlock AI Talk with the generated owner code. After unlocking, open **Settings → Audio API setup → Check local gateway** to save a Groq key and optional ElevenLabs settings without editing an environment file.
+Unlock AI Talk with the generated owner code. AI Talk and **Settings** both link to **Audio API setup**. Choose **Check gateway and show key fields**, then save a Groq key and optional ElevenLabs settings without editing an environment file.
 
 Keys are sent only to the same-origin local gateway. They are stored in ignored `.local/ai-credentials.json`, are cleared from the form after saving, and are never placed in browser progress or exports. Hosted gateways use their platform secret manager instead.
 

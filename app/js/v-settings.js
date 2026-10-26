@@ -59,6 +59,12 @@ export async function render(el, ctx) {
       <a class="btn secondary" href="#getting-started" aria-label="Open getting started guide">Open getting started guide ${icon('arrow')}</a>
     </section>
 
+    <section class="settings-card card" id="audio-api-setup">
+      <div class="card-title"><div><p class="eyebrow">OPTIONAL LOCAL GATEWAY</p><h2>Audio API setup</h2></div><span class="pill" id="audio-api-status">Needs check</span></div>
+      <p class="small muted">Use this form to save a Groq key for transcription and an optional ElevenLabs key for natural speech. Device speech works without any key.</p>
+      <div id="audio-api-content"><button class="btn" id="audio-api-check" type="button">Check gateway and show key fields</button><p class="fine">For safety, you must unlock AI Talk first. Keys are saved only by your local gateway and never enter progress backups.</p></div>
+    </section>
+
     <div class="settings-layout">
       <div class="settings-primary">
         <section class="settings-card card">
@@ -89,11 +95,6 @@ export async function render(el, ctx) {
             <div class="form-actions btn-row"><button class="btn" type="submit">Save preferences ${icon('check')}</button></div>
           </form>
         </section>
-
-       <section class="settings-card card" id="audio-api-setup">
-         <div class="card-title"><div><p class="eyebrow">OPTIONAL LOCAL GATEWAY</p><h2>Audio API setup</h2></div><span class="pill" id="audio-api-status">Not checked</span></div>
-         <div id="audio-api-content"><p class="small muted">Device speech works without a key. Check the local gateway only when you want to save Groq or ElevenLabs settings from this app.</p><button class="btn secondary" id="audio-api-check" type="button">Check local gateway</button></div>
-       </section>
 
        <section class="settings-card card" id="backup-section">
           <div class="card-title"><div><p class="eyebrow">TRANSFER YOUR STATE</p><h2>Progress backups</h2></div><span class="pill">Account-free</span></div>
@@ -159,12 +160,12 @@ export async function render(el, ctx) {
       if (ctx.signal?.aborted) return;
       if (!status.audioSetupAvailable) {
         badge.textContent = 'Server-managed';
-        host.innerHTML = '<p class="small muted">This gateway does not accept provider keys from the browser. Use the host’s secret manager. German device speech and Gemini Companion need no key.</p>';
+        host.innerHTML = '<p class="small muted">This gateway does not accept provider keys from the browser. Use the host’s secret manager. German device speech and Gemini Companion need no key.</p><a class="btn secondary" href="#ai">Open AI Talk</a>';
         return;
       }
       if (!status.authenticated) {
         badge.textContent = 'Unlock first';
-        host.innerHTML = '<p class="small muted">Unlock the private local gateway in <a href="#ai">AI Talk</a>, then return here. The key is sent only to that same-origin gateway and is never added to progress exports.</p>';
+        host.innerHTML = '<p class="small muted">Unlock the private local gateway in AI Talk, then return here. The key is sent only to that same-origin gateway and is never added to progress exports.</p><a class="btn secondary" href="#ai">Unlock AI Talk</a>';
         return;
       }
       badge.textContent = status.groqReady || status.naturalVoiceConfigured ? 'Configured' : 'Optional';

@@ -95,7 +95,7 @@ export async function renderLobby(el, ctx) {
     if (!status) {
       host.innerHTML = `<p class="eyebrow">PRIVATE CONNECTION</p><h2>${loading ? 'Checking the gateway…' : 'AI gateway unavailable'}</h2>
         ${setupError ? `<p class="small section-gap" role="alert">${esc(setupError)}</p>` : ''}
-        <p class="fine section-gap">Start <code>npm run ai:gateway</code> in a second terminal, then check again. German device voices and Gemini Companion need no gateway.</p>
+         <p class="fine section-gap">Start <code>npm run ai:gateway</code> in a second terminal, then check again. German device voices and Gemini Companion need no gateway. <a href="#settings">Set up audio API keys</a></p>
          <button class="btn secondary" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
       el.querySelector('#ai-setup-status').textContent = loading ? 'Checking the AI connection.' : 'AI connection unavailable.';
       safeAction(host.querySelector('#ai-retry'), refresh, ctx.error);
@@ -111,7 +111,7 @@ export async function renderLobby(el, ctx) {
       ${status.authenticated
         ? `<div class="btn-row"><button class="btn secondary" id="ai-lock">Lock AI Talk</button><button class="btn secondary" id="ai-capabilities" ${status.groqReady ? '' : 'disabled'}>Check models</button></div>`
         : `<form id="ai-unlock" class="inline-form"><label for="ai-token">Owner access code<input id="ai-token" name="token" type="password" autocomplete="one-time-code" minlength="43" maxlength="43" required placeholder="43 characters" ${status.configured ? '' : 'disabled'}></label><button class="btn" type="submit" ${status.configured ? '' : 'disabled'}>Unlock AI Talk</button></form><p class="fine">The generated owner code is sent only to this gateway to unlock it. Provider API keys stay on the server. No Sprich account is needed.</p>`}
-      <p class="fine section-gap">${status.naturalVoiceConfigured ? 'ElevenLabs is configured; its Free tier and remaining credits are checked before each new synthesis.' : 'German device speech needs no TTS API key. Add a German voice in your device settings if needed.'} <a href="#settings">Voice settings</a></p>
+       <p class="fine section-gap">${status.naturalVoiceConfigured ? 'ElevenLabs is configured; its Free tier and remaining credits are checked before each new synthesis.' : 'German device speech needs no TTS API key. Add a German voice in your device settings if needed.'} <a href="#settings">Voice settings</a> · <a href="#settings">Set up audio API keys</a></p>
       ${status.authenticated ? usageCard(usage, status) : ''}
       <div class="ai-boundary"><strong>Always optional</strong><p class="fine">Core lessons stay available. Gemini Companion below needs no gateway at all.</p></div>
         <button class="text-button" id="ai-retry" ${loading ? 'disabled' : ''}>Check connection again</button>`;
