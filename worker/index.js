@@ -47,7 +47,7 @@ async function turnBody(request, kind) {
   return { input, audio, extension, hash: await sha256(canonical({ input, audioHash })) };
 }
 
-export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console, loadAssessmentDefinition = loadWorkerAssessment, saveAudioConfig = null } = {}) {
+export function createGateway({ fetcher = (...args) => fetch(...args), now = Date.now, testMode = false, logger = console, loadAssessmentDefinition = loadWorkerAssessment, saveAudioConfig = null, deleteAudioConfig = null, audioKeychainAvailable = Boolean(saveAudioConfig) } = {}) {
   async function handle(request, env, execution = {}) {
     const path = new URL(request.url).pathname;
     if (!path.startsWith('/api/')) return env.ASSETS ? env.ASSETS.fetch(request) : new Response('Not found', { status: 404 });
@@ -69,7 +69,7 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
         return securityHeaders(success({ configured: configured && databaseReady, authenticated: signedIn, groqReady,
           naturalVoiceConfigured: Boolean(env.ELEVENLABS_API_KEY && env.ELEVENLABS_VOICE_ID), naturalVoiceId: env.ELEVENLABS_VOICE_ID ?? '',
           testMode, models: AI_MODELS, limits,
-          audioSetupAvailable: Boolean(saveAudioConfig),
+          audioSetupAvailable: Boolean(saveAudioConfig), audioKeychainAvailable: Boolean(audioKeychainAvailable),
           missing: [!authConfigured(env) && 'owner access code / signing secret', !databaseReady && 'request database and migrations', !env.GROQ_API_KEY && 'Groq API key', env.GROQ_FREE_TIER_CONFIRMED !== 'true' && 'owner confirmation of the Groq Free plan'].filter(Boolean) }), request);
       }
       if (!configured) throw problem(503, 'setup', 'The owner has not configured the AI gateway yet. Open the setup guide; Gemini Companion is available now.');
@@ -89,8 +89,16 @@ export function createGateway({ fetcher = (...args) => fetch(...args), now = Dat
       }
       if (!signedIn) throw problem(401, 'authentication', 'Unlock the private AI connection first.');
       const day = new Date(now()).toISOString().slice(0, 10);
-      if (path === `${PREFIX}/setup/audio` && request.method === 'POST') {
+      if (path === `${PREFIX}/setup/audio` && ['POST', 'DELETE'].includes(request.method)) {
         if (!saveAudioConfig) throw problem(503, 'setup_remote', 'Provider keys can only be saved by the local gateway. Use your host’s secret manager for a deployed gateway.');
+        if (!audioKeychainAvailable) throw problem(503, 'keychain_unavailable', 'The operating system keychain is unavailable. Start a desktop session with its secure credential service, then try again.');
+        if (request.method === 'DELETE') {
+          if (!deleteAudioConfig) throw problem(503, 'setup_remote', 'Saved provider keys can only be removed by the local gateway.');
+          const provider = new URL(request.url).searchParams.get('provider');
+          if (!['groq', 'elevenlabs'].includes(provider)) throw problem(422, 'validation', 'Choose a supported audio provider.');
+          await deleteAudioConfig(provider);
+          return securityHeaders(success({ deleted: true, provider }), request);
+        }
         const input = await jsonBody(request, 5000);
         const config = {};
         const groqKey = typeof input?.groqApiKey === 'string' ? input.groqApiKey.trim() : '';

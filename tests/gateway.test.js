@@ -141,6 +141,20 @@ test('authenticated local setup saves audio provider keys without returning them
   assert.ok(!JSON.stringify(body).includes('eleven-from-settings'));
 });
 
+test('authenticated local setup can remove one provider without touching the other', async () => {
+  const clock = { t: START };
+  const env = await makeEnv();
+  const removed = [];
+  const provider = createMockProvider();
+  const gateway = createGateway({ fetcher: provider.fetch, now: () => clock.t, testMode: true, logger: SILENT,
+    saveAudioConfig: async () => {}, deleteAudioConfig: async name => { removed.push(name); } });
+  const { cookie } = await signIn(gateway, env);
+  const response = await call(gateway, env, '/api/v1/setup/audio?provider=elevenlabs', { method: 'DELETE', cookie });
+  assert.equal(response.status, 200, await response.clone().text());
+  assert.deepEqual(await read(response), { data: { deleted: true, provider: 'elevenlabs' }, meta: { apiVersion: 'v1' } });
+  assert.deepEqual(removed, ['elevenlabs']);
+});
+
 test('audio provider setup is unavailable when the gateway has no local persistence hook', async () => {
   const clock = { t: START };
   const env = await makeEnv();
